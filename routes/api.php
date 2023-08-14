@@ -58,7 +58,7 @@ Route::namespace(PasswordResetLinkController::class)->prefix('reset-password')->
 
 // Route::get('/dashboard', [DashboardController::class, 'get']);
 
-// Catch-all route for not found routes
+// Catch-out any route that is not defined
 Route::any('{any}', function () {
     return HttpResponses::error(null, "The requested resource could not be found.", 404);
 })->where('any', '.*');

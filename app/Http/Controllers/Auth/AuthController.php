@@ -7,7 +7,7 @@ use App\Traits\HttpResponses;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\Auth\StoreUserRequest;
 use App\Http\Requests\Auth\LoginUserRequest;
 
 class AuthController extends Controller
@@ -30,12 +30,13 @@ class AuthController extends Controller
     // StoreUserRequest $request
     public  function register(StoreUserRequest $request)
     {
-        $request->validated($request->only(['name', 'email', 'password']));
+        $request->validated($request->only(['name', 'email', 'password', 'phone']));
         // create a new user 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->password)
+            'password' => Hash::make($request->password),
+            'phone' => $request->phone
         ]);
 
         return HttpResponses::success(['user' => $user], 'Account Has been created succesfully');
