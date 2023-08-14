@@ -21,9 +21,7 @@ class Handler extends ExceptionHandler
         'password_confirmation',
     ];
 
-    /**
-     * Register the exception handling callbacks for the application.
-     */
+
     public function register(): void
     {
         $this->reportable(function (Throwable $e) {
@@ -31,9 +29,9 @@ class Handler extends ExceptionHandler
         });
     }
 
-    // faild to thenticated reponse
+    // response when a user attempt to athenticate with wrong credentials
     protected function unauthenticated($request, AuthenticationException $exception)
     {
-        return   $this::error(null, $exception->getMessage(), 401);
+        return   HttpResponses::error(null, $exception->getMessage(), 401);
     }
 }

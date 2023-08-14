@@ -17,13 +17,10 @@ class AuthController extends Controller
     {
         $credentials = ['email', 'password'];
 
-        $request->validated($request->only($credentials));
-
         if (!Auth::attempt($request->only($credentials)))
             return HttpResponses::error("name or email is incorrect", 'error while trying to log in', 401);
 
         $user = User::where('email', $request->email)->first();
-        // \Illuminate\Support\Facades\Log::info($user);
 
         $token = $user->createToken('login-user token ')->plainTextToken;
 
@@ -40,9 +37,8 @@ class AuthController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password)
         ]);
-        $token = $user->createToken('API token')->plainTextToken;
 
-        return HttpResponses::success(['user' => $user, 'token' => $token], 'Account Has been created succesfully');
+        return HttpResponses::success(['user' => $user], 'Account Has been created succesfully');
     }
     function logout()
     {

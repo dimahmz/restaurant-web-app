@@ -2,50 +2,72 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\RedirectResponse;
+use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Traits\HttpResponses;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Validation\ValidationException;
-use Inertia\Inertia;
-use Inertia\Response;
+use App\Http\Requests\Auth\ResetPasswordRequest;
+
 
 class PasswordResetLinkController extends Controller
 {
-    /**
-     * Display the password reset link request view.
-     */
-    public function create(): Response
-    {
-        return Inertia::render('Auth/ForgotPassword', [
-            'status' => session('status'),
-        ]);
-    }
-
     /**
      * Handle an incoming password reset link request.
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request): RedirectResponse
-    {
-        $request->validate([
-            'email' => 'required|email',
-        ]);
 
-        // We will send the password reset link to this user. Once we have attempted
-        // to send the link, we will examine the response then see the message we
-        // need to show to the user. Finally, we'll send out a proper response.
-        $status = Password::sendResetLink(
-            $request->only('email')
+    use HttpResponses;
+
+    // receive an email and send a password reset link to this email
+    public function store(Request $request)
+    {
+        try {
+
+            $request->validate([
+                'email' => 'required|email',
+            ]);
+            $status = Password::sendResetLink(
+                $request->only('email')
+            );
+
+            // \Illuminate\Support\Facades\Log::info([$status, Password::RESET_LINK_SENT, trans($status)]);
+
+            if ($status == Password::RESET_LINK_SENT) {
+                return $this::success(null, trans($status));
+            }
+
+            return $this::error(null, trans($status), 422);
+        } catch (ValidationException $e) {
+
+            return $this::error(null, $e->errors(), 422);
+        }
+    }
+
+    // update the user password
+    public function update(ResetPasswordRequest $request, $token)
+    {
+        $data = array_merge(
+            ['token' => $token],
+            $request->only('email', 'password', 'password_confirmation')
+        );
+        $status = Password::reset(
+            $data,
+            function (User $user, string $password) {
+                $user->forceFill([
+                    'password' => Hash::make($password)
+                ])->setRememberToken(Str::random(60));
+
+                $user->save();
+            }
         );
 
-        if ($status == Password::RESET_LINK_SENT) {
-            return back()->with('status', __($status));
-        }
-
-        throw ValidationException::withMessages([
-            'email' => [trans($status)],
-        ]);
+        return $status === Password::PASSWORD_RESET
+            ? $this::success(null, trans($status),)
+            : $this::error(null, trans($status), 402);
     }
 }

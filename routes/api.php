@@ -1,9 +1,10 @@
 <?php
 
+use App\Http\Controllers\Auth\PasswordResetLinkController;
 use Illuminate\Http\Request;
 use App\Traits\HttpResponses;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Dashboards\AdminDashboardController;
 use App\Http\Controllers\Dashboards\DeliverymanDashboardController;
 use App\Http\Controllers\Dashboards\StaffDashboardController;
@@ -13,7 +14,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 // Public Routes 
-Route::get('/test', function () {
+Route::post('/test', function () {
     return "api is working ";
 });
 
@@ -42,6 +43,14 @@ Route::group(
         Route::post('/logout', [AuthController::class, 'logout']);
     }
 );
+
+// Reset password 
+Route::namespace(PasswordResetLinkController::class)->prefix('reset-password')->group(function () {
+    Route::post('/', [PasswordResetLinkController::class, 'store']);
+    Route::put('/{token}', [PasswordResetLinkController::class, 'update']);
+});
+
+
 // TODO an alternative for using just one route
 // Route::get('/dashboard', function () {
 //     // ...
@@ -51,5 +60,5 @@ Route::group(
 
 // Catch-all route for not found routes
 Route::any('{any}', function () {
-    return HttpResponses::error(null, "The requested resource could not be found.", 404); // Customize the view and status code as needed
+    return HttpResponses::error(null, "The requested resource could not be found.", 404);
 })->where('any', '.*');
