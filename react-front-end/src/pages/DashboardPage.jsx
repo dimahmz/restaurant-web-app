@@ -1,19 +1,23 @@
-import React from "react";
-import { AiTwotoneHome, AiOutlinePlus } from "react-icons/ai";
+import { AiOutlinePlus } from "react-icons/ai";
 import { HiShoppingCart } from "react-icons/hi";
 import { CgProfile } from "react-icons/cg";
+import { UseAuth } from "../hooks/AuthContext";
+import { Link } from "react-router-dom";
+
 import { MdManageHistory } from "react-icons/md";
 import NavBar from "../PosComponents/NavBar";
 import Footer from "../PosComponents/Footer";
 
 const DashboardPage = () => {
+    const { LogoutUser } = UseAuth();
+
     return (
         <div className=" bg-gray-200 h-screen">
             <NavBar />
             <section className=" mt-4 h-[600px] overflow-scroll mb-2 ">
                 <div className="max-w-[1320px] m-auto px-4">
                     <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-3">
-                        <a href="/dashboard/pos">
+                        <Link to="/dashboard/pos">
                             {" "}
                             <div className="mb-4 px-2 bg-white shadow-lg cursor-pointer">
                                 <div>
@@ -40,8 +44,8 @@ const DashboardPage = () => {
                                     </div>
                                 </div>
                             </div>
-                        </a>
-                        <a href="/dashboard/orders">
+                        </Link>
+                        <Link to="/dashboard/orders">
                             {" "}
                             <div className="mb-4 px-2 bg-white shadow-lg cursor-pointer">
                                 <div>
@@ -68,8 +72,8 @@ const DashboardPage = () => {
                                     </div>
                                 </div>
                             </div>
-                        </a>
-                        <a href="/dashboard/customers">
+                        </Link>
+                        <Link to="/dashboard/customers">
                             {" "}
                             <div className="mb-4 px-2 bg-white shadow-lg cursor-pointer">
                                 <div>
@@ -96,8 +100,8 @@ const DashboardPage = () => {
                                     </div>
                                 </div>
                             </div>
-                        </a>
-                        <a href="/dashboard/kitchen">
+                        </Link>
+                        <Link to="/dashboard/kitchen">
                             {" "}
                             <div className="mb-4 px-2 bg-white shadow-lg cursor-pointer">
                                 <div>
@@ -124,9 +128,8 @@ const DashboardPage = () => {
                                     </div>
                                 </div>
                             </div>
-                        </a>
-                        <a href="/dashboard/manage/food/add-new">
-                            {" "}
+                        </Link>
+                        <Link to="/dashboard/manage/food/add-new">
                             <div className="mb-4 px-2 bg-white shadow-lg cursor-pointer">
                                 <div>
                                     <div>
@@ -152,26 +155,25 @@ const DashboardPage = () => {
                                     </div>
                                 </div>
                             </div>
-                        </a>{" "}
-                        <div className="mb-4 px-2 bg-white shadow-lg cursor-pointer">
-                            <div>
-                                <div>
-                                    <img
-                                        src="https://khadyo.softtechdemo.com/assets/img/product-img-6.jpg"
-                                        alt=""
-                                    />
+                        </Link>
+                        <div
+                            className="mb-4 px-2 bg-white shadow-lg cursor-pointer"
+                            onClick={LogoutUser}
+                        >
+                            <img
+                                src="https://khadyo.softtechdemo.com/assets/img/product-img-6.jpg"
+                                alt=""
+                            />
+                            <div className=" p-8 relative">
+                                <div className="flex text-purple-700 font-bold text-sm">
+                                    <MdManageHistory size={20} />{" "}
+                                    <span>LOGOUT</span>
                                 </div>
-                                <div className=" p-8 relative">
-                                    <div className="flex text-purple-700 font-bold text-sm">
-                                        <MdManageHistory size={20} />{" "}
-                                        <span>LOGOUT</span>
-                                    </div>
-                                    <div className="text-3xl font-bold py-2">
-                                        Logout
-                                    </div>
-                                    <div className="absolute bg-white  w-[70px] h-[70px] rounded-full right-[10%] top-[-35%] shadow-lg flex justify-center items-center hover:bg-[#cc3333] hover:text-white duration-300">
-                                        <AiOutlinePlus size={40} className="" />
-                                    </div>
+                                <div className="text-3xl font-bold py-2">
+                                    Logout
+                                </div>
+                                <div className="absolute bg-white  w-[70px] h-[70px] rounded-full right-[10%] top-[-35%] shadow-lg flex justify-center items-center hover:bg-[#cc3333] hover:text-white duration-300">
+                                    <AiOutlinePlus size={40} className="" />
                                 </div>
                             </div>
                         </div>
@@ -182,5 +184,14 @@ const DashboardPage = () => {
         </div>
     );
 };
-
+{
+    /* <Link to="/">
+<AiTwotoneHome size={25} />
+</Link>
+<AiOutlineLogout
+size={25}
+className="hover:cursor-pointer"
+onClick={LogoutUser}
+/> */
+}
 export default DashboardPage;
