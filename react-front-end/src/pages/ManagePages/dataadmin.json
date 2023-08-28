@@ -1,0 +1,29 @@
+[
+    {
+        "id": 1,
+        "image_name": "./ima.jpg",
+        "name": "hajar",
+        "phone": "123-456-7890",
+        "branch": "Branch A",
+        "user_type": "admin",
+        "action": "update"
+    },
+    {
+        "id": 2,
+        "image_name": "image2.jpg",
+        "name": "hajar",
+        "phone": "987-654-3210",
+        "branch": "Branch B",
+        "user_type": "staff",
+        "action": "create"
+    },
+    {
+        "id": 3,
+        "image_name": "image3.jpg",
+        "name": "hajar",
+        "phone": "555-555-5555",
+        "branch": "Branch C",
+        "user_type": "superadmin",
+        "action": "delete"
+    }
+]

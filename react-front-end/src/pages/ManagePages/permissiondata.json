@@ -1,0 +1,23 @@
+[
+    {
+        "name": "admin",
+        "permissions": [
+            "manage_users",
+            "manage_menu",
+            "manage_orders",
+            "view_reports"
+        ]
+    },
+    {
+        "name": "waiter",
+        "permissions": ["take_orders", "serve_food", "view_menu"]
+    },
+    {
+        "name": "chef",
+        "permissions": ["prepare_dishes", "view_orders", "manage_inventory"]
+    },
+    {
+        "name": "cashier",
+        "permissions": ["process_payments", "view_orders", "generate_receipts"]
+    }
+]

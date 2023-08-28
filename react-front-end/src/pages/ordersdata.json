@@ -1,0 +1,181 @@
+{
+    "orders": [
+        {
+            "order_id": 1,
+            "customer_name": "John Doe",
+            "items": [
+                {
+                    "item_id": 101,
+                    "item_name": "T-shirt",
+                    "additional_info": "Color: Red, Size: Medium"
+                },
+                {
+                    "item_id": 102,
+                    "item_name": "Jeans",
+                    "additional_info": "Color: Blue, Size: 32"
+                }
+            ]
+        },
+        {
+            "order_id": 2,
+            "customer_name": "Jane Smith",
+            "items": [
+                {
+                    "item_id": 201,
+                    "item_name": "Sneakers",
+                    "additional_info": "Color: White, Size: 8"
+                }
+            ]
+        },
+        {
+            "order_id": 3,
+            "customer_name": "Alice Johnson",
+            "items": [
+                {
+                    "item_id": 301,
+                    "item_name": "Dress ",
+                    "additional_info": "Color: Green, Size: Small"
+                },
+                {
+                    "item_id": 302,
+                    "item_name": "Handbag",
+                    "additional_info": "Color: Brown, Type: Leather"
+                },
+                {
+                    "item_id": 501,
+                    "item_name": "Socks",
+                    "additional_info": "Color: Black, Size: Medium"
+                },
+                {
+                    "item_id": 601,
+                    "item_name": "Skirt",
+                    "additional_info": "Color: Blue, Size: Small"
+                },
+                {
+                    "item_id": 602,
+                    "item_name": "Shoes",
+                    "additional_info": "Color: Brown, Size: 9"
+                }
+            ]
+        },
+        {
+            "order_id": 4,
+            "customer_name": "Emily Brown",
+            "items": [
+                {
+                    "item_id": 401,
+                    "item_name": "Shirt",
+                    "additional_info": "Color: White, Size: Small"
+                }
+            ]
+        },
+        {
+            "order_id": 5,
+            "customer_name": "Michael Johnson",
+            "items": [
+                {
+                    "item_id": 501,
+                    "item_name": "Socks",
+                    "additional_info": "Color: Black, Size: Medium"
+                },
+                {
+                    "item_id": 601,
+                    "item_name": "Skirt",
+                    "additional_info": "Color: Blue, Size: Small"
+                },
+                {
+                    "item_id": 602,
+                    "item_name": "Shoes",
+                    "additional_info": "Color: Brown, Size: 9"
+                }
+            ]
+        },
+        {
+            "order_id": 6,
+            "customer_name": "Olivia Davis",
+            "items": [
+                {
+                    "item_id": 601,
+                    "item_name": "Skirt",
+                    "additional_info": "Color: Blue, Size: Small"
+                },
+                {
+                    "item_id": 602,
+                    "item_name": "Shoes",
+                    "additional_info": "Color: Brown, Size: 9"
+                }
+            ]
+        },
+        {
+            "order_id": 7,
+            "customer_name": "William Wilson",
+            "items": [
+                {
+                    "item_id": 701,
+                    "item_name": "Hat",
+                    "additional_info": "Color: Black, Size: One Size"
+                }
+            ]
+        },
+        {
+            "order_id": 8,
+            "customer_name": "Sophia Martinez",
+            "items": [
+                {
+                    "item_id": 801,
+                    "item_name": "Gloves",
+                    "additional_info": "Color: Gray, Size: Medium"
+                }
+            ]
+        },
+        {
+            "order_id": 9,
+            "customer_name": "Liam Anderson",
+            "items": [
+                {
+                    "item_id": 901,
+                    "item_name": "Jacket",
+                    "additional_info": "Color: Black, Size: Large"
+                }
+            ]
+        },
+        {
+            "order_id": 10,
+            "customer_name": "Ava Hernandez",
+            "items": [
+                {
+                    "item_id": 1001,
+                    "item_name": "Scarf",
+                    "additional_info": "Color: Red, Size: One Size"
+                },
+                {
+                    "item_id": 1002,
+                    "item_name": "Gloves",
+                    "additional_info": "Color: Blue, Size: Small"
+                }
+            ]
+        }
+    ],
+    "items": [
+        {
+            "item_id": 101,
+            "item_name": "T-shirt"
+        },
+        {
+            "item_id": 102,
+            "item_name": "Jeans"
+        },
+        {
+            "item_id": 201,
+            "item_name": "Sneakers"
+        },
+        {
+            "item_id": 301,
+            "item_name": "Dress"
+        },
+        {
+            "item_id": 302,
+            "item_name": "Handbag"
+        }
+    ]
+}

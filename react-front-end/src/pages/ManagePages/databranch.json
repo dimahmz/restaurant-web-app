@@ -1,0 +1,62 @@
+[
+    {
+        "name": "John Doe",
+        "delivery_charge": 5.99,
+        "address": "123 Main Street, Cityville, 12345",
+        "phone": "555-123-4567"
+    },
+    {
+        "name": "Jane Smith",
+        "delivery_charge": 4.5,
+        "address": "456 Elm Avenue, Townsville, 67890",
+        "phone": "555-987-6543"
+    },
+    {
+        "name": "Michael Johnson",
+        "delivery_charge": 7.25,
+        "address": "789 Oak Road, Villageland, 45678",
+        "phone": "555-789-1234"
+    },
+    {
+        "name": "Emily Davis",
+        "delivery_charge": 6.75,
+        "address": "567 Pine Lane, Hamletville, 23456",
+        "phone": "555-234-5678"
+    },
+    {
+        "name": "William Wilson",
+        "delivery_charge": 3.99,
+        "address": "987 Maple Street, Countryside, 34567",
+        "phone": "555-345-6789"
+    },
+    {
+        "name": "Olivia Martin",
+        "delivery_charge": 5.25,
+        "address": "234 Cedar Avenue, Riverside, 56789",
+        "phone": "555-456-7890"
+    },
+    {
+        "name": "James Anderson",
+        "delivery_charge": 4.0,
+        "address": "678 Birch Court, Lakeside, 67890",
+        "phone": "555-567-8901"
+    },
+    {
+        "name": "Sophia Rodriguez",
+        "delivery_charge": 6.5,
+        "address": "345 Willow Lane, Mountainville, 78901",
+        "phone": "555-678-9012"
+    },
+    {
+        "name": "Liam Martinez",
+        "delivery_charge": 3.75,
+        "address": "890 Spruce Road, Oceanview, 89012",
+        "phone": "555-789-0123"
+    },
+    {
+        "name": "Ava Brown",
+        "delivery_charge": 5.0,
+        "address": "123 Rose Street, Valleytown, 90123",
+        "phone": "555-890-1234"
+    }
+]

@@ -1,10 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 body {
-  background-color: #131313;
+    background-color: #131313;
 }
 .active {
-  background-color: #de222a;
-  color: white;
+    background-color: #de222a;
+    color: white;
+}
+
+.submenu {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.open {
+    max-height: 200px; /* Adjust this value to the maximum height of your submenu */
 }

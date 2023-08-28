@@ -1,0 +1,98 @@
+[
+    {
+        "name": "Burger",
+        "group": "Fast Food",
+        "price": 8.99,
+        "image": "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8YnVyZ2VyfGVufDB8fDB8fHww&auto=format&fit=crop&w=600&q=60"
+    },
+    {
+        "name": "Pizza",
+        "group": "Fast Food",
+        "price": 12.99,
+        "image": "https://images.unsplash.com/photo-1588315029754-2dd089d39a1a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fHBpenphfGVufDB8fDB8fHww&auto=format&fit=crop&w=600&q=60"
+    },
+    {
+        "name": "Salad",
+        "group": "Healthy",
+        "price": 7.49,
+        "image": "https://www.example.com/salad.jpg"
+    },
+    {
+        "name": "Sushi",
+        "group": "Japanese",
+        "price": 15.99,
+        "image": "https://www.example.com/sushi.jpg"
+    },
+    {
+        "name": "Pasta",
+        "group": "Italian",
+        "price": 10.99,
+        "image": "https://www.example.com/pasta.jpg"
+    },
+    {
+        "name": "Taco",
+        "group": "Mexican",
+        "price": 6.99,
+        "image": "https://www.example.com/taco.jpg"
+    },
+    {
+        "name": "Sandwich",
+        "group": "Fast Food",
+        "price": 5.99,
+        "image": "https://www.example.com/sandwich.jpg"
+    },
+    {
+        "name": "Steak",
+        "group": "Grill",
+        "price": 19.99,
+        "image": "https://www.example.com/steak.jpg"
+    },
+    {
+        "name": "Sushi Roll",
+        "group": "Japanese",
+        "price": 13.99,
+        "image": "https://www.example.com/sushi_roll.jpg"
+    },
+    {
+        "name": "Chicken Salad",
+        "group": "Healthy",
+        "price": 8.49,
+        "image": "https://www.example.com/chicken_salad.jpg"
+    },
+    {
+        "name": "Fries",
+        "group": "Side Dish",
+        "price": 3.99,
+        "image": "https://www.example.com/fries.jpg"
+    },
+    {
+        "name": "Pancakes",
+        "group": "Breakfast",
+        "price": 7.99,
+        "image": "https://www.example.com/pancakes.jpg"
+    },
+    {
+        "name": "Sushi Platter",
+        "group": "Japanese",
+        "price": 29.99,
+        "image": "https://www.example.com/sushi_platter.jpg"
+    },
+    {
+        "name": "Ice Cream",
+        "group": "Dessert",
+        "price": 4.99,
+        "image": "https://www.example.com/ice_cream.jpg"
+    },
+    {
+        "name": "Burrito",
+        "group": "Mexican",
+        "price": 9.99,
+        "image": "https://www.example.com/burrito.jpg"
+    },
+    {
+        "name": "Cupcake",
+        "group": "Dessert",
+        "price": 2.49,
+        "image": "https://www.example.com/cupcake.jpg"
+    }
+]
