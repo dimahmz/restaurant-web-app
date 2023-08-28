@@ -10,7 +10,7 @@ use App\Http\Controllers\Dashboards\DeliverymanDashboardController;
 use App\Http\Controllers\Dashboards\StaffDashboardController;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+    return HttpResponses::success($request->user(), "user data", 200);
 });
 
 // Public Routes 
@@ -25,23 +25,31 @@ Route::post('/signup', [AuthController::class, 'register']);
 
 // Protected Routes
 Route::group(
-    ['middleware' => ['auth:sanctum'], 'prefix' => 'dashboard'],
+    ['middleware' => ['auth:sanctum']],
+
+    // Dashboard Routes
     function () {
-        // The admin routes
-        Route::group(['middleware' => ['checkrole:Admin']],   function () {
-            Route::get('/admin', [AdminDashboardController::class, 'get']);
-        });
-        // The staff routes
-        Route::group(['middleware' => ['checkrole:Staff']],   function () {
-            Route::get('/staff', [StaffDashboardController::class, 'get']);
-        });
-        // The deliveryman routes
-        Route::group(['middleware' => ['checkrole:Deliveryman']],   function () {
-            Route::get('/deliveryman', [DeliverymanDashboardController::class, 'get']);
+        Route::prefix('dashboard')->group(function () {
+            // The admin routes
+            Route::group(['middleware' => ['checkrole:Admin']],   function () {
+                Route::get('/admin', [AdminDashboardController::class, 'get']);
+            });
+            // The staff routes
+            Route::group(['middleware' => ['checkrole:Staff']],   function () {
+                Route::get('/staff', [StaffDashboardController::class, 'get']);
+            });
+            // The deliveryman routes
+            Route::group(['middleware' => ['checkrole:Deliveryman']],   function () {
+                Route::get('/deliveryman', [DeliverymanDashboardController::class, 'get']);
+            });
         });
 
-        Route::post('/logout', [AuthController::class, 'logout']);
+        // Edit a user routes
+        Route::prefix("user")->group(function () {
+            Route::post('/logout', [AuthController::class, 'logout']);
+        });
     }
+
 );
 
 // Reset password 
@@ -55,8 +63,6 @@ Route::namespace(PasswordResetLinkController::class)->prefix('reset-password')->
 // Route::get('/dashboard', function () {
 //     // ...
 // })->middleware([First::class, Second::class]);
-
-// Route::get('/dashboard', [DashboardController::class, 'get']);
 
 // Catch-out any route that is not defined
 Route::any('{any}', function () {

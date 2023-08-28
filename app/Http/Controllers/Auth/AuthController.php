@@ -7,8 +7,9 @@ use App\Traits\HttpResponses;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use App\Http\Requests\Auth\StoreUserRequest;
+use Illuminate\Foundation\Http\FormRequest;
 use App\Http\Requests\Auth\LoginUserRequest;
+use App\Http\Requests\Auth\StoreUserRequest;
 
 class AuthController extends Controller
 {
@@ -41,10 +42,9 @@ class AuthController extends Controller
 
         return HttpResponses::success(['user' => $user], 'Account Has been created succesfully');
     }
-    function logout()
+    function logout(FormRequest $request)
     {
-        Auth::logout();
-        // user()->currentAccessToken()->delete();
+        $request->user()->currentAccessToken()->delete();
         return HttpResponses::success([], 'user has been logged out');
     }
 }
