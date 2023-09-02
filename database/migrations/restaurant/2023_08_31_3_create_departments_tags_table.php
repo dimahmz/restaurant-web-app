@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('roles', function (Blueprint $table) {
+        Schema::create('department_tags', function (Blueprint $table) {
             $table->id();
-            $table->enum('name', ['Admin', 'Staff', 'Customer', 'Deliveryman']);
+            $table->string("name");
+            $table->decimal("commission", 3, 3);
+            $table->timestamps();
         });
     }
 
@@ -22,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('roules');
+        Schema::dropIfExists('departments_tags');
     }
-};;
+};
