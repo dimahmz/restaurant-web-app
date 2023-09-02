@@ -68,3 +68,12 @@ Route::namespace(PasswordResetLinkController::class)->prefix('reset-password')->
 Route::any('{any}', function () {
     return HttpResponses::error(null, "The requested resource could not be found.", 404);
 })->where('any', '.*');
+
+//
+use App\Http\Controllers\API\CategoryController;
+use App\Http\Controllers\API\ArticleController;
+use App\Http\Controllers\API\TableController;
+
+Route::get('/categories', [CategoryController::class, 'index']);
+Route::get('/articles', [ArticleController::class, 'index']);
+Route::get('/tables', [TableController::class, 'index']);
