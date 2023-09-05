@@ -13,7 +13,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { AiOutlineArrowRight } from "react-icons/ai";
 
 import { MdLocalPrintshop } from "react-icons/md";
-const HistoriquePage = () => {
+const OnlineHistoryPage = () => {
     const handleFormClose = () => {
         setAddCustomer(false);
     };
@@ -125,7 +125,7 @@ const HistoriquePage = () => {
                                                 <a href="/dashboard/orders">
                                                     {" "}
                                                     <button className=" text-xs rounded-sm  uppercase px-2 py-3 text-[#0880ea] bg-[#daedfe] duration-300 hover:text-white hover:bg-[#0880ea]">
-                                                        Pos orders
+                                                        pos orders
                                                     </button>
                                                 </a>
                                             </li>
@@ -446,4 +446,4 @@ const HistoriquePage = () => {
     );
 };
 
-export default HistoriquePage;
+export default OnlineHistoryPage;

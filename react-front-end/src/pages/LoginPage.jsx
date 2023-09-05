@@ -43,7 +43,7 @@ const LoginPage = () => {
     return (
         <div className="bg-[#d4d4d8] h-screen  ">
             <div className="max-w-[1320px] m-auto px-4 flex flex-col">
-                <div className="px-2  justify-between w-[50%]">
+                <div className="px-2 justify-between w-[50%]">
                     <div className="relative max-w-[130px] h-[50px] ml-4 ">
                         <span className=" ">
                             <Link to="/">
@@ -127,33 +127,33 @@ const LoginPage = () => {
                             </form>
                         </div>
                     </div>
-                </div>
-                <div className=" hidden lg:flex relative w-[67%]  items-center justify-center h-full mt-24 ">
-                    <img
-                        className="w-[72%] ml-16"
-                        src="https://khadyo.softtechdemo.com/assets/img/sign-in.png"
-                        alt=""
-                    />
-                    <img
-                        className="absolute top-0 left-28"
-                        src="https://khadyo.softtechdemo.com/assets/img/obj-1.png"
-                        alt=""
-                    />
-                    <img
-                        className="absolute left-[50%] top-0"
-                        src="https://khadyo.softtechdemo.com/assets/img/obj-8.png"
-                        alt=""
-                    />
-                    <img
-                        className="absolute top-[50%] left-[100px]"
-                        src="https://khadyo.softtechdemo.com/assets/img/obj-9.png"
-                        alt=""
-                    />
-                    <img
-                        className="absolute bottom-[100px] left-[50%]"
-                        src="https://khadyo.softtechdemo.com/assets/img/obj-7.png"
-                        alt=""
-                    />
+                    <div className=" hidden lg:flex relative w-[67%]  items-center justify-center h-full mt-24 ">
+                        <img
+                            className="w-[72%] ml-16"
+                            src="https://khadyo.softtechdemo.com/assets/img/sign-in.png"
+                            alt=""
+                        />
+                        <img
+                            className="absolute top-0 left-28"
+                            src="https://khadyo.softtechdemo.com/assets/img/obj-1.png"
+                            alt=""
+                        />
+                        <img
+                            className="absolute left-[50%] top-0"
+                            src="https://khadyo.softtechdemo.com/assets/img/obj-8.png"
+                            alt=""
+                        />
+                        <img
+                            className="absolute top-[50%] left-[100px]"
+                            src="https://khadyo.softtechdemo.com/assets/img/obj-9.png"
+                            alt=""
+                        />
+                        <img
+                            className="absolute bottom-[100px] left-[50%]"
+                            src="https://khadyo.softtechdemo.com/assets/img/obj-7.png"
+                            alt=""
+                        />
+                    </div>
                 </div>
             </div>
         </div>

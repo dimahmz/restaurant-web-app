@@ -1,7 +1,112 @@
-import React from "react";
+import React, { useState } from "react";
 import { AiOutlineRight } from "react-icons/ai";
 import CheckboxWithLabel from "./CheckboxWithLabel";
+import CommissionBar from "./CommissionBar";
+import GroupsBar from "./GroupsBar";
+import GridItems from "./GridItem";
+import VariationsTable from "./VariationsTable";
+import ProprtyTable from "./ProprtyTable";
 const Products = () => {
+    const commissions = [
+        "DINE IN",
+        "xxxxxxxxxxxxx",
+        "FRNG FREE",
+        "TESTING USER",
+        "GOOD",
+    ];
+    const menuItems = [
+        "SEASONAL FRUIT JUICES",
+        "DRY FRUIT MILKSHAKES",
+        "SEASONAL MILKSHAKES",
+        "FRUIT CREAMM",
+        "FRIES",
+        "PIZZA",
+        "BURGER",
+        "MILK SHAKES GROUP",
+        "COFFEE",
+        "MOJITO",
+        "TACOS",
+        "SHARMA",
+        "PUNJABI",
+    ];
+    const [items, setItems] = useState([]);
+
+    const clearBasket = () => {
+        setItems([]); // Function to clear the basket
+    };
+    const gridData = [
+        {
+            imageUrl:
+                "https://khadyo.softtechdemo.com/public//images/food_item/1689458718-323409769-654366893131782-3517675748538205122-njpg.jpg",
+            label: "Lemon squash",
+            stock: 10,
+        },
+        {
+            imageUrl:
+                "https://khadyo.softtechdemo.com/public//images/food_item/1689458718-323409769-654366893131782-3517675748538205122-njpg.jpg",
+            label: "Item 2",
+            stock: 5,
+        },
+        {
+            imageUrl:
+                "https://khadyo.softtechdemo.com/public//images/food_item/1662249823-pizza-ridajpg.jpg",
+            label: "Item 3",
+            stock: 20,
+        },
+        {
+            imageUrl:
+                "https://khadyo.softtechdemo.com/public//images/food_item/1685053360-64494a90d3a26png.png",
+            label: "Item 4",
+            stock: 15,
+        },
+        {
+            imageUrl:
+                "https://khadyo.softtechdemo.com/public//images/food_item/1685017028-screenshot-2022-04-26-162843png.png",
+            label: "Item 5",
+            stock: 8,
+        },
+        {
+            imageUrl:
+                "https://khadyo.softtechdemo.com/public//images/food_item/1674842211-tehbotoljpg.jpg",
+            label: "Item 6",
+            stock: 12,
+        },
+        {
+            imageUrl: "https://example.com/image7.jpg",
+            label: "Item 7",
+            stock: 3,
+        },
+        {
+            imageUrl: "https://example.com/image8.jpg",
+            label: "Item 8",
+            stock: 7,
+        },
+        {
+            imageUrl: "https://example.com/image9.jpg",
+            label: "Item 9",
+            stock: 18,
+        },
+        {
+            imageUrl: "https://example.com/image10.jpg",
+            label: "Item 10",
+            stock: 14,
+        },
+    ];
+    const tableData = [
+        { name: "Large", price: "5.00DH" },
+        { name: "Medium", price: "4.00DH" },
+        { name: "Small", price: "3.00DH" },
+        { name: "Extra Large", price: "6.00DH" },
+        { name: "Super Size", price: "7.50DH" },
+    ];
+    const tableData1 = [
+        { name: "Item 1", unitPrice: "10.00" },
+        { name: "Item 2", unitPrice: "15.50" },
+        { name: "Item 3", unitPrice: "8.75" },
+        { name: "Item 4", unitPrice: "12.25" },
+        { name: "Item 5", unitPrice: "9.99" },
+    ];
+
     return (
         <div className="w-[58.3333333333%] ">
             <div className="flex ">
@@ -25,203 +130,25 @@ const Products = () => {
             </div>
             <div className="mt-[10px] flex flex-row">
                 <div className="w-[216px] h-[563.2px] overflow-scroll px-1">
-                    <ul className="text-white text-sm  ">
-                        <li className="mb-[10px] flex justify-center">
-                            {" "}
-                            <button className="w-full bg-[#09c2de] pr-[4.7em] pl-[1.4em] py-[0.8em] uppercase">
-                                DINE IN{" "}
-                            </button>
-                        </li>
-                        <li className="mb-[10px] flex justify-center">
-                            <button className="w-full bg-[#09c2de] pr-[4.7em] pl-[1.4em] py-[0.8em] uppercase">
-                                xxxxxxxxxxxxx{" "}
-                            </button>
-                        </li>
-                        <li className="mb-[10px] flex justify-center">
-                            <button className="w-full bg-[#09c2de] pr-[4.7em] pl-[1.4em] py-[0.8em] uppercase">
-                                FRNG FREE{" "}
-                            </button>
-                        </li>
-                        <li className="mb-[10px]">
-                            <button className="w-full bg-[#09c2de] flex justify-center items-center uppercase">
-                                <span className=" pl-[1.4em] py-[0.8em] text-center pr-2 ">
-                                    TESTING USER
-                                </span>
-                                <div className=" bg-black/20 h-full py-4 px-2 ml-10 ">
-                                    <AiOutlineRight
-                                        size={20}
-                                        className="text-white  "
-                                    />
-                                </div>
-                            </button>
-                        </li>
-                        <li className="mb-[30px] flex justify-center">
-                            <button className=" w-full bg-[#09c2de] pr-[4.7em] pl-[1.4em] py-[0.8em] uppercase">
-                                GOOD
-                            </button>
-                        </li>
-                    </ul>
-                    <ul className="text-[16px]">
-                        <li className="mb-[10px]">
-                            <button className="w-full  border-[#f64e60] px-3 py-[0.375rem] bg-[#f64e60] duration-300 text-white border font-bold  ">
-                                SEASONAL FRUIT JUICES
-                            </button>
-                        </li>
-                        <li className="mb-[10px]">
-                            <button className="w-full bg-white border-[#f64e60] px-3 py-[0.375rem] hover:bg-[#f64e60] duration-300 hover:text-white border font-bold text-black ">
-                                DRY FRUIT MILKSHAKES
-                            </button>
-                        </li>
-                        <li className="mb-[10px]">
-                            <button className="w-full bg-white border-[#f64e60] px-3 py-[0.375rem] hover:bg-[#f64e60] duration-300 hover:text-white border font-bold text-black ">
-                                SEASONAL MILKSHAKES
-                            </button>
-                        </li>
-                        <li className="mb-[10px]">
-                            <button className="w-full bg-white border-[#f64e60] px-3 py-[0.375rem] hover:bg-[#f64e60] duration-300 hover:text-white border font-bold text-black ">
-                                FRUIT CREAMM
-                            </button>
-                        </li>
-                        <li className="mb-[10px]">
-                            <button className="w-full bg-white border-[#f64e60] px-3 py-[0.375rem] hover:bg-[#f64e60] duration-300 hover:text-white border font-bold text-black ">
-                                FRIES
-                            </button>
-                        </li>
-                        <li className="mb-[10px]">
-                            <button className="w-full bg-white border-[#f64e60]  px-3 py-[0.375rem] hover:bg-[#f64e60] duration-300 hover:text-white border font-bold text-black ">
-                                PIZZA
-                            </button>
-                        </li>
-                        <li className="mb-[10px]">
-                            <button className="w-full bg-white  border-[#f64e60] px-3 py-[0.375rem] hover:bg-[#f64e60] duration-300 hover:text-white border font-bold text-black ">
-                                BURGER
-                            </button>
-                        </li>
-                        <li className="mb-[10px]">
-                            <button className="w-full bg-white border-[#f64e60]  px-3 py-[0.375rem] hover:bg-[#f64e60] duration-300 hover:text-white border font-bold text-black ">
-                                MILK SHAKES GROUP
-                            </button>
-                        </li>
-                        <li className="mb-[10px]">
-                            <button className="w-full bg-white  border-[#f64e60] px-3 py-[0.375rem] hover:bg-[#f64e60] duration-300 hover:text-white border font-bold text-black ">
-                                COFFEE
-                            </button>
-                        </li>
-                        <li className="mb-[10px]">
-                            <button className="w-full bg-white border-[#f64e60]  px-3 py-[0.375rem] hover:bg-[#f64e60] duration-300 hover:text-white border font-bold text-black ">
-                                MOJITO
-                            </button>
-                        </li>
-                        <li className="mb-[10px]">
-                            <button className="w-full bg-white border-[#f64e60]  px-3 py-[0.375rem] hover:bg-[#f64e60] duration-300 hover:text-white border font-bold text-black ">
-                                TACOS
-                            </button>
-                        </li>
-                        <li className="mb-[10px]">
-                            <button className="w-full bg-white border-[#f64e60] px-3 py-[0.375rem] hover:bg-[#f64e60] duration-300 hover:text-white border font-bold text-black ">
-                                SHARMA
-                            </button>
-                        </li>
-                        <li className="mb-[10px]">
-                            <button className="w-full bg-white border-[#f64e60] px-3 py-[0.375rem] hover:bg-[#f64e60] duration-300 hover:text-white border font-bold text-black ">
-                                PUNJABI
-                            </button>
-                        </li>
-                    </ul>
+                    <CommissionBar data={commissions} />
+                    <div className="mt-6">
+                        <GroupsBar items={menuItems} />
+                    </div>
                 </div>
                 <div className="flex-row flex">
                     <div className="w-[389.667px] h-[563.2px] px-1 overflow-scroll">
-                        <div>
-                            <div className="grid grid-cols-3 gap-x-6 ">
-                                <div className="  mb-[10px] px-1  w-[136.55px] min-h-[190.55px] cursor-pointer ">
-                                    <div className="bg-white shadow-lg h-full">
-                                        <div className="relative  overflow-hidden bg-cover bg-no-repeat">
-                                            <img
-                                                className="transition duration-300 ease-in-out hover:scale-110"
-                                                src="https://khadyo.softtechdemo.com/public//images/food_item/1684657757-screenshot-2023-03-06-105253png.png"
-                                                alt=""
-                                            />
-                                        </div>
-                                        <div>
-                                            <div className="p-[10px] text-sm flex  justify-center items-center text-center font-bold ">
-                                                ARABIC
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className=" row-auto  mb-[10px] px-1  w-[136.55px] min-h-[190.55px] cursor-pointer ">
-                                    <div className="bg-white shadow-lg h-full">
-                                        <div className="relative  overflow-hidden bg-cover bg-no-repeat">
-                                            <img
-                                                className="transition duration-300 ease-in-out hover:scale-110"
-                                                src="https://khadyo.softtechdemo.com/public//images/food_item/1689458718-323409769-654366893131782-3517675748538205122-njpg.jpg"
-                                                alt=""
-                                            />
-                                        </div>
-                                        <div>
-                                            <div className=" p-[10px] text-sm  flex  justify-center items-center text-center font-bold ">
-                                                <span>ARABIC</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="  mb-[10px] px-1  w-[136.55px] min-h-[190.55px] cursor-pointer ">
-                                    <div className="bg-white shadow-lg h-full">
-                                        <div className="relative  overflow-hidden bg-cover bg-no-repeat">
-                                            <img
-                                                className="transition duration-300 ease-in-out hover:scale-110"
-                                                src="https://khadyo.softtechdemo.com/public//images/food_item/1674842211-tehbotoljpg.jpg"
-                                                alt=""
-                                            />
-                                        </div>
-                                        <div className="p-[10px] text-sm flex justify-center items-center text-center font-bold ">
-                                            ARABIC
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="  mb-[10px] px-1  w-[136.55px] min-h-[190.55px] cursor-pointer ">
-                                    <div className="bg-white shadow-lg h-full ">
-                                        <div className="relative  overflow-hidden bg-cover bg-no-repeat">
-                                            <img
-                                                className="transition duration-300 ease-in-out hover:scale-110"
-                                                src="https://khadyo.softtechdemo.com/public//images/food_item/1662249823-pizza-ridajpg.jpg"
-                                                alt=""
-                                            />
-                                        </div>
-                                        <div className="p-[10px] text-sm flex flex-grow justify-center items-center text-center font-bold ">
-                                            ARABIC
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <GridItems data={gridData} />
                     </div>
                     <div className=" pl-1">
                         <div className=" w-[280.333px] h-[563.2px] bg-white overflow-scroll">
-                            <div className="p-2">
-                                <div>
-                                    <div className="text-white bg-[#f64e60] px-4 py-2 flex justify-center font-bold border-2 ">
-                                        Variations
-                                    </div>
-                                    <table className="table-auto w-full">
-                                        <thead className="border">
-                                            <tr>
-                                                <td className="pl-2">Name</td>
-                                                <td className="pl-2 border-l-2">
-                                                    Price
-                                                </td>
-                                            </tr>
-                                        </thead>
-                                        <tbody className="bg-[#f4f9fc] border-2">
-                                            <tr>
-                                                <td className="p-4 border-r-2">
-                                                    <CheckboxWithLabel label="large" />
-                                                </td>
-                                                <td className="p-4">5.00DH</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
+                            <div className="mt-2">
+                                <VariationsTable tableData={tableData} />
+                            </div>
+                            <div>
+                                <ProprtyTable
+                                    title="Spice level"
+                                    data={tableData1}
+                                />
                             </div>
                         </div>
                     </div>

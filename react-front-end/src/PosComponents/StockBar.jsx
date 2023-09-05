@@ -18,59 +18,70 @@ const StockBar = ({ isOpen, onClick }) => {
 
     const submenuItems = [
         {
-            id: "admin-staff",
-            label: "Admin / Staff",
-            to: "/dashboard/manage/user/admin-staff",
+            id: "food-purchase",
+            label: "Food Purchase",
+            to: "/dashboard/manage/stock/food-purchase",
         },
         {
-            id: "customers",
-            label: "Customers",
-            to: "/dashboard/manage/user/customers",
+            id: "purchase-history",
+            label: "Purchase History",
+            to: "/dashboard/manage/stock/purchase-history-food",
         },
         {
-            id: "waiters",
-            label: "Waiters",
-            to: "/dashboard/manage/user/waiters",
+            id: "ingredient-group",
+            label: "Ingredient Group",
+            to: "/dashboard/manage/stock/ingredient-group",
         },
         {
-            id: "role-groups",
-            label: "Role Groups",
-            to: "/dashboard/manage/user/role-groups",
+            id: "ingredient-item",
+            label: "Ingredient Item",
+            to: "/dashboard/manage/stock/ingredient-item",
         },
         {
-            id: "delivery-user",
-            label: "Delivery User",
-            to: "/dashboard/manage/user/delivery-user",
+            id: "ingredient-purchase",
+            label: "Ingredient Purchase ",
+            to: "/dashboard/manage/stock/purchase-ingredient",
+        },
+        {
+            id: "ingredient-purchase-history",
+            label: "Ingredient Purchase History",
+            to: "/dashboard/manage/stock/purchase-history-ingredient",
+        },
+        {
+            id: "manage-supplier",
+            label: "Manage Supplier",
+            to: "/dashboard/manage/stock/manage-supplier",
+        },
+        {
+            id: "supplier-history",
+            label: "Supplier History",
+            to: "/dashboard/manage/stock/supplier-history",
         },
     ];
 
     return (
         <div className="mb-[10px]">
-            <ul>
-                <li
-                    className={`p-[10px] text-xl hover:text-white font-bold hover:bg-[#f64e60] bg-white border border-[#f64e60] ${
-                        isOpen ? "active" : ""
-                    }`}
-                    onClick={() => handleHeaderClick("user")}
-                >
-                    MANAGE STOCK
-                </li>
-                <ul className={`submenu ${isOpen ? "open" : ""}`}>
-                    {submenuItems.map((item) => (
-                        <Link to={item.to} key={item.id}>
-                            <li
-                                className={`p-[10px] border-b-[1px] text-sm font-bold border-solid bg-white ${
-                                    activeListItem === item.id
-                                        ? "text-red-600"
-                                        : ""
-                                }`}
-                                onClick={() => handleListItemClick(item.id)}
-                            >
-                                - {item.label}
-                            </li>
-                        </Link>
-                    ))}
-                </ul>
+            <div
+                className={`p-[10px] text-xl hover:text-white font-bold hover:bg-[#f64e60] bg-white border border-[#f64e60] ${
+                    isOpen ? "active" : ""
+                }`}
+                onClick={() => handleHeaderClick("user")}
+            >
+                MANAGE STOCK
+            </div>
+            <ul className={`submenu ${isOpen ? "open" : ""}`}>
+                {submenuItems.map((item) => (
+                    <Link to={item.to} key={item.id}>
+                        <li
+                            className={`p-[10px] border-b-[1px] text-sm font-bold border-solid bg-white ${
+                                activeListItem === item.id ? "text-red-600" : ""
+                            }`}
+                            onClick={() => handleListItemClick(item.id)}
+                        >
+                            - {item.label}
+                        </li>
+                    </Link>
+                ))}
             </ul>
         </div>
     );

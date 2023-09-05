@@ -4,11 +4,15 @@ import data from "./dataitems.json";
 import { Link } from "react-router-dom";
 import Action2 from "../../PosComponents/Action2";
 import AddVariantes from "./AddNew/AddVariantes";
+import ViewVariantion from "./AddNew/ViewVariantion";
 const ItemListePage = () => {
     const [showAddVariations, setShowAddVariations] = useState(false);
     const [addVariantesStates, setAddVariantesStates] = useState(
         data.map(() => false)
     );
+    const handleClose = () => {
+        setShowVariation(false);
+    };
 
     const [openIndex, setOpenIndex] = useState(null);
     const handleVariationsClick = () => {
@@ -25,6 +29,11 @@ const ItemListePage = () => {
         } else {
             setOpenIndex(index); // Open the clicked component
         }
+    };
+    const [showVariation, setShowVariation] = useState(false);
+
+    const handleCheckVariation = () => {
+        setShowVariation(true);
     };
     const [currentPage, setCurrentPage] = useState(1);
     const customersPerPage = 10;
@@ -140,7 +149,18 @@ const ItemListePage = () => {
                                             {d.group}
                                         </td>
                                         <td className="p-2 border-r-2 text-xs text-center">
-                                            {d.price}
+                                            {d.prices ? (
+                                                <button
+                                                    onClick={
+                                                        handleCheckVariation
+                                                    }
+                                                    className="text-white bg-[#f64e60] px-2 py-1 text-sm"
+                                                >
+                                                    Check Variations
+                                                </button>
+                                            ) : (
+                                                <p>Price: ${d.price}</p>
+                                            )}
                                         </td>
                                         <td className="p-2 border-r-2 text-xs text-center">
                                             <Action2
@@ -192,6 +212,15 @@ const ItemListePage = () => {
                                         </td>
                                     </tr>
                                 ))}
+                                {showVariation && (
+                                    <div className="fixed bg-black/80 overflow-scroll w-full h-screen z-10 left-0 top-0">
+                                        <div className="mt-20 flex justify-center">
+                                            <ViewVariantion
+                                                onClose={handleClose}
+                                            />
+                                        </div>
+                                    </div>
+                                )}
                             </tbody>
                         </table>
 
@@ -264,7 +293,18 @@ const ItemListePage = () => {
                                                     {d.group}
                                                 </td>
                                                 <td className="p-2 border-r-2 text-xs text-center">
-                                                    {d.price}
+                                                    {d.prices ? (
+                                                        <button
+                                                            onClick={
+                                                                handleCheckVariation
+                                                            }
+                                                            className="text-white bg-[#f64e60] px-2 py-1 text-sm"
+                                                        >
+                                                            Check Variations
+                                                        </button>
+                                                    ) : (
+                                                        <p>Price: ${d.price}</p>
+                                                    )}
                                                 </td>
                                                 <td className="p-2 border-r-2 text-xs text-center">
                                                     <Action2
@@ -323,6 +363,15 @@ const ItemListePage = () => {
                                                 </td>
                                             </tr>
                                         ))}
+                                        {showVariation && (
+                                            <div className="fixed bg-black/80 overflow-scroll w-full h-screen z-10 left-0 top-0">
+                                                <div className="mt-20 flex justify-center">
+                                                    <ViewVariantion
+                                                        onClose={handleClose}
+                                                    />
+                                                </div>
+                                            </div>
+                                        )}
                                     </tbody>
                                 </table>
                             </div>
@@ -365,5 +414,4 @@ const ItemListePage = () => {
         </div>
     );
 };
-
 export default ItemListePage;

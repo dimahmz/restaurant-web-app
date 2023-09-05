@@ -24,6 +24,14 @@ import TablesPage from "./ManagePages/TablesPage";
 import PaymentTypesPage from "./ManagePages/PaymentTypesPage";
 import BranchesPage from "./ManagePages/BranchesPage";
 import Footer from "../PosComponents/Footer";
+import FoodPurchasePage from "./ManagePages/FoodPurchasePage";
+import PurchaseHistoryPage from "./ManagePages/PurchaseHistoryPage";
+import IngredientGroupPage from "./ManagePages/IngredientGroupPage";
+import IngerdientItemPage from "./ManagePages/IngerdientItemPage";
+import IngredientPurchasePage from "./ManagePages/IngredientPurchasePage";
+import IngredientPurchaseHistoryPage from "./ManagePages/IngredientPurchaseHistoryPage";
+import ManageSupplierPage from "./ManagePages/ManageSupplierPage";
+import SupplierHistoryPage from "./ManagePages/SupplierHistoryPage";
 const ManagePage = () => {
     const navigate = useNavigate();
     const currentPath = window.location.pathname;
@@ -84,6 +92,38 @@ const ManagePage = () => {
                         {currentPath ===
                             "/dashboard/manage/resturant/payment-types" && (
                             <PaymentTypesPage />
+                        )}
+                        {currentPath ===
+                            "/dashboard/manage/stock/food-purchase" && (
+                            <FoodPurchasePage />
+                        )}
+                        {currentPath ===
+                            "/dashboard/manage/stock/purchase-history-food" && (
+                            <PurchaseHistoryPage />
+                        )}
+                        {currentPath ===
+                            "/dashboard/manage/stock/ingredient-group" && (
+                            <IngredientGroupPage />
+                        )}
+                        {currentPath ===
+                            "/dashboard/manage/stock/ingredient-item" && (
+                            <IngerdientItemPage />
+                        )}
+                        {currentPath ===
+                            "/dashboard/manage/stock/purchase-ingredient" && (
+                            <IngredientPurchasePage />
+                        )}
+                        {currentPath ===
+                            "/dashboard/manage/stock/purchase-history-ingredient" && (
+                            <IngredientPurchaseHistoryPage />
+                        )}
+                        {currentPath ===
+                            "/dashboard/manage/stock/manage-supplier" && (
+                            <ManageSupplierPage />
+                        )}
+                        {currentPath ===
+                            "/dashboard/manage/stock/supplier-history" && (
+                            <SupplierHistoryPage />
                         )}
                     </div>
                 </div>

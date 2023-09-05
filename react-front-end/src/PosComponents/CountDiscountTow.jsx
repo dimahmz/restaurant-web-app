@@ -5,13 +5,13 @@ const CountDiscountTow = () => {
     const [count, setCount] = useState(0);
 
     const handleIncrement = () => {
-        const newCount = (count + 0.01).toFixed(2); // Round to 2 decimal places
+        const newCount = count + 1; // Round to 2 decimal places
         setCount(parseFloat(newCount));
     };
 
     const handleDecrement = () => {
-        if (count >= 0.01) {
-            const newCount = (count - 0.01).toFixed(2); // Round to 2 decimal places
+        if (count >= 1) {
+            const newCount = count - 1; // Round to 2 decimal places
             setCount(parseFloat(newCount));
         }
     };
@@ -24,15 +24,15 @@ const CountDiscountTow = () => {
     };
 
     return (
-        <div className="flex justify-between p-[5px] text-sm h-[38px] border-[2px] rounded-sm">
+        <div className="flex justify-between bg-white text-sm h-[38px] border-2 border-gray-300 rounded-sm">
             <input
                 placeholder="e.g. Type price of this items in US dollar"
-                className="bg-white w-full pr-4 focus:outline-none"
-                value={count.toFixed(2)}
+                className="bg-white w-full  p-3 focus:outline-none"
+                value={count}
                 onChange={handleInputChange}
             />
-            <div className="">
-                <div className="flex flex-col">
+            <div className="mt-1">
+                <div className="flex flex-col ">
                     <button
                         onClick={handleIncrement}
                         className="bg-gray-400 px-3 hover:bg-gray-200 duration-200"

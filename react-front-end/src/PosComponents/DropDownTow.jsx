@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 
-const DropDownTow = ({ options, onFilterChange }) => {
+const DropDownTow = ({ options, title }) => {
     const [isFocused, setIsFocused] = useState(false);
     const [selectedOption, setSelectedOption] = useState(""); // Changed variable name
 
@@ -66,7 +66,7 @@ const DropDownTow = ({ options, onFilterChange }) => {
             <div className="w-full flex relative ">
                 <input
                     className="p-2 w-full text-left text-xs focus:outline-none"
-                    placeholder="Filter by group..."
+                    placeholder={title}
                     value={searchQuery}
                     onChange={handleSearchInputChange}
                     onClick={handleInputClick}

@@ -1,15 +1,51 @@
 import React, { useState } from "react";
 import { BiSearch } from "react-icons/bi";
-import { Link } from "react-router-dom";
-import Action from "../../PosComponents/Action";
 
-const TestTable = ({ title, data, headers }) => {
+import Action from "../../PosComponents/Action";
+import Delete from "./AddNew/Delete";
+
+const TestTable = ({ title, data = [], headers, EditComponent }) => {
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 8;
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
     const pageCount = Math.ceil(data.length / itemsPerPage);
+    const [openIndex, setOpenIndex] = useState(null);
+    const [add, setAdd] = useState(false);
+    const handleFormClose = () => {
+        setAdd(false);
+    };
+    const [showEditPayment, setShowEditPayment] = useState(false);
+    const [selectedPaymentType, setSelectedPaymentType] = useState(null);
 
+    const handleEditPaymentClick = (dataline) => {
+        setSelectedPaymentType(dataline);
+        setOpenIndex(null);
+        setShowEditPayment(true);
+    };
+
+    const handleAdd = () => {
+        setAdd(!add);
+        setOpenIndex(null);
+    };
+    const handleEditPaymentClose = () => {
+        setSelectedPaymentType(null);
+        setShowEditPayment(false);
+    };
+    const [confirmdelete, setConfirmDelete] = useState(false);
+    const handleDelete = () => {
+        setConfirmDelete(!confirmdelete);
+        setOpenIndex(null);
+    };
+
+    // Function to handle opening/closing of Action2 components
+    const handleToggleOptions = (index) => {
+        if (index === openIndex) {
+            setOpenIndex(null); // Close the currently open component
+        } else {
+            setOpenIndex(index); // Open the clicked component
+        }
+    };
     const [searchQuery, setSearchQuery] = useState("");
     const filteredItems = data.filter((item) =>
         Object.values(item).some((value) =>
@@ -56,11 +92,22 @@ const TestTable = ({ title, data, headers }) => {
                             <BiSearch size={20} className="text-white" />
                         </button>
                         <div className="ml-3">
-                            <Link to="/dashboard/manage/food/add-new">
-                                <button className="bg-[#f64e60] text-xs text-white px-6 py-3 rounded-sm">
-                                    ADD NEW
-                                </button>
-                            </Link>
+                            <button
+                                onClick={handleAdd}
+                                className="bg-[#f64e60] text-xs text-white px-6 py-3 rounded-sm"
+                            >
+                                ADD NEW
+                            </button>
+                            {add && (
+                                <div className="fixed  bg-black/80 overflow-scroll w-full h-screen z-10 left-0 top-0  ">
+                                    <div className="mt-20 flex justify-center">
+                                        <EditComponent
+                                            onClose={handleFormClose}
+                                            isUpdating={false}
+                                        />
+                                    </div>
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>
@@ -83,39 +130,10 @@ const TestTable = ({ title, data, headers }) => {
                                 ))}
                             </tr>
                         </thead>
-                        <tbody>
-                            {searchQuery
-                                ? filteredItems.map((item, index) => (
-                                      <tr
-                                          className="border hover:bg-gray-200 duration-150"
-                                          key={index}
-                                      >
-                                          <td className="px-2 py-4 border-r-2 text-xs text-center">
-                                              {index + 1}
-                                          </td>
-                                          {Object.values(item).map(
-                                              (value, idx) => (
-                                                  <td
-                                                      key={idx}
-                                                      className={`px-2 py-4 border-r-2 text-xs text-center ${
-                                                          idx ===
-                                                          headers.length - 1
-                                                              ? ""
-                                                              : "border-r-2"
-                                                      }`}
-                                                  >
-                                                      {value}
-                                                  </td>
-                                              )
-                                          )}
-                                          <td className="px-2 py-4 border-r-2 text-xs text-center">
-                                              <Action />
-                                          </td>
-                                      </tr>
-                                  ))
-                                : data
-                                      .slice(indexOfFirstItem, indexOfLastItem)
-                                      .map((item, index) => (
+                        {data.length > 0 ? (
+                            <tbody>
+                                {searchQuery
+                                    ? filteredItems.map((item, index) => (
                                           <tr
                                               className="border hover:bg-gray-200 duration-150"
                                               key={index}
@@ -139,11 +157,110 @@ const TestTable = ({ title, data, headers }) => {
                                                   )
                                               )}
                                               <td className="px-2 py-4 border-r-2 text-xs text-center">
-                                                  <Action />
+                                                  <Action
+                                                      key={index}
+                                                      isOpen={
+                                                          index === openIndex
+                                                      }
+                                                      toggleOptions={() =>
+                                                          handleToggleOptions(
+                                                              index
+                                                          )
+                                                      }
+                                                      onEdit={() =>
+                                                          handleEditPaymentClick(
+                                                              item
+                                                          )
+                                                      }
+                                                      onDelete={handleDelete}
+                                                  />
                                               </td>
                                           </tr>
-                                      ))}
-                        </tbody>
+                                      ))
+                                    : data
+                                          .slice(
+                                              indexOfFirstItem,
+                                              indexOfLastItem
+                                          )
+                                          .map((item, index) => (
+                                              <tr
+                                                  className="border hover:bg-gray-200 duration-150"
+                                                  key={index}
+                                              >
+                                                  <td className="px-2 py-4 border-r-2 text-xs text-center">
+                                                      {index + 1}
+                                                  </td>
+                                                  {Object.values(item).map(
+                                                      (value, idx) => (
+                                                          <td
+                                                              key={idx}
+                                                              className={`px-2 py-4 border-r-2 text-xs text-center ${
+                                                                  idx ===
+                                                                  headers.length -
+                                                                      1
+                                                                      ? ""
+                                                                      : "border-r-2"
+                                                              }`}
+                                                          >
+                                                              {value}
+                                                          </td>
+                                                      )
+                                                  )}
+                                                  <td className="px-2 py-4 border-r-2 text-xs text-center">
+                                                      <Action
+                                                          key={index}
+                                                          isOpen={
+                                                              index ===
+                                                              openIndex
+                                                          }
+                                                          toggleOptions={() =>
+                                                              handleToggleOptions(
+                                                                  index
+                                                              )
+                                                          }
+                                                          onEdit={() =>
+                                                              handleEditPaymentClick(
+                                                                  item
+                                                              )
+                                                          }
+                                                          onDelete={
+                                                              handleDelete
+                                                          }
+                                                      />
+                                                  </td>
+                                              </tr>
+                                          ))}
+                                {showEditPayment && (
+                                    <div className="fixed bg-black/80 overflow-scroll w-full h-screen z-10 left-0 top-0">
+                                        <div className="mt-20 flex justify-center">
+                                            <EditComponent
+                                                onClose={handleEditPaymentClose}
+                                                dataline={selectedPaymentType} // Pass the selected payment type
+                                                isUpdating={true} // Set to true for update mode
+                                            />
+                                        </div>
+                                    </div>
+                                )}
+                                {confirmdelete && (
+                                    <div className="fixed bg-white/80 overflow-scroll w-screen h-screen z-10 left-0 top-0  ">
+                                        <div className="flex mt-48 justify-center items-center">
+                                            <Delete onClose={handleDelete} />
+                                        </div>
+                                    </div>
+                                )}
+                            </tbody>
+                        ) : (
+                            <tbody>
+                                <tr>
+                                    <td
+                                        colSpan={headers.length + 1}
+                                        className="p-4 text-center"
+                                    >
+                                        No data available.
+                                    </td>
+                                </tr>
+                            </tbody>
+                        )}
                     </table>
                 </div>
                 {/* Pagination or search results info */}

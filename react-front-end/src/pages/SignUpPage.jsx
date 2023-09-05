@@ -70,6 +70,7 @@ const SignUpPage = () => {
                                         className="rounded focus:outline-none text-gray-800 px-4 py-2 w-full"
                                         type="name"
                                         placeholder="Name"
+                                        value="Customername"
                                     />
                                 </div>
                                 <div className=" mb-4">
@@ -78,6 +79,7 @@ const SignUpPage = () => {
                                         className="rounded focus:outline-none text-gray-800 px-4 py-2 w-full"
                                         type="email"
                                         placeholder="Email"
+                                        value="UserName@gmail.com"
                                     />
                                 </div>
                                 <div className=" mb-4">
@@ -86,6 +88,7 @@ const SignUpPage = () => {
                                         className="rounded focus:outline-none text-gray-800 px-4 py-2 w-full"
                                         type="phone"
                                         placeholder="ex:+16815223402"
+                                        value="0624789531"
                                     />
                                 </div>
                                 <div className="mb-4">
@@ -94,6 +97,7 @@ const SignUpPage = () => {
                                         className="rounded focus:outline-none text-gray-800 px-4 py-2 w-full"
                                         type="password"
                                         placeholder="Password"
+                                        value="12345678"
                                     />
                                 </div>
                                 <div className="mb-4">
@@ -102,6 +106,7 @@ const SignUpPage = () => {
                                         className="rounded focus:outline-none text-gray-800 px-4 py-2 w-full"
                                         type="password"
                                         placeholder="Confirm Password"
+                                        value="12345678"
                                     />
                                 </div>
                                 <div>

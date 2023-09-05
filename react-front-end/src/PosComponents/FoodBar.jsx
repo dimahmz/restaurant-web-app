@@ -38,11 +38,6 @@ const FoodBar = ({ isOpen, onClick }) => {
             label: "Variations",
             to: "/dashboard/manage/food/variations",
         },
-        {
-            id: "variations2",
-            label: "Variations2",
-            to: "/dashboard/manage/food/variations2",
-        },
     ];
 
     return (

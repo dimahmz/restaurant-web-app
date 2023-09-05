@@ -3,6 +3,7 @@ import { BiSearch } from "react-icons/bi";
 import data from "./dataadmin.json";
 import { Link } from "react-router-dom";
 import NewAdminStaff from "./AddNew/NewAdminStaff";
+import Action3 from "../../PosComponents/Action3";
 const AdminStaffPage = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const customersPerPage = 10;
@@ -15,6 +16,16 @@ const AdminStaffPage = () => {
     const [add, setAdd] = useState(false);
     const handleFormClose = () => {
         setAdd(false);
+    };
+    const [openIndex, setOpenIndex] = useState(null);
+
+    // Function to handle opening/closing of Action2 components
+    const handleToggleOptions = (index) => {
+        if (index === openIndex) {
+            setOpenIndex(null); // Close the currently open component
+        } else {
+            setOpenIndex(index); // Open the clicked component
+        }
     };
     const pageCount = Math.ceil(data.length / customersPerPage);
     const [searchQuery, setSearchQuery] = useState("");
@@ -140,7 +151,13 @@ const AdminStaffPage = () => {
                                             {d.user_type}
                                         </td>
                                         <td className="p-2 border-r-2 text-xs text-center">
-                                            {d.action}
+                                            <Action3
+                                                key={i}
+                                                isOpen={i === openIndex}
+                                                toggleOptions={() =>
+                                                    handleToggleOptions(i)
+                                                }
+                                            />
                                         </td>
                                     </tr>
                                 ))}
@@ -225,7 +242,15 @@ const AdminStaffPage = () => {
                                                     {d.user_type}
                                                 </td>
                                                 <td className="p-2 border-r-2 text-xs text-center">
-                                                    {d.action}
+                                                    <Action3
+                                                        key={i}
+                                                        isOpen={i === openIndex}
+                                                        toggleOptions={() =>
+                                                            handleToggleOptions(
+                                                                i
+                                                            )
+                                                        }
+                                                    />
                                                 </td>
                                             </tr>
                                         ))}

@@ -2,13 +2,20 @@
     {
         "name": "Burger",
         "group": "Fast Food",
-        "price": 8.99,
+        "prices": {
+            "small": 6.99,
+            "medium": 7.99,
+            "large": 8.99
+        },
         "image": "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8YnVyZ2VyfGVufDB8fDB8fHww&auto=format&fit=crop&w=600&q=60"
     },
     {
         "name": "Pizza",
         "group": "Fast Food",
-        "price": 12.99,
+        "prices": {
+            "small": 10.99,
+            "large": 12.99
+        },
         "image": "https://images.unsplash.com/photo-1588315029754-2dd089d39a1a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fHBpenphfGVufDB8fDB8fHww&auto=format&fit=crop&w=600&q=60"
     },
     {
@@ -62,7 +69,10 @@
     {
         "name": "Fries",
         "group": "Side Dish",
-        "price": 3.99,
+        "prices": {
+            "small": 2.99,
+            "large": 3.99
+        },
         "image": "https://www.example.com/fries.jpg"
     },
     {
@@ -74,7 +84,10 @@
     {
         "name": "Sushi Platter",
         "group": "Japanese",
-        "price": 29.99,
+        "prices": {
+            "small": 24.99,
+            "large": 29.99
+        },
         "image": "https://www.example.com/sushi_platter.jpg"
     },
     {

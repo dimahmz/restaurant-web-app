@@ -1,24 +1,31 @@
 import React from "react";
 import DropDownTow from "./DropDownTow";
 import CountDiscountTow from "./CountDiscountTow";
+
 const Branch = () => {
+    const Branch = ["branch1", "branch2", "branch3"];
+    const table = ["table1", "table2", "table3"];
     return (
         <div className="px-2">
             <div className="w-[152px] h-[611.2px]  ">
                 <div className="h-[70%]">
                     <ul>
                         <li className="mb-4">
-                            <DropDownTow />
+                            <DropDownTow options={Branch} title="Branch..." />
                         </li>
                         <li className="mb-4 border-2 rounded  border-gray-300">
                             <input
                                 type="text"
                                 placeholder="Serch here"
-                                className="px-2 py-1 w-full border-solid text-sm "
+                                className="py-2 w-full px-1 border-solid text-sm "
                             />
                         </li>
                         <li className="mb-4">
-                            <DropDownTow />
+                            <DropDownTow options={table} title="Table..." />
+                        </li>
+                        <li className="mb-4">
+                            {" "}
+                            <CountDiscountTow />
                         </li>
                     </ul>
                 </div>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import NavBar from "../PosComponents/NavBar";
 import DropDownTow from "../PosComponents/DropDownTow";
 import { BiSearch } from "react-icons/bi";
@@ -6,6 +6,11 @@ import { MdDone } from "react-icons/md";
 import data from "./ordersdata.json";
 import Footer from "../PosComponents/Footer";
 const KitchenOrdersPage = () => {
+    const [orderStatus, setOrderStatus] = useState({});
+
+    const handleAcceptOrder = (orderId) => {
+        setOrderStatus({ ...orderStatus, [orderId]: "pending" });
+    };
     return (
         <div className="bg-gray-200 h-screen">
             <NavBar />
@@ -85,8 +90,23 @@ const KitchenOrdersPage = () => {
                                         <button className=" mr-2 uppercase text-xs px-4 py-2 text-white bg-[#0dd19d] hover:bg-[#41b797] duration-300 rounded-sm">
                                             order ready
                                         </button>
-                                        <button className=" uppercase text-xs px-4 py-2 text-white bg-[#158df7] hover:bg-[#4489c5] duration-300 rounded-sm">
-                                            accept order
+                                        <button
+                                            className={`mr-2 uppercase text-xs px-4 py-2 text-white ${
+                                                orderStatus[order.order_id] ===
+                                                "pending"
+                                                    ? "bg-red-500" // Change this to the desired red color
+                                                    : "bg-[#158df7] hover:bg-[#4489c5]"
+                                            } duration-300 rounded-sm`}
+                                            onClick={() =>
+                                                handleAcceptOrder(
+                                                    order.order_id
+                                                )
+                                            }
+                                        >
+                                            {orderStatus[order.order_id] ===
+                                            "pending"
+                                                ? "Make Order Pending"
+                                                : "Accept Order"}
                                         </button>
                                     </div>
                                     <div className="my-[10px]">

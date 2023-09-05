@@ -45,7 +45,7 @@ function App() {
                         element={<CustomerPage />}
                     />
                     <Route
-                        path="/online-orders"
+                        path="/dashboard/online-orders"
                         element={<OnlineHistoryPage />}
                     />
                     <Route

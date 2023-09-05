@@ -3,14 +3,45 @@ import CountDiscout from "./CountDiscout";
 import { BiSolidCalculator } from "react-icons/bi";
 import Calculator from "./Calculator";
 import { FaTrash } from "react-icons/fa";
+import ReactToPrint from "react-to-print";
+import TicketComponent from "./TicketComponent";
 const BasketComponent = () => {
     const [nav, setNav] = useState(false);
+    const [serviceCharge, setServiceCharge] = useState(0.0);
+    const [discount, setDiscount] = useState(0.0);
+    const [showTicket, setShowTicket] = useState(false);
 
     const initialItems = [
         { id: 1, name: "Pizza", qty: 1, price: 10 },
+        { id: 2, name: "Burger", qty: 1, price: 12 },
         // Add more items here if needed
     ];
+
+    const handleSubmit = () => {
+        setShowTicket(true);
+        // Trigger the print dialog
+    };
+     
     const [items, setItems] = useState(initialItems);
+
+    const calculateTotalBill = () => {
+        // Calculate the total price of all items
+        const totalItemsPrice = items.reduce(
+            (total, item) => total + item.price * item.qty,
+            0
+        );
+
+        // Calculate the total GST for items in the tbody
+        const totalGST = items.reduce(
+            (total, item) => total + item.price * item.qty * 0.1, // Assuming a GST rate of 10%
+            0
+        );
+
+        // Calculate the final total bill
+        const totalBill = totalItemsPrice + totalGST + serviceCharge - discount;
+
+        return totalBill.toFixed(2); // Assuming you want to round the total to two decimal places
+    };
 
     const updateQty = (index, newQty) => {
         const updatedItems = [...items];
@@ -22,10 +53,11 @@ const BasketComponent = () => {
         const updatedItems = items.filter((_, i) => i !== index);
         setItems(updatedItems);
     };
+
     return (
         <div className=" relative pl-[10px] bg-white w-[480px] h-[611.2px] ">
             {nav ? (
-                <div className="absolute right-[100%] top-[50%]">
+                <div className="absolute right-[70%] top-[50%]">
                     <Calculator />
                 </div>
             ) : (
@@ -34,12 +66,7 @@ const BasketComponent = () => {
             <div className="p-4 h-full">
                 <div className="w-[100%] h-[100%]">
                     <div className="flex justify-end">
-                        <span
-                            className="font-bold
-             text-sm "
-                        >
-                            ORDER TOKEN:
-                        </span>
+                        <span className="font-bold text-sm">ORDER TOKEN:</span>
                     </div>
                     <div className="mt-[10px]">
                         <div className="h-[353.8px]">
@@ -162,7 +189,17 @@ const BasketComponent = () => {
                                         </span>
                                     </div>
                                     <div className=" w-[50%] flex  justify-center">
-                                        <span className="py-[5px]">0.00DH</span>
+                                        <span className="py-[5px]">
+                                            {items
+                                                .reduce(
+                                                    (total, item) =>
+                                                        total +
+                                                        item.price * item.qty,
+                                                    0
+                                                )
+                                                .toFixed(2)}
+                                            DH
+                                        </span>
                                     </div>
                                 </div>
                                 <div className="w-[50%] flex  bg-[#f4f9fc] border text-[12px] font-bold">
@@ -172,7 +209,19 @@ const BasketComponent = () => {
                                         </span>
                                     </div>
                                     <div className=" w-[50%] flex  justify-center">
-                                        <span className="py-[5px]">0.00DH</span>
+                                        <span className="py-[5px]">
+                                            {items
+                                                .reduce(
+                                                    (total, item) =>
+                                                        total +
+                                                        item.price *
+                                                            item.qty *
+                                                            0.1, // Assuming a GST rate of 10%
+                                                    0
+                                                )
+                                                .toFixed(2)}{" "}
+                                            DH
+                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -194,7 +243,10 @@ const BasketComponent = () => {
                                         </span>
                                     </div>
                                     <div className=" w-[50%] bg-white border flex  justify-center">
-                                        <CountDiscout />
+                                        <CountDiscout
+                                            count={serviceCharge}
+                                            setCount={setServiceCharge}
+                                        />
                                     </div>
                                 </div>
                                 <div className="w-[50%] flex  bg-[#f4f9fc] border text-[12px] font-bold">
@@ -204,7 +256,10 @@ const BasketComponent = () => {
                                         </span>
                                     </div>
                                     <div className=" w-[50%] bg-white border flex  justify-center">
-                                        <CountDiscout />
+                                        <CountDiscout
+                                            count={discount}
+                                            setCount={setDiscount}
+                                        />
                                     </div>
                                 </div>
                             </div>
@@ -215,7 +270,7 @@ const BasketComponent = () => {
                                     <span>Total Bill</span>
                                 </div>
                                 <div className="pt-2 pb-[10px] text-white font-bold">
-                                    <span>0.00DH</span>
+                                    <span>{calculateTotalBill()} DH</span>
                                 </div>
                             </div>
                         </div>
@@ -232,7 +287,10 @@ const BasketComponent = () => {
                                 <button className="mr-2 text-white px-4 py-2 font-bold bg-[#f64e60] rounded-[2px] ">
                                     SETTLE
                                 </button>
-                                <button className=" text-white px-4 py-2 font-bold bg-[#0dd19d] rounded-[2px] ">
+                                <button
+                                    onClick={handleSubmit}
+                                    className=" text-white px-4 py-2 font-bold bg-[#0dd19d] rounded-[2px] "
+                                >
                                     SUBMIT
                                 </button>
                             </div>
@@ -240,6 +298,14 @@ const BasketComponent = () => {
                     </div>
                 </div>
             </div>
+            {showTicket && (
+                <div className="print-only absolute top-0">
+                    <TicketComponent
+                        items={items}
+                        totalBill={calculateTotalBill()}
+                    />
+                </div>
+            )}
         </div>
     );
 };

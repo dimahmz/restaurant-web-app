@@ -17,5 +17,10 @@ body {
 }
 
 .open {
-    max-height: 200px; /* Adjust this value to the maximum height of your submenu */
+    max-height: 400px; /* Adjust this value to the maximum height of your submenu */
+}
+.hovered-plus:hover {
+    background-color: #cc3333;
+    color: white;
+    transition: background-color 0.3s, color 0.3s;
 }
