@@ -1,22 +1,21 @@
-import React from "react";
 import { FaBasketShopping } from "react-icons/fa6";
-import PopularComponent from "./PopularComponent";
+import PopularFood from "./PopularFood";
+import axios from "../utils/axios";
+import { useEffect, useState } from "react";
+
 const MenuHome = () => {
-    const menuItems = [
-        "SEASONAL FRUIT JUICES",
-        "DRY FRUIT MILKSHAKES",
-        "SEASONAL MILKSHAKES",
-        "FRUIT CREAM",
-        "FRIES",
-        "PIZZA",
-        "BURGER",
-        "MILK SHAKES GROUP",
-        "COFFEE",
-        "MOJITO",
-        "TACOS",
-        "SHARMA",
-        "PUNJABI",
-    ];
+    const [foods, setFoods] = useState([]);
+
+    useEffect(() => {
+        async function fetchFoods() {
+            const response = await axios.get("/foods");
+            if (response.data.success) {
+                setFoods(response.data.payload);
+            }
+        }
+        fetchFoods();
+    }, []);
+
     return (
         <div>
             <div className="w-full bg-white pt-32 pb-20">
@@ -68,7 +67,6 @@ const MenuHome = () => {
                         </div>
                         <div className=" relative flex flex-col  justify-center p-4">
                             <span>
-                                {" "}
                                 <img
                                     className="absolute right-0 top-[50%]"
                                     src="https://khadyo.softtechdemo.com/website/images/shapes/1.png"
@@ -85,7 +83,7 @@ const MenuHome = () => {
                     </div>
                 </div>
             </div>
-            <PopularComponent data={menuItems} />
+            <PopularFood foods={foods} />
             <div id="special" className="relative bg-white ">
                 <div className="max-w-[1140px] m-auto px-4 py-28">
                     <h1 className="text-[#2a435d]  text-5xl text-center font-extrabold">
