@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\User;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use App\Models\Role;
+use App\Models\Users\Role;
+use App\Models\Restaurant\Branch;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -25,7 +26,7 @@ class User extends Authenticatable
     ];
 
     protected $attributes = [
-        'role_id' => 3, // new created users are by default Costumers
+        'role_id' => 3, // new created users are by default Customers
     ];
 
     /**
@@ -49,6 +50,11 @@ class User extends Authenticatable
     ];
     public function role()
     {
-        return $this->hasOne(Role::class);
+        return $this->belongsTo(Role::class);
+    }
+
+    public function branch()
+    {
+        return $this->belongsTo(Branch::class);
     }
 }

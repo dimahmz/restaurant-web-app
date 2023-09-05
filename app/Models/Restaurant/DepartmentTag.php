@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Restaurant;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Role extends Model
+class DepartmentTag extends Model
 {
     use HasFactory;
 }

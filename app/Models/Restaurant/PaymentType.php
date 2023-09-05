@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\restaurant;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Table extends Model
+class PaymentType extends Model
 {
-    protected $fillable = ['number', 'seats'];
+    use HasFactory;
 }
