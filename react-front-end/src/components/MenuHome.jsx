@@ -1,23 +1,24 @@
-import { FaBasketShopping } from "react-icons/fa6";
 import PopularFood from "./PopularFood";
 import axios from "../utils/axios";
 import { useEffect, useState } from "react";
+import SpecialFood from "./SpecialFood";
 
 const MenuHome = () => {
     const [foods, setFoods] = useState([]);
 
     useEffect(() => {
         async function fetchFoods() {
-            const response = await axios.get("/foods");
+            let response = await axios.get("/foods");
             if (response.data.success) {
                 setFoods(response.data.payload);
+                console.log(response.data.payload);
             }
         }
         fetchFoods();
     }, []);
 
     return (
-        <div>
+        <>
             <div className="w-full bg-white pt-32 pb-20">
                 <div className="max-w-[1140px] m-auto px-2 ">
                     <div className="grid lg:grid-cols-2 grid-cols-1">
@@ -90,156 +91,27 @@ const MenuHome = () => {
                         Explore Our
                         <span className="text-[#cc3333]"> Special Menu</span>
                     </h1>
-                    <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 max-w-[1240px] m-auto px-4  bg-white">
-                        <div className=" shadow-2xl flex flex-col p-4  my-4 text-center m-4 rounded-lg hover:scale-105 duration-300">
-                            <div className="relative h-[250px]  mt-24 mb-6 ">
-                                <img
-                                    src="https://khadyo.softtechdemo.com/public//images/food_item/1662249823-pizza-ridajpg.jpg"
-                                    alt="/"
-                                    className=" block  w-full h-full   object-cover rounded-lg "
-                                />
-                                <button className="absolute text-white bg-[#cc3333] top-[10%] px-4 py-2 z-50 right-0">
-                                    <FaBasketShopping size={20} className="" />
-                                </button>
-                            </div>
-                            <h1 className="text-center text-sm text-white">
-                                <span className="bg-[#cc3333]  rounded-md px-2 mt-8 ">
-                                    special
-                                </span>
-                            </h1>
-                            <h2 className="font-bold text-3xl mt-8 mb-8">
-                                Pizza Rida
-                            </h2>
-                        </div>
-                        <div className=" shadow-2xl flex flex-col p-4  my-4 text-center m-4 rounded-lg hover:scale-105 duration-300">
-                            <div className="relative h-[250px]  mt-24 mb-6 ">
-                                <img
-                                    src="https://khadyo.softtechdemo.com/public//images/food_item/1662249823-pizza-ridajpg.jpg"
-                                    alt="/"
-                                    className=" block  w-full h-full   object-cover rounded-lg "
-                                />
-                                <button className="absolute text-white bg-[#cc3333] top-[10%] px-4 py-2 z-50 right-0">
-                                    <FaBasketShopping size={20} className="" />
-                                </button>
-                            </div>
-                            <h1 className="text-center text-sm text-white">
-                                <span className="bg-[#cc3333]  rounded-md px-2 mt-8 ">
-                                    special
-                                </span>
-                            </h1>
-                            <h2 className="font-bold text-3xl mt-8 mb-8">
-                                Pizza Rida
-                            </h2>
-                        </div>
-                        <div className=" shadow-2xl flex flex-col p-4  my-4 text-center m-4 rounded-lg hover:scale-105 duration-300">
-                            <div className="relative h-[250px]  mt-24 mb-6 ">
-                                <img
-                                    src="https://khadyo.softtechdemo.com/public//images/food_item/1662249823-pizza-ridajpg.jpg"
-                                    alt="/"
-                                    className=" block  w-full h-full   object-cover rounded-lg "
-                                />
-                                <button className="absolute text-white bg-[#cc3333] top-[10%] px-4 py-2 z-50 right-0">
-                                    <FaBasketShopping size={20} className="" />
-                                </button>
-                            </div>
-                            <h1 className="text-center text-sm text-white">
-                                <span className="bg-[#cc3333]  rounded-md px-2 mt-8 ">
-                                    special
-                                </span>
-                            </h1>
-                            <h2 className="font-bold text-3xl mt-8 mb-8">
-                                Pizza Rida
-                            </h2>
-                        </div>
-                        <div className=" shadow-2xl flex flex-col p-4  my-4 text-center m-4 rounded-lg hover:scale-105 duration-300">
-                            <div className="relative h-[250px]  mt-24 mb-6 ">
-                                <img
-                                    src="https://khadyo.softtechdemo.com/public//images/food_item/1662249823-pizza-ridajpg.jpg"
-                                    alt="/"
-                                    className=" block  w-full h-full   object-cover rounded-lg "
-                                />
-                                <button className="absolute text-white bg-[#cc3333] top-[10%] px-4 py-2 z-50 right-0">
-                                    <FaBasketShopping size={20} className="" />
-                                </button>
-                            </div>
-                            <h1 className="text-center text-sm text-white">
-                                <span className="bg-[#cc3333]  rounded-md px-2 mt-8 ">
-                                    special
-                                </span>
-                            </h1>
-                            <h2 className="font-bold text-3xl mt-8 mb-8">
-                                Pizza Rida
-                            </h2>
-                        </div>
-                        <div className=" shadow-2xl flex flex-col p-4  my-4 text-center m-4 rounded-lg hover:scale-105 duration-300">
-                            <div className="relative h-[250px]  mt-24 mb-6 ">
-                                <img
-                                    src="https://khadyo.softtechdemo.com/public//images/food_item/1662249823-pizza-ridajpg.jpg"
-                                    alt="/"
-                                    className=" block  w-full h-full   object-cover rounded-lg "
-                                />
-                                <button className="absolute text-white bg-[#cc3333] top-[10%] px-4 py-2 z-50 right-0">
-                                    <FaBasketShopping size={20} className="" />
-                                </button>
-                            </div>
-                            <h1 className="text-center text-sm text-white">
-                                <span className="bg-[#cc3333]  rounded-md px-2 mt-8 ">
-                                    special
-                                </span>
-                            </h1>
-                            <h2 className="font-bold text-3xl mt-8 mb-8">
-                                Pizza Rida
-                            </h2>
-                        </div>
-                        <div className=" shadow-2xl flex flex-col p-4  my-4 text-center m-4 rounded-lg hover:scale-105 duration-300">
-                            <div className="relative h-[250px]  mt-24 mb-6 ">
-                                <img
-                                    src="https://khadyo.softtechdemo.com/public//images/food_item/1662249823-pizza-ridajpg.jpg"
-                                    alt="/"
-                                    className=" block  w-full h-full   object-cover rounded-lg "
-                                />
-                                <button className="absolute text-white bg-[#cc3333] top-[10%] px-4 py-2 z-50 right-0">
-                                    <FaBasketShopping size={20} className="" />
-                                </button>
-                            </div>
-                            <h1 className="text-center text-sm text-white">
-                                <span className="bg-[#cc3333]  rounded-md px-2 mt-8 ">
-                                    special
-                                </span>
-                            </h1>
-                            <h2 className="font-bold text-3xl mt-8 mb-8">
-                                Pizza Rida
-                            </h2>
-                        </div>
-                        <div className=" shadow-2xl flex flex-col p-4  my-4 text-center m-4 rounded-lg hover:scale-105 duration-300">
-                            <div className="relative h-[250px]  mt-24 mb-6 ">
-                                <img
-                                    src="https://khadyo.softtechdemo.com/public//images/food_item/1662249823-pizza-ridajpg.jpg"
-                                    alt="/"
-                                    className=" block  w-full h-full   object-cover rounded-lg "
-                                />
-                                <button className="absolute text-white bg-[#cc3333] top-[10%] px-4 py-2 z-50 right-0">
-                                    <FaBasketShopping size={20} className="" />
-                                </button>
-                            </div>
-                            <h1 className="text-center text-sm text-white">
-                                <span className="bg-[#cc3333]  rounded-md px-2 mt-8 ">
-                                    special
-                                </span>
-                            </h1>
-                            <h2 className="font-bold text-3xl mt-8 mb-8">
-                                Pizza Rida
-                            </h2>
-                        </div>
+                    <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 max-w-[1240px] m-auto px-4  bg-white mt-16">
+                        {foods.map((foodGroups) =>
+                            foodGroups.foods.map(
+                                (food, index) =>
+                                    food.is_special === 1 && (
+                                        <SpecialFood
+                                            key={index}
+                                            specialFood={food}
+                                        />
+                                    )
+                            )
+                        )}
                     </div>
+                    <img
+                        className="hidden xl:flex absolute right-0 top-[62%]"
+                        src="https://khadyo.softtechdemo.com/website/images/img/37.png"
+                        alt=""
+                    />
                 </div>
-                <img
-                    className="hidden xl:flex absolute right-0 top-[62%]"
-                    src="https://khadyo.softtechdemo.com/website/images/img/37.png"
-                    alt=""
-                />
             </div>
-        </div>
+        </>
     );
 };
 

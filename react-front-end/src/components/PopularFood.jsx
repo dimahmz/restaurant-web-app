@@ -1,6 +1,5 @@
 // eslint-disable-next-line react/prop-types
 const PopularComponent = ({ foods }) => {
-    console.log(foods);
     return (
         <div id="popular" className="w-full bg-white relative">
             <div className="max-w-[1140px] m-auto px-4 bg-white">
@@ -10,18 +9,25 @@ const PopularComponent = ({ foods }) => {
                 <h1 className="text-[#2a435d] font-bold text-4xl text-center">
                     Popular <span className="text-[#cc3333]">Menu</span>
                 </h1>
-                <div className="flex justify-center">
-                    <div className="grid xl:grid-cols-6 lg:grid-cols-4 md:grid-cols-3 grid-cols-2 justify-center items-center p-4 mt-2">
-                        {foods.map((food, index) => (
-                            <button
-                                key={index}
-                                className="hover:bg-[#cc3333] hover:text-white hover:bg-[url('https://khadyo.softtechdemo.com/website/images/shapes/14.png')] duration-300 font-bold border rounded border-solid w-[150px] h-[150px] p-4 m-4"
-                            >
-                                {food.name}
-                            </button>
-                        ))}
+                {foods.length == 0 ? (
+                    <div className="text-red-800 text-2xl my-24 font-medium text-center bg-white">
+                        Error while trying to load Popular Menu. please refresh
+                        page page or try again later
                     </div>
-                </div>
+                ) : (
+                    <div className="flex justify-center">
+                        <div className="grid xl:grid-cols-6 lg:grid-cols-4 md:grid-cols-3 grid-cols-2 justify-center items-center p-4 mt-2">
+                            {foods.map((food, index) => (
+                                <button
+                                    key={index}
+                                    className="hover:bg-[#cc3333] hover:text-white hover:bg-[url('https://khadyo.softtechdemo.com/website/images/shapes/14.png')] duration-300 font-bold border rounded border-solid w-[150px] h-[150px] p-4 m-4"
+                                >
+                                    {food.name}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+                )}
                 <div className="mt-4 pb-4">
                     <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4">
                         <div className=" flex border-2 h-[250px] w-[350px] py-4 px-2 rounded hover:shadow-lg hover:scale-105 duration-300">
@@ -50,7 +56,6 @@ const PopularComponent = ({ foods }) => {
                         </div>
                         <div className=" flex border-2 h-[250px] w-[350px] py-4 px-2 rounded hover:shadow-lg hover:scale-105 duration-300">
                             <div className="mr-6 flex justify-center items-center w-[100px]">
-                                {" "}
                                 <img
                                     className=" rounded-full h-[60px] w-[100px]  flex"
                                     src="https://khadyo.softtechdemo.com/public//images/food_item/1692258705-wasabi-2png.png"

@@ -5,7 +5,7 @@ const HeaderHome = () => {
     const isUserAuthenticated = UseAuth().isUserAuthenticated();
 
     return (
-        <div className="relative">
+        <div className="relative bg-[#131313]">
             <header id="home" className=" pt-5 mb-32 bg-transparent">
                 <div className="  max-w-[1140px] m-auto ">
                     <div className="md:flex  md:items-center md:justify-between ">
