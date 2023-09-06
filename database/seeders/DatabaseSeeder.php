@@ -3,10 +3,17 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use App\Models\User;
+
 use Illuminate\Database\Seeder;
-use Database\Seeders\RolesSeeder;
-use Database\Seeders\UsersSeeder;
+use Database\Seeders\Foods\FoodGroupSeeder;
+use Database\Seeders\Foods\FoodSeeder;
+use Database\Seeders\Orders\OrderSeeder;
+use Database\Seeders\Users\RolesSeeder;
+use Database\Seeders\Users\UsersSeeder;
+use Database\Seeders\Stock\PurchaseSeeder;
+use Database\Seeders\Restaurant\BranchSeeder;
+use Database\Seeders\Restaurant\PaymentTypeSeeder;
+use Database\Seeders\Restaurant\DepartmentTagSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,7 +22,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory()->count(20)->unverified()->create();
-        $this->call([UsersSeeder::class, RolesSeeder::class]);
+
+        $this->call(BranchSeeder::class);
+        $this->call(RolesSeeder::class);
+        $this->call(UsersSeeder::class);
+        $this->call(DepartmentTagSeeder::class);
+        $this->call(PaymentTypeSeeder::class);
+        $this->call(FoodGroupSeeder::class);
+        $this->call(FoodSeeder::class);
+        $this->call(PurchaseSeeder::class);
+        $this->call(OrderSeeder::class);
     }
 }
