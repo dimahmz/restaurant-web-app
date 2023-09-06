@@ -8,10 +8,11 @@ use App\Models\Foods\FoodGroup;
 use App\Models\Foods\Variation;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Food extends Model
 {
+    protected $table = "foods";
+
     use HasFactory;
     public function properties()
     {
@@ -19,7 +20,7 @@ class Food extends Model
     }
     public function variations()
     {
-        return $this->belongsToMany(Variation::class, 'food_variations');
+        return $this->belongsToMany(Variation::class, 'food_variations')->withPivot("price");
     }
 
     public function purchases()
@@ -31,13 +32,4 @@ class Food extends Model
     {
         return $this->belongsTo(FoodGroup::class);
     }
-
-
-    protected $fillable = [
-        "food_group_id",
-        "name",
-        "price",
-        "is_special",
-        "image"
-    ];
 }
