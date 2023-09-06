@@ -6,24 +6,18 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
-        Schema::create('department_tags', function (Blueprint $table) {
+        Schema::create('order_property_items', function (Blueprint $table) {
             $table->id();
-            $table->string("name");
-            $table->decimal("commission", 6, 3);
+            $table->foreignId("order_id");
+            $table->foreignId("property_item_id")->constrained(table: 'property_items');
+            $table->tinyInteger("quantity")->default(1);
             $table->timestamps();
         });
     }
-
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        Schema::dropIfExists('departments_tags');
+        Schema::dropIfExists('order_property_items');
     }
 };

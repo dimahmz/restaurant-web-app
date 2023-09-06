@@ -16,8 +16,10 @@ return new class extends Migration
             $table->foreignId('food_group_id')->constrained(table: 'food_groups');
             $table->string("name");
             $table->decimal("price", 8, 2);
-            $table->boolean("isSpecial");
-            $table->string("image");
+            $table->boolean("is_special")->default(1);
+            $table->integer("in_stock")->default(0);
+            $table->string("image")->nullable();
+            $table->timestamps();
         });
     }
 
@@ -26,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('items');
+        Schema::dropIfExists('foods');
     }
 };

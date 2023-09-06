@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('food_variations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("variation_id");
-            $table->foreignId("food_id");
+            $table->foreignId("variation_id")->constrained();
+            $table->foreignId("food_id")->constrained(table: "foods");
             $table->decimal("price", 6, 2);
             $table->timestamps();
         });

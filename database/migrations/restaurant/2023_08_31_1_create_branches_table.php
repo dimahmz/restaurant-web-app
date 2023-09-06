@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('branches', function (Blueprint $table) {
             $table->id();
             $table->string("name");
-            $table->bigInteger("phone");
+            $table->string("phone", 25);
             $table->text("address");
             $table->decimal("delivery_fee", 5, 2);
             $table->timestamps();

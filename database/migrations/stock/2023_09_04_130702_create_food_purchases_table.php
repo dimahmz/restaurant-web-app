@@ -11,10 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('department_tags', function (Blueprint $table) {
+        Schema::create('food_purchases', function (Blueprint $table) {
             $table->id();
-            $table->string("name");
-            $table->decimal("commission", 6, 3);
+            $table->foreignId('food_id');
+            $table->foreignId('purchase_id');
+            $table->integer("stock")->default(0);
+            $table->integer("quantity");
+            $table->decimal("rate", 10, 2);
+            $table->decimal("total", 10, 2);
             $table->timestamps();
         });
     }
@@ -24,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('departments_tags');
+        Schema::dropIfExists('food_purchases');
     }
 };

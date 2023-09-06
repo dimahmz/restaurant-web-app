@@ -18,12 +18,12 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->string('password')->nullable();
             $table->rememberToken();
             $table->timestamps();
-            $table->string("image");
-            $table->tinyText("address");
-            $table->string("branch");
+            $table->string("image")->nullable();
+            $table->tinyText("address")->nullable();
+            $table->foreignId("branch_id")->nullable();
             $table->foreignId('role_id')->constrained();
         });
     }
