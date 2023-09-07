@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Models\User;
+use App\Models\User\User;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Traits\HttpResponses;
