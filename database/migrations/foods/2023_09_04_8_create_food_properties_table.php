@@ -14,8 +14,8 @@ return new class extends Migration
         //
         Schema::create('food_properties', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("property_id")->constrained(table: "properties");
-            $table->foreignId("food_id")->constrained(table: "foods");
+            $table->foreignId("property_id")->constrained(table: "properties")->cascadeOnDelete();
+            $table->foreignId("food_id")->constrained(table: "foods")->cascadeOnDelete();
             $table->timestamps();
         });
     }

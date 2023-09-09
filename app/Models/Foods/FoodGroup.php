@@ -14,4 +14,5 @@ class FoodGroup extends Model
     {
         return $this->hasMany(Food::class);
     }
+    protected $fillable = ['name'];
 }

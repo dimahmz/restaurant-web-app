@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('foods', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('food_group_id')->constrained(table: 'food_groups');
+            $table->foreignId('food_group_id')->constrained(table: 'food_groups')->cascadeOnDelete();
             $table->string("name");
             $table->decimal("price", 8, 2);
             $table->boolean("is_special")->default(1);

@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->foreignId('food_id');
             $table->foreignId('purchase_id');
-            $table->integer("stock")->default(0);
             $table->integer("quantity");
             $table->decimal("rate", 10, 2);
             $table->decimal("total", 10, 2);

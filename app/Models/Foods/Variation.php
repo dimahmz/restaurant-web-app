@@ -18,4 +18,7 @@ class Variation extends Model
     {
         return $this->hasMany(Order::class);
     }
+
+    protected $fillable = ['name'];
+
 }

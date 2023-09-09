@@ -13,14 +13,13 @@ return new class extends Migration
     {
         Schema::create('purchases', function (Blueprint $table) {
             $table->id();
-            $table->string("payment_type");
-            $table->string("type");
-            $table->integer("invoce");
+            $table->foreignId("supplier_id")->constrained(table: "suppliers");
+            $table->foreignId("branch_id")->constrained(table: "branches");
+            $table->string("payment_type")->defaul("Cash");
+            $table->integer("invoice");
             $table->decimal("total", 12, 2);
             $table->decimal("paid", 12, 2);
             $table->decimal("due", 12, 2);
-            $table->foreignId("supplier_id")->constrained(table: "suppliers");
-            $table->foreignId("branch_id")->constrained(table: "branches");
             $table->timestamps();
         });
     }

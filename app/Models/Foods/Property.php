@@ -20,4 +20,6 @@ class Property extends Model
     {
         return $this->hasMany(PropertyItem::class);
     }
+    protected $fillable = ['name'];
+
 }

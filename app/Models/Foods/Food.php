@@ -32,4 +32,13 @@ class Food extends Model
     {
         return $this->belongsTo(FoodGroup::class);
     }
+
+
+    protected $fillable = [
+        'food_group_id',
+        'name',
+        'price',
+        'is_special',
+        'image',
+    ];
 }
