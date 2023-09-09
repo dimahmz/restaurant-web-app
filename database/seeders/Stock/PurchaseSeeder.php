@@ -22,6 +22,6 @@ class PurchaseSeeder extends Seeder
                 "quantity" => fake()->randomNumber(3),
             ])->count(5),
             'purchases'
-        )->create();
+        )->count(10)->create();
     }
 }

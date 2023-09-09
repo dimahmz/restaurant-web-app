@@ -12,6 +12,7 @@ use App\Http\Controllers\Food\PropertyController;
 use App\Http\Controllers\Food\FoodGroupController;
 use App\Http\Controllers\Food\VariationController;
 use App\Http\Controllers\Stock\PurchaseController;
+use App\Http\Controllers\Stock\SupplierController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Dashboards\AdminDashboardController;
 use App\Http\Controllers\Dashboards\StaffDashboardController;
@@ -54,26 +55,35 @@ Route::put('/food/variations/update', [VariationController::class, 'put']);
 Route::delete('/food/variations/delete', [VariationController::class, 'delete']);
 
     // ------- Orders ----------
+
 // Online
 Route::get('/orders', [OrderController::class, 'get']);
 Route::post('/order/create', [OrderController::class, 'post']);
 Route::put('/order/update', [OrderController::class, 'put']);
 Route::delete('/order/delete', [OrderController::class, 'delete']);
 
+    // ------- Stock ----------
+
+// purchases
+Route::get('/purchases', [OrderController::class, 'get']);
+Route::post('/purchases/create', [PurchaseController::class, 'post']);
+Route::put('/purchases/update', [PurchaseController::class, 'put']);
+Route::delete('/purchases/delete', [PurchaseController::class, 'delete']);
+
+// suppliers
+Route::get('/suppliers', [SupplierController::class, 'get']);
+Route::post('/suppliers/create', [SupplierController::class, 'post']);
+Route::put('/suppliers/update', [SupplierController::class, 'put']);
+Route::delete('/suppliers/delete', [SupplierController::class, 'delete']);
+
+
+// ------- Point of sells ----------
+
 // point of sell
 Route::get('/online_orders', [OnlineOrderController::class, 'get']);
 Route::post('/online_order/create', [OnlineOrderController::class, 'post']);
 Route::put('/online_order/update', [OnlineOrderController::class, 'put']);
 Route::delete('/online_order/order/delete', [OnlineOrderController::class, 'delete']);
-
-    
-
-
-
-
-// Purchase Routes
-Route::get('/purchases' , [PurchaseController::class, 'get']);
-Route::post('/purchases/create' , [PurchaseController::class, 'post']);
 
 
 // ------------ Protected Routes --------------

@@ -2,10 +2,11 @@
 
 namespace App\Providers;
 
-use App\Listeners\LogUserAuthenticated;
+use App\Models\Orders\Order;
+use App\Observers\OrderObserver;
 use Illuminate\Auth\Events\Login;
-use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Registered;
+use App\Listeners\LogUserAuthenticated;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
@@ -31,7 +32,8 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        // to update food whenever a new purchase is occurred
+        Order::observe(OrderObserver::class);
     }
 
     /**

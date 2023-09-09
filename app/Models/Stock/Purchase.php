@@ -25,4 +25,6 @@ class Purchase extends Model
     {
         return $this->belongsToMany(Food::class, 'food_purchases');
     }
+    protected $guarded = ["id"];
+
 }

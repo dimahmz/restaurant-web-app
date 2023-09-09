@@ -13,4 +13,6 @@ class Supplier extends Model
     {
         return $this->hasMany(Purchase::class);
     }
+
+    protected $guarded = ["id"];
 }
