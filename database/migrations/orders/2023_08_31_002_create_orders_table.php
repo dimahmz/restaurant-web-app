@@ -13,15 +13,16 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("branch_id")->constrained(table: "branches");
-            $table->foreignId("variation_id")->nullable();
-            $table->foreignId("food_id");
-            $table->foreignId("user_id");
+            $table->foreignId("branch_id")->nullable()->constrained(table: "branches")->nullOnDelete();
+            $table->foreignId("variation_id")->nullable()->nullOnDelete();
+            $table->foreignId("food_id")->nullable()->constrained(table: "foods")->nullOnDelete();
+            $table->foreignId("user_id")->nullable()->nullOnDelete();
             $table->tinyInteger("quantity")->default(1);
             $table->string("status")->default("processing");
             $table->string("delivery_address")->nullable();
             $table->string("delivery_time")->default("30 min");
-            $table->string("customer");
+            $table->string("delivery_charge")->default("15");
+            $table->string("customer")->nullable();
             $table->tinyInteger("table")->nullable();
             $table->string("waiter")->nullable();
             $table->decimal('subtotal', 10, 2);
@@ -29,9 +30,9 @@ return new class extends Migration
             $table->decimal('SGST', 5, 2)->default(5);
             $table->decimal('department_commission', 5, 2)->default(0.00);
             $table->decimal('total_bill', 12, 2)->default(500.00);
-            $table->decimal('paid_amount', 12, 2)->default(600.00);
-            $table->decimal('due_amount', 12, 2)->default(100.00);
-            $table->boolean('is_online')->default(1);
+            $table->decimal('paid_amount', 12, 2)->default(600.00)->nullable();
+            $table->decimal('due_amount', 12, 2)->default(100.00)->nullable();
+            $table->boolean('is_online')->default(0);
             $table->timestamps();
         });
     }

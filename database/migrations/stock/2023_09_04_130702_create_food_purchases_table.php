@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('food_purchases', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('food_id');
-            $table->foreignId('purchase_id');
+            $table->foreignId('food_id')->constrained(table: "foods")->cascadeOndelete();
+            $table->foreignId('purchase_id')->constrained(table: "purchases")->cascadeOndelete();
             $table->integer("quantity");
             $table->decimal("rate", 10, 2);
             $table->decimal("total", 10, 2);

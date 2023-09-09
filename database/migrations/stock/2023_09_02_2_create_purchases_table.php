@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('purchases', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("supplier_id")->constrained(table: "suppliers");
-            $table->foreignId("branch_id")->constrained(table: "branches");
-            $table->string("payment_type")->defaul("Cash");
+            $table->foreignId("supplier_id")->nullable()->constrained(table: "suppliers")->nullOnDelete(); 
+            $table->foreignId("branch_id")->nullable()->constrained(table: "branches")->nullOnDelete();
+            $table->string("payment_type")->default("Cash");
             $table->integer("invoice");
             $table->decimal("total", 12, 2);
             $table->decimal("paid", 12, 2);

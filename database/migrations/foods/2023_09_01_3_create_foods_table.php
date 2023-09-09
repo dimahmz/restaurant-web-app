@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string("name");
             $table->decimal("price", 8, 2);
             $table->boolean("is_special")->default(1);
-            $table->integer("in_stock")->default(0);
+            $table->integer("in_stock")->default(100);
             $table->string("image")->nullable();
             $table->timestamps();
         });

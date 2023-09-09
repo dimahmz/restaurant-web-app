@@ -10,9 +10,9 @@ return new class extends Migration
     {
         Schema::create('order_property_items', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("order_id");
-            $table->foreignId("property_item_id")->constrained(table: 'property_items');
-            $table->tinyInteger("quantity")->default(1);
+            $table->foreignId("order_id")->cascadeOnDelete();
+            $table->foreignId("property_item_id")->nullable()->constrained(table: 'property_items')->nullOnDelete();
+            $table->tinyInteger("quantity");
             $table->timestamps();
         });
     }
