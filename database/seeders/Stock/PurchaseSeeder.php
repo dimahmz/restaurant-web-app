@@ -17,10 +17,9 @@ class PurchaseSeeder extends Seeder
     {
         Supplier::factory()->has(
             Purchase::factory()->hasAttached(Food::factory()->count(3), [
-                "stock" => 0,
                 "rate" => fake()->randomFloat($nbMaxDecimals = 2, $min = 4, $max = 100),
                 "total" => fake()->randomFloat($nbMaxDecimals = 2, $min = 100, $max = 1000),
-                "quantity" => fake()->randomNumber(),
+                "quantity" => fake()->randomNumber(3),
             ])->count(5),
             'purchases'
         )->create();
