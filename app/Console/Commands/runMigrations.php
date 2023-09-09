@@ -13,7 +13,7 @@ class runMigrations extends Command
     public function handle()
     {
         //
-        $folders = ['restaurant', 'users', 'foods', "stock", "users", "orders"];
+        $folders = ['restaurant', 'users', 'foods', "stock", "users", "orders" , "triggers"];
 
         Artisan::call('migrate:fresh');
 
@@ -23,6 +23,8 @@ class runMigrations extends Command
             $this->call('migrate', [
                 '--path' => $path,
             ]);
+            
         }
+        Artisan::call('db:seed');
     }
 }

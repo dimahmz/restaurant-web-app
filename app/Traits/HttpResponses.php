@@ -10,7 +10,7 @@ trait HttpResponses
     return response()->json([
       'success' => true,
       'message' => $message,
-      'data' => $data
+      'payload' => $data
     ],  $code);
   }
 
@@ -19,7 +19,7 @@ trait HttpResponses
     return response()->json([
       'success' => false,
       'message' => $message,
-      'data' => $data
+      'payload' => $data
     ],  $code);
   }
 }

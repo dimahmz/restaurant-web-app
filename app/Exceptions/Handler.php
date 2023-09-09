@@ -2,9 +2,10 @@
 
 namespace App\Exceptions;
 
-use App\Traits\HttpResponses;
 use Throwable;
+use App\Traits\HttpResponses;
 use Illuminate\Auth\AuthenticationException;
+use Illuminate\Validation\ValidationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
@@ -21,6 +22,29 @@ class Handler extends ExceptionHandler
         'password_confirmation',
     ];
 
+    public function render($request, Throwable $exception)
+    {
+        if ($exception instanceof ValidationException) {
+            // Handle validation exceptions as JSON responses
+            return $this::error(
+                $exception->validator->errors(),
+                'input errors',
+                422
+            );
+        }
+        if ($exception instanceof OutOfStockException) {
+            return $this::error(
+                null,
+                'food is out of stock',
+                404
+            );
+        }
+
+        return parent::render($request, $exception);
+    }
+
+
+    // Add more exception handling logic as needed for your JSON API
 
     public function register(): void
     {
