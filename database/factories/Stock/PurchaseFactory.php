@@ -19,8 +19,7 @@ class PurchaseFactory extends Factory
     {
         return [
             "payment_type" => fake()->randomElement(["Cash", "Bank payment"]),
-            "type" => "",
-            "invoce" => fake()->randomNumber(3),
+            "invoice" => fake()->randomNumber(3),
             "total" =>  fake()->randomFloat($nbMaxDecimals = 2, $min = 4, $max = 1000),
             "paid" => fake()->randomFloat($nbMaxDecimals = 2, $min = 50, $max = 1000),
             "due" => fake()->randomFloat($nbMaxDecimals = 2, $min = 0, $max = 100),
