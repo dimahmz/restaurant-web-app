@@ -21,12 +21,7 @@ class Branch extends Model
     }
 
 
-    protected $fillable = [
-        'name',
-        'phone',
-        'adresse',
-        'delivery_fee'
-    ];
+    protected $guarded = ["id"];
 
     use HasFactory;
 }

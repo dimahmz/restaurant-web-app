@@ -20,7 +20,7 @@ class BranchFactory extends Factory
             'name' => fake()->name(),
             'phone' => fake()->phoneNumber(),
             'address' => fake()->address(),
-            'delivery_fee' => fake()->randomFloat(
+            'delivery_charge' => fake()->randomFloat(
                 $nbMaxDecimals = 2,
                 $min = 0,
                 $max = 100

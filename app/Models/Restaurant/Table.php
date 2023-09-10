@@ -14,4 +14,7 @@ class Table extends Model
     {
         return $this->belongsTo(Branch::class);
     }
+
+    protected $guarded =["id"];
+
 }

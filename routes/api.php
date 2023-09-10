@@ -13,8 +13,12 @@ use App\Http\Controllers\Food\VariationController;
 use App\Http\Controllers\Order\PosOrderController;
 use App\Http\Controllers\Stock\PurchaseController;
 use App\Http\Controllers\Stock\SupplierController;
+use App\Http\Controllers\Restaurant\TableController;
 use App\Http\Controllers\Order\OnlineOrderController;
+use App\Http\Controllers\Restaurant\BranchController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
+use App\Http\Controllers\Restaurant\PaymentTypeController;
+use App\Http\Controllers\Restaurant\DepartmentTagController;
 use App\Http\Controllers\Dashboards\AdminDashboardController;
 use App\Http\Controllers\Dashboards\StaffDashboardController;
 use App\Http\Controllers\Dashboards\DeliverymanDashboardController;
@@ -83,6 +87,32 @@ Route::get('/suppliers', [SupplierController::class, 'get']);
 Route::post('/suppliers/create', [SupplierController::class, 'post']);
 Route::put('/suppliers/update', [SupplierController::class, 'put']);
 Route::delete('/suppliers/delete', [SupplierController::class, 'delete']);
+
+    // ------- Restaurant ----------
+// branches
+Route::get('/branches', [BranchController::class, 'get']);
+Route::post('/branches/create', [BranchController::class, 'post']);
+Route::put('/branches/update', [BranchController::class, 'put']);
+Route::delete('/branches/delete', [BranchController::class, 'delete']);
+
+// Dept Tags
+Route::get('/department_tags', [DepartmentTagController::class, 'get']);
+Route::post('/department_tags/create', [DepartmentTagController::class, 'post']);
+Route::put('/department_tags/update', [DepartmentTagController::class, 'put']);
+Route::delete('/department_tags/delete', [DepartmentTagController::class, 'delete']);
+
+// tables
+Route::get('/tables', [TableController::class, 'get']);
+Route::post('/tables/create', [TableController::class, 'post']);
+Route::put('/tables/update', [TableController::class, 'put']);
+Route::delete('/tables/delete', [TableController::class, 'delete']);
+
+// Payment types
+Route::get('/payment_types', [PaymentTypeController::class, 'get']);
+Route::post('/payment_types/create', [PaymentTypeController::class, 'post']);
+Route::put('/payment_types/update', [PaymentTypeController::class, 'put']);
+Route::delete('/payment_types/delete', [PaymentTypeController::class, 'delete']);
+
 
 
 
