@@ -3,7 +3,7 @@
 namespace App\Models\User;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use App\Models\Users\Role;
+use App\Models\User\Role;
 use App\Models\Restaurant\Branch;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
@@ -26,7 +26,7 @@ class User extends Authenticatable
     ];
 
     protected $attributes = [
-        'role_id' => 3, // new created users are by default Customers
+        'role_id' => 5, // new created users are by default Customers
     ];
 
     /**

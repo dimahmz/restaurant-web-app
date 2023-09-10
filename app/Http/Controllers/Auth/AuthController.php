@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Models\User;
+use App\Models\User\User;
 use App\Traits\HttpResponses;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -18,14 +18,15 @@ class AuthController extends Controller
     {
         $credentials = ['email', 'password'];
 
+
         if (!Auth::attempt($request->only($credentials)))
             return HttpResponses::error("name or email is incorrect", 'error while trying to log in', 401);
 
-        $user = User::where('email', $request->email)->first();
+        $user = Auth::user();
 
-        $token = $user->createToken('login-user token ')->plainTextToken;
+        $token = $user->createToken("'{$user->name}' login-token")->plainTextToken;
 
-        return HttpResponses::success(['user' => $user, 'token' => $token], 'log in successfully');
+        return HttpResponses::success(['user' => $user, 'token' => $token], 'logged in successfully');
     }
 
     // StoreUserRequest $request
