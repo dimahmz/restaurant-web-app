@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\Orders\Order;
 use Illuminate\Http\Request;
 use App\Traits\HttpResponses;
 use Illuminate\Support\Facades\Log;
@@ -11,8 +10,10 @@ use App\Http\Controllers\Order\OrderController;
 use App\Http\Controllers\Food\PropertyController;
 use App\Http\Controllers\Food\FoodGroupController;
 use App\Http\Controllers\Food\VariationController;
+use App\Http\Controllers\Order\PosOrderController;
 use App\Http\Controllers\Stock\PurchaseController;
 use App\Http\Controllers\Stock\SupplierController;
+use App\Http\Controllers\Order\OnlineOrderController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Dashboards\AdminDashboardController;
 use App\Http\Controllers\Dashboards\StaffDashboardController;
@@ -57,10 +58,17 @@ Route::delete('/food/variations/delete', [VariationController::class, 'delete'])
     // ------- Orders ----------
 
 // Online
-Route::get('/orders', [OrderController::class, 'get']);
-Route::post('/order/create', [OrderController::class, 'post']);
-Route::put('/order/update', [OrderController::class, 'put']);
-Route::delete('/order/delete', [OrderController::class, 'delete']);
+Route::get('/online_orders', [OnlineOrderController::class, 'get']);
+Route::post('/online_order/create', [OnlineOrderController::class, 'post']);
+Route::put('/online_order/update', [OnlineOrderController::class, 'put']);
+Route::delete('/online_order/delete', [OnlineOrderController::class, 'delete']);
+
+// point of sell
+Route::get('/pos_orders', [PosOrderController::class, 'get']);
+Route::post('/pos_order/create', [PosOrderController::class, 'post']);
+Route::put('/pos_order/update', [OnlineOrderController::class, 'put']);
+Route::delete('/pos_order/delete', [OnlineOrderController::class, 'delete']);
+
 
     // ------- Stock ----------
 
@@ -76,14 +84,6 @@ Route::post('/suppliers/create', [SupplierController::class, 'post']);
 Route::put('/suppliers/update', [SupplierController::class, 'put']);
 Route::delete('/suppliers/delete', [SupplierController::class, 'delete']);
 
-
-// ------- Point of sells ----------
-
-// point of sell
-Route::get('/online_orders', [OnlineOrderController::class, 'get']);
-Route::post('/online_order/create', [OnlineOrderController::class, 'post']);
-Route::put('/online_order/update', [OnlineOrderController::class, 'put']);
-Route::delete('/online_order/order/delete', [OnlineOrderController::class, 'delete']);
 
 
 // ------------ Protected Routes --------------

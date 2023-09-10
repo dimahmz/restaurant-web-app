@@ -17,14 +17,12 @@ return new class extends Migration
             $table->foreignId("variation_id")->nullable()->nullOnDelete();
             $table->foreignId("food_id")->nullable()->constrained(table: "foods")->nullOnDelete();
             $table->foreignId("user_id")->nullable()->nullOnDelete();
+            $table->foreignId("table")->nullable()->nullOnDelete();
             $table->tinyInteger("quantity")->default(1);
             $table->string("status")->default("processing");
             $table->string("delivery_address")->nullable();
-            $table->string("delivery_time")->default("30 min");
+            $table->string("delivery_time")->default("30 min")->nullable();
             $table->string("delivery_charge")->default("15");
-            $table->string("customer")->nullable();
-            $table->tinyInteger("table")->nullable();
-            $table->string("waiter")->nullable();
             $table->decimal('subtotal', 10, 2);
             $table->decimal('CGST', 5, 2)->default(5);
             $table->decimal('SGST', 5, 2)->default(5);
@@ -32,7 +30,7 @@ return new class extends Migration
             $table->decimal('total_bill', 12, 2)->default(500.00);
             $table->decimal('paid_amount', 12, 2)->default(600.00)->nullable();
             $table->decimal('due_amount', 12, 2)->default(100.00)->nullable();
-            $table->boolean('is_online')->default(0);
+            $table->boolean('is_online');
             $table->timestamps();
         });
     }

@@ -18,6 +18,11 @@ class OrderObserver
         if($food->in_stock < $order->quantity){
             throw new OutOfStockException();
         }
+
+        $food->decrement('in_stock' , $order->quantity);
+        
+        $food->save();
+
     }
 
 }

@@ -23,12 +23,10 @@ class OrderFactory extends Factory
         return [
             "branch_id" => Branch::inRandomOrder()->first()->id,
             "user_id" => User::inRandomOrder()->first()->id,
-            "customer" => User::inRandomOrder()->first()->name,
             "food_id" => Food::inRandomOrder()->first()->id,
             "variation_id" => Variation::inRandomOrder()->first()->id,
             "delivery_address" => fake()->sentence(),
             "quantity" => rand(1, 5),
-            "waiter" => "",
             "subtotal" => fake()->randomFloat(
                 $nbMaxDecimals = 2,
                 $min = 80,
