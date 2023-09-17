@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 const withMT = require("@material-tailwind/react/utils/withMT");
+const plugin = require("tailwindcss/plugin");
 
 module.exports = withMT({
     content: [
@@ -10,5 +11,24 @@ module.exports = withMT({
     theme: {
         extend: {},
     },
-    plugins: [],
+    plugins: [
+        plugin(function ({ addUtilities }) {
+            addUtilities({
+                ".flex-center": {
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                },
+                ".flex-center-between": {
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                },
+                ".flex-column": {
+                    display: "flex",
+                    flexDirection: "column",
+                },
+            });
+        }),
+    ],
 });
