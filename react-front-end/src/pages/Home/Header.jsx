@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { UseAuth } from "../hooks/AuthContext";
+import { UseAuth } from "../../hooks/AuthContext";
 
 const HeaderHome = () => {
     const isUserAuthenticated = UseAuth().isUserAuthenticated();
@@ -65,11 +65,11 @@ const HeaderHome = () => {
                             </div>
                             <div className="flex">
                                 {isUserAuthenticated ? (
-                                    <a href="/dashboard">
-                                        <button className="bg-[#cc3333] px-4  text-white text-xl md:text-2xl hover:bg-transparent hover:text-[#cc3333] border border-[#cc3333] w-[140px] h-[52px] text-center rounded-md ">
+                                    <Link to="/dashboard">
+                                        <button className="bg-[#cc3333] px-7 py-3  text-white text-xl md:text-2xl hover:bg-transparent hover:text-[#cc3333] border border-[#cc3333] text-center rounded-md ">
                                             Dashboard
                                         </button>
-                                    </a>
+                                    </Link>
                                 ) : (
                                     <Link to="/login">
                                         <button className="bg-[#cc3333] px-4  text-white text-xl md:text-2xl hover:bg-transparent hover:text-[#cc3333] border border-[#cc3333] w-[140px] h-[52px] text-center rounded-md ">
@@ -83,9 +83,7 @@ const HeaderHome = () => {
                 </div>
             </header>
             <section>
-                <div className="hidden lg:flex absolute  h-full -z-50  w-[450px] top-0 right-[20%] bg-[#271C0A] ">
-                    {" "}
-                </div>
+                <div className="hidden lg:flex absolute  h-full -z-50  w-[450px] top-0 right-[20%] bg-[#271C0A] "></div>
                 <div>
                     <span className="hidden lg:flex absolute -z-50 top-0 left-0 ">
                         <img
@@ -157,7 +155,6 @@ const HeaderHome = () => {
                                     />
                                 </span>
                                 <span>
-                                    {" "}
                                     <img
                                         src="https://khadyo.softtechdemo.com/public/uploads/1685846995.jpg"
                                         alt=""

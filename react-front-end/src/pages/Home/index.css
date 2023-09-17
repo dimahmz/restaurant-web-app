@@ -1,0 +1,7 @@
+.sidebar-btn {
+    @apply text-white bg-[#cc3333] px-8 py-2 rounded-md;
+}
+
+.order_cart div {
+    @apply flex justify-between items-center;
+}

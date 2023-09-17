@@ -1,12 +1,11 @@
 import { Routes, Route } from "react-router-dom";
-import HomePage from "./pages/HomePage";
+import HomePage from "./pages/Home";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
 import ResetPasswordPage from "./pages/ResetPasswordPage";
 import DashboardPage from "./pages/DashboardPage";
-import PosPage from "./pages/PosPage";
-import HistoriquePage from "./pages/HistoriquePage";
-import OnlineHistoryPage from "./pages/OnlineHistoryPage";
+import PosPage from "./pages/POS";
+import OnlineOrders from "./pages/Orders/Online";
 import CustomerPage from "./pages/CustomerPage";
 import OnlineCustomerPage from "./pages/OnlineCustomerPage";
 import KitchenOrdersPage from "./pages/KitchenOrdersPage";
@@ -37,8 +36,8 @@ function App() {
                     <Route path="/dashboard" element={<DashboardPage />} />
                     <Route path="/dashboard/pos" element={<PosPage />} />
                     <Route
-                        path="/dashboard/orders"
-                        element={<HistoriquePage />}
+                        path="/dashboard/pos-orders"
+                        element={<OnlineOrders />}
                     />
                     <Route
                         path="/dashboard/customers"
@@ -46,7 +45,7 @@ function App() {
                     />
                     <Route
                         path="/dashboard/online-orders"
-                        element={<OnlineHistoryPage />}
+                        element={<OnlineOrders />}
                     />
                     <Route
                         path="/dashboard/online-customers"

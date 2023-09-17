@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { AiOutlineCaretDown } from "react-icons/ai";
 
 const DropDown = ({ items, defaultValue }) => {

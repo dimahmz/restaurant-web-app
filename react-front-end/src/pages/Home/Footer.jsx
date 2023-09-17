@@ -1,54 +1,6 @@
-import React from "react";
-import DropDown from "../components/DropDown";
-import DropDown3 from "../PosComponents/DropDown3";
 const FooterHome = () => {
-    const languageOptions = [
-        { value: "en", label: "English" },
-        { value: "fr", label: "Français" },
-        { value: "es", label: "Español" },
-        { value: "de", label: "Deutsch" },
-    ];
-    const CoinOptions = [
-        { value: "dh", label: "DH" },
-        { value: "$", label: "Dollar US" },
-    ];
-
     return (
         <div id="language" className="bg-white  relative pb-10 pt-32 ">
-            <div className="max-w-[1140px] px-4 m-auto">
-                <div className=" flex justify-between pb-4 ">
-                    <div className=" px-2 w-[50%] ">
-                        <h1 className=" font-bold lg:text-4xl text-xl text-[#2a435d]">
-                            Set Your{" "}
-                            <span className="text-[#cc3333]">
-                                {" "}
-                                Local Language
-                            </span>
-                        </h1>
-                    </div>
-                    <div>
-                        <DropDown3
-                            options={languageOptions}
-                            defaultValue="en"
-                        />
-                    </div>
-                </div>
-                <div className=" flex justify-between pb-11 ">
-                    <div className="px-2 w-[50%] ">
-                        <h1 className=" font-bold lg:text-4xl text-xl text-[#2a435d]">
-                            Set your{" "}
-                            <span className="text-[#5db535] ">
-                                {" "}
-                                local currency
-                            </span>
-                        </h1>
-                    </div>
-                    <div>
-                        <DropDown3 options={CoinOptions} defaultValue="$" />
-                    </div>
-                </div>
-                <div className="border-dotted border-[1px] border-gray-500 mt-4 mb-4 "></div>
-            </div>
             <div className="max-w-[1140px] px-4 m-auto">
                 <div className="flex flex-col justify-center items-center px-2">
                     <div>
