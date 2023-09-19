@@ -3,7 +3,7 @@ import HomePage from "./pages/Home";
 import LoginPage from "./pages/Auth/LoginPage";
 import SignUpPage from "./pages/Auth/SignUpPage";
 import ResetPasswordPage from "./pages/Auth/ResetPasswordPage";
-import DashboardPage from "./pages/DashboardPage";
+import DashboardPage from "./pages/Dashboard";
 import PosPage from "./pages/POS";
 import OnlineOrders from "./pages/Orders/Online";
 import CustomerPage from "./pages/CustomerPage";

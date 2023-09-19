@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { AiOutlineClose } from "react-icons/ai";
-import DropDown from "../../../components/DropDown";
+import DropDown from "../../Home/DropDown";
 import DropDownTow from "../../../PosComponents/DropDownTow";
 
 const NewTable = ({ onClose, dataline, isUpdating }) => {

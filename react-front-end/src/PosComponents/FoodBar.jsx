@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+/* eslint-disable react/prop-types */
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const FoodBar = ({ isOpen, onClick }) => {
@@ -54,9 +55,8 @@ const FoodBar = ({ isOpen, onClick }) => {
                 <li className={`submenu ${isOpen ? "open" : ""}`}>
                     <ul>
                         {submenuItems.map((item) => (
-                            <Link to={item.to}>
+                            <Link key={item.id} to={item.to}>
                                 <li
-                                    key={item.id}
                                     className={`p-[10px] cursor-pointer text-sm font-bold border-solid border-b-[1px] bg-white ${
                                         activeListItem === item.id
                                             ? "text-red-600"

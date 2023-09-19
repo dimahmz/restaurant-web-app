@@ -1,9 +1,6 @@
-import React, { useState } from "react";
-import NavBar from "../PosComponents/NavBar";
+import { useState } from "react";
 import { BiSearch } from "react-icons/bi";
 import data from "./datatestcustomer.json";
-import Footer from "../PosComponents/Footer";
-import Action from "../PosComponents/Action";
 
 const OnlineCustomerPage = () => {
     const [currentPage, setCurrentPage] = useState(1);
@@ -53,7 +50,6 @@ const OnlineCustomerPage = () => {
 
     return (
         <div className="bg-gray-200 h-screen">
-            <NavBar />
             <div>
                 <div className="mt-[10px]">
                     <div className="max-w-[1520px] mx-auto px-4">
@@ -404,9 +400,7 @@ const OnlineCustomerPage = () => {
                     </div>
                 </div>
             </div>
-            <Footer />
         </div>
-    
     );
 };
 

@@ -1,8 +1,10 @@
-import axios from "../../utils/axios";
 import { useEffect, useState } from "react";
 import { FaBasketShopping } from "react-icons/fa6";
 import HeroSection from "./HeroSection";
 import SideBarOrder from "./SideBarOrder";
+import { Food } from "../../APIs/Food";
+import { Branch } from "../../APIs/Restaurant";
+import { MenuProvider } from "./MenuProvider";
 
 const MenuHome = () => {
     const [foodGroups, setFoodGroups] = useState([]);
@@ -13,18 +15,16 @@ const MenuHome = () => {
 
     useEffect(() => {
         async function fetchFoods() {
-            let response = await axios.get("/foods");
-            if (response.data.success) {
-                setFoodGroups(response.data.payload);
-                console.log(response.data.success);
+            const response = await Food.get();
+            if (response.success) {
+                setFoodGroups(response.payload);
             }
         }
 
         async function fetchBranches() {
-            let response = await axios.get("/branches");
-            if (response.data.success) {
-                setBranches(response.data.payload);
-                console.log(response.data.payload);
+            const response = await Branch.get();
+            if (response.success) {
+                setBranches(response.payload);
             }
         }
         fetchFoods();
@@ -32,7 +32,7 @@ const MenuHome = () => {
     }, []);
 
     return (
-        <>
+        <MenuProvider>
             <SideBarOrder selectedFood={selectedFood} branches={branches} />
             <HeroSection />
             <div id="popular" className="w-full bg-white relative">
@@ -83,7 +83,7 @@ const MenuHome = () => {
                                     <div className="w-[100px]">
                                         <img
                                             className="rounded-full w-[100px]"
-                                            src={food.image}
+                                            src={`http://192.168.1.63:8000/storage/${food.image}`}
                                             alt={food.name}
                                         />
                                     </div>
@@ -157,7 +157,7 @@ const MenuHome = () => {
                     </div>
                 </div>
             </div>
-        </>
+        </MenuProvider>
     );
 };
 

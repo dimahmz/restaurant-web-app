@@ -1,5 +1,3 @@
-import React from "react";
-import DropDown from "../../components/DropDown";
 import DropDownTow from "../../PosComponents/DropDownTow";
 
 const FoodPurchasePage = () => {

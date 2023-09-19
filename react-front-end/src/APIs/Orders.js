@@ -87,7 +87,7 @@ export class OnlineOrder extends Order {
     // update
     static async update({ id, status }) {
         try {
-            const resp = await axios.put("/online_order/update", {
+            const resp = await axios.put("/online_order", {
                 id,
                 status,
             });
@@ -99,7 +99,7 @@ export class OnlineOrder extends Order {
     // delete order
     static async delete(id) {
         try {
-            const resp = await axios.delete("/online_order/delete", {
+            const resp = await axios.delete("/online_order", {
                 data: { id },
             });
             return resp.data;

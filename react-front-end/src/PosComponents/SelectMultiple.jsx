@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 const SelectMultiple = ({ options, label }) => {
     const [searchText, setSearchText] = useState("");

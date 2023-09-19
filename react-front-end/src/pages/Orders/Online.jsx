@@ -1,11 +1,9 @@
 import { OnlineOrder } from "../../APIs/Orders";
-import NavBar from "../../components/NavBar";
 import SeachHeader from "./Header";
 import { useEffect, useState } from "react";
 import { Modal, Box } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import SnackBar from "../../components/snackBar";
-
 import "./online.css";
 
 const OnlineHistoryPage = () => {
@@ -123,7 +121,6 @@ const OnlineHistoryPage = () => {
             />
 
             <div className="bg-gray-200 h-screen ">
-                <NavBar />
                 {/* Table seach header component */}
                 <div className="px-3">
                     <SeachHeader />

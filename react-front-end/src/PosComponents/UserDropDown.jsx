@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { UseAuth } from "../hooks/AuthContext";
 
 const UserNavBar = () => {
     const [isDropdownOpen, setDropdownOpen] = useState(false);
@@ -6,6 +7,8 @@ const UserNavBar = () => {
     const toggleDropdown = () => {
         setDropdownOpen(!isDropdownOpen);
     };
+
+    const { LogoutUser } = UseAuth();
 
     return (
         <div className="flex items-center justify-between  p-2">
@@ -22,24 +25,13 @@ const UserNavBar = () => {
                         isDropdownOpen ? "" : "hidden"
                     }`}
                 >
-                    <a
-                        href="/update-user-profile"
-                        className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
-                    >
-                        Change Password
-                    </a>
-                    <a
-                        href="/dashboard/"
-                        className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
-                    >
-                        Dashboard
-                    </a>
-                    <a
+                    <span
                         href="#"
                         className="block px-4 py-2 text-gray-800 border-t-2 hover:bg-gray-100"
+                        onClick={() => LogoutUser()}
                     >
                         LogOut
-                    </a>
+                    </span>
                 </div>
             </div>
         </div>

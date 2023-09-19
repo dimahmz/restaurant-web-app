@@ -2,10 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-.active {
+/* .active {
     background-color: #de222a;
     color: white;
-}
+} */
 
 .submenu {
     max-height: 0;

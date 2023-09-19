@@ -1,8 +1,6 @@
-import React, { useState } from "react";
-import NavBar from "../PosComponents/NavBar";
+import { useState } from "react";
 import { BiSearch } from "react-icons/bi";
 import data from "./datatestcustomer.json";
-import Footer from "../PosComponents/Footer";
 import AddCustomerForm from "../PosComponents/AddCustomerForm";
 import Action from "../PosComponents/Action";
 const CustomerPage = () => {
@@ -57,7 +55,6 @@ const CustomerPage = () => {
 
     return (
         <div className="bg-gray-200 h-screen">
-            <NavBar />
             <div>
                 <div className="mt-[10px]">
                     <div className="max-w-[1304px] mx-auto px-4">
@@ -334,7 +331,6 @@ const CustomerPage = () => {
                     </div>
                 </div>
             </div>
-            <Footer />
         </div>
     );
 };

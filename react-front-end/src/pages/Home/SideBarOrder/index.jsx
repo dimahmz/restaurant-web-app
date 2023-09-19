@@ -22,7 +22,10 @@ const ShopBasketHome = ({ selectedFood, branches }) => {
     function changePhase(phaseNumber, order) {
         setPhaseToDisplay((prev) => {
             const update = prev.map(() => false);
-            update[phaseNumber] = true;
+            if (phaseNumber >= 0) update[phaseNumber] = true;
+            else {
+                setDisplaySideBar(false);
+            }
             return update;
         });
         setOrder(order);

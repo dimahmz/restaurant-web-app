@@ -1,10 +1,6 @@
-import NavBar from "../../components/NavBar";
-import Footer from "../POS/Footer";
-
 const UpdatePassPage = () => {
     return (
         <div className="bg-gray-200 h-screen">
-            <NavBar />
             <div className="mt-[10px] mb-[10px]">
                 <div className="max-w-[1320px] m-auto">
                     <div className="bg-white">
@@ -37,7 +33,6 @@ const UpdatePassPage = () => {
                     </div>
                 </div>
             </div>
-            <Footer />
         </div>
     );
 };

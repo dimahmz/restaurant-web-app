@@ -113,7 +113,6 @@ const AddNewItemPage = () => {
                             defaultChecked
                         />
                         <label className="py-2 cursor-pointer">
-                            {" "}
                             Is Special?
                         </label>
                     </div>

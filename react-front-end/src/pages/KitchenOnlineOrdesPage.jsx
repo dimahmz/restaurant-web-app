@@ -1,12 +1,8 @@
-import React from "react";
-import NavBar from "../PosComponents/NavBar";
-import Footer from "../PosComponents/Footer";
 import { BiSearch } from "react-icons/bi";
 import DropDownTow from "../PosComponents/DropDownTow";
 const KitchenOnlineOrdesPage = () => {
     return (
         <div className="bg-gray-200 h-screen">
-            <NavBar />
             <div>
                 <div className="mt-[15px]">
                     <div className="pl-2">

@@ -1,14 +1,18 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import OrderTotalChrges from "./TotalCharges";
 import SnackBar from "../../../components/snackBar";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { OnlineOrder } from "../../../APIs/Orders";
 import { Delivery_address_schema } from "../../../data-validation/Order";
+import { MenuContext } from "../MenuProvider";
+
 const OrderCheckOut = ({ foodToOrder, changePhase }) => {
     const [address, setAdress] = useState("");
     const [note, setNote] = useState("");
     const [message, setMessage] = useState("");
     const [open, setOpen] = useState(false);
+
+    const { onOrderSent } = useContext(MenuContext);
 
     async function palceOrder() {
         const { error } = Delivery_address_schema.validate(address);
@@ -23,14 +27,9 @@ const OrderCheckOut = ({ foodToOrder, changePhase }) => {
         foodToOrder.order_note_to_rider = note;
 
         const response = await OnlineOrder.create(foodToOrder);
-        if (response.success) {
-            changePhase(0, null);
-            setMessage("your order has been placed");
-            setOpen(true);
-        } else {
-            setMessage(response.message);
-            setOpen(true);
-        }
+        onOrderSent(response);
+        changePhase(-1, null);
+        // your order has been placed
     }
 
     function backToCart() {

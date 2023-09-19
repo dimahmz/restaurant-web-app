@@ -1,11 +1,6 @@
-// src/components/UploadButton.js
-import { useState } from "react";
-
-const UploadButton = () => {
-    const [selectedImage, setSelectedImage] = useState("");
-
+const UploadButton = ({ onUploadImg }) => {
     const handleImageUpload = (event) => {
-        setSelectedImage(event.target.files[0].name); // Get the name of the selected image
+        onUploadImg(event.target.files[0]);
     };
 
     return (
@@ -19,9 +14,6 @@ const UploadButton = () => {
                         onChange={handleImageUpload}
                     />
                 </label>
-                <span className="text-gray-500">
-                    {selectedImage ? selectedImage : "No image chosen"}
-                </span>
             </div>
         </div>
     );

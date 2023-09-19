@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import FoodBar from "./FoodBar";
 import UserBar from "./UserBar";
 import ResturantBar from "./ResturantBar";
@@ -9,7 +9,7 @@ const MenuBar = () => {
 
     return (
         <div className="pr-[20px]">
-            <div className="w-[209.33px] h-[563.2px] pb-5 overflow-scroll">
+            <div className="w-[209.33px] h-[563.2px] pb-5 overflow-y-auto">
                 <FoodBar
                     isOpen={openDropdown === "food"}
                     onClick={() => setOpenDropdown("food")}
