@@ -8,7 +8,7 @@ const NavBar = () => {
             <div className="flex justify-between max-w-[1320px] m-auto">
                 <div className="px-4">
                     <img
-                        className="h-[50px]"
+                        className="max-h-[50px]"
                         src="https://khadyo.softtechdemo.com/public/images/logo/1685847152-jcris-system-logopng.png"
                         alt=""
                     />

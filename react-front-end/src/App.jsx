@@ -19,6 +19,7 @@ import {
     ProtectedRoutesToUsers,
 } from "./hooks/ProtectedRoutes";
 import AuthProvider from "./hooks/AuthContext";
+import Layout from "./pages/Layout";
 
 function App() {
     return (
@@ -35,42 +36,47 @@ function App() {
                 </Route>
                 {/* protected routes */}
                 <Route element={<ProtectedRoutes />}>
-                    <Route path="/dashboard" element={<DashboardPage />} />
-                    <Route path="/dashboard/pos" element={<PosPage />} />
-                    <Route
-                        path="/dashboard/pos-orders"
-                        element={<OnlineOrders />}
-                    />
-                    <Route
-                        path="/dashboard/customers"
-                        element={<CustomerPage />}
-                    />
-                    <Route
-                        path="/dashboard/online-orders"
-                        element={<OnlineOrders />}
-                    />
-                    <Route
-                        path="/dashboard/online-customers"
-                        element={<OnlineCustomerPage />}
-                    />
-                    <Route
-                        path="/dashboard/kitchen"
-                        element={<KitchenOrdersPage />}
-                    />
-                    <Route
-                        path="/dashboard/kitchen/online"
-                        element={<KitchenOnlineOrdesPage />}
-                    />
+                    <Route element={<Layout />}>
+                        <Route path="/dashboard" element={<DashboardPage />} />
+                        <Route path="/dashboard/pos" element={<PosPage />} />
+                        <Route
+                            path="/dashboard/pos-orders"
+                            element={<OnlineOrders />}
+                        />
+                        <Route
+                            path="/dashboard/customers"
+                            element={<CustomerPage />}
+                        />
+                        <Route
+                            path="/dashboard/online-orders"
+                            element={<OnlineOrders />}
+                        />
+                        <Route
+                            path="/dashboard/online-customers"
+                            element={<OnlineCustomerPage />}
+                        />
+                        <Route
+                            path="/dashboard/kitchen"
+                            element={<KitchenOrdersPage />}
+                        />
+                        <Route
+                            path="/dashboard/kitchen/online"
+                            element={<KitchenOnlineOrdesPage />}
+                        />
 
-                    <Route path="/dashboard/manage" element={<ManagePage />}>
-                        <Route path="food" element={<Food />} />
-                        <Route path="add-food" element={<AddFood />} />
+                        <Route
+                            path="/dashboard/manage"
+                            element={<ManagePage />}
+                        >
+                            <Route path="food" element={<Food />} />
+                            <Route path="add-food" element={<AddFood />} />
+                        </Route>
+
+                        <Route
+                            path="/update-user-profile"
+                            element={<UpdatePassPage />}
+                        />
                     </Route>
-
-                    <Route
-                        path="/update-user-profile"
-                        element={<UpdatePassPage />}
-                    />
                 </Route>
             </Routes>
         </AuthProvider>
