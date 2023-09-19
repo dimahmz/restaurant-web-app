@@ -24,7 +24,6 @@ class OnlineOrderController extends Controller
             'quantity' => $request->quantity,
             'delivery_address' => $request->delivery_address,
             'subtotal' => $request->subtotal,
-            'department_commission' => $request->department_commission,
             'total_bill' => $request->total_bill,
             'paid_amount'=> null,
             'due_amount'=> null,
@@ -38,7 +37,7 @@ class OnlineOrderController extends Controller
     // --------- read ----------
     function get()
     {
-        $orders = Order::with('branch' , 'property_items.property' , 'variation' , 'food')->where('is_online', 0)->get();
+        $orders = Order::with('branch' , 'property_items.property' , 'variation' , 'food')->where('is_online', '>', 0)->get();
         return $this::success($orders);
     }
 

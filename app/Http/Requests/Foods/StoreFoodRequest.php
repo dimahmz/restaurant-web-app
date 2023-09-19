@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Foods;
 
+use App\Models\Foods\Food;
 use App\Traits\HttpResponses;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
@@ -23,6 +24,7 @@ class StoreFoodRequest extends FormRequest
             'food_group_id' => 'required|numeric',
             'name' => 'required|string',
             'price' => 'required|numeric',
+            'is_special' => 'required|numeric',
             'image' => "required|image|mimes:jpeg,png,jpg,gif|max:$size"
         ];
     }

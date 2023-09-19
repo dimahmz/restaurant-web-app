@@ -22,8 +22,13 @@ class TableController extends Controller
     // --------- read ----------
     function get()
     {
-        $table = Table::select("id", "name" , "commission")->get();
+        $table = Table::all();
         return $this::success($table);
+    }
+    function get_with_branch(){
+        $table = Table::with('branch')->get();
+        return $this::success($table);
+
     }
 
     // --------update -------

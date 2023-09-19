@@ -17,6 +17,7 @@ class FoodController extends Controller
     // ------- Create ----------
     function post(StoreFoodRequest $request)
     {
+        
         $path =  $request->file('image')->store('images' , 'public');
 
         $food = Food::create([
@@ -28,12 +29,15 @@ class FoodController extends Controller
         ]);
 
         // create the the food properties
-        if ($request->properties_IDs)
-            $food->properties()->attach($request->properties_IDs);
+        if ($request->properties_IDs){
+            $IDs = json_decode($request->properties_IDs);
+            $food->properties()->attach($IDs);
+        }
         // create the food variations
-        if ($request->variations_IDs)
-            $food->variations()->attach($request->variations_IDs);
-
+        if ($request->variations_IDs){            
+            $IDs=json_decode($request->variations_IDs);
+            $food->variations()->attach($IDs);
+        }
         return $this::success($food);
     }
 
@@ -43,6 +47,21 @@ class FoodController extends Controller
         $foods = FoodGroup::with('foods.variations', 'foods.properties.property_items')->get();
         return $this::success($foods);
     }
+
+    function getGroupsFoods()
+    {
+        $foods = FoodGroup::with('foods.variations', 'foods.properties.property_items')->get();
+        return $this::success($foods);
+    }
+
+    function getFood()
+    {
+        $foods = Food::with('properties' , 'variations' , 'food_group')->get();
+        return $this::success($foods);
+    }
+
+
+
 
     // ------- Update ----------
     function put(UpdateFoodRequest $request)

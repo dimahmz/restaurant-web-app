@@ -15,7 +15,6 @@ class StoreOnlineOrder extends FormRequest
     {
         return [
             'branch_id' => 'required|numeric',
-            'variation_id' => 'required|numeric',
             'food_id' => 'required|numeric',
             'costumer_id' => 'required|numeric',
             'quantity'=> 'required|numeric',

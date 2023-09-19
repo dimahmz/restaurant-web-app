@@ -43,9 +43,9 @@ class AuthController extends Controller
 
         return HttpResponses::success(['user' => $user], 'Account Has been created succesfully');
     }
-    function logout(FormRequest $request)
+    function logout()
     {
-        $request->user()->currentAccessToken()->delete();
+        Auth::logout();        
         return HttpResponses::success([], 'user has been logged out');
     }
 }
