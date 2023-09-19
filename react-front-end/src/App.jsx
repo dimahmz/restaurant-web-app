@@ -1,8 +1,8 @@
 import { Routes, Route } from "react-router-dom";
 import HomePage from "./pages/Home";
-import LoginPage from "./pages/LoginPage";
-import SignUpPage from "./pages/SignUpPage";
-import ResetPasswordPage from "./pages/ResetPasswordPage";
+import LoginPage from "./pages/Auth/LoginPage";
+import SignUpPage from "./pages/Auth/SignUpPage";
+import ResetPasswordPage from "./pages/Auth/ResetPasswordPage";
 import DashboardPage from "./pages/DashboardPage";
 import PosPage from "./pages/POS";
 import OnlineOrders from "./pages/Orders/Online";
@@ -10,8 +10,10 @@ import CustomerPage from "./pages/CustomerPage";
 import OnlineCustomerPage from "./pages/OnlineCustomerPage";
 import KitchenOrdersPage from "./pages/KitchenOrdersPage";
 import KitchenOnlineOrdesPage from "./pages/KitchenOnlineOrdesPage";
-import ManagePage from "./pages/ManagePage";
-import UpdatePassPage from "./pages/UpdatePassPage";
+import ManagePage from "./pages/Manage";
+import Food from "./pages/Manage/Food";
+import AddFood from "./pages/Manage/Food/addFood";
+import UpdatePassPage from "./pages/Auth/UpdatePassPage";
 import {
     ProtectedRoutes,
     ProtectedRoutesToUsers,
@@ -60,10 +62,11 @@ function App() {
                         element={<KitchenOnlineOrdesPage />}
                     />
 
-                    <Route
-                        path="/dashboard/manage/*"
-                        element={<ManagePage />}
-                    />
+                    <Route path="/dashboard/manage" element={<ManagePage />}>
+                        <Route path="food" element={<Food />} />
+                        <Route path="add-food" element={<AddFood />} />
+                    </Route>
+
                     <Route
                         path="/update-user-profile"
                         element={<UpdatePassPage />}

@@ -21,7 +21,6 @@ export default function AuthProvider({ children }) {
     //     AuthenticateUser,
     //     LogoutUser,
     // });
-
     const setUserContext = (newProp) => {
         const newUserContext = {
             ...userContext,
@@ -118,7 +117,7 @@ export default function AuthProvider({ children }) {
         if (rememberUser) {
             ManageCookies.setCookie(
                 "authorization_token",
-                response.data.token,
+                response.payload.token,
                 100
             );
             localStorage.setItem("isAuthenticated", JSON.stringify(true));
@@ -126,7 +125,7 @@ export default function AuthProvider({ children }) {
             sessionStorage.setItem("isAuthenticated", JSON.stringify(true));
             ManageCookies.setCookie(
                 "authorization_token",
-                response.data.token,
+                response.payload.token,
                 0
             );
         }
@@ -147,7 +146,9 @@ export default function AuthProvider({ children }) {
             resetAuthenticationState();
             navigate("/");
         } catch (error) {
-            return error.response.data.message;
+            const response = error.response;
+            if (response?.data?.message) return response?.data?.message;
+            return response?.data?.payload;
         }
     }
 

@@ -1,6 +1,5 @@
-import React from "react";
-import NavBar from "../PosComponents/NavBar";
-import Footer from "../PosComponents/Footer";
+import NavBar from "../../components/NavBar";
+import Footer from "../POS/Footer";
 
 const UpdatePassPage = () => {
     return (
