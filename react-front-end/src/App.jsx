@@ -20,6 +20,11 @@ import {
 } from "./hooks/ProtectedRoutes";
 import AuthProvider from "./hooks/AuthContext";
 import Layout from "./pages/Layout";
+// Restaurant
+import Branches from "./pages/Manage/Restaurant/branches";
+import DepTags from "./pages/Manage/Restaurant/depTags";
+import Payments from "./pages/Manage/Restaurant/payments";
+import Tables from "./pages/Manage/Restaurant/tables";
 
 function App() {
     return (
@@ -68,8 +73,16 @@ function App() {
                             path="/dashboard/manage"
                             element={<ManagePage />}
                         >
-                            <Route path="food" element={<Food />} />
-                            <Route path="add-food" element={<AddFood />} />
+                            <Route path="food">
+                                <Route index element={<Food />} />
+                                <Route path="add-food" element={<AddFood />} />
+                            </Route>
+                            <Route path="restaurant">
+                                <Route path="branches" element={<Branches />} />
+                                <Route path="dpt-tags" element={<DepTags />} />
+                                <Route path="tables" element={<Tables />} />
+                                <Route path="payments" element={<Payments />} />
+                            </Route>
                         </Route>
 
                         <Route

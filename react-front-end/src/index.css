@@ -6,7 +6,9 @@
     background-color: #de222a;
     color: white;
 } */
-
+body {
+    background-color: #ebebeb;
+}
 .submenu {
     max-height: 0;
     overflow: hidden;

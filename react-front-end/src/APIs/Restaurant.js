@@ -15,21 +15,42 @@ export class Branch {
 }
 
 export class DeptTag {
-    static async getAll() {}
+    static async get() {
+        try {
+            const resp = await axios.get("/department_tags");
+            return resp.data;
+        } catch (e) {
+            return e.response.data;
+        }
+    }
     static async create() {}
     static async update() {}
     static async delete() {}
 }
 
 export class Table {
-    static async get() {}
+    static async get() {
+        try {
+            const resp = await axios.get("/tables/branch");
+            return resp.data;
+        } catch (e) {
+            return e.response.data;
+        }
+    }
     static async create() {}
     static async update() {}
     static async delete() {}
 }
 
 export class PaymentType {
-    static async getAll() {}
+    static async get() {
+        try {
+            const resp = await axios.get("/payment_types");
+            return resp.data;
+        } catch (e) {
+            return e.response.data;
+        }
+    }
     static async create() {}
     static async update() {}
     static async delete() {}

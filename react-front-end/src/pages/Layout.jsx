@@ -8,7 +8,7 @@ const Layout = () => {
             <div className="w-full fixed top-0 z-[10000]">
                 <NavBar />
             </div>
-            <div className="mt-16">
+            <div className="mt-[70px]">
                 <Outlet />
             </div>
             <div className="fixed w-full bottom-0">

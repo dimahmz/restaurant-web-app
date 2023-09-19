@@ -1,3 +1,11 @@
 .active-link {
-    @apply text-red-600;
+    @apply text-[#f64e60];
+}
+
+ul.pages-links {
+    @apply relative text-sm font-[700] transition-all hidden;
+}
+
+ul.show-links {
+    @apply block;
 }
