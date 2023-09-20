@@ -15,8 +15,4 @@ class PropertyItem extends Model
         return $this->belongsTo(Property::class);
     }
 
-    public function orders()
-    {
-        return $this->belongToMany(Order::class, 'order_property_items');
-    }
 }

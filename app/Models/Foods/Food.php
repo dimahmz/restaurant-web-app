@@ -2,6 +2,7 @@
 
 namespace App\Models\Foods;
 
+use App\Models\Orders\Order;
 use App\Models\Foods\Property;
 use App\Models\Stock\Purchase;
 use App\Models\Foods\FoodGroup;
@@ -27,6 +28,12 @@ class Food extends Model
     {
         return $this->belongsToMany(Purchase::class, 'food_purchases');
     }
+    public function orders()
+    {
+        return $this->belongsToMany(Order::class, 'order_food');
+    }
+
+
 
     public function food_group()
     {

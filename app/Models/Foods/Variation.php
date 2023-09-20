@@ -2,6 +2,7 @@
 
 namespace App\Models\Foods;
 
+use App\Models\Foods\Food;
 use App\Models\orders\Order;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -14,11 +15,10 @@ class Variation extends Model
     {
         return $this->belongsToMany(Food::class, 'food_variations');
     }
-    public function orders()
+    public function order_food()
     {
-        return $this->hasMany(Order::class);
+        return $this->belongsToMany(Food::class, 'order_food');
     }
-
     protected $fillable = ['name'];
 
 }

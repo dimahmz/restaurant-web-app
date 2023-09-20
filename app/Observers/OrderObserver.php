@@ -13,15 +13,15 @@ class OrderObserver
     public function creating(Order $order): void
     {
 
-        $food = Food::find($order->food_id);
+        // $food = Food::find($order->food_id);
 
-        if($food->in_stock < $order->quantity){
-            throw new OutOfStockException();
-        }
+        // if($food->in_stock < $order->quantity){
+        //     throw new OutOfStockException();
+        // }
 
-        $food->decrement('in_stock' , $order->quantity);
+        // $food->decrement('in_stock' , $order->quantity);
         
-        $food->save();
+        // $food->save();
 
     }
 

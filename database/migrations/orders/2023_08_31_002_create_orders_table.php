@@ -14,15 +14,12 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId("branch_id")->nullable()->constrained(table: "branches")->nullOnDelete();
-            $table->foreignId("variation_id")->nullable()->nullOnDelete();
-            $table->foreignId("food_id")->nullable()->constrained(table: "foods")->nullOnDelete();
             $table->foreignId("user_id")->nullable()->nullOnDelete();
             $table->foreignId("table")->nullable()->nullOnDelete();
-            $table->tinyInteger("quantity")->default(1);
             $table->string("status")->default("processing");
             $table->string("delivery_address")->nullable();
             $table->string("delivery_time")->default("30 min")->nullable();
-            $table->string("delivery_charge")->default("15");
+            $table->string("delivery_charge")->default("15")->nullable();
             $table->decimal('subtotal', 10, 2);
             $table->decimal('CGST', 5, 2)->default(5);
             $table->decimal('SGST', 5, 2)->default(5);

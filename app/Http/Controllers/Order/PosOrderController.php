@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Order;
 use App\Models\Orders\Order;
 use Illuminate\Http\Request;
 use App\Traits\HttpResponses;
+use App\Models\Orders\OrderFood;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
+use App\Models\Orders\OrderFoodItem;
 use App\Http\Requests\Order\StorePOSorder;
 
 class PosOrderController extends Controller
@@ -17,9 +20,7 @@ class PosOrderController extends Controller
     {
         $order = Order::create([
             'branch_id' => $request->branch_id,
-            'food_id' => $request->food_id,
             'user_id' => $request->user_id,
-            'variation_id' => $request->variation_id,
             'quantity' => $request->quantity,
             'subtotal' => $request->subtotal,
             'department_commission' => $request->department_commission,
@@ -29,9 +30,26 @@ class PosOrderController extends Controller
             'total_bill' => $request->total_bill,
             'is_online'  => 0
         ]);
-         // create the the order propertiesPosOrderController
-         if ($request->property_items)
-            $order->property_items()->attach($request->property_items);
+        //  create the ordered food tables 
+        foreach ($request->order_food as $order_food) {
+            $new_order_food = OrderFood::create([
+                'order_id'=> $order->id,
+                'food_id'=> $order_food['food_id'],
+                'variation_id' => $order_food['variation_id'],
+                'quantity'=>$order_food['quantity'],        
+            ]);
+                // each order food can have multiple property items attched to it  
+                if(isset($order_food['food_property_items'])){
+                    Log::info(isset($order_food['food_property_items']));
+                    foreach ($order_food['food_property_items'] as $food_property_item ){
+                        OrderFoodItem::create([
+                            'order_food_id'=> $new_order_food->id,
+                            'property_item_id'=> $food_property_item['property_item_id'],
+                            'quantity'=>$food_property_item['quantity'],
+                        ]);
+                    }
+                }
+        }
         return $this::success($order);
     }
     // --------- read ----------
