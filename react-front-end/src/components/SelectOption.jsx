@@ -1,7 +1,7 @@
 import { FormControl, Select, MenuItem } from "@mui/material";
 import { useState } from "react";
 
-export default function SimpleSnackbar({ options, onSelectOption }) {
+export default function SimpleSnackbar({ options, onSelectOption, label }) {
     const [selectedOption, setSelectedOption] = useState("");
 
     function handleSelectOption(e) {
@@ -25,7 +25,7 @@ export default function SimpleSnackbar({ options, onSelectOption }) {
                 name="selectedFoodGroup"
             >
                 <MenuItem value={""}>
-                    <label>Select a Branch</label>
+                    <label>{label}</label>
                 </MenuItem>
                 {options.map((option) => (
                     <MenuItem

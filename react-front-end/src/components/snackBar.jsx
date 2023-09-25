@@ -5,10 +5,12 @@ export default function SimpleSnackbar({
     open,
     handleClose,
     severity,
+    sx,
 }) {
     if (!severity) {
         severity = "error";
     }
+    // className={ "& .MuiAlert-icon": { color: "#fff" } }
     return (
         <>
             <Snackbar
@@ -17,7 +19,7 @@ export default function SimpleSnackbar({
                 autoHideDuration={6000}
                 onClose={handleClose}
             >
-                <Alert onClose={handleClose} severity={severity}>
+                <Alert onClose={handleClose} severity={severity} sx={sx}>
                     {message}
                 </Alert>
             </Snackbar>

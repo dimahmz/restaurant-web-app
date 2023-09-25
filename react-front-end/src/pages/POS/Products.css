@@ -1,0 +1,3 @@
+.procduct-selected {
+    @apply bg-[#f64e60] text-white;
+}

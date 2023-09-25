@@ -1,21 +1,44 @@
-const VariationsTable = ({ variations, onSelectVariation }) => {
+import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { modify_food_order, store_order_food } from "../../stores/pointOfSale";
+
+const VariationsTable = ({ variations }) => {
+    const dispatch = useDispatch();
+
+    const [variationIndex, setVariationIndex] = useState(null);
+
+    const selectedFoodIndex = useSelector(
+        (state) => state.pointOfSalesOrders.select_food_index
+    );
+
+    const order_food = useSelector(store_order_food);
+
+    function addVariation(variation, i) {
+        setVariationIndex(i);
+        const update = { ...order_food[selectedFoodIndex] };
+        update.selected_variation = variation;
+        dispatch(modify_food_order(update));
+    }
+
     return (
-        <div className="p-2">
+        <div className="text-xs">
             <div>
-                <div className="text-white bg-[#f64e60] px-4 py-2 flex justify-center font-bold border-2">
+                <div className="text-white bg-[#f64e60] px-4 py-2 flex justify-center font-medium border-2">
                     Variations
                 </div>
                 {variations.length === 0 ? (
-                    <p className="px-3 mt-7">There is no variation</p>
+                    <p className="px-2 mt-7 text-center text-base">
+                        Food doesn't have any variation
+                    </p>
                 ) : (
                     <table className="table-auto w-full">
-                        <thead className="border">
-                            <tr>
-                                <td className="pl-2">Name</td>
-                                <td className="pl-2 border-l-2">Price</td>
+                        <thead className="border  text-center">
+                            <tr className="py-3">
+                                <td className="py-1">Name</td>
+                                <td className="py-1">Price</td>
                             </tr>
                         </thead>
-                        <tbody className="bg-[#f4f9fc] border-2">
+                        <tbody className="bg-[#f4f9fc] border">
                             {variations.map((variation, index) => (
                                 <tr key={index} className="border-b-2">
                                     <td className="p-2 ">
@@ -23,18 +46,21 @@ const VariationsTable = ({ variations, onSelectVariation }) => {
                                             <input
                                                 type="checkbox"
                                                 className="form-checkbox mr-2"
-                                                onClick={(e) => {
-                                                    if (e.target.checked)
-                                                        onSelectVariation(
-                                                            variation
-                                                        );
-                                                }}
+                                                checked={
+                                                    variationIndex === index
+                                                }
+                                                onChange={() =>
+                                                    addVariation(
+                                                        variation,
+                                                        index
+                                                    )
+                                                }
                                             />
                                             {variation.name}
                                         </label>
                                     </td>
-                                    <td className="p-2 border-l-2">
-                                        {variation.price}
+                                    <td className="">
+                                        {variation.pivot.price} DH
                                     </td>
                                 </tr>
                             ))}

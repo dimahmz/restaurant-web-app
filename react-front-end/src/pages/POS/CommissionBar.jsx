@@ -1,13 +1,16 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { update_dep_tag } from "../../stores/pointOfSale";
 
-const CommissionBar = ({ data, onSelectCommission }) => {
+const CommissionBar = ({ data }) => {
+    const dispatch = useDispatch();
+
     const [selectedButtonIndex, setSelectedButtonIndex] = useState(-1);
 
     const handleButtonClick = (department_tag, index) => {
-        console.log(department_tag);
+        dispatch(update_dep_tag(department_tag));
         setSelectedButtonIndex(index);
-        onSelectCommission(department_tag);
     };
 
     return (

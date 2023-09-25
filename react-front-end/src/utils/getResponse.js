@@ -1,3 +1,4 @@
+/* eslint-disable no-prototype-builtins */
 export default function getResponseMessage(response) {
     if (typeof response.payload === "object") {
         let errors = response.payload;
