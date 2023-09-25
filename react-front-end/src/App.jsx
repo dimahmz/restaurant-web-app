@@ -7,10 +7,6 @@ import DashboardPage from "./pages/Dashboard";
 import PosPage from "./pages/POS";
 import OnlineOrders from "./pages/Orders/Online";
 import POSorders from "./pages/Orders/Pos";
-import CustomerPage from "./pages/CustomerPage";
-import OnlineCustomerPage from "./pages/OnlineCustomerPage";
-import KitchenOrdersPage from "./pages/KitchenOrdersPage";
-import KitchenOnlineOrdesPage from "./pages/KitchenOnlineOrdesPage";
 import ManagePage from "./pages/Manage";
 import Food from "./pages/Manage/Food";
 import AddFood from "./pages/Manage/Food/addFood";
@@ -58,27 +54,9 @@ function App() {
                                 />
 
                                 <Route
-                                    path="customers"
-                                    element={<CustomerPage />}
-                                />
-                                <Route
                                     path="online-orders"
                                     element={<OnlineOrders />}
                                 />
-                                <Route
-                                    path="online-customers"
-                                    element={<OnlineCustomerPage />}
-                                />
-                                <Route path="kitchen">
-                                    <Route
-                                        index
-                                        element={<KitchenOrdersPage />}
-                                    />
-                                    <Route
-                                        path="online"
-                                        element={<KitchenOnlineOrdesPage />}
-                                    />
-                                </Route>
                                 <Route path="manage" element={<ManagePage />}>
                                     <Route path="food">
                                         <Route index element={<Food />} />
