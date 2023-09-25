@@ -2,6 +2,7 @@
 /* eslint-disable no-prototype-builtins */
 import { useEffect, useState } from "react";
 import SnackBar from "../../../components/snackBar";
+import { Stack } from "@mui/material";
 
 const SelectedOrderOption = ({ OrderselectedFood, branches, changePhase }) => {
     const [foodOrder, setFoodOrder] = useState({});
@@ -77,6 +78,9 @@ const SelectedOrderOption = ({ OrderselectedFood, branches, changePhase }) => {
                 open={open}
                 handleClose={() => {
                     setOpen(false);
+                }}
+                sx={{
+                    width: 600,
                 }}
             />
             <div className="relative overflow-y-auto p-4 h-full max-h-[75vh]">

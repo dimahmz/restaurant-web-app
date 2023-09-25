@@ -5,38 +5,37 @@ const ServerError = {
     message: "a server error pleaser try again later",
 };
 
-export default class Order {}
+export default class Order {
+    static async getOneOrder(id) {
+        try {
+            const resp = await axios.get(`/order/${id}`);
+            return resp.data;
+        } catch (e) {
+            return e.response.data;
+        }
+    }
+}
 
 // Point of sales orders
 export class PosOrder extends Order {
-    static create(order) {
-        const {
-            branch_id,
-            variation_id,
-            food_id,
-            user_id,
-            quantity,
-            subtotal,
-            totall_bill,
-            paid_amount,
-            due_amount,
-            department_commission,
-            property_items,
-        } = order;
-
-        console.log({
-            branch_id,
-            variation_id,
-            food_id,
-            user_id,
-            quantity,
-            subtotal,
-            totall_bill,
-            paid_amount,
-            due_amount,
-            department_commission,
-            property_items,
-        });
+    static async create(order) {
+        const new_food_order = {
+            ...order,
+        };
+        try {
+            const resp = await axios.post("/pos_order", new_food_order);
+            return resp.data;
+        } catch (e) {
+            return e.response.data;
+        }
+    }
+    static async get() {
+        try {
+            const resp = await axios.get("/pos_orders");
+            return resp.data;
+        } catch (e) {
+            return e.response.data;
+        }
     }
 }
 

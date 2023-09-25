@@ -6,13 +6,14 @@ import { AiOutlineArrowRight } from "react-icons/ai";
 import { BiSearch } from "react-icons/bi";
 import { MenuItem, FormControl, Select } from "@mui/material";
 import { Branch } from "../../APIs/Restaurant";
-
-const TableHeader = () => {
+import "./Header.css";
+const TableHeader = ({ link, onSearchChange, branchChange }) => {
     const [branch, setBranch] = useState("");
     const [branches, setBranches] = useState([]);
 
     const handleChange = (event) => {
         setBranch(event.target.value);
+        branchChange(event.target.value);
     };
 
     useEffect(() => {
@@ -24,9 +25,12 @@ const TableHeader = () => {
         }
         fetchBranches();
     }, []);
+    function handleInputChange(name) {
+        onSearchChange(name);
+    }
 
     return (
-        <div className="max-w-[1520px] mx-auto px-4 mt-[10px] bg-white  shadow-lg py-2">
+        <div className="relative header-shadow max-w-[1520px] mx-auto px-4 mt-[10px] bg-white py-2">
             <h1 className="text-lg font-bold uppercase text-[#121053] my-3">
                 Online Order history
             </h1>
@@ -38,13 +42,16 @@ const TableHeader = () => {
                     <input
                         className="bg-[#f0f7fb] px-2 text-[#49505] text-xs h-[36px] focus:outline-none"
                         type="text"
-                        placeholder="Search.."
+                        placeholder="Search By Token"
+                        onChange={(e) => handleInputChange(e.target.value)}
                     />
                 </div>
                 <div className="flex items-center space-x-4">
-                    <button className="uppercase  text-[#0880ea] bg-[#daedfe] duration-300 hover:text-white hover:bg-[#0880ea] py-2 px-3">
-                        <Link to="/sdashboard/pos-orders">pos orders</Link>
-                    </button>
+                    <Link to={link.path}>
+                        <button className="uppercase  text-[#0880ea] bg-[#daedfe] duration-300 hover:text-white hover:bg-[#0880ea] py-2 px-3">
+                            {link.name}
+                        </button>
+                    </Link>
                     <div>
                         <FormControl sx={{ minWidth: "180px" }}>
                             <Select
@@ -59,7 +66,7 @@ const TableHeader = () => {
                                 }}
                             >
                                 <MenuItem value="">
-                                    <em>Select a Branch</em>
+                                    <em>Any Branch</em>
                                 </MenuItem>
                                 {branches.map((branch) => (
                                     <MenuItem key={branch.id} value={branch.id}>

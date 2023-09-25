@@ -1,25 +1,27 @@
-import { OnlineOrder } from "../../APIs/Orders";
+import { OnlineOrder, PosOrder } from "../../APIs/Orders";
 import SeachHeader from "./Header";
 import { useEffect, useState } from "react";
 import { Modal } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import SnackBar from "../../components/snackBar";
+import PosModal from "./PosModal";
 import "./Pos_Online.css";
-import OnlineModal from "./OnlineModal";
 
 const OnlineHistoryPage = () => {
     const [orders, setOrders] = useState([]);
-    const [slectedOrder, setSelectedOrder] = useState(null);
+    const [filteredRows, setFilteredRows] = useState([]);
+    const [selectedOrder, setSelectedOrder] = useState(null);
     const [openModal, setOpenModal] = useState(false);
     const [openNotification, setOpenNotification] = useState(false);
     const [errorMsg, setErrorMsg] = useState(null);
 
     // get orders
     async function getOrders() {
-        const response = await OnlineOrder.get();
+        const response = await PosOrder.get();
         if (response.success) {
             const $orders = setUpOrders(response.payload);
             setOrders($orders);
+            setFilteredRows($orders);
         } else {
             setErrorMsg(response.message);
             setOpenNotification(true);
@@ -30,7 +32,7 @@ const OnlineHistoryPage = () => {
         getOrders();
     }, []);
 
-    // edit echa order with new properties
+    // edit each order with redable properties
     function setUpOrders(orders) {
         const $orders = orders.map((order) => {
             const $Date = new Date(order.created_at);
@@ -58,28 +60,63 @@ const OnlineHistoryPage = () => {
         }
     }
 
+    // when the table's filter in the header changes
+    function searchChange(id) {
+        filterChange({ branchId: null, id });
+    }
+    function branchChange(branchId) {
+        filterChange({ branchId, id: null });
+    }
+
+    // filter the data based on the search header inputs
+    function filterChange({ branchId, id }) {
+        let $filteredRows = [...orders];
+        if (branchId) {
+            const filtredByBranch = orders.filter(
+                (order) => order.branch.id == branchId
+            );
+            $filteredRows = [...filtredByBranch];
+        }
+        if (id) {
+            const filtredByName = orders.filter((order) => order.id == id);
+            $filteredRows = [...filtredByName];
+        }
+        setFilteredRows($filteredRows);
+    }
+
     // dipaly an order detail
     async function orderModelDetail(id) {
-        const resp = await OnlineOrder.getOneOrder(id);
-        console.log(resp);
+        const resp = await PosOrder.getOneOrder(id);
         if (!resp.success) {
             window.alert("Order not found, please try again later");
             return;
         }
         setSelectedOrder(resp.payload);
         setOpenModal(true);
+        console.log(resp.payload);
     }
     const columns = [
-        { field: "id", headerName: "S/L", flex: 1 },
+        { field: "_index", headerName: "S/L", flex: 1 },
+        {
+            field: "id",
+            headerName: "Token",
+            flex: 1,
+            renderCell: (params) => (
+                <span className="text-[#158DF7]">{"#" + params.row.id}</span>
+            ),
+        },
         { field: "date", headerName: "Date", flex: 1 },
         { field: "time", headerName: "Time", flex: 1 },
-        { field: "costumer", headerName: "customer", flex: 1 },
+        {
+            field: "user",
+            headerName: "Customer",
+            valaueGetter: () => "hi",
+            flex: 1,
+        },
         {
             field: "total_bill",
             headerName: "Totall Bill",
-            valueGetter: (params) => {
-                return params.row.total_bill + " DH";
-            },
+            valaueGetter: (params) => params.row.total_bill + " DH",
             flex: 1,
         },
         { field: "_branch", headerName: "Branch", flex: 1 },
@@ -125,14 +162,16 @@ const OnlineHistoryPage = () => {
                 }}
             />
 
-            <div className="bg-gray-200 h-screen">
+            <div className="bg-gray-200 h-screen ">
                 {/* Table seach header component */}
                 <div className="px-3">
                     <SeachHeader
                         link={{
-                            name: "pos orders",
-                            path: "/dashboard/pos-orders",
+                            name: "online orders",
+                            path: "/dashboard/online-orders",
                         }}
+                        onSearchChange={searchChange}
+                        branchChange={branchChange}
                     />
                     <div
                         style={{
@@ -140,12 +179,15 @@ const OnlineHistoryPage = () => {
                             backgroundColor: "#ffffff",
                             padding: "14px",
                             overflowY: "auto",
+                            maxHeight: "100vh",
                         }}
                     >
                         <DataGrid
-                            rows={orders}
+                            rows={filteredRows.map((row, i) => ({
+                                _index: i + 1,
+                                ...row,
+                            }))}
                             columns={columns}
-                            autoHeight={true}
                             sx={{
                                 minHeight: "52vh",
                             }}
@@ -159,13 +201,10 @@ const OnlineHistoryPage = () => {
                     </div>
                     <Modal
                         className="overflow-y-auto"
-                        sx={{
-                            marginBottom: 1,
-                        }}
                         open={openModal}
                         onClose={() => setOpenModal(false)}
                     >
-                        <OnlineModal selectedOrder={slectedOrder} />
+                        <PosModal selectedOrder={selectedOrder} />
                     </Modal>
                 </div>
             </div>

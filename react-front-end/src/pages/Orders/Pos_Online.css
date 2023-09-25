@@ -1,0 +1,11 @@
+.order-details-container > :nth-child(odd) {
+    @apply bg-[#0000000d];
+}
+.modal-row {
+    @apply flex justify-between px-16 py-1;
+}
+
+table.order-detail tr,
+table.order-detail td {
+    @apply border border-[#dee2e6];
+}
