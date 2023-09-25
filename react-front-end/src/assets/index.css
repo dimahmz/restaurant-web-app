@@ -16,7 +16,7 @@ body {
 }
 
 .open {
-    max-height: 400px; /* Adjust this value to the maximum height of your submenu */
+    max-height: 10px; /* Adjust this value to the maximum height of your submenu */
 }
 .hovered-plus:hover {
     background-color: #cc3333;
@@ -25,7 +25,7 @@ body {
 }
 
 ::-webkit-scrollbar {
-    width: 3px;
+    width: 4px;
 }
 
 /* Track  */
@@ -35,8 +35,10 @@ body {
 
 /* Handle  */
 ::-webkit-scrollbar-thumb {
+    position: relative;
     background: #888;
-    border-radius: 5px;
+    border-radius: 10px;
+    z-index: 10000;
 }
 
 /* Handle on hover  */

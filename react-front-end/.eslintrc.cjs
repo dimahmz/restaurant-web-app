@@ -14,6 +14,7 @@ module.exports = {
     rules: {
         "react/prop-types": "off",
         "no-extra-parens": "off",
+        "no-prototype-builtins": "off",
         "react-refresh/only-export-components": [
             "warn",
             { allowConstantExport: true },
