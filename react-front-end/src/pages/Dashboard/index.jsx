@@ -35,7 +35,7 @@ const dashboardElements = [
         description: "Kitchen",
     },
     {
-        to: "/dashboard/manage",
+        to: "/dashboard/manage/food",
         imgSrc: "https://khadyo.softtechdemo.com/assets/img/product-img-8.png",
         icon: <MdManageHistory size={20} />,
         title: "MANAGE",

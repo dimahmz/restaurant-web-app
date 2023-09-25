@@ -4,8 +4,8 @@ import { Outlet } from "react-router-dom";
 
 const Layout = () => {
     return (
-        <>
-            <div className="w-full fixed top-0 z-[10000]">
+        <div className="relative">
+            <div className="w-full fixed top-0 z-[1000]">
                 <NavBar />
             </div>
             <div className="mt-[70px]">
@@ -14,7 +14,7 @@ const Layout = () => {
             <div className="fixed w-full bottom-0">
                 <Footer />
             </div>
-        </>
+        </div>
     );
 };
 
