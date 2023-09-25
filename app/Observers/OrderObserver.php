@@ -2,26 +2,28 @@
 
 namespace App\Observers;
 
-use App\Exceptions\OutOfStockException;
 use App\Models\Foods\Food;
 use App\Models\orders\Order;
 use App\Traits\HttpResponses;
+use App\Models\Orders\OrderFood;
+use Illuminate\Support\Facades\Log;
+use App\Exceptions\OutOfStockException;
 
 class OrderObserver
 {
     use HttpResponses;
-    public function creating(Order $order): void
+    public function creating(OrderFood $orderFood): void
     {
 
-        // $food = Food::find($order->food_id);
+        $food = Food::find($orderFood->food_id);
+        Log::info($food);
+        if($food->in_stock < $orderFood->quantity){
+            Order::destroy($orderFood->order_id);
+            throw new OutOfStockException();
+        }
 
-        // if($food->in_stock < $order->quantity){
-        //     throw new OutOfStockException();
-        // }
-
-        // $food->decrement('in_stock' , $order->quantity);
-        
-        // $food->save();
+        $food->decrement('in_stock' , $orderFood->quantity);
+        $food->save();
 
     }
 

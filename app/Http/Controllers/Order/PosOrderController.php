@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Order;
 
 use App\Models\Orders\Order;
-use Illuminate\Http\Request;
 use App\Traits\HttpResponses;
 use App\Models\Orders\OrderFood;
 use Illuminate\Support\Facades\Log;
@@ -20,6 +19,7 @@ class PosOrderController extends Controller
     {
         $order = Order::create([
             'branch_id' => $request->branch_id,
+            'table_id' => $request->table_id,
             'user_id' => $request->user_id,
             'quantity' => $request->quantity,
             'subtotal' => $request->subtotal,
@@ -50,12 +50,12 @@ class PosOrderController extends Controller
                     }
                 }
         }
-        return $this::success($order);
+        return $this::success(null, "Order has been taken");
     }
     // --------- read ----------
     function get()
     {
-        $orders = Order::with('branch' , 'property_items.property' , 'variation' , 'food')->where('is_online', 0)->get();
+        $orders = Order::with('branch' , 'food')->where('is_online', 0)->orderBy('created_at' , 'desc')->get();
         return $this::success($orders);
     }
 }

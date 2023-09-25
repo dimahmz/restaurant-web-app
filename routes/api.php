@@ -40,6 +40,10 @@ Route::post('/signup', [AuthController::class, 'register']);
 
 // food Routes 
 Route::get('/foods', [FoodController::class, 'get']);
+Route::get('/food/variations_properties', [FoodController::class, 'getFood_var_prop']);
+
+Route::get('/groups/foods', [FoodController::class, 'get']);
+
 Route::post('/food', [FoodController::class, 'post']);
 Route::put('/food', [FoodController::class, 'put']);
 Route::delete('/food', [FoodController::class, 'delete']);
@@ -73,6 +77,13 @@ Route::post('/pos_order', [PosOrderController::class, 'post']);
 Route::put('/pos_order', [OnlineOrderController::class, 'put']);
 Route::delete('/pos_order', [OnlineOrderController::class, 'delete']);
 
+// get Order
+
+Route::get('/order/{id}', [OrderController::class, 'get']);
+
+
+
+
 
     // ------- Stock ----------
 
@@ -103,6 +114,7 @@ Route::delete('/department_tags', [DepartmentTagController::class, 'delete']);
 
 // tables
 Route::get('/tables', [TableController::class, 'get']);
+Route::get('/tables/branch', [TableController::class, 'get_with_branch']);
 Route::post('/tables', [TableController::class, 'post']);
 Route::put('/tables', [TableController::class, 'put']);
 Route::delete('/tables', [TableController::class, 'delete']);
@@ -137,13 +149,13 @@ Route::group(
             });
         });
 
-        // Edit a user routes
-        Route::prefix("user")->group(function () {
-            Route::post('/logout', [AuthController::class, 'logout']);
-        });
     }
-
+    
 );
+// logOut
+Route::prefix("user")->group(function () {
+    Route::post('/logout', [AuthController::class, 'logout']);
+});
 
 // Reset password 
 Route::namespace(PasswordResetLinkController::class)->prefix('reset-password')->group(function () {

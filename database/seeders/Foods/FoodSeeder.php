@@ -17,12 +17,17 @@ class FoodSeeder extends Seeder
      */
     public function run(): void
     {
-        Food::factory()->hasAttached(
-            Variation::factory()->count(2),
-            ["price" => fake()->randomFloat($nbMaxDecimals = 2, $min = 5, $max = 300),]
-        )->has(
-            Property::factory()->has(PropertyItem::factory()->count(5), 'property_items')
-        )->count(10)->create();
+        Food::factory()->count(4)->create();
+
+        for($i=0 ; $i<15 ; $i++){
+            Food::factory()->hasAttached(
+                Variation::inRandomOrder()->take(3)->get(),
+                ["price" => fake()->randomFloat($nbMaxDecimals = 2, $min = 5, $max = 300),]
+            )->hasAttached(
+                Property::inRandomOrder()->take(2)->get()
+            )->create();
+        }
+
     }
 }
 

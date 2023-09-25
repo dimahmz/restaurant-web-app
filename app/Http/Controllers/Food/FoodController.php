@@ -47,6 +47,23 @@ class FoodController extends Controller
         $foods = FoodGroup::with('foods.variations', 'foods.properties.property_items')->get();
         return $this::success($foods);
     }
+    function getOnlyFood()
+    {
+        $foods = FoodGroup::all();
+        return $this::success($foods);
+    }
+
+    function getFood_var_prop(){
+        $foods = Food::with('variations', 'properties.property_items')->get();
+        return $this::success($foods);
+    }
+    function getSpecial(){
+        $foods = Food::where('is_special' , '>' , 0);
+        return $this::success($foods);
+
+
+    }
+
 
     function getGroupsFoods()
     {

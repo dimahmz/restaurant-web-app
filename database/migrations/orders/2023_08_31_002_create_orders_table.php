@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId("branch_id")->nullable()->constrained(table: "branches")->nullOnDelete();
             $table->foreignId("user_id")->nullable()->nullOnDelete();
-            $table->foreignId("table")->nullable()->nullOnDelete();
+            $table->foreignId("table_id")->nullable()->nullOnDelete();
             $table->string("status")->default("processing");
             $table->string("delivery_address")->nullable();
             $table->string("delivery_time")->default("30 min")->nullable();

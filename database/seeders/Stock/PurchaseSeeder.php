@@ -15,13 +15,13 @@ class PurchaseSeeder extends Seeder
      */
     public function run(): void
     {
-        Supplier::factory()->has(
-            Purchase::factory()->hasAttached(Food::factory()->count(3), [
-                "rate" => fake()->randomFloat($nbMaxDecimals = 2, $min = 4, $max = 100),
-                "total" => fake()->randomFloat($nbMaxDecimals = 2, $min = 100, $max = 1000),
-                "quantity" => fake()->randomNumber(3),
-            ])->count(5),
-            'purchases'
-        )->count(10)->create();
+        // Supplier::factory()->has(
+        //     Purchase::factory()->hasAttached(Food::factory()->count(1), [
+        //         "rate" => fake()->randomFloat($nbMaxDecimals = 2, $min = 4, $max = 100),
+        //         "total" => fake()->randomFloat($nbMaxDecimals = 2, $min = 100, $max = 1000),
+        //         "quantity" => fake()->randomNumber(3),
+        //     ])->count(5),
+        //     'purchases'
+        // )->count(10)->create();
     }
 }

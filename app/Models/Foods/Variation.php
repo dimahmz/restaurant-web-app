@@ -17,7 +17,7 @@ class Variation extends Model
     }
     public function order_food()
     {
-        return $this->belongsToMany(Food::class, 'order_food');
+        return $this->hasMany(Food::class, 'order_food');
     }
     protected $fillable = ['name'];
 

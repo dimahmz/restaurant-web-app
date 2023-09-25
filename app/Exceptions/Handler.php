@@ -4,8 +4,11 @@ namespace App\Exceptions;
 
 use Throwable;
 use App\Traits\HttpResponses;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
@@ -39,6 +42,15 @@ class Handler extends ExceptionHandler
                 404
             );
         }
+
+        if ($exception instanceof QueryException) {
+            return $this::error(
+                null,
+                'Server error, please try again laters',
+                500
+            );
+        }
+
 
         return parent::render($request, $exception);
     }

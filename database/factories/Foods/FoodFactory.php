@@ -25,7 +25,7 @@ class FoodFactory extends Factory
                 $min = 0,
                 $max = 100
             ),
-            'is_special' => fake()->numberBetween(0, 1),
+            'is_special' => 0,
             // "food_group_id" => FoodGroup::factory(),
             "food_group_id" => $id,
 

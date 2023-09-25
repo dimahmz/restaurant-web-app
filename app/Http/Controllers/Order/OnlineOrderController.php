@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Order;
 use App\Models\Orders\Order;
 use Illuminate\Http\Request;
 use App\Traits\HttpResponses;
+use App\Models\Orders\OrderFood;
+use App\Models\Foods\PropertyItem;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Order\StoreOnlineOrder;
 
@@ -37,7 +39,7 @@ class OnlineOrderController extends Controller
     // --------- read ----------
     function get()
     {
-        $orders = Order::with('branch' , 'property_items.property' , 'variation' , 'food')->where('is_online', '>', 0)->get();
+        $orders = Order::with('branch' , 'food')->where('is_online', '>', 0)->orderBy('created_at' , 'desc')->get();
         return $this::success($orders);
     }
 

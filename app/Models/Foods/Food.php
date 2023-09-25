@@ -24,6 +24,10 @@ class Food extends Model
         return $this->belongsToMany(Variation::class, 'food_variations')->withPivot("price");
     }
 
+    function property_items(){
+        return $this->belongsToMany(PropertyItem::class, 'order_food_items');
+    }
+
     public function purchases()
     {
         return $this->belongsToMany(Purchase::class, 'food_purchases');

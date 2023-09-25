@@ -4,8 +4,6 @@ namespace Database\Seeders\Restaurant;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use App\Models\Restaurant\DepartmentTag;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class DepartmentTagSeeder extends Seeder
 {
@@ -14,6 +12,29 @@ class DepartmentTagSeeder extends Seeder
      */
     public function run(): void
     {
-        DepartmentTag::factory()->count(5)->create();
+        DB::table('department_tags')->insert([
+            [
+                'name' => 'DINE IN',
+                'commission' => 0
+            ],
+            [
+                'name' => 'CULINARY',
+                'commission' => 20
+            ],
+            [
+                'name' => 'PASTRY',
+                'commission' => 10
+            ],
+            [
+                'name' => 'GRILL',
+                'commission' => 12
+            ],
+            [
+                'name' => 'HSCT',
+                'commission' => 7
+            ],
+
+        ]);
+
     }
 }
