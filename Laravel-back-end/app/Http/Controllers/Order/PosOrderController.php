@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Order;
 use App\Models\Orders\Order;
 use App\Traits\HttpResponses;
 use App\Models\Orders\OrderFood;
-use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use App\Models\Orders\OrderFoodItem;
 use App\Http\Requests\Order\StorePOSorder;
@@ -39,16 +38,16 @@ class PosOrderController extends Controller
                 'quantity'=>$order_food['quantity'],        
             ]);
                 // each order food can have multiple property items attched to it  
-                if(isset($order_food['food_property_items'])){
-                    Log::info(isset($order_food['food_property_items']));
-                    foreach ($order_food['food_property_items'] as $food_property_item ){
-                        OrderFoodItem::create([
-                            'order_food_id'=> $new_order_food->id,
-                            'property_item_id'=> $food_property_item['property_item_id'],
-                            'quantity'=>$food_property_item['quantity'],
-                        ]);
-                    }
-                }
+                // if(isset($order_food['food_property_items'])){
+                //     Log::info(isset($order_food['food_property_items']));
+                //     foreach ($order_food['food_property_items'] as $food_property_item ){
+                //         OrderFoodItem::create([
+                //             'order_food_id'=> $new_order_food->id,
+                //             'property_item_id'=> $food_property_item['property_item_id'],
+                //             'quantity'=>$food_property_item['quantity'],
+                //         ]);
+                //     }
+                // }
         }
         return $this::success(null, "Order has been taken");
     }

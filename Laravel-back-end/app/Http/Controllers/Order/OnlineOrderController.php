@@ -5,8 +5,6 @@ namespace App\Http\Controllers\Order;
 use App\Models\Orders\Order;
 use Illuminate\Http\Request;
 use App\Traits\HttpResponses;
-use App\Models\Orders\OrderFood;
-use App\Models\Foods\PropertyItem;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Order\StoreOnlineOrder;
 

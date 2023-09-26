@@ -16,7 +16,7 @@ class StorePOSorder extends FormRequest
         return [
             'order_food' => 'required|array|min:1',
             'order_food.*.food_id' => 'required|numeric',
-            'order_food.*.variation_id' => 'required|numeric',
+            'order_food.*.variation_id' => 'present|nullable|numeric',
             'order_food.*.quantity' => 'required|numeric',
             'order_food.*.food_property_items' => 'array',
             'order_food.*.food_property_items.*.property_item_id' => 'required|numeric',
