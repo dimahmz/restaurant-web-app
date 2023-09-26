@@ -120,6 +120,10 @@ export const pointOfSaleSlice = createSlice({
     update_total_bill: (state, action) => {
       state.total_bill = action.payload;
     },
+    reset_selections: (state) => {
+      state.selected_branch_id = null;
+      state.selected_table_id = null;
+    },
     reset_store: (state) => {
       Object.keys(state).forEach((key) => {
         if (initialState[key]) state[key] = initialState[key];
@@ -146,6 +150,7 @@ export const {
   update_commission,
   update_total_bill,
   reset_store,
+  reset_selections,
 } = pointOfSaleSlice.actions;
 
 // const unsubscribe = pointOfSaleSlice.subscribe(() => {

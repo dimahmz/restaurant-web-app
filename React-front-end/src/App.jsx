@@ -15,8 +15,8 @@ import UpdatePassPage from "./pages/Auth/UpdatePassPage";
 import {
   ProtectedRoutes,
   ProtectedRoutesToUsers,
-} from "./hooks/ProtectedRoutes";
-import AuthProvider from "./hooks/AuthContext";
+} from "./context/ProtectedRoutes";
+import AuthProvider from "./context/AuthContext";
 import Layout from "./pages/Layout";
 // Restaurant
 import Branches from "./pages/Manage/Restaurant/branches";

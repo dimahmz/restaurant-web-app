@@ -1,6 +1,10 @@
 /* eslint-disable react/prop-types */
 import { useDispatch } from "react-redux";
-import { update_branch, update_table } from "../../stores/pointOfSale";
+import {
+  update_branch,
+  update_table,
+  reset_selections,
+} from "../../stores/pointOfSale";
 import SelectOption from "../../components/SelectOption";
 import { useState } from "react";
 
@@ -10,6 +14,7 @@ const Branch = ({ branches, tables }) => {
 
   function cancleSelections() {
     setValue(Math.random());
+    dispatch(reset_selections());
   }
   return (
     <div className="relative w-full h-full py-3 px-2 bg-white">
