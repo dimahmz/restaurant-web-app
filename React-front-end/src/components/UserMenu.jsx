@@ -10,8 +10,11 @@ import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
 import { UseAuth } from "../context/AuthContext";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function AccountMenu() {
+  const user = useSelector((state) => state.user.userProfile);
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -36,7 +39,7 @@ export default function AccountMenu() {
           aria-haspopup="true"
           aria-expanded={open ? "true" : undefined}
         >
-          <Avatar sx={{ width: 32, height: 32 }}>A</Avatar>
+          <Avatar sx={{ width: 32, height: 32 }}>{user.name[0]}</Avatar>
         </IconButton>
       </Tooltip>
       <Menu

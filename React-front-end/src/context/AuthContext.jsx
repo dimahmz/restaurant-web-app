@@ -4,7 +4,11 @@ import ManageCookies from "../utils/Cookies";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import User from "../APIs/User";
-import { update_login_state } from "../stores/user";
+import {
+  update_login_state,
+  set_user_profile,
+  update_loading,
+} from "../stores/user";
 
 export const AuthContext = createContext();
 
@@ -19,6 +23,7 @@ export default function AuthProvider({ children }) {
 
   // fetch the user if he is authenticated
   const fetchUser = async () => {
+    dispatch(update_loading(true));
     if (!ManageCookies.getCookie("authorization_token")) {
       dispatch(update_login_state(false));
       return;
@@ -26,9 +31,7 @@ export default function AuthProvider({ children }) {
 
     const response = await User.getUser();
 
-    response.success
-      ? dispatch(update_login_state(true))
-      : resetAuthenticationState();
+    response.success ? setAuthState(response.payload) : resetAuthState();
   };
 
   //to authenticate a user
@@ -36,10 +39,9 @@ export default function AuthProvider({ children }) {
     const response = await User.authenticateUser(userInfo);
 
     if (!response.success) {
-      resetAuthenticationState();
+      resetAuthState();
     } else {
-      dispatch(update_login_state(true));
-
+      setAuthState(response.payload.user);
       // store the user token
       ManageCookies.setCookie(
         "authorization_token",
@@ -52,15 +54,22 @@ export default function AuthProvider({ children }) {
   }
 
   // remove variables related to authentication state
-  const resetAuthenticationState = () => {
+  const resetAuthState = () => {
     dispatch(update_login_state(false));
     ManageCookies.removeCookie("authorization_token");
+    dispatch(update_loading(false));
+  };
+
+  const setAuthState = (userData) => {
+    dispatch(update_login_state(true));
+    dispatch(set_user_profile(userData));
+    dispatch(update_loading(false));
   };
 
   // to log out the user
   async function LogoutUser() {
     const response = await User.logOut();
-    if (response.success) resetAuthenticationState();
+    if (response.success) resetAuthState();
     navigate("/");
   }
 

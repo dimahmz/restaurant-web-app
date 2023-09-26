@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  user: { id: 1 },
   food_order: [],
   selected_food: { id: null },
   depTag: {},

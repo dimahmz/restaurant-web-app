@@ -13,7 +13,7 @@ class OrderController extends Controller
     //
     function get($id)
     {
-        $orderDtail = Order::with('branch')->find($id);
+        $orderDtail = Order::with('branch','user')->find($id);
         $food_order = OrderFood::with("variation" , "food")->where('order_id' , '=', $id)->get();
         $order = ['food_order' => $food_order , 'order'=> $orderDtail];
         return $this::success($order);

@@ -17,6 +17,8 @@ const Footer = () => {
 
   // order properties
 
+  const user = useSelector((state) => state.user.userProfile);
+
   const state = useSelector((state) => state);
 
   const order_food = useSelector(store_order_food);
@@ -27,7 +29,6 @@ const Footer = () => {
   const branch_id = useSelector(
     (state) => state.pointOfSalesOrders.selected_branch_id
   );
-  const user_id = useSelector((state) => state.pointOfSalesOrders.user.id);
 
   const table_id = useSelector(
     (state) => state.pointOfSalesOrders.selected_table_id
@@ -94,7 +95,7 @@ const Footer = () => {
     new_food_order.department_commission = order_commission;
     new_food_order.branch_id = branch_id;
     new_food_order.table_id = table_id;
-    new_food_order.user_id = user_id;
+    new_food_order.user_id = user.id;
 
     dispatch(set_loading(true));
 

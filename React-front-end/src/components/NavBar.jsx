@@ -1,8 +1,11 @@
 import { AiTwotoneHome } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import UserMenu from "./UserMenu";
+import { useSelector } from "react-redux";
 
 const NavBar = () => {
+  const user = useSelector((state) => state.user.userProfile);
+
   return (
     <div className="bg-white py-0.5">
       <div className="flex-center-between max-w-[1320px] mx-auto">
@@ -13,16 +16,16 @@ const NavBar = () => {
             alt=""
           />
         </div>
-        <div className="w-1/5 flex items-center px-4">
+        <div className="flex items-center px-4 py-1">
           <Link to="/">
             <div className="p-1 mr-4">
               <AiTwotoneHome size={25} className="text-[#cc3333]" />
             </div>
           </Link>
 
-          <div className="flex items-center gap-1 p-2 mr-4 ">
+          <div className="flex items-center gap-1  mr-4 ">
             <UserMenu />
-            <p>Admin</p>
+            <p>{user.name}</p>
           </div>
         </div>
       </div>

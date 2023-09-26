@@ -2,6 +2,7 @@
 
 namespace App\Models\Orders;
 
+use App\Models\User\User;
 use App\Models\Foods\Food;
 use App\Models\Orders\OrderFood;
 use App\Models\Restaurant\Branch;
@@ -19,6 +20,9 @@ class Order extends Model
     public function food()
     {
         return $this->belongsToMany(Food::class, 'order_food')->withPivot("quantity", "variation_id");
+    }
+    public function user(){
+        return $this->belongsTo(User::class);
     }
     protected $guarded =["id"];
 }
