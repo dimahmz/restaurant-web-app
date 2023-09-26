@@ -1,75 +1,67 @@
-import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { modify_food_order, store_order_food } from "../../stores/pointOfSale";
 
 const VariationsTable = ({ variations }) => {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    const [variationIndex, setVariationIndex] = useState(null);
+  const selected_food = useSelector(
+    (state) => state.pointOfSalesOrders.selected_food
+  );
+  const selectedFoodIndex = useSelector(
+    (state) => state.pointOfSalesOrders.select_food_index
+  );
 
-    const selectedFoodIndex = useSelector(
-        (state) => state.pointOfSalesOrders.select_food_index
-    );
+  const order_food = useSelector(store_order_food);
 
-    const order_food = useSelector(store_order_food);
+  function addVariation(variation) {
+    const update = { ...order_food[selectedFoodIndex] };
+    update.selected_variation = variation;
+    dispatch(modify_food_order(update));
+  }
 
-    function addVariation(variation, i) {
-        setVariationIndex(i);
-        const update = { ...order_food[selectedFoodIndex] };
-        update.selected_variation = variation;
-        dispatch(modify_food_order(update));
-    }
-
-    return (
-        <div className="text-xs">
-            <div>
-                <div className="text-white bg-[#f64e60] px-4 py-2 flex justify-center font-medium border-2">
-                    Variations
-                </div>
-                {variations.length === 0 ? (
-                    <p className="px-2 mt-7 text-center text-base">
-                        Food doesn't have any variation
-                    </p>
-                ) : (
-                    <table className="table-auto w-full">
-                        <thead className="border  text-center">
-                            <tr className="py-3">
-                                <td className="py-1">Name</td>
-                                <td className="py-1">Price</td>
-                            </tr>
-                        </thead>
-                        <tbody className="bg-[#f4f9fc] border">
-                            {variations.map((variation, index) => (
-                                <tr key={index} className="border-b-2">
-                                    <td className="p-2 ">
-                                        <label className="flex items-center space-x-2">
-                                            <input
-                                                type="checkbox"
-                                                className="form-checkbox mr-2"
-                                                checked={
-                                                    variationIndex === index
-                                                }
-                                                onChange={() =>
-                                                    addVariation(
-                                                        variation,
-                                                        index
-                                                    )
-                                                }
-                                            />
-                                            {variation.name}
-                                        </label>
-                                    </td>
-                                    <td className="">
-                                        {variation.pivot.price} DH
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                )}
-            </div>
+  return (
+    <div className="text-xs">
+      <div>
+        <div className="text-white bg-[#f64e60] px-4 py-2 flex justify-center font-medium border-2">
+          Variations
         </div>
-    );
+        {variations.length === 0 ? (
+          <p className="px-2 mt-7 text-center text-base">
+            Food doesn&apos;t have any variation
+          </p>
+        ) : (
+          <table className="table-auto w-full">
+            <thead className="border  text-center">
+              <tr className="py-3">
+                <td className="py-1">Name</td>
+                <td className="py-1">Price</td>
+              </tr>
+            </thead>
+            <tbody className="bg-[#f4f9fc] border">
+              {variations.map((variation, index) => (
+                <tr key={index} className="border-b-2">
+                  <td className="p-2 ">
+                    <label className="flex items-center space-x-2">
+                      <input
+                        type="checkbox"
+                        className="form-checkbox mr-2"
+                        checked={
+                          variation.id == selected_food.selected_variation.id
+                        }
+                        onChange={() => addVariation(variation, index)}
+                      />
+                      {variation.name}
+                    </label>
+                  </td>
+                  <td className="">{variation.pivot.price} DH</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+      </div>
+    </div>
+  );
 };
 
 export default VariationsTable;
