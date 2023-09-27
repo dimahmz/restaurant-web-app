@@ -17,13 +17,18 @@ const OnlineHistoryPage = () => {
   const [openModal, setOpenModal] = useState(false);
   const [openNotification, setOpenNotification] = useState(false);
   const [errorMsg, setErrorMsg] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   // get orders
   async function getOrders() {
     let response = null;
+    setIsLoading(true);
+
     location.pathname === "/dashboard/pos-orders"
       ? (response = await PosOrder.get())
       : (response = await OnlineOrder.get());
+
+    setIsLoading(false);
 
     if (response.success) {
       const $orders = setUpOrders(response.payload);
@@ -182,7 +187,6 @@ const OnlineHistoryPage = () => {
               backgroundColor: "#ffffff",
               padding: "14px",
               overflowY: "auto",
-              maxHeight: "100vh",
             }}
           >
             <DataGrid
@@ -192,7 +196,7 @@ const OnlineHistoryPage = () => {
               }))}
               columns={columns}
               sx={{
-                minHeight: "52vh",
+                height: 340,
               }}
               initialState={{
                 pagination: {
@@ -200,6 +204,7 @@ const OnlineHistoryPage = () => {
                 },
               }}
               pageSizeOptions={[5, 10]}
+              loading={isLoading}
             />
           </div>
           <Modal

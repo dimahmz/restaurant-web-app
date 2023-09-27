@@ -6,9 +6,13 @@ import ResetPasswordPage from "./pages/Auth/ResetPasswordPage";
 import DashboardPage from "./pages/Dashboard";
 import PosDashboard from "./pages/POS";
 import PosOnlineOrders from "./pages/Orders/Pos_Online";
+// manage
 import ManagePage from "./pages/Manage";
 import Food from "./pages/Manage/Food";
+import Groups from "./pages/Manage/Food/groups";
 import AddFood from "./pages/Manage/Food/addFood";
+import Variations from "./pages/Manage/Food/variations";
+
 import UpdatePassPage from "./pages/Auth/UpdatePassPage";
 
 // Contexes
@@ -46,12 +50,13 @@ function App() {
                 <Route index element={<DashboardPage />} />
                 <Route path="pos" element={<PosDashboard />} />
                 <Route path="pos-orders" element={<PosOnlineOrders />} />
-
                 <Route path="online-orders" element={<PosOnlineOrders />} />
                 <Route path="manage" element={<ManagePage />}>
                   <Route path="food">
                     <Route index element={<Food />} />
                     <Route path="add-food" element={<AddFood />} />
+                    <Route path="groups" element={<Groups />} />
+                    <Route path="variations" element={<Variations />} />
                   </Route>
                   <Route path="restaurant">
                     <Route path="branches" element={<Branches />} />

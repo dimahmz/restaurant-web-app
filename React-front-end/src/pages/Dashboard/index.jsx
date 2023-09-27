@@ -1,6 +1,5 @@
 import { AiOutlinePlus } from "react-icons/ai";
 import { HiShoppingCart } from "react-icons/hi";
-import { CgProfile } from "react-icons/cg";
 import { MdManageHistory } from "react-icons/md";
 import { UseAuth } from "../../context/AuthContext";
 import { Link } from "react-router-dom";
@@ -21,13 +20,6 @@ const dashboardElements = [
     description: "Orders Histories",
   },
   {
-    to: "/dashboard/customers",
-    imgSrc: "https://khadyo.softtechdemo.com/assets/img/product-img-4.jpg",
-    icon: <CgProfile size={20} />,
-    title: "CUSTOMERS",
-    description: "Customers",
-  },
-  {
     to: "/dashboard/kitchen",
     imgSrc: "https://khadyo.softtechdemo.com/assets/img/product-img-9.jpg",
     icon: <HiShoppingCart size={20} />,
@@ -35,7 +27,7 @@ const dashboardElements = [
     description: "Kitchen",
   },
   {
-    to: "/dashboard/manage/food",
+    to: "/dashboard/manage/food/",
     imgSrc: "https://khadyo.softtechdemo.com/assets/img/product-img-8.png",
     icon: <MdManageHistory size={20} />,
     title: "MANAGE",

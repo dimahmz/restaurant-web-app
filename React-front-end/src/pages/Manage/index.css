@@ -1,11 +1,17 @@
 .active-link {
-    @apply text-[#f64e60];
+  @apply text-[#f64e60];
 }
 
 ul.pages-links {
-    @apply relative text-sm font-[700] transition-all hidden;
+  @apply relative text-sm font-[700] transition-all hidden;
 }
 
 ul.show-links {
-    @apply block;
+  @apply block;
+}
+
+.selected-sub-pages,
+.selected-sub-pages:hover {
+  background-color: #f64e60 !important;
+  color: #fff !important;
 }

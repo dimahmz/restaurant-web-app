@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Snackbar from "../../components/snackBar";
 import { CircularProgress } from "@mui/material";
 import { DeptTag, Table, Branch } from "../../APIs/Restaurant";
-import { Food } from "../../APIs/Food";
+import { Group } from "../../APIs/Food";
 import getResponseMessage from "../../utils/getResponse";
 
 const PosPage = () => {
@@ -31,7 +31,7 @@ const PosPage = () => {
 
   useEffect(() => {
     async function fetchFoods() {
-      let response = await Food.get();
+      let response = await Group.getGroupFood();
       if (response.success) {
         setFoodGroups(response.payload);
       }

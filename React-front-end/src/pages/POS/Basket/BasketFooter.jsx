@@ -97,13 +97,13 @@ const Footer = () => {
     new_food_order.table_id = table_id;
     new_food_order.user_id = user.id;
 
-    dispatch(set_loading(true));
+    // dispatch(set_loading(true));
 
-    const response = await PosOrder.create(new_food_order);
+    // const response = await PosOrder.create(new_food_order);
 
     setTimeout(() => {
-      dispatch(set_response(response));
-      if (response.success) dispatch(reset_store());
+      // dispatch(set_response(response));
+      // if (response.success) dispatch(reset_store());
     }, 1000);
   }
   return (

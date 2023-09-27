@@ -54,9 +54,9 @@ const Products = () => {
             <p className="break-all text-sm text-center uppercase font-bold">
               {food.name}
             </p>
-            <div className="text-sm uppercase flex justify-center items-center text-center font-bold">
+            {/* <div className="text-sm uppercase flex justify-center items-center text-center font-bold">
               Stock: {food.in_stock}
-            </div>
+            </div> */}
           </div>
         </div>
       ))}

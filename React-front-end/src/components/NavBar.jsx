@@ -8,7 +8,7 @@ const NavBar = () => {
 
   return (
     <div className="bg-white py-0.5">
-      <div className="flex-center-between max-w-[1320px] mx-auto">
+      <div className="flex-center-between max-w-[1320px] mx-auto pr-32">
         <div className="px-4">
           <img
             className="max-h-[38px]"
@@ -16,14 +16,14 @@ const NavBar = () => {
             alt=""
           />
         </div>
-        <div className="flex items-center px-4 py-1">
+        <div className="flex items-center space-x-8 px-4 py-1">
           <Link to="/">
-            <div className="p-1 mr-4">
+            <div className="p-1">
               <AiTwotoneHome size={25} className="text-[#cc3333]" />
             </div>
           </Link>
 
-          <div className="flex items-center gap-1  mr-4 ">
+          <div className="flex items-center space-x-4 ">
             <UserMenu />
             <p>{user.name}</p>
           </div>
