@@ -40,14 +40,7 @@ class OnlineOrderController extends Controller
         $orders = Order::with('branch' , 'food')->where('is_online', '>', 0)->orderBy('created_at' , 'desc')->get();
         return $this::success($orders);
     }
-
-    // --------update -------
-    function put(Request $request)
-    {
-        $request->validate(['id' => 'required|numeric' , 'status' => 'required|string']);
-        Order::where('id', $request->id)->update(['status' => $request->status]);
-        return $this::success("order has been updated");
-    }
+    
     // ------- delete -----------
     function delete(Request $request) {
         $request->validate(['id' => 'required|numeric']);

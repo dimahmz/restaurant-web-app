@@ -18,7 +18,7 @@ class TableFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name(),
+            'name' => fake()->lexify("?????"),
             'capacity' => fake()->numberBetween(5, 13),
             'branch_id' => Branch::factory()
         ];

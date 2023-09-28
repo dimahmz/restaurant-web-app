@@ -42,7 +42,7 @@ Route::post('/signup', [AuthController::class, 'register']);
 Route::get('/foods', [FoodController::class, 'get']);
 Route::get('/food/variations_properties', [FoodController::class, 'getFood_var_prop']);
 
-Route::get('/groups/foods', [FoodController::class, 'get']);
+Route::get('/groups/foods', [FoodController::class, 'getGroupsFoods']);
 
 Route::post('/food', [FoodController::class, 'post']);
 Route::put('/food', [FoodController::class, 'put']);
@@ -68,21 +68,20 @@ Route::delete('/food_variations', [VariationController::class, 'delete']);
 // Online
 Route::get('/online_orders', [OnlineOrderController::class, 'get']);
 Route::post('/online_order', [OnlineOrderController::class, 'post']);
-Route::put('/online_order', [OnlineOrderController::class, 'put']);
 Route::delete('/online_order', [OnlineOrderController::class, 'delete']);
 
 // point of sell
 Route::get('/pos_orders', [PosOrderController::class, 'get']);
 Route::post('/pos_order', [PosOrderController::class, 'post']);
-Route::put('/pos_order', [OnlineOrderController::class, 'put']);
 Route::delete('/pos_order', [OnlineOrderController::class, 'delete']);
 
-// get Order
 
-Route::get('/order/{id}', [OrderController::class, 'get']);
+// Order routes
 
-
-
+Route::get('/order/{id}', [OrderController::class, 'getById']);
+Route::get('/orders', [OrderController::class, 'get']);
+Route::get('/orders/kitchen', [OrderController::class, 'getKitchenOrders']);
+Route::put('/order/{id}', [OrderController::class, 'put']);
 
 
     // ------- Stock ----------

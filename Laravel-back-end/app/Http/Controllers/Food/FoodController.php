@@ -6,6 +6,7 @@ use App\Models\Foods\Food;
 use Illuminate\Http\Request;
 use App\Traits\HttpResponses;
 use App\Models\Foods\FoodGroup;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Foods\StoreFoodRequest;
 use App\Http\Requests\Foods\UpdateFoodRequest;
@@ -19,7 +20,7 @@ class FoodController extends Controller
     {
         
         $path =  $request->file('image')->store('images' , 'public');
-
+        
         $food = Food::create([
             'food_group_id' => $request->food_group_id,
             'name' => $request->name,
@@ -28,23 +29,20 @@ class FoodController extends Controller
             'image' => $path ,
         ]);
 
-        // create the the food properties
-        if ($request->properties_IDs){
-            $IDs = json_decode($request->properties_IDs);
-            $food->properties()->attach($IDs);
-        }
+        // TODO
         // create the food variations
-        if ($request->variations_IDs){            
-            $IDs=json_decode($request->variations_IDs);
+        $IDs = json_decode($request->variations_IDs, true);
+        if ($IDs){  
             $food->variations()->attach($IDs);
         }
+
         return $this::success($food);
     }
 
     // ------- Read ----------
     function get()
     {
-        $foods = FoodGroup::with('foods.variations', 'foods.properties.property_items')->get();
+        $foods = Food::orderBy('created_at' , 'desc')->get();
         return $this::success($foods);
     }
     function getOnlyFood()
@@ -57,6 +55,7 @@ class FoodController extends Controller
         $foods = Food::with('variations', 'properties.property_items')->get();
         return $this::success($foods);
     }
+
     function getSpecial(){
         $foods = Food::where('is_special' , '>' , 0);
         return $this::success($foods);

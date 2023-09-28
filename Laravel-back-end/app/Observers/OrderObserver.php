@@ -15,15 +15,15 @@ class OrderObserver
     public function creating(OrderFood $orderFood): void
     {
 
-        $food = Food::find($orderFood->food_id);
-        Log::info($food);
-        if($food->in_stock < $orderFood->quantity){
-            Order::destroy($orderFood->order_id);
-            throw new OutOfStockException();
-        }
+        // $food = Food::find($orderFood->food_id);
+        // Log::info($food);
+        // if($food->in_stock < $orderFood->quantity){
+        //     Order::destroy($orderFood->order_id);
+        //     throw new OutOfStockException();
+        // }
 
-        $food->decrement('in_stock' , $orderFood->quantity);
-        $food->save();
+        // $food->decrement('in_stock' , $orderFood->quantity);
+        // $food->save();
 
     }
 
