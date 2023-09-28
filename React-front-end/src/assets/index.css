@@ -7,41 +7,45 @@
     color: white;
 } */
 body {
-    background-color: #ebebeb;
+  background-color: #ebebeb;
 }
 .submenu {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.header-shadow {
+  box-shadow: rgba(34, 39, 54, 0.08) 0px 5px 15px;
 }
 
 .open {
-    max-height: 10px; /* Adjust this value to the maximum height of your submenu */
+  max-height: 10px; /* Adjust this value to the maximum height of your submenu */
 }
 .hovered-plus:hover {
-    background-color: #cc3333;
-    color: white;
-    transition: background-color 0.3s, color 0.3s;
+  background-color: #cc3333;
+  color: white;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 ::-webkit-scrollbar {
-    width: 4px;
+  width: 4px;
 }
 
 /* Track  */
 ::-webkit-scrollbar-track {
-    background: #f1f1f1;
+  background: #f1f1f1;
 }
 
 /* Handle  */
 ::-webkit-scrollbar-thumb {
-    position: relative;
-    background: #888;
-    border-radius: 10px;
-    z-index: 10000;
+  position: relative;
+  background: #888;
+  border-radius: 10px;
+  z-index: 10000;
 }
 
 /* Handle on hover  */
 ::-webkit-scrollbar-thumb:hover {
-    background: #555;
+  background: #555;
 }

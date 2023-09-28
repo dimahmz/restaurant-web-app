@@ -25,15 +25,19 @@ const PosModal = ({ selectedOrder }) => {
             <td>QTY</td>
             <td>Status</td>
           </tr>
-          {selectedOrder.food_order.map((food_order, index) => (
-            <tr key={index} className="bg-[#f4f9fc] text-center">
+          {selectedOrder.order_food.map((order_food, index) => (
+            <tr key={index} className="bg-[#f4f9fc] text-center py-1">
               <td>{index + 1}</td>
-              <td className="w-[30%]">{food_order.food.name}</td>
+              <td className="w-[30%]">{order_food.food.name}</td>
               <td>
-                <span>Variation:&nbsp;</span>
-                {food_order.variation.name}
+                {order_food?.variation?.name && (
+                  <div>
+                    <span>Variation:&nbsp;</span>
+                    {order_food?.variation?.name}
+                  </div>
+                )}
               </td>
-              <td>{food_order.quantity}</td>
+              <td>{order_food.quantity}</td>
               <td></td>
             </tr>
           ))}
@@ -46,24 +50,24 @@ const PosModal = ({ selectedOrder }) => {
             {location.pathname === "/dashboard/online-orders" ? (
               <>
                 <p>Customer</p>
-                <p> {selectedOrder.order?.user?.name || "-"} </p>
+                <p> {selectedOrder?.user?.name || "-"} </p>
               </>
             ) : (
               <>
                 <p>Received By</p>
-                <p> {selectedOrder.order?.user?.name || "-"} </p>
+                <p> {selectedOrder?.user?.name || "-"} </p>
               </>
             )}
           </div>
           <div className="modal-row">
             <p>Branch</p>
-            <p> {selectedOrder.order?.branch?.name || "-"} </p>
+            <p> {selectedOrder?.branch?.name || "-"} </p>
           </div>
           {location.pathname === "/dashboard/online-orders" && (
             <div className="modal-row">
               <p>Delivery Address</p>
               <p className="w-1/2 text-center">
-                {selectedOrder.order?.delivery_address || "-"}
+                {selectedOrder?.delivery_address || "-"}
               </p>
             </div>
           )}
@@ -75,37 +79,35 @@ const PosModal = ({ selectedOrder }) => {
           )}
           <div className="modal-row">
             <p>Subtotal</p>
-            <p>{selectedOrder?.order?.subtotal + " DH" || "-"}</p>
+            <p>{selectedOrder?.subtotal + " DH" || "-"}</p>
           </div>
           <div className="modal-row">
             <p>CGST</p>
-            <p>{selectedOrder.order?.CGST + " DH" || "-"}</p>
+            <p>{selectedOrder?.CGST + " DH" || "-"}</p>
           </div>
           <div className="modal-row">
             <p>SGST</p>
-            <p>{selectedOrder?.order?.SGST + " DH" || "-"}</p>
+            <p>{selectedOrder?.SGST || "-"}</p>
           </div>
           {!(location.pathname === "/dashboard/online-orders") && (
             <div className="modal-row">
               <p>Department Commission</p>
-              <p>
-                {selectedOrder?.order?.department_commission + " DH" || "-"}
-              </p>
+              <p>{selectedOrder?.department_commission + " DH" || "-"}</p>
             </div>
           )}
           <div className="modal-row">
             <p>Total bill</p>
-            <p>{selectedOrder?.order?.total_bill + " DH" || "-"}</p>
+            <p>{selectedOrder?.total_bill + " DH" || "-"}</p>
           </div>
           {!(location.pathname === "/dashboard/online-orders") && (
             <>
               <div className="modal-row">
                 <p>Paid amount</p>
-                <p>{selectedOrder?.order?.paid_amount + " DH" || "-"}</p>
+                <p>{selectedOrder?.paid_amount || "-"}</p>
               </div>
               <div className="modal-row">
                 <p>Due amount</p>
-                <p> {selectedOrder?.order?.due_amount + " DH" || "-"}</p>
+                <p> {selectedOrder?.due_amount + " DH" || "-"}</p>
               </div>
             </>
           )}

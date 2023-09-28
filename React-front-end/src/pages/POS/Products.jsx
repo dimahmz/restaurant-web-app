@@ -46,7 +46,7 @@ const Products = () => {
           <div className="relative bg-cover bg-no-repeat">
             <img
               className="transition duration-300 ease-in-out hover:scale-110"
-              src={`http://192.168.1.106:8000/storage/${food.image}`}
+              src={`/images_host/${food.image}`}
               alt={food.name}
             />
           </div>

@@ -14,9 +14,12 @@ export default defineConfig({
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/serverip/, ""),
       },
+      "/images_host": {
+        target: "http://192.168.1.106:8000/storage/images",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/images_host/, ""),
+      },
     },
     host: true,
-    // assets URLs
-    origin: "http://192.168.1.106:8000",
   },
 });

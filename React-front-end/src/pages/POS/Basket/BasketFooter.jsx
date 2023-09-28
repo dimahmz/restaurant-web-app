@@ -1,5 +1,7 @@
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { ComponentToPrint } from "../OrderToPrint";
+import { useReactToPrint } from "react-to-print";
 import {
   store_order_food,
   set_response,
@@ -78,8 +80,10 @@ const Footer = () => {
   }, [state]);
 
   // store the order in the database
+  const [posOrder, setPosOrder] = useState(null);
+
   async function submitOrder() {
-    const new_food_order = {};
+    const $posOrder = {};
     const $order_food = order_food.map((food) => {
       return {
         food_id: food.id,
@@ -87,25 +91,37 @@ const Footer = () => {
         quantity: food.quantity,
       };
     });
-    new_food_order.order_food = [...$order_food];
-    new_food_order.subtotal = subtotal;
-    new_food_order.total_bill = total_bill;
-    new_food_order.due_amount = subtotal;
-    new_food_order.paid_amount = paid_amount;
-    new_food_order.department_commission = order_commission;
-    new_food_order.branch_id = branch_id;
-    new_food_order.table_id = table_id;
-    new_food_order.user_id = user.id;
+    $posOrder.order_food = [...$order_food];
+    $posOrder.subtotal = subtotal;
+    $posOrder.total_bill = total_bill;
+    $posOrder.due_amount = subtotal;
+    $posOrder.paid_amount = paid_amount;
+    $posOrder.department_commission = order_commission;
+    $posOrder.branch_id = branch_id;
+    $posOrder.table_id = table_id;
+    $posOrder.user_id = user.id;
 
-    // dispatch(set_loading(true));
+    setPosOrder($posOrder);
+    dispatch(set_loading(true));
 
-    // const response = await PosOrder.create(new_food_order);
+    const response = await PosOrder.create($posOrder);
 
     setTimeout(() => {
-      // dispatch(set_response(response));
-      // if (response.success) dispatch(reset_store());
-    }, 1000);
+      if (response.success) {
+        handlePrint();
+        dispatch(reset_store());
+      }
+
+      dispatch(set_response(response));
+    }, 700);
   }
+
+  // print the order
+  const componenetRef = useRef(ComponentToPrint);
+
+  const handlePrint = useReactToPrint({
+    content: () => componenetRef.current,
+  });
   return (
     <div className="border-2 border-slate-600 text-[12px]">
       <div className="flex justify-between bg-[#f4f9fc] font-semibold  p-1 border-b-2 border-slate-600">
@@ -130,6 +146,9 @@ const Footer = () => {
         <p className="">{total_bill} DH</p>
       </div>
       <div className="flex justify-end space-x-3 py-2 text-[15px] font-semibold px-2">
+        <div className="hidden">
+          <ComponentToPrint ref={componenetRef} posOrder={posOrder} />
+        </div>
         <button
           className="text-white px-4 py-2 tracking-[5px]  bg-[#0dd19d] rounded-[2px]"
           onClick={submitOrder}
