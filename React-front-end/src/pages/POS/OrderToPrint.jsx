@@ -4,10 +4,9 @@ import { forwardRef } from "react";
 import { useSelector } from "react-redux";
 
 export const ComponentToPrint = forwardRef((props, ref) => {
-  const order = useSelector(
-    (state) => state.pointOfSalesOrders.response.payload
-  );
-  console.log(order);
+  const response = useSelector((state) => state.pointOfSalesOrders.response);
+  const order = response.payload;
+
   return (
     <div ref={ref} className="mx-16 my-10 text-lg">
       {Object.keys(order).length === 0 ? (

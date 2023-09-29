@@ -72,7 +72,7 @@ const TableHeader = ({ onSearchChange, branchChange }) => {
               onChange={(e) => handleInputChange(e.target.value)}
             />
           </div>
-          <FormControl sx={{ minWidth: "180px" }}>
+          <FormControl sx={{ width: "180px" }}>
             <Select
               value={branch}
               onChange={handleChange}

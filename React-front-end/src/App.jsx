@@ -3,9 +3,11 @@ import HomePage from "./pages/Home";
 import LoginPage from "./pages/Auth/LoginPage";
 import SignUpPage from "./pages/Auth/SignUpPage";
 import ResetPasswordPage from "./pages/Auth/ResetPasswordPage";
+// Dashboard
 import DashboardPage from "./pages/Dashboard";
 import PosDashboard from "./pages/POS";
 import PosOnlineOrders from "./pages/Orders/Pos_Online";
+import Kichen from "./pages/Kitchen";
 // manage
 import ManagePage from "./pages/Manage";
 import Food from "./pages/Manage/Food";
@@ -51,6 +53,7 @@ function App() {
                 <Route path="pos" element={<PosDashboard />} />
                 <Route path="pos-orders" element={<PosOnlineOrders />} />
                 <Route path="online-orders" element={<PosOnlineOrders />} />
+                <Route path="kitchen" element={<Kichen />} />
                 <Route path="manage" element={<ManagePage />}>
                   <Route path="food">
                     <Route index element={<Food />} />

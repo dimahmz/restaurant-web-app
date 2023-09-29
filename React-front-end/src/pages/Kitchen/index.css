@@ -1,0 +1,3 @@
+table.order-box-table td {
+  @apply py-2;
+}

@@ -52,7 +52,7 @@ const BasketComponent = () => {
       <div className="h-[59%] overflow-y-auto py-1">
         {order_food.length === 0 ? (
           <p className="text-red-800 text-center py-2">
-            Select food item to add to the list
+            Basket Food items is empty
           </p>
         ) : (
           <div className="flex flex-col-reverse">

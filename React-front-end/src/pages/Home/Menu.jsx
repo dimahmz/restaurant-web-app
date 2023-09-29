@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { FaBasketShopping } from "react-icons/fa6";
 import HeroSection from "./HeroSection";
 import SideBarOrder from "./SideBarOrder";
-import { Food, Group } from "../../APIs/Food";
+import { Group } from "../../APIs/Food";
 import { Branch } from "../../APIs/Restaurant";
 import { MenuProvider } from "./MenuProvider";
 
@@ -81,7 +81,7 @@ const MenuHome = () => {
                   <div className="w-[100px]">
                     <img
                       className="rounded-full w-[100px]"
-                      src={`http://192.168.1.63:8000/storage/${food.image}`}
+                      src={`/images_host/${food.image}`}
                       alt={food.name}
                     />
                   </div>
@@ -118,8 +118,8 @@ const MenuHome = () => {
                         >
                           <div className="relative">
                             <img
-                              src="https://khadyo.softtechdemo.com/public//images/food_item/1662249823-pizza-ridajpg.jpg"
-                              alt="/"
+                              src={`/images_host/${food.image}`}
+                              alt={food.name}
                               className="block w-full h-full object-cover rounded-lg "
                             />
                             <button className="absolute text-white bg-[#cc3333] top-[10%] px-4 py-2 z-50 right-0">

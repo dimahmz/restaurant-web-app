@@ -31,6 +31,17 @@ export default class Order {
       return e.response.data;
     }
   }
+
+  static async changeStatus(id, status) {
+    try {
+      const resp = await axios.put(`/order/${id}`, {
+        status,
+      });
+      return resp.data;
+    } catch (e) {
+      return e.response.data;
+    }
+  }
 }
 
 // Point of sales orders

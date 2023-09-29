@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ComponentToPrint } from "../OrderToPrint";
 import { useReactToPrint } from "react-to-print";
@@ -80,7 +80,6 @@ const Footer = () => {
   }, [state]);
 
   // store the order in the database
-  const [posOrder, setPosOrder] = useState(null);
 
   async function submitOrder() {
     const $posOrder = {};
@@ -101,7 +100,6 @@ const Footer = () => {
     $posOrder.table_id = table_id;
     $posOrder.user_id = user.id;
 
-    setPosOrder($posOrder);
     dispatch(set_loading(true));
 
     const response = await PosOrder.create($posOrder);
@@ -111,9 +109,8 @@ const Footer = () => {
         handlePrint();
         dispatch(reset_store());
       }
-
-      dispatch(set_response(response));
     }, 700);
+    dispatch(set_response(response));
   }
 
   // print the order
@@ -147,7 +144,7 @@ const Footer = () => {
       </div>
       <div className="flex justify-end space-x-3 py-2 text-[15px] font-semibold px-2">
         <div className="hidden">
-          <ComponentToPrint ref={componenetRef} posOrder={posOrder} />
+          <ComponentToPrint ref={componenetRef} />
         </div>
         <button
           className="text-white px-4 py-2 tracking-[5px]  bg-[#0dd19d] rounded-[2px]"

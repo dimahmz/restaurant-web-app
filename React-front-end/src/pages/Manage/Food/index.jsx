@@ -26,11 +26,13 @@ const FoodItems = () => {
       headerName: "Image",
       flex: 1,
       renderCell: (params) => (
-        <img
-          src={`${import.meta.env.VITE_APP_IMAGES_URL + params.row.image}
-          `}
-          alt={params.row.name.slice(0, 9)}
-        />
+        <div className="p-2 flex-center">
+          <img
+            className="block rounded-full w-12 h-12"
+            src={`/images_host/${params.row.image}`}
+            alt={params.row.name.slice(0, 9)}
+          />
+        </div>
       ),
     },
     { field: "name", headerName: "Name", flex: 1 },
@@ -47,9 +49,10 @@ const FoodItems = () => {
 
   return (
     <div className="bg-white h-full">
-      <TableHeader label="Food Item List" />
+      <TableHeader label="Items List" />
       <div className="w-full h-[400px] bg-white px-4 py-8 mt-3">
         <DataGrid
+          rowHeight={80}
           rows={foods.map((row, i) => ({
             _index: i + 1,
             ...row,
