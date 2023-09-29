@@ -22,7 +22,7 @@ class TableController extends Controller
     // --------- read ----------
     function get()
     {
-        $table = Table::all();
+        $table = Table::orderBy('created_at' , 'desc')->get();
         return $this::success($table);
     }
     function get_with_branch(){

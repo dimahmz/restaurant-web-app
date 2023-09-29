@@ -5,7 +5,7 @@ import { Branch } from "../../APIs/Restaurant";
 
 const KitchenHeader = ({ onRefrechOrder, handleFilter }) => {
   const [branches, setBranches] = useState([]);
-  const [selectedBranchId, setSelectedBranchId] = useState(undefined);
+  const [selectedBranchId, setSelectedBranchId] = useState("");
 
   const [serachId, setSerachId] = useState(undefined);
 
@@ -49,7 +49,7 @@ const KitchenHeader = ({ onRefrechOrder, handleFilter }) => {
           <Select
             value={selectedBranchId}
             onChange={(e) => {
-              setSelectedBranchId(e.target.event);
+              setSelectedBranchId(e.target.value);
             }}
             displayEmpty
             inputProps={{ "aria-label": "Without label" }}
@@ -59,7 +59,7 @@ const KitchenHeader = ({ onRefrechOrder, handleFilter }) => {
               height: "35px",
             }}
           >
-            <MenuItem value={undefined}>
+            <MenuItem value="">
               <em>Any Branch</em>
             </MenuItem>
             {branches.map((branch) => (

@@ -24,7 +24,7 @@ class DepartmentTagController extends Controller
     // --------- read ----------
     function get()
     {
-        $dep_tag = DepartmentTag::select("id", "name" , "commission")->get();
+        $dep_tag = DepartmentTag::select("id", "name" , "commission")->orderBy('created_at' , 'desc')->get();
         return $this::success($dep_tag);
     }
 

@@ -7,6 +7,7 @@ import { Food, Group, Variation } from "../../../APIs/Food";
 import VariationPrice from "../../../components/VariationPrice";
 import SnackBar from "../../../components/snackBar";
 import getResponseMessage from "../../../utils/getResponse";
+import { LoadingButton } from "@mui/lab";
 
 const AddNewItemPage = () => {
   const [hasVariations, setHasVariations] = useState(false);
@@ -23,11 +24,25 @@ const AddNewItemPage = () => {
 
   const [name, setName] = useState("");
 
-  const [variations_IDs, SetvariationsIDs] = useState([]);
+  const [variations_IDs, setVariationsIDs] = useState([]);
 
   const [message, setMessage] = useState("Food item has been added");
+
   const [open, setOpen] = useState(false);
+
+  const [isLoading, setIsLoading] = useState(false);
+
   const [severity, setSeverity] = useState("success");
+
+  function resetForm() {
+    setHasVariations(false);
+    setFoodGroups([]);
+    setFoodVariations([]);
+    setFoodGroupID(null);
+    setPrice("");
+    setName("");
+    setVariationsIDs([]);
+  }
 
   useEffect(() => {
     async function fetchFoodGroups() {
@@ -52,11 +67,12 @@ const AddNewItemPage = () => {
   }
 
   function onAddVariationPrice($variations_prices) {
-    SetvariationsIDs($variations_prices);
-    console.log(variations_IDs);
+    setVariationsIDs($variations_prices);
   }
 
   async function AddNewFoodItem(e) {
+    setIsLoading(true);
+
     e.preventDefault();
     const image = e.target["image"].files[0];
     const is_special = e.target["is_special"].value ? 1 : 0;
@@ -69,17 +85,21 @@ const AddNewItemPage = () => {
       variations_IDs,
     };
     const response = await Food.create(newFood);
+
     if (!response.success) {
       const msg = getResponseMessage(response);
-
+      setIsLoading(false);
       setMessage(msg);
       setSeverity("error");
-    } else {
-      setMessage("Food item has been added");
-      setSeverity("success");
+      setOpen(true);
+      return;
     }
 
+    setMessage("Food item has been added");
+    setSeverity("success");
     setOpen(true);
+    setIsLoading(false);
+    resetForm();
   }
 
   return (
@@ -118,10 +138,11 @@ const AddNewItemPage = () => {
               <span className="text-red-600">*</span>
             </label>
             <TextField
-              size="small"
-              label="e.g Pizza"
-              variant="filled"
               hiddenLabel
+              placeholder="e.g Spicy Pizza"
+              size="small"
+              variant="filled"
+              defaultValue={name}
               onChange={(e) => {
                 setName(e.target.value);
               }}
@@ -174,11 +195,12 @@ const AddNewItemPage = () => {
               </span>
             </label>
             <TextField
+              hiddenLabel
               size="small"
               type="number"
               variant="filled"
-              label="e.g Type price of this item"
-              hiddenLabel
+              placeholder="e.g Type price of this item"
+              defaultValue={price}
               min={1}
               onChange={(e) => {
                 setPrice(e.target.value);
@@ -190,8 +212,8 @@ const AddNewItemPage = () => {
             <Checkbox
               className="h-4 w-4"
               color="pink"
-              defaultChecked
               name="is_special"
+              defaultChecked={false}
             />
             <label className="cursor-pointer"> Is Special?</label>
           </div>
@@ -203,11 +225,23 @@ const AddNewItemPage = () => {
             <div>
               <input type="file" name="image" accept="image/*" required />
             </div>
-            <div>
-              <button className="rounded-sm px-12 py-[0.375rem] duration-300 text-white bg-[#f64e60] hover:bg-[#f96674]">
-                SAVE
-              </button>
-            </div>
+            <button>
+              <LoadingButton
+                sx={{
+                  paddingX: "30px",
+                  backgroundColor: "#F5364A",
+                  "&:hover": {
+                    backgroundColor: "#F5365A",
+                  },
+                }}
+                loading={isLoading}
+                size="small"
+                loadingPosition="center"
+                variant="contained"
+              >
+                <span>save</span>
+              </LoadingButton>
+            </button>
           </div>
         </form>
       </div>

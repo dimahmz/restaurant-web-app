@@ -49,7 +49,8 @@ class PosOrderController extends Controller
                 //     }
                 // }
         }
-        return $this::success(null, "Order has been taken");
+        $order = Order::with('branch','user','order_food.food' , 'order_food.variation')->find($order->id);
+        return $this::success($order, "Order has been taken");
     }
     // --------- read ----------
     function get()

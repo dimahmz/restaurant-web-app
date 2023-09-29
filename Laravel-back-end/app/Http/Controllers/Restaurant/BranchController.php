@@ -26,7 +26,7 @@ class BranchController extends Controller
     // --------- read ----------
     function get()
     {
-        $branch = Branch::all();
+        $branch = Branch::orderBy('created_at' , 'desc')->get();
         return $this::success($branch);
     }
 

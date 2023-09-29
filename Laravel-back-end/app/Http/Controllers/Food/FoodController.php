@@ -18,9 +18,8 @@ class FoodController extends Controller
     // ------- Create ----------
     function post(StoreFoodRequest $request)
     {
-        
-        $path =  $request->file('image')->store('images' , 'public');
-        
+         $path  = $request->file('image')->store('images'  , 'public');
+
         $food = Food::create([
             'food_group_id' => $request->food_group_id,
             'name' => $request->name,

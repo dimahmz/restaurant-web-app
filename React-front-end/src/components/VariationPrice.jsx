@@ -57,8 +57,8 @@ const VariationPrice = ({ variations, onSelectOption }) => {
             <span className="text-red-600">*</span>
           </label>
           <TextField
+            hiddenLabel
             sx={{ width: "100%" }}
-            label="Price"
             type="number"
             min={1}
             name="price"

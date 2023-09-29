@@ -23,7 +23,7 @@ class PaymentTypeController extends Controller
     // --------- read ----------
     function get()
     {
-        $payment_type = PaymentType::all();
+        $payment_type = PaymentType::orderBy('created_at' , 'desc')->get();
         return $this::success($payment_type);
     }
 

@@ -66,7 +66,7 @@ const TableHeader = ({ onSearchChange, branchChange }) => {
               <BiSearch size={15} className="text-white" />
             </div>
             <input
-              className="bg-[#f0f7fb] px-2 text-[#49505] text-xs h-[36px] focus:outline-none"
+              className="bselectedBranchIdg-[#f0f7fb] px-2 text-[#49505] text-xs h-[36px] focus:outline-none"
               type="text"
               placeholder="Search By Token"
               onChange={(e) => handleInputChange(e.target.value)}

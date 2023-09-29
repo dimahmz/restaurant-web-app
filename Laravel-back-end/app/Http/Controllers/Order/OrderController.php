@@ -34,7 +34,7 @@ class OrderController extends Controller
     function getKitchenOrders()
     {
 
-        $orders = Order::with('order_food.food','order_food.variation' )->whereIn("status",["pending" , "accepted"])->get();
+        $orders = Order::with('order_food.food','order_food.variation' )->whereIn("status",["pending" , "accepted"])->orderBy('created_at' , 'desc')->get();
 
         return $this::success($orders);
     }
@@ -44,13 +44,13 @@ class OrderController extends Controller
     {
         $request->validate(['status' => 'required|in:pending,accepted,ready']);
 
-        $order = Order::find($id);
+        $order = Order::with('order_food.food','order_food.variation' )->find($id);
 
         if(!$order) return $this::error("order doesn't exist");
         
         $order->update(['status' => $request->status]);
         
-        return $this::success("order has been updated");
+        return $this::success($order, "order has been updated");
 
 
     }

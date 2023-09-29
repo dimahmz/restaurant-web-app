@@ -4,11 +4,11 @@
 
 #### Front-end
 
-_navigate to this folder_
+**navigate to this folder**
 
 `cd React-front-end`
 
-_install the depedencies_
+**install the depedencies**
 
 `npm i`
 
@@ -18,29 +18,30 @@ _run it in the dev mode_
 
 #### Back-end
 
-_navigate to this folder_
+**navigate to this folder**
 
 `cd Laravel-back-end`
 
-_install the depedencies_
+**install the depedencies**
 
 `composer install`
 
-_generate_an_app_key_
+**generate_an_app_key**
 
 `php artisan key:generate`
 
-start Xampp server
+**start Xampp server**
 
-_run the database migrations_
-_(this command will take a couple of time around 2 minutes, because sveral images will be generated and stored on this your machine in the storage/app/public/images folder)_
+**run the database migrations**
+
+(this command will take a couple of time around 2 minutes, because around 15 images will be generated and stored on your machine in the storage/app/public/images folder)
 
 `php artisan app:run-migrations`
 
-_create a symblic link to the images storage_
+**create a symblic link to the images storage**
 
 `php artisan storage:link`
 
-_run the project_
+**run the project**
 
 `php artisan serve`
