@@ -27,14 +27,19 @@ const PosPage = () => {
   const [branches, setBranches] = useState([]);
   const [tables, setTables] = useState([]);
   const [foodGroups, setFoodGroups] = useState([]);
+  const [foodGroupsLoading, setFoodGroupsLoading] = useState(false);
+
   const [commissions, setCommissions] = useState([]);
+  const [commissionsLoading, setCommissionsLoading] = useState(false);
 
   useEffect(() => {
     async function fetchFoods() {
+      setFoodGroupsLoading(true);
       let response = await Group.getGroupFood();
       if (response.success) {
         setFoodGroups(response.payload);
       }
+      setFoodGroupsLoading(false);
     }
     async function fetchCommissions() {
       let response = await DeptTag.get();
@@ -43,10 +48,12 @@ const PosPage = () => {
       }
     }
     async function fetchBranches() {
+      setCommissionsLoading(true);
       let response = await Branch.get();
       if (response.success) {
         setBranches(response.payload);
       }
+      setCommissionsLoading(false);
     }
     async function fetchTables() {
       let response = await Table.get();
@@ -115,12 +122,24 @@ const PosPage = () => {
               <OrdersNavBar />
             </div>
             <div className="max-h-[70vh] px-2 flex space-x-2">
-              <div className="overflow-y-auto px-1 max-w-[150px]">
-                <CommissionBar data={commissions} />
-                <GroupsBar
-                  foodGroups={foodGroups}
-                  onSelectGroup={handleSelectedGroup}
-                />
+              <div className="overflow-y-auto px-1 w-full max-w-[150px]">
+                {commissionsLoading ? (
+                  <div className="flex-center w-full h-1/2 z-[1000] backdrop-blur-sm bg-white/0">
+                    <CircularProgress color="primary" />
+                  </div>
+                ) : (
+                  <CommissionBar data={commissions} />
+                )}
+                {foodGroupsLoading ? (
+                  <div className="flex-center w-full h-1/2 z-[1000] backdrop-blur-sm bg-white/0">
+                    <CircularProgress color="primary" />
+                  </div>
+                ) : (
+                  <GroupsBar
+                    foodGroups={foodGroups}
+                    onSelectGroup={handleSelectedGroup}
+                  />
+                )}
               </div>
               <div className="w-[322px] overflow-y-auto">
                 <Products />

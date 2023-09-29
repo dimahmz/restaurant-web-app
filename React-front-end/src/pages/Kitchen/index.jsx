@@ -7,7 +7,7 @@ import { CircularProgress } from "@mui/material";
 const KitchenPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [orders, setOrders] = useState([]);
-  const [filtredOrders, setFiltredOrders] = useState();
+  const [filtredOrders, setFiltredOrders] = useState([]);
 
   // get orders
   async function getOrders() {

@@ -25,7 +25,11 @@ const Products = () => {
 
   return !selectedGroupFood?.foods ? (
     <p className="px-4 mt-14 font-medium text-xl">
-      Select a group to get the a list of food
+      No group of food is selected!
+    </p>
+  ) : selectedGroupFood.foods.length == 0 ? (
+    <p className="px-4 mt-14 font-medium text-xl">
+      Group without any food item!
     </p>
   ) : (
     <div className="py-2 grid grid-cols-2 gap-x-2 gap-y-3">

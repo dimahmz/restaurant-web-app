@@ -5,6 +5,7 @@ import SideBarOrder from "./SideBarOrder";
 import { Group } from "../../APIs/Food";
 import { Branch } from "../../APIs/Restaurant";
 import { MenuProvider } from "./MenuProvider";
+import { CircularProgress } from "@mui/material";
 
 const MenuHome = () => {
   const [foodGroups, setFoodGroups] = useState([]);
@@ -13,12 +14,16 @@ const MenuHome = () => {
   const [selectedFoodGroup, setSelectedFoodGroup] = useState([]);
   const [selectedFood, setSelectedFood] = useState({});
 
+  const [isLoading, setLoading] = useState(false);
+
   useEffect(() => {
     async function fetchFoods() {
+      setLoading(true);
       const response = await Group.getGroupFood();
       if (response.success) {
         setFoodGroups(response.payload);
       }
+      setLoading(false);
     }
 
     async function fetchBranches() {
@@ -43,8 +48,11 @@ const MenuHome = () => {
           <h1 className="text-[#2a435d] font-bold text-4xl text-center">
             Popular <span className="text-[#cc3333]">Menu</span>
           </h1>
-          {/* Food Groups */}
-          {foodGroups.length == 0 ? (
+          {isLoading ? (
+            <div className="w-full h-64 flex justify-center mt-28 z-[1000000] backdrop-blur-sm bg-white/0">
+              <CircularProgress color="primary" />
+            </div>
+          ) : foodGroups.length == 0 ? (
             <div className="text-red-800 text-2xl my-24 font-medium text-center bg-white">
               Error while trying to load Popular Menu. please refresh page page
               or try again later
@@ -73,25 +81,25 @@ const MenuHome = () => {
               {selectedFoodGroup.map((food, index) => (
                 <div
                   key={index}
-                  className="px-4 flex border-2 w-[280px] py-8 rounded hover:shadow-lg hover:scale-105 duration-300 cursor-pointer"
+                  className="flex py-6  px-4 space-x-8 border-2 rounded hover:shadow-lg hover:scale-105 duration-300 cursor-pointer"
                   onClick={() => {
                     setSelectedFood(food);
                   }}
                 >
-                  <div className="w-[100px]">
+                  <div className="flex-center">
                     <img
-                      className="rounded-full w-[100px]"
+                      className="rounded-full w-[100px] h-[100px]"
                       src={`/images_host/${food.image}`}
                       alt={food.name}
                     />
                   </div>
-                  <div>
-                    <div>
-                      <h1 className="text-[#2a435d] hover:text-[#cc3333] text-xl">
-                        {food.name}
-                      </h1>
-                      <h2 className="text-[#2a435d]">{food.price} DH</h2>
-                    </div>
+                  <div className="flex-column space-y-5 ">
+                    <h1 className="text-[#2a435d] hover:text-[#cc3333] text-[30px] ">
+                      {food.name}
+                    </h1>
+                    <h2 className="text-[#2a435d] text-lg font-bold">
+                      {food.price} DH
+                    </h2>
                   </div>
                 </div>
               ))}
@@ -104,14 +112,14 @@ const MenuHome = () => {
                 Explore Our
                 <span className="text-[#cc3333]">Special Menu</span>
               </h1>
-              <div className="max-w-[900px] grid lg:grid-cols-3 md:grid-cols-3 grid-cols-1 m-auto px-4 mt-16 gap-x-12 gap-y-6">
+              <div className="max-w-[1000px] grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 mx-auto gap-x-12 gap-y-6 px-8 mt-16">
                 {foodGroups.map((foodGroup) =>
                   foodGroup.foods.map(
                     (food, index) =>
                       food.is_special === 1 && (
                         <div
                           key={index}
-                          className="shadow-xl flex flex-col p-4 text-center rounded-lg hover:scale-105 duration-300"
+                          className="shadow-xl flex-column py-12 px-6 text-center rounded-lg hover:scale-105 duration-300"
                           onClick={() => {
                             setSelectedFood(food);
                           }}
@@ -127,13 +135,11 @@ const MenuHome = () => {
                             </button>
                           </div>
                           <h1 className="text-center text-sm text-white">
-                            <span className="bg-[#cc3333] rounded-md px-2 mt-8 ">
+                            <span className="bg-[#cc3333] inline-block rounded-md px-2 my-4 ">
                               special
                             </span>
                           </h1>
-                          <h2 className="font-bold text-2xl py-4">
-                            {food.name}
-                          </h2>
+                          <h2 className="font-bold text-2xl">{food.name}</h2>
                         </div>
                       )
                   )

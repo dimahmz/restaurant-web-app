@@ -77,44 +77,48 @@ const OrderBoxItem = ({ order, onRefrechOrder }) => {
           size="small"
           onClick={handleChangeStatus}
           loading={isLoading}
-          loadingPosition="end"
+          loadingPosition="center"
           variant="contained"
         >
           <span>{$order.status}</span>
         </LoadingButton>
       </div>
       <table className="order-box-table w-full order-detail border-collapse">
-        <tr className="text-center">
-          <td>S/L</td>
-          <td>Food</td>
-          <td>Additional Info</td>
-          <td>QTY</td>
-        </tr>
-        <tr className="text-white bg-[#f64e60]">
-          <td colSpan={5}>
-            <div className="font-bold flex space-x-2 px-3">
-              <p>Otder Token : #{$order.id}</p>
-              <p>Ordred At : {getDate($order.created_at)}</p>
-            </div>
-          </td>
-        </tr>
-        {$order.order_food.map((order_food, index) => (
-          <tr key={index} className="bg-[#f4f9fc] text-center py-4">
-            <td>{index + 1}</td>
-            <td className="w-[30%]">{order_food.food.name}</td>
-            <td>
-              {order_food?.variation?.name ? (
-                <div>
-                  <span>Variation:&nbsp;</span>
-                  {order_food?.variation?.name}
-                </div>
-              ) : (
-                "-"
-              )}
-            </td>
-            <td>{order_food.quantity}</td>
+        <thead>
+          <tr className="text-center">
+            <td>S/L</td>
+            <td>Food</td>
+            <td>Additional Info</td>
+            <td>QTY</td>
           </tr>
-        ))}
+        </thead>
+        <tbody>
+          <tr className="text-white bg-[#f64e60]">
+            <td colSpan={5}>
+              <div className="font-bold flex space-x-2 px-3">
+                <p>Otder Token : #{$order.id}</p>
+                <p>Ordred At : {getDate($order.created_at)}</p>
+              </div>
+            </td>
+          </tr>
+          {$order.order_food.map((order_food, index) => (
+            <tr key={index} className="bg-[#f4f9fc] text-center py-4">
+              <td>{index + 1}</td>
+              <td className="w-[30%]">{order_food.food.name}</td>
+              <td>
+                {order_food?.variation?.name ? (
+                  <div>
+                    <span>Variation:&nbsp;</span>
+                    {order_food?.variation?.name}
+                  </div>
+                ) : (
+                  "-"
+                )}
+              </td>
+              <td>{order_food.quantity}</td>
+            </tr>
+          ))}
+        </tbody>
       </table>
     </section>
   );

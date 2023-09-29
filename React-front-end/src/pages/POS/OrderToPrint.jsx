@@ -2,6 +2,7 @@
 import { Divider } from "@mui/material";
 import { forwardRef } from "react";
 import { useSelector } from "react-redux";
+import getDate from "../../utils/getTime";
 
 export const ComponentToPrint = forwardRef((props, ref) => {
   const response = useSelector((state) => state.pointOfSalesOrders.response);
@@ -15,7 +16,7 @@ export const ComponentToPrint = forwardRef((props, ref) => {
         <div>
           <div className="text-center">
             <h1>Ordered by {order?.user?.name || " - "} </h1>
-            <h1>At {order?.created_at} </h1>
+            <h1>At {getDate(order.created_at)} </h1>
             <h1>Branch {order?.branch?.name || " - "} </h1>
           </div>
           <Divider sx={{ marginY: 2, width: "100%" }} />
