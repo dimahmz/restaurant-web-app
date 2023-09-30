@@ -5,7 +5,7 @@ import { Outlet } from "react-router-dom";
 const Layout = () => {
   return (
     <div className="relative overflow-y-hidden">
-      <header className="w-full fixed top-0 z-[1000]">
+      <header className="w-full fixed top-0 z-[1000] shadow-lg">
         <NavBar />
       </header>
       <main className="mt-[60px]">

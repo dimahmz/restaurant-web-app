@@ -2,17 +2,20 @@ import { useEffect, useState } from "react";
 import { DeptTag } from "../../../APIs/Restaurant";
 import { BsThreeDots } from "react-icons/bs";
 import { DataGrid } from "@mui/x-data-grid";
-import SearchBar from "../../../components/SeachBar";
+import TableHeader from "../tableHader";
+import Filter from "../../../utils/filters";
 
 const Branches = () => {
   const [departments, setDepartments] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [filtredDepartment, setfiltredDepartment] = useState([]);
 
   async function fechDepartments() {
     setIsLoading(true);
     const response = await DeptTag.get();
     if (response.success) {
       setDepartments(response.payload);
+      setfiltredDepartment(response.payload);
     }
     setIsLoading(false);
   }
@@ -33,12 +36,21 @@ const Branches = () => {
     },
   ];
 
+  function filterDepartment(e) {
+    const name = e.target.value;
+    const $filtredDepartment = Filter.byName(departments, name);
+    setfiltredDepartment($filtredDepartment);
+  }
+
   return (
     <div className="bg-white h-full">
-      <SearchBar title="Department Tag List" />
+      <TableHeader
+        title="Department Tag List"
+        handleSearchChange={filterDepartment}
+      />
       <div className="w-full h-[370px] px-4 py-2">
         <DataGrid
-          rows={departments}
+          rows={filtredDepartment}
           columns={columns}
           initialState={{
             pagination: {

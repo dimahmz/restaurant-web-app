@@ -2,18 +2,20 @@ import { useEffect, useState } from "react";
 import { BsThreeDots } from "react-icons/bs";
 import { DataGrid } from "@mui/x-data-grid";
 import { Branch } from "../../../APIs/Restaurant";
-
-import SearchBar from "../../../components/SeachBar";
+import TableHeader from "../tableHader";
+import Filter from "../../../utils/filters";
 
 const Branches = () => {
   const [branches, setBranches] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [filtredBranches, setFiltredBranches] = useState([]);
 
   async function fechBranches() {
     setIsLoading(true);
     const response = await Branch.get();
     if (response.success) {
       setBranches(response.payload);
+      setFiltredBranches(response.payload);
     }
     setIsLoading(false);
   }
@@ -35,12 +37,18 @@ const Branches = () => {
     },
   ];
 
+  function filterBranches(e) {
+    const name = e.target.value;
+    const $filtredBranches = Filter.byName(branches, name);
+    setFiltredBranches($filtredBranches);
+  }
+
   return (
     <div className="bg-white h-full">
-      <SearchBar title="Branch List" />
+      <TableHeader title="Goup Item List" handleSearchChange={filterBranches} />
       <div className="w-full h-[370px] bg-white px-4 py-2">
         <DataGrid
-          rows={branches}
+          rows={filtredBranches}
           columns={columns}
           initialState={{
             pagination: {

@@ -22,7 +22,15 @@ const AddNewItemPage = () => {
 
   const [price, setPrice] = useState(null);
 
+  function onPriceChange(e) {
+    setPrice(e.target.value);
+  }
+
   const [name, setName] = useState("");
+
+  function onNameChange(e) {
+    setName(e.target.value);
+  }
 
   const [variations_IDs, setVariationsIDs] = useState([]);
 
@@ -36,12 +44,11 @@ const AddNewItemPage = () => {
 
   function resetForm() {
     setHasVariations(false);
-    setFoodGroups([]);
-    setFoodVariations([]);
     setFoodGroupID(null);
     setPrice("");
     setName("");
     setVariationsIDs([]);
+    resetSelect();
   }
 
   useEffect(() => {
@@ -139,13 +146,11 @@ const AddNewItemPage = () => {
             </label>
             <TextField
               hiddenLabel
+              value={name}
               placeholder="e.g Spicy Pizza"
               size="small"
               variant="filled"
-              defaultValue={name}
-              onChange={(e) => {
-                setName(e.target.value);
-              }}
+              onChange={onNameChange}
               required
             />
           </div>
@@ -196,15 +201,13 @@ const AddNewItemPage = () => {
             </label>
             <TextField
               hiddenLabel
+              value={price}
               size="small"
               type="number"
               variant="filled"
               placeholder="e.g Type price of this item"
-              defaultValue={price}
               min={1}
-              onChange={(e) => {
-                setPrice(e.target.value);
-              }}
+              onChange={onPriceChange}
               required
             />
           </div>

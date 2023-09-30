@@ -2,17 +2,20 @@ import { useEffect, useState } from "react";
 import { BsThreeDots } from "react-icons/bs";
 import { DataGrid } from "@mui/x-data-grid";
 import { Table } from "../../../APIs/Restaurant";
-import SearchBar from "../../../components/SeachBar";
+import TableHeader from "../tableHader";
+import Filter from "../../../utils/filters";
 
-const Branches = () => {
-  const [tables, setTables] = useState([]);
+const ManageTables = () => {
+  const [Tables, setTables] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [filtredTables, setFiltredTables] = useState([]);
 
   async function fechTables() {
     setIsLoading(true);
     const response = await Table.get();
     if (response.success) {
       setTables(response.payload);
+      setFiltredTables(response.payload);
     }
     setIsLoading(false);
   }
@@ -42,12 +45,18 @@ const Branches = () => {
     },
   ];
 
+  function filterTables(e) {
+    const name = e.target.value;
+    const $filtredTable = Filter.byName(Tables, name);
+    setFiltredTables($filtredTable);
+  }
+
   return (
     <div className="bg-white h-full">
-      <SearchBar title="Table List" />
+      <TableHeader title="Table List" handleSearchChange={filterTables} />
       <div className="w-full h-[370px] px-4 py-4 ">
         <DataGrid
-          rows={tables}
+          rows={filtredTables}
           columns={columns}
           initialState={{
             pagination: {
@@ -62,4 +71,4 @@ const Branches = () => {
   );
 };
 
-export default Branches;
+export default ManageTables;

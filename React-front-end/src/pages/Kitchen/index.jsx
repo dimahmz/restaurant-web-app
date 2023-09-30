@@ -28,8 +28,8 @@ const KitchenPage = () => {
   function onFilter({ branchId, id }) {
     let $filteredRows = [...orders];
     if (id) {
-      const filtredByName = orders.filter((order) => order.id == id);
-      $filteredRows = [...filtredByName];
+      const filtredByID = orders.filter((order) => order.id == id);
+      $filteredRows = [...filtredByID];
     }
     if (branchId) {
       const filtredByBranch = orders.filter(

@@ -27,7 +27,7 @@ const KitchenHeader = ({ onRefrechOrder, handleFilter }) => {
   }, [selectedBranchId, serachId]);
 
   return (
-    <header className="flex items-center bg-white py-5 px-4">
+    <header className="flex items-center bg-white py-5 px-4 shadow-lg">
       <h1 className="w-full text-lg font-semibold">Kitchen Dashboard</h1>
       <div className="flex justify-end space-x-4 w-full">
         <div className="">

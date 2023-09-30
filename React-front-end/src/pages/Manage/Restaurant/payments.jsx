@@ -2,17 +2,20 @@ import { useEffect, useState } from "react";
 import { BsThreeDots } from "react-icons/bs";
 import { DataGrid } from "@mui/x-data-grid";
 import { PaymentType } from "../../../APIs/Restaurant";
-import SearchBar from "../../../components/SeachBar";
+import TableHeader from "../tableHader";
+import Filter from "../../../utils/filters";
 
 const Branches = () => {
-  const [payments, setPayments] = useState([]);
+  const [Payments, setPayments] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [filtredPayments, setFiltredPayments] = useState([]);
 
   async function fechPayments() {
     setIsLoading(true);
     const response = await PaymentType.get();
     if (response.success) {
       setPayments(response.payload);
+      setFiltredPayments(response.payload);
     }
     setIsLoading(false);
   }
@@ -33,12 +36,21 @@ const Branches = () => {
     },
   ];
 
+  function filterPayments(e) {
+    const name = e.target.value;
+    const $filtredPayments = Filter.byName(Payments, name);
+    setFiltredPayments($filtredPayments);
+  }
+
   return (
     <div className="bg-white h-full">
-      <SearchBar title="Payment Type List" />
+      <TableHeader
+        title="Payment Type List"
+        handleSearchChange={filterPayments}
+      />
       <div className="w-full h-[370px] px-4 py-4 ">
         <DataGrid
-          rows={payments}
+          rows={filtredPayments}
           columns={columns}
           initialState={{
             pagination: {

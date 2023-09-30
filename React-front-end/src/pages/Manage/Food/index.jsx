@@ -1,19 +1,23 @@
-import { BsThreeDots } from "react-icons/bs";
-import TableHeader from "./tableHader";
-
-import { DataGrid } from "@mui/x-data-grid";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { BsThreeDots } from "react-icons/bs";
+import { DataGrid } from "@mui/x-data-grid";
+import TableHeader from "../tableHader";
 
 import { Food } from "../../../APIs/Food";
 
 const FoodItems = () => {
-  const [foods, setFoods] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [foods, setFoods] = useState([]);
+  const [filtredFoods, setFiltredFoods] = useState([]);
 
   async function fetchFood() {
     setIsLoading(true);
     const response = await Food.get();
-    if (response.success) setFoods(response.payload);
+    if (response.success) {
+      setFoods(response.payload);
+      setFiltredFoods(response.payload);
+    }
     setIsLoading(false);
   }
   useEffect(() => {
@@ -47,13 +51,40 @@ const FoodItems = () => {
     },
   ];
 
+  const naviagate = useNavigate();
+
+  function handleAddNewFood() {
+    naviagate("add-food");
+  }
+
+  function filterFoodItems(e) {
+    const name = e.target.value;
+    let $filtredFoods = [...foods];
+
+    if (name) {
+      const filtredByName = foods.filter((food) => {
+        const namePattern = new RegExp(name, "i");
+        return namePattern.test(food.name);
+      });
+
+      $filtredFoods = [...filtredByName];
+    }
+
+    setFiltredFoods($filtredFoods);
+  }
+
   return (
     <div className="bg-white h-full">
-      <TableHeader label="Items List" />
+      <TableHeader
+        title="Items List"
+        onAddNew={handleAddNewFood}
+        handleSearchChange={filterFoodItems}
+        placeholder="search by name"
+      />
       <div className="w-full h-[400px] bg-white px-4 py-8 mt-3">
         <DataGrid
           rowHeight={80}
-          rows={foods.map((row, i) => ({
+          rows={filtredFoods.map((row, i) => ({
             _index: i + 1,
             ...row,
           }))}
