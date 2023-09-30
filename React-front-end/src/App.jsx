@@ -30,15 +30,14 @@ import DepTags from "./pages/Manage/Restaurant/depTags";
 import Payments from "./pages/Manage/Restaurant/payments";
 import Tables from "./pages/Manage/Restaurant/tables";
 
-// stores
-import { Provider } from "react-redux";
-import store from "./stores/index";
+import LoadingContext from "./context/LoadingContext";
 
 function App() {
   return (
-    <Provider store={store}>
-      <AuthProvider>
-        <Routes>
+    <AuthProvider>
+      <Routes>
+        {/* Auth loader */}
+        <Route element={<LoadingContext />}>
           <Route path="/" element={<HomePage />} />
           <Route element={<ProtectedRoutesToUsers />}>
             <Route path="/login" element={<LoginPage />} />
@@ -70,12 +69,11 @@ function App() {
                 </Route>
               </Route>
             </Route>
-
             <Route path="/update-user-profile" element={<UpdatePassPage />} />
           </Route>
-        </Routes>
-      </AuthProvider>
-    </Provider>
+        </Route>
+      </Routes>
+    </AuthProvider>
   );
 }
 

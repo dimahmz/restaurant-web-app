@@ -1,13 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
+const userProfile = {
+  name: "",
+  email: "",
+  id: null,
+  isLoggedIn: false,
+};
 export const userSlice = createSlice({
   name: "user",
   initialState: {
-    userProfile: {
-      name: "",
-      email: "",
-      id: null,
-      isLoggedIn: false,
-    },
+    userProfile,
     isLoading: false,
   },
 
@@ -31,6 +32,12 @@ export const userSlice = createSlice({
     update_loading: (state, action) => {
       state.isLoading = action.payload;
     },
+
+    log_out_user: (state) => {
+      Object.keys(state.userProfile).forEach((key) => {
+        if (userProfile[key]) state[key] = userProfile[key];
+      });
+    },
   },
 });
 
@@ -39,6 +46,7 @@ export const {
   update_login_state,
   set_user_profile,
   update_loading,
+  log_out_user,
 } = userSlice.actions;
 
 export default userSlice.reducer;

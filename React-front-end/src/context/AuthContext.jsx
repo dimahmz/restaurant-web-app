@@ -16,23 +16,25 @@ export default function AuthProvider({ children }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  // fetch the user if he is authenticated
+  const fetchUser = async () => {
+    if (!ManageCookies.getCookie("authorization_token")) {
+      resetAuthState();
+      return;
+    }
+
+    dispatch(update_loading(true));
+    const response = await User.getUser();
+
+    response.success ? setAuthState(response.payload) : resetAuthState();
+
+    dispatch(update_loading(false));
+  };
+
   // fetch the user data when the component (page) is mounted
   useEffect(() => {
     fetchUser();
   }, []);
-
-  // fetch the user if he is authenticated
-  const fetchUser = async () => {
-    dispatch(update_loading(true));
-    if (!ManageCookies.getCookie("authorization_token")) {
-      dispatch(update_login_state(false));
-      return;
-    }
-
-    const response = await User.getUser();
-
-    response.success ? setAuthState(response.payload) : resetAuthState();
-  };
 
   //to authenticate a user
   async function AuthenticateUser(userInfo, rememberUser) {
@@ -57,19 +59,20 @@ export default function AuthProvider({ children }) {
   const resetAuthState = () => {
     dispatch(update_login_state(false));
     ManageCookies.removeCookie("authorization_token");
-    dispatch(update_loading(false));
   };
 
   const setAuthState = (userData) => {
     dispatch(update_login_state(true));
     dispatch(set_user_profile(userData));
-    dispatch(update_loading(false));
   };
 
   // to log out the user
   async function LogoutUser() {
+    dispatch(update_loading(true));
     const response = await User.logOut();
     if (response.success) resetAuthState();
+    dispatch(update_loading(false));
+
     navigate("/");
   }
 
