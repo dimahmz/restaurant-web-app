@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import SnackBar from "../../components/snackBar";
 import getResponseMessage from "../../utils/getResponse";
 import User from "../../APIs/User";
+import { LoadingButton } from "@mui/lab";
 
 const SignUpPage = () => {
   const navigate = useNavigate();
@@ -10,7 +11,10 @@ const SignUpPage = () => {
   const [errorMsg, setErrorMsg] = useState("");
   const [open, setOpen] = useState(false);
 
+  const [isLoading, setLoading] = useState(false);
+
   async function registerNewUser(e) {
+    setLoading(true);
     e.preventDefault();
     //
     const name = document.forms[0].elements.name.value,
@@ -23,6 +27,8 @@ const SignUpPage = () => {
     const userData = { name, email, password, phone, password_confirmation };
 
     const response = await User.registerUser(userData);
+
+    setLoading(false);
 
     if (response.success) {
       navigate("/login");
@@ -42,23 +48,20 @@ const SignUpPage = () => {
         handleClose={() => {
           setOpen(false);
         }}
-        sx={{
-          background: "#de222a",
-          color: "#fff",
-        }}
+        sx={{ background: "#de222a", color: "#fff", marginBottom: "50px" }}
       />
       <div className="bg-[#d4d4d8] h-screen">
         <div className="max-w-[1320px] m-auto px-4 flex flex-col">
           <div className="px-2  justify-between w-[50%] ">
-            <div className="relative max-w-[130px] h-[50px] ml-4 mt-0 md:mt-12">
+            <div className="relative max-w-[130px] h-[50px] ml-4 mt-0">
               <span>
-                <a href="/">
+                <Link to="/">
                   <img
                     className="w-[90px]"
                     src="https://khadyo.softtechdemo.com/public/images/logo/1685847152-jcris-system-logopng.png"
                     alt=""
                   />
-                </a>
+                </Link>
               </span>
             </div>
           </div>
@@ -119,25 +122,30 @@ const SignUpPage = () => {
                     />
                   </div>
                   <div>
-                    <button
-                      type="submit"
-                      className="cursor-pointer py-2 px-4 rounded-sm text-white bg-[#0dd19d] hover:bg-[#0e735b]"
+                    <LoadingButton
+                      sx={{
+                        paddingX: "30px",
+                        backgroundColor: "#0dd19d",
+                        "&:hover": {
+                          backgroundColor: "#0e735b",
+                        },
+                      }}
+                      size="small"
+                      onClick={registerNewUser}
+                      loading={isLoading}
+                      loadingPosition="center"
+                      variant="contained"
                     >
-                      SIGN UP
-                    </button>
+                      <span>SIGN UP</span>
+                    </LoadingButton>
                   </div>
                   <div className="mb-4 mt-4">
-                    <span>
+                    <p>
                       Already have an account?&nbsp;&nbsp;
-                      <a
-                        className=" cursor-pointer hover:text-[#96353f]"
-                        href="/login"
-                      >
-                        <span className=" cursor-pointer hover:text-[#96353f]">
-                          Sing In
-                        </span>
-                      </a>
-                    </span>
+                      <Link to="/login">
+                        <span className="hover:text-[#f64e60]">Sing in</span>
+                      </Link>
+                    </p>
                   </div>
                 </form>
               </div>

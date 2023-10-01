@@ -3,7 +3,7 @@ const userProfile = {
   name: "",
   email: "",
   id: null,
-  isLoggedIn: false,
+  isLoggedIn: true,
 };
 export const userSlice = createSlice({
   name: "user",

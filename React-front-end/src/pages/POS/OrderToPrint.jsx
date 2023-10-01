@@ -28,9 +28,9 @@ export const ComponentToPrint = forwardRef((props, ref) => {
             ...lineStyle,
           }}
         />
-        <h1 className="text-center">TOKEN NO : {order.id || "-"}</h1>
+        <h1 className="text-center">TOKEN NO : {order?.id || "-"}</h1>
 
-        <h1>Date : {getDate(order.created_at)} </h1>
+        <h1>Date : {getDate(order?.created_at)} </h1>
         <table className="w-full">
           <thead>
             <tr>
@@ -52,7 +52,7 @@ export const ComponentToPrint = forwardRef((props, ref) => {
                   )}
                 </td>
                 <td className="">
-                  {`${$order_food?.food.price}  DH` || " - "}
+                  {`${$order_food?.food?.price}  DH` || " - "}
                 </td>
               </tr>
             ))}
