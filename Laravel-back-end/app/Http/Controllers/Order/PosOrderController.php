@@ -49,7 +49,7 @@ class PosOrderController extends Controller
                 //     }
                 // }
         }
-        $order = Order::with('branch','user','order_food.food' , 'order_food.variation')->find($order->id);
+        $order = Order::with('branch','user','order_food.food', 'payment_type' , 'order_food.variation')->find($order->id);
         return $this::success($order, "Order has been taken");
     }
     // --------- read ----------

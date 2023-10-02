@@ -6,6 +6,7 @@ use App\Models\User\User;
 use App\Models\Foods\Food;
 use App\Models\Orders\OrderFood;
 use App\Models\Restaurant\Branch;
+use App\Models\Restaurant\PaymentType;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -28,6 +29,10 @@ class Order extends Model
 
     public function user(){
         return $this->belongsTo(User::class);
+    }
+
+    public function payment_type(){
+        return $this->belongsTo(PaymentType::class);
     }
     protected $guarded =["id"];
 }

@@ -15,7 +15,7 @@ class OrderController extends Controller
     //
     function getById($id)
     {
-        $order = Order::with('branch','user','order_food.food' , 'order_food.variation')->find($id);
+        $order = Order::with('branch','user',"payment_type", 'order_food.food' , 'order_food.variation')->find($id);
         return $this::success($order);
     }
     function get(Request $request)
@@ -27,7 +27,7 @@ class OrderController extends Controller
 
         if($status_param) $query->where("status" , "=" , $status_param);
         
-        $orders = $query->with('order_food.food','order_food.variation' )->get();
+        $orders = $query->with('order_food.food','order_food.variation' , 'payment_type')->get();
 
         return $this::success($orders);
     }

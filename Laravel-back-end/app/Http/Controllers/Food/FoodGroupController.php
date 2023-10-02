@@ -16,7 +16,7 @@ class FoodGroupController extends Controller
     {
         $request->validate(['name' => 'required|string']);
         $food_group = FoodGroup::create(["name" => $request->name]);
-        return $this::success($food_group);
+        return $this::success($food_group , "Food goup has been added");
     }
     // --------- read ----------
     function get()
@@ -42,7 +42,7 @@ class FoodGroupController extends Controller
 
         $food_group->delete();
 
-        return $this::success(null, 'Deleted');
+        return $this::success(null, 'Group has been deleted');
     }
 
 }

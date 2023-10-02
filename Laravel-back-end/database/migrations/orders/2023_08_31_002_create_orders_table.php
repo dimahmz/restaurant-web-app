@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId("branch_id")->nullable()->constrained(table: "branches")->nullOnDelete();
             $table->foreignId("user_id")->nullable()->nullOnDelete();
             $table->foreignId("table_id")->nullable()->nullOnDelete();
+            $table->foreignId("payment_id")->nullable()->constrained(table: "payment_types")->nullOnDelete();
             $table->enum('status', ['pending', 'accepted', 'ready'])->default("pending");
             $table->string("delivery_address")->nullable();
             $table->string("delivery_time")->default("30 min")->nullable();
