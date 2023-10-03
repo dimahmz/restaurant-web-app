@@ -34,7 +34,7 @@ class OrderController extends Controller
     function getKitchenOrders()
     {
 
-        $orders = Order::with('order_food.food','order_food.variation' )->whereIn("status",["pending" , "accepted"])->orderBy('created_at' , 'desc')->get();
+        $orders = Order::with('order_food.food','order_food.variation', 'branch' )->whereIn("status",["pending" , "accepted"])->orderBy('created_at' , 'desc')->get();
 
         return $this::success($orders);
     }
@@ -55,6 +55,13 @@ class OrderController extends Controller
 
     }
 
+
+    function delete($id) {
+        $order = Order::find($id);
+        if (!$order) return $this::error(null, "Order whih this Id doesn't exist", 404);
+        $order->delete();
+        return $this::success(null, 'Deleted');
+    }
 
 
 

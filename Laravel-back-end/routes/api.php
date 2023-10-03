@@ -50,8 +50,8 @@ Route::delete('/food', [FoodController::class, 'delete']);
 // food groups
 Route::get('/food_groups', [FoodGroupController::class, 'get']);
 Route::post('/food_groups', [FoodGroupController::class, 'post']);
-Route::put('/food_groups', [FoodGroupController::class, 'put']);
-Route::delete('/food_groups', [FoodGroupController::class, 'delete']);
+Route::put('/food_group/{id}', [FoodGroupController::class, 'put']);
+Route::delete('/food_group/{id}', [FoodGroupController::class, 'delete']);
 // food properties
 Route::get('/food_properties', [PropertyController::class, 'get']);
 Route::post('/food_properties', [PropertyController::class, 'post']);
@@ -68,7 +68,6 @@ Route::delete('/food_variations', [VariationController::class, 'delete']);
 // Online
 Route::get('/online_orders', [OnlineOrderController::class, 'get']);
 Route::post('/online_order', [OnlineOrderController::class, 'post']);
-Route::delete('/online_order', [OnlineOrderController::class, 'delete']);
 
 // point of sell
 Route::get('/pos_orders', [PosOrderController::class, 'get']);
@@ -82,6 +81,7 @@ Route::get('/order/{id}', [OrderController::class, 'getById']);
 Route::get('/orders', [OrderController::class, 'get']);
 Route::get('/orders/kitchen', [OrderController::class, 'getKitchenOrders']);
 Route::put('/order/{id}', [OrderController::class, 'put']);
+Route::delete('/order/{id}', [OrderController::class, 'delete']);
 
 
     // ------- Stock ----------
