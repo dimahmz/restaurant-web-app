@@ -3,6 +3,7 @@ import KitchenHeader from "./Header";
 import OrderBox from "./OrderBox";
 import Order from "../../APIs/Orders";
 import { CircularProgress } from "@mui/material";
+import Filter from "../../utils/filters";
 
 const KitchenPage = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -27,16 +28,12 @@ const KitchenPage = () => {
   // filter the data based on the header search inputs
   function onFilter({ branchId, id }) {
     let $filteredRows = [...orders];
-    if (id) {
-      const filtredByID = orders.filter((order) => order.id == id);
-      $filteredRows = [...filtredByID];
-    }
-    if (branchId) {
-      const filtredByBranch = orders.filter(
-        (order) => order.branch_id == branchId
-      );
-      $filteredRows = [...filtredByBranch];
-    }
+
+    const filtredById = Filter.byId($filteredRows, id);
+    $filteredRows = [...filtredById];
+
+    const filtredByBranch = Filter.byBranchId($filteredRows, branchId);
+    $filteredRows = [...filtredByBranch];
 
     setFiltredOrders($filteredRows);
   }

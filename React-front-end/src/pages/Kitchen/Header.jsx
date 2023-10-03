@@ -1,7 +1,7 @@
 import { Button, FormControl, MenuItem, Select } from "@mui/material";
 import { useEffect, useState } from "react";
-import { BiSearch } from "react-icons/bi";
 import { Branch } from "../../APIs/Restaurant";
+import SearchInput from "../../components/SearchInput";
 
 const KitchenHeader = ({ onRefrechOrder, handleFilter }) => {
   const [branches, setBranches] = useState([]);
@@ -23,7 +23,6 @@ const KitchenHeader = ({ onRefrechOrder, handleFilter }) => {
       branchId: selectedBranchId,
       id: serachId,
     });
-    console.log(selectedBranchId);
   }, [selectedBranchId, serachId]);
 
   return (
@@ -69,17 +68,10 @@ const KitchenHeader = ({ onRefrechOrder, handleFilter }) => {
             ))}
           </Select>
         </FormControl>
-        <div className="flex-center">
-          <input
-            className="bg-[#f0f7fb] px-2 text-[#49505] text-xs h-[36px] focus:outline-none"
-            type="text"
-            placeholder="Search By Token"
-            onChange={(e) => setSerachId(e.target.value)}
-          />
-          <div className="bg-[#f64e60] p-2 h-9 w-9 flex-center">
-            <BiSearch size={15} className="text-white" />
-          </div>
-        </div>
+        <SearchInput
+          placeholder="Search By Token"
+          onChange={(e) => setSerachId(e.target.value)}
+        />
       </div>
     </header>
   );

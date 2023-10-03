@@ -2,6 +2,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
+import { LoadingButton } from "@mui/lab";
 
 const style = {
   position: "absolute",
@@ -15,11 +16,12 @@ const style = {
   p: 4,
 };
 
-export default function BasicModal({
+export default function ConfirmModal({
   labels,
   open,
   onSubmitModal,
   handleClose,
+  isLoading = false,
 }) {
   return (
     <div>
@@ -37,7 +39,7 @@ export default function BasicModal({
             {labels.message}
           </Typography>
           <div className="flex space-x-8 mt-5">
-            <Button
+            <LoadingButton
               variant="contained"
               sx={{
                 paddingX: "30px",
@@ -46,10 +48,12 @@ export default function BasicModal({
                   backgroundColor: "#F5365A",
                 },
               }}
+              loading={isLoading}
+              loadingPosition="center"
               onClick={onSubmitModal}
             >
               {labels.submit}
-            </Button>
+            </LoadingButton>
             <Button
               variant="contained"
               sx={{

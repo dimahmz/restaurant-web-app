@@ -48,7 +48,6 @@ const AddNewItemPage = () => {
     setPrice("");
     setName("");
     setVariationsIDs([]);
-    resetSelect();
   }
 
   useEffect(() => {

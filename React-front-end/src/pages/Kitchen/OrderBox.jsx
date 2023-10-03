@@ -1,7 +1,7 @@
 import { Button } from "@mui/material";
 import Order from "../../APIs/Orders";
-import { useState } from "react";
-import AppModal from "../../components/Modal";
+import { useEffect, useState } from "react";
+import AppModal from "../../components/ConfirmModal";
 import "./index.css";
 import getDate from "../../utils/getTime";
 import { LoadingButton } from "@mui/lab";
@@ -15,6 +15,10 @@ const OrderBoxItem = ({ order, onRefrechOrder }) => {
   // const [status, setStatus] = useState("pending");
 
   const handleOpen = () => setOpen(true);
+
+  useEffect(() => {
+    setOrder(order);
+  }, [order]);
 
   //@TO_FIX
   // refresh may finish before changing the status

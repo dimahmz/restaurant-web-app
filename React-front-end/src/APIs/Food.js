@@ -54,18 +54,39 @@ export class Group {
       return e.response.data;
     }
   }
-
   static async getGroupFood() {
     try {
       const resp = await axios.get("/groups/foods");
       return resp.data;
     } catch (e) {
+      return e?.response?.data;
+    }
+  }
+
+  static async create(name) {
+    try {
+      const resp = await axios.post("/food_groups", { name });
+      return resp.data;
+    } catch (e) {
       return e.response.data;
     }
   }
-  static async create() {}
-  static async update() {}
-  static async delete() {}
+  static async delete(id) {
+    try {
+      const resp = await axios.delete(`/food_group/${id}`);
+      return resp.data;
+    } catch (e) {
+      return e.response.data;
+    }
+  }
+  static async update(id, name) {
+    try {
+      const resp = await axios.put(`/food_group/${id}`, { name });
+      return resp.data;
+    } catch (e) {
+      return e.response.data;
+    }
+  }
 }
 
 export class Variation {

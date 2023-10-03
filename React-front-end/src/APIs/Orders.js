@@ -1,10 +1,5 @@
 import axios from "../utils/axios";
 
-const ServerError = {
-  success: false,
-  message: "a server error pleaser try again later",
-};
-
 export default class Order {
   static async getOneOrder(id) {
     try {
@@ -37,6 +32,14 @@ export default class Order {
       const resp = await axios.put(`/order/${id}`, {
         status,
       });
+      return resp.data;
+    } catch (e) {
+      return e.response.data;
+    }
+  }
+  static async delete(id) {
+    try {
+      const resp = await axios.delete(`/order/${id}`);
       return resp.data;
     } catch (e) {
       return e.response.data;
@@ -78,9 +81,6 @@ export class OnlineOrder extends Order {
       delivery_address = $order.order_delivery_address,
       subtotal = $order.order_subtotal,
       total_bill = $order.order_total_bill,
-      // property_items
-      // [{id : 1 , {quantity : 3}}]
-      // property_items : $order.order_propery_items.map(()=> )
       note = $order.order_note_to_rider;
     try {
       const resp = await axios.post("/online_order", {
@@ -121,18 +121,6 @@ export class OnlineOrder extends Order {
       return resp.data;
     } catch (e) {
       return e.response.data;
-    }
-  }
-  // delete order
-  static async delete(id) {
-    try {
-      const resp = await axios.delete("/online_order", {
-        data: { id },
-      });
-      return resp.data;
-    } catch (e) {
-      if (e.response) return e.response.data;
-      return ServerError;
     }
   }
 }

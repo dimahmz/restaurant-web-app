@@ -44,9 +44,7 @@ const FoodItems = () => {
     {
       field: "no_field",
       headerName: "Action",
-      renderCell: () => (
-        <BsThreeDots onClick="" style={{ cursor: "pointer" }} />
-      ),
+      renderCell: () => <BsThreeDots style={{ cursor: "pointer" }} />,
       flex: 1,
     },
   ];

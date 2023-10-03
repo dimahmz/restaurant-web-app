@@ -3,14 +3,16 @@ import { useLocation } from "react-router-dom";
 import SeachHeader from "./Header";
 import OrderDetailModal from "./OrderDetail";
 import SnackBar from "../../components/snackBar";
-import { OnlineOrder, PosOrder } from "../../APIs/Orders";
+import Order, { OnlineOrder, PosOrder } from "../../APIs/Orders";
 import { Modal } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
+import ConfirmModal from "../../components/ConfirmModal";
 import "./Pos_Online.css";
+import { getTime, getYearMonthDay } from "../../utils/getTime";
+import Filter from "../../utils/filters";
 
 const OnlineHistoryPage = () => {
   let location = useLocation();
-
   const [orders, setOrders] = useState([]);
   const [filteredRows, setFilteredRows] = useState([]);
   const [selectedOrder, setSelectedOrder] = useState(null);
@@ -18,6 +20,10 @@ const OnlineHistoryPage = () => {
   const [openNotification, setOpenNotification] = useState(false);
   const [errorMsg, setErrorMsg] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [isDetailLoading, setIDetailLoading] = useState(false);
+  const [isDeleteLoading, setisDeleteLoading] = useState(false);
+  const [openConfirmModal, setOpenConfirmModal] = useState(false);
+  const [orderIdToDelete, setOrderIdToDelete] = useState(null);
 
   // get orders
   async function getOrders() {
@@ -31,7 +37,7 @@ const OnlineHistoryPage = () => {
     setIsLoading(false);
 
     if (response.success) {
-      const $orders = setUpOrders(response.payload);
+      const $orders = response.payload;
       setOrders($orders);
       setFilteredRows($orders);
     } else {
@@ -44,26 +50,12 @@ const OnlineHistoryPage = () => {
     getOrders();
   }, [location]);
 
-  // edit each order with redable properties
-  function setUpOrders(orders) {
-    const $orders = orders.map((order) => {
-      const $Date = new Date(order.created_at);
-      order.date = `${$Date.getMonth()}-${$Date.getFullYear()}-${$Date.getDate()}`;
-      order.time = $Date.toLocaleTimeString([], {
-        hour: "2-digit",
-        minute: "2-digit",
-        hour12: true,
-      });
-      order._branch = order.branch.name;
-
-      return order;
-    });
-    return $orders;
-  }
-
   // delete an order
-  async function deleteOrder(id) {
-    const response = await OnlineOrder.delete(id);
+  async function deleteOrder() {
+    setisDeleteLoading(true);
+    const response = await Order.delete(orderIdToDelete);
+    setisDeleteLoading(false);
+    setOpenConfirmModal(false);
     if (response.success) {
       await getOrders();
     } else {
@@ -83,30 +75,26 @@ const OnlineHistoryPage = () => {
   // filter the data based on the search header inputs
   function filterChange({ branchId, id }) {
     let $filteredRows = [...orders];
-    if (branchId) {
-      const filtredByBranch = orders.filter(
-        (order) => order.branch.id == branchId
-      );
-      $filteredRows = [...filtredByBranch];
-    }
-    if (id) {
-      const filtredByName = orders.filter((order) => order.id == id);
-      $filteredRows = [...filtredByName];
-    }
+    const filtredById = Filter.byId($filteredRows, id);
+    $filteredRows = [...filtredById];
+    const filtredByBranchId = Filter.byBranchId($filteredRows, branchId);
+    $filteredRows = [...filtredByBranchId];
     setFilteredRows($filteredRows);
   }
 
   // dipaly an order detail
   async function orderModelDetail(id) {
+    setOpenModal(true);
+    setIDetailLoading(true);
     const resp = await PosOrder.getOneOrder(id);
+    setIDetailLoading(false);
     if (!resp.success) {
       window.alert("Order not found, please try again later");
       return;
     }
     setSelectedOrder(resp.payload);
-    setOpenModal(true);
-    console.log(resp.payload);
   }
+
   const columns = [
     { field: "_index", headerName: "S/L", flex: 1 },
     {
@@ -117,21 +105,30 @@ const OnlineHistoryPage = () => {
         <span className="text-[#158DF7]">{"#" + params.row.id}</span>
       ),
     },
-    { field: "date", headerName: "Date", flex: 1 },
-    { field: "time", headerName: "Time", flex: 1 },
     {
-      field: "user",
-      headerName: "Customer",
-      valaueGetter: () => "hi",
+      field: "_time",
+      headerName: "Time",
+      valueGetter: (params) => getTime(params.row.created_at),
+      flex: 1,
+    },
+    {
+      field: "_date",
+      headerName: "Date",
+      valueGetter: (params) => getYearMonthDay(params.row.created_at),
       flex: 1,
     },
     {
       field: "total_bill",
       headerName: "Totall Bill",
-      valaueGetter: (params) => params.row.total_bill + " DH",
+      valueGetter: (params) => params.row.total_bill + " DH",
       flex: 1,
     },
-    { field: "_branch", headerName: "Branch", flex: 1 },
+    {
+      field: "_branch",
+      headerName: "Branch",
+      valueGetter: (params) => params.row.branch.name,
+      flex: 1,
+    },
     {
       field: "status",
       headerName: "Status",
@@ -155,7 +152,10 @@ const OnlineHistoryPage = () => {
         <button
           className="bg-red-400 text-white py-1 px-2 rounded"
           style={{ cursor: "pointer" }}
-          onClick={() => deleteOrder(params.row.id)}
+          onClick={() => {
+            setOpenConfirmModal(true);
+            setOrderIdToDelete(params.row.id);
+          }}
         >
           delete
         </button>
@@ -172,6 +172,17 @@ const OnlineHistoryPage = () => {
         handleClose={() => {
           setOpenNotification(false);
         }}
+      />
+      <ConfirmModal
+        labels={{
+          message: "You want to delete this group?",
+          cancel: "No",
+          submit: "Delete",
+        }}
+        open={openConfirmModal}
+        handleClose={() => setOpenConfirmModal(false)}
+        onSubmitModal={deleteOrder}
+        isLoading={isDeleteLoading}
       />
 
       <div className="bg-gray-200 h-screen ">
@@ -190,14 +201,18 @@ const OnlineHistoryPage = () => {
             }}
           >
             <DataGrid
+              sx={{
+                height: 340,
+                "& .MuiDataGrid-cell:focus": {
+                  outline: "none",
+                  border: "none",
+                },
+              }}
               rows={filteredRows.map((row, i) => ({
                 _index: i + 1,
                 ...row,
               }))}
               columns={columns}
-              sx={{
-                height: 340,
-              }}
               initialState={{
                 pagination: {
                   paginationModel: { page: 0, pageSize: 5 },
@@ -212,7 +227,10 @@ const OnlineHistoryPage = () => {
             open={openModal}
             onClose={() => setOpenModal(false)}
           >
-            <OrderDetailModal selectedOrder={selectedOrder} />
+            <OrderDetailModal
+              selectedOrder={selectedOrder}
+              isDetailLoading={isDetailLoading}
+            />
           </Modal>
         </div>
       </div>

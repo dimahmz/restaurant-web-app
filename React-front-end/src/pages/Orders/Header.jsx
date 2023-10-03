@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import "react-datepicker/dist/react-datepicker.css";
-import { BiSearch } from "react-icons/bi";
 import { MenuItem, FormControl, Select } from "@mui/material";
 import { Branch } from "../../APIs/Restaurant";
-import "./Header.css";
 import { useLocation } from "react-router-dom";
+import SearchInput from "../../components/SearchInput";
+import "./Header.css";
 
 const TableHeader = ({ onSearchChange, branchChange }) => {
   const [branch, setBranch] = useState("");
@@ -61,17 +60,10 @@ const TableHeader = ({ onSearchChange, branchChange }) => {
       </h1>
       <div className="flex-center-between">
         <div className="flex items-center space-x-10 px-4 py-2">
-          <div className="flex-center">
-            <div className="bg-[#f64e60] p-2 h-9 w-9 flex-center">
-              <BiSearch size={15} className="text-white" />
-            </div>
-            <input
-              className="bselectedBranchIdg-[#f0f7fb] px-2 text-[#49505] text-xs h-[36px] focus:outline-none"
-              type="text"
-              placeholder="Search By Token"
-              onChange={(e) => handleInputChange(e.target.value)}
-            />
-          </div>
+          <SearchInput
+            placeholder="Search By Token"
+            onChange={(e) => handleInputChange(e.target.value)}
+          />
           <FormControl sx={{ width: "180px" }}>
             <Select
               value={branch}
