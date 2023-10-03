@@ -1,10 +1,15 @@
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { UseAuth } from "../../context/AuthContext";
 
 const HeaderHome = () => {
   const isUserAuthenticated = useSelector(
     (state) => state.user.userProfile.isLoggedIn
   );
+  const userRole = useSelector((state) => state.user.userProfile.role_id);
+
+  const { LogoutUser } = UseAuth();
+
   return (
     <div className="relative bg-[#131313]">
       <header id="home" className=" pt-5 mb-32 bg-transparent">
@@ -62,11 +67,20 @@ const HeaderHome = () => {
               </div>
               <div className="flex">
                 {isUserAuthenticated ? (
-                  <Link to="/dashboard">
-                    <button className="bg-[#cc3333] px-7 py-3  text-white text-xl md:text-2xl hover:bg-transparent hover:text-[#cc3333] border border-[#cc3333] text-center rounded-md ">
-                      Dashboard
+                  userRole == 1 ? (
+                    <Link to="/dashboard">
+                      <button className="bg-[#cc3333] px-7 py-3  text-white text-xl md:text-2xl hover:bg-transparent hover:text-[#cc3333] border border-[#cc3333] text-center rounded-md ">
+                        Dashboard
+                      </button>
+                    </Link>
+                  ) : (
+                    <button
+                      onClick={LogoutUser}
+                      className="bg-[#cc3333] px-7 py-3  text-white text-xl md:text-2xl hover:bg-transparent hover:text-[#cc3333] border border-[#cc3333] text-center rounded-md "
+                    >
+                      Log Out
                     </button>
-                  </Link>
+                  )
                 ) : (
                   <Link to="/login">
                     <button className="bg-[#cc3333] px-4  text-white text-xl md:text-2xl hover:bg-transparent hover:text-[#cc3333] border border-[#cc3333] w-[140px] h-[52px] text-center rounded-md ">

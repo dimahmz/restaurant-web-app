@@ -12,7 +12,7 @@ const LoginPage = () => {
 
   const useAuth = UseAuth();
 
-  //l error message to display to the user
+  //error message to display to the user
   const [errorMsg, setErrorMsg] = useState(false);
   const [open, setOpen] = useState(false);
 

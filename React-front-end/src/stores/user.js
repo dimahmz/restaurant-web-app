@@ -4,6 +4,7 @@ const userProfile = {
   email: "",
   id: null,
   isLoggedIn: true,
+  role_id: null,
 };
 export const userSlice = createSlice({
   name: "user",
