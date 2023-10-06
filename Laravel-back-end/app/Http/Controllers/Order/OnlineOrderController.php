@@ -19,6 +19,7 @@ class OnlineOrderController extends Controller
         $order = Order::create([
             'branch_id' => $request->branch_id,
             'variation_id' => $request->variation_id,
+            'payment_id' => $request->payment_id,
             'food_id' => $request->food_id,
             'user_id' => $request->user_id,
             'quantity' => $request->quantity,

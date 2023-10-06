@@ -19,6 +19,7 @@ class PosOrderController extends Controller
         $order = Order::create([
             'branch_id' => $request->branch_id,
             'table_id' => $request->table_id,
+            'payment_id' => $request->payment_id,
             'user_id' => $request->user_id,
             'quantity' => $request->quantity,
             'subtotal' => $request->subtotal,

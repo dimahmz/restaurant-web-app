@@ -35,6 +35,11 @@ const Footer = () => {
   const table_id = useSelector(
     (state) => state.pointOfSalesOrders.selected_table_id
   );
+
+  const payment_id = useSelector(
+    (state) => state.pointOfSalesOrders.selected_payment_type_id
+  );
+
   const subtotal = useSelector((state) => state.pointOfSalesOrders.subtotal);
   const total_bill = useSelector(
     (state) => state.pointOfSalesOrders.total_bill
@@ -99,6 +104,7 @@ const Footer = () => {
     $posOrder.branch_id = branch_id;
     $posOrder.table_id = table_id;
     $posOrder.user_id = user.id;
+    $posOrder.payment_id = payment_id;
 
     dispatch(set_loading(true));
 

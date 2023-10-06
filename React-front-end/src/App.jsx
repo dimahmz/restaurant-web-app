@@ -29,6 +29,7 @@ import Branches from "./pages/Manage/Restaurant/Branches";
 import DeptTags from "./pages/Manage/Restaurant/DeptTags";
 import Payments from "./pages/Manage/Restaurant/PaymentsTypes";
 import Tables from "./pages/Manage/Restaurant/Tables";
+import Items from "./pages/Manage/Food/Items";
 
 import LoadingContext from "./context/LoadingContext";
 
@@ -55,7 +56,7 @@ function App() {
                 <Route path="kitchen" element={<Kichen />} />
                 <Route path="manage" element={<ManagePage />}>
                   <Route path="food">
-                    {/* <Route index element={<Food />} /> */}
+                    <Route index element={<Items />} />
                     {/* <Route path="add-food" element={<AddFood />} /> */}
                     <Route path="groups" element={<Groups />} />
                     <Route path="variations" element={<Variations />} />

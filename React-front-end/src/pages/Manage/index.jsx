@@ -1,6 +1,6 @@
 import { NavLink, Outlet } from "react-router-dom";
 import { useState } from "react";
-import "./index.css";
+import "./style//index.css";
 
 const SubPages = [
   {

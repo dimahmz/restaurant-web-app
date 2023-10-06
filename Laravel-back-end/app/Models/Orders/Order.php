@@ -32,7 +32,7 @@ class Order extends Model
     }
 
     public function payment_type(){
-        return $this->belongsTo(PaymentType::class);
+        return $this->belongsTo(PaymentType::class, "payment_id");
     }
     protected $guarded =["id"];
 }

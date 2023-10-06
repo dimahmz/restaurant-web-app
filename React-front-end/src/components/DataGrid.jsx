@@ -1,8 +1,14 @@
 import { DataGrid } from "@mui/x-data-grid";
 
-export default function CustomDataGrid({ isLoading, columns, filteredRows }) {
+export default function CustomDataGrid({
+  isLoading,
+  columns,
+  filteredRows,
+  props,
+}) {
   return (
     <DataGrid
+      {...props}
       sx={{
         "& .MuiDataGrid-cell:focus": {
           outline: "none",

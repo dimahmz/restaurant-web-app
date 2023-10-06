@@ -3,12 +3,13 @@ import { useDispatch } from "react-redux";
 import {
   update_branch,
   update_table,
+  update_payment_type,
   reset_selections,
 } from "../../stores/pointOfSale";
 import SelectOption from "../../components/SelectOption";
 import { useState } from "react";
 
-const Branch = ({ branches, tables }) => {
+const SelectSideBar = ({ branches, tables, pyamnetTypes }) => {
   const dispatch = useDispatch();
   const [value, setValue] = useState("");
 
@@ -39,6 +40,14 @@ const Branch = ({ branches, tables }) => {
             }}
           />
         </div>
+        <SelectOption
+          label="Payment type"
+          value={value}
+          options={pyamnetTypes}
+          onSelectOption={(id) => {
+            dispatch(update_payment_type(id));
+          }}
+        />
       </div>
       <div className="absolute bottom-[15px] w-full flex-center">
         <button
@@ -52,4 +61,4 @@ const Branch = ({ branches, tables }) => {
   );
 };
 
-export default Branch;
+export default SelectSideBar;

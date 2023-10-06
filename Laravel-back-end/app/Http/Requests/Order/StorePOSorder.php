@@ -22,6 +22,7 @@ class StorePOSorder extends FormRequest
             'order_food.*.food_property_items.*.property_item_id' => 'required|numeric',
             'order_food.*.food_property_items.*.quantity' => 'required|numeric',
             'branch_id' => 'required|numeric',
+            'payment_id' => 'required|numeric',
             'user_id' => 'required|numeric',
             'subtotal' => 'required|numeric',
             'total_bill' => 'required|numeric',

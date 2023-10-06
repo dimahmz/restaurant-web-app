@@ -28,6 +28,7 @@ export const pointOfSaleSlice = createSlice({
     ...initialState,
     selected_branch_id: null,
     selected_table_id: null,
+    selected_payment_type_id: null,
     show_response: false,
     response: { message: "", payload: {} },
     isLoading: false,
@@ -90,6 +91,12 @@ export const pointOfSaleSlice = createSlice({
     update_table: (state, action) => {
       state.selected_table_id = action.payload;
     },
+
+    // ------ selected Payment type  ---------
+    update_payment_type: (state, action) => {
+      state.selected_payment_type_id = action.payload;
+    },
+
     // ------ selected department tag  ---------
     update_dep_tag: (state, action) => {
       state.selected_dep_tag.name = action.payload.name;
@@ -122,6 +129,7 @@ export const pointOfSaleSlice = createSlice({
     reset_selections: (state) => {
       state.selected_branch_id = null;
       state.selected_table_id = null;
+      state.selected_payment_type_id = null;
     },
     reset_store: (state) => {
       Object.keys(state).forEach((key) => {
@@ -139,6 +147,7 @@ export const {
   modify_food_order,
   update_branch,
   update_table,
+  update_payment_type,
   update_dep_tag,
   set_response,
   set_show_response,

@@ -30,7 +30,11 @@ export const ComponentToPrint = forwardRef((props, ref) => {
         />
         <h1 className="text-center">TOKEN NO : {order?.id || "-"}</h1>
 
-        <h1>Date : {getDate(order?.created_at)} </h1>
+        <h1 className="py-2">Date : {getDate(order?.created_at)} </h1>
+        <h1 className="py-2">
+          Payment type: {order?.payment_type?.name || "-"}
+        </h1>
+
         <table className="w-full">
           <thead>
             <tr>

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { MdDelete, MdModeEdit } from "react-icons/md";
 import { DataGrid } from "@mui/x-data-grid";
 import { Branch, Table } from "../../../../APIs/Restaurant";
-import TableHeader from "../../tableHader";
+import TableHeader from "../../tableHeader";
 import Filter from "../../../../utils/filters";
 import DotsMenu from "../../../../components/dotsMenu";
 import { MenuItem } from "@mui/material";

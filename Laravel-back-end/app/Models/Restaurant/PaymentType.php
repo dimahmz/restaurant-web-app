@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class PaymentType extends Model
 {
+
+    protected $table = 'payment_types';
+
     use HasFactory;
 
     protected $guarded =["id"];

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import TableHeader from "../../tableHader";
+import TableHeader from "../../tableHeader";
 import { DataGrid } from "@mui/x-data-grid";
 import { MdDelete, MdModeEdit } from "react-icons/md";
 import { MenuItem } from "@mui/material";

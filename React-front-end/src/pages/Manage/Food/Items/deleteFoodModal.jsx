@@ -1,37 +1,44 @@
 import { useDispatch, useSelector } from "react-redux";
 import ConfirmDeleteModal from "../../../../components/ConfirmModal";
-import { toggle_delete_item_modal } from "../../../../stores/manageFood";
+import {
+  selectedFood,
+  toggle_delete_item_modal,
+} from "../../../../stores/manageFood";
 import { useState } from "react";
 import { Food } from "../../../../APIs/Food";
 
-export default function DeleteFoodItemModal({ refresh }) {
+export default function DeleteFoodModal({ refresh, serverResponse }) {
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
 
-  const selected_food = useSelector((state) => state.manageFood.selectedFood);
+  const $selectedFood = useSelector(selectedFood);
+
   const open = useSelector((state) => state.manageFood.openDeleteItemModal);
 
   function handleClose() {
-    dispatch(toggle_delete_item_modal(false));
+    dispatch(
+      toggle_delete_item_modal({
+        name: "openDeleteItemModal",
+        value: false,
+      })
+    );
   }
 
   async function deleteFood() {
     setIsLoading(true);
-    const response = await Food.delete(selected_food.id);
+    const response = await Food.delete($selectedFood.id);
+    serverResponse(response);
     if (response.success) {
-      await refresh();
+      refresh();
       setIsLoading(false);
-      dispatch(toggle_delete_item_modal(true));
-    } else {
-      window.alert("an error occurred please try again later");
+      handleClose();
     }
     setIsLoading(false);
-    handleClose();
   }
   return (
     <ConfirmDeleteModal
       labels={{
-        message: "You want to delete this food?",
+        message: "You want to delete this Food?",
         cancel: "No",
         submit: "Delete",
       }}

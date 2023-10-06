@@ -13,7 +13,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import Snackbar from "../../components/snackBar";
 import { CircularProgress } from "@mui/material";
-import { DeptTag, Table, Branch } from "../../APIs/Restaurant";
+import { DeptTag, Table, Branch, PaymentType } from "../../APIs/Restaurant";
 import { Group } from "../../APIs/Food";
 import getResponseMessage from "../../utils/getResponse";
 
@@ -28,9 +28,9 @@ const PosPage = () => {
   const [tables, setTables] = useState([]);
   const [foodGroups, setFoodGroups] = useState([]);
   const [foodGroupsLoading, setFoodGroupsLoading] = useState(false);
-
   const [commissions, setCommissions] = useState([]);
   const [commissionsLoading, setCommissionsLoading] = useState(false);
+  const [pyamnetTypes, setPaymentTypes] = useState([]);
 
   useEffect(() => {
     async function fetchFoods() {
@@ -61,10 +61,17 @@ const PosPage = () => {
         setTables(response.payload);
       }
     }
+    async function fetchPaymentTypes() {
+      let response = await PaymentType.get();
+      if (response.success) {
+        setPaymentTypes(response.payload);
+      }
+    }
     fetchCommissions();
     fetchFoods();
     fetchBranches();
     fetchTables();
+    fetchPaymentTypes();
   }, []);
 
   // ------ adding Items ----------
@@ -149,7 +156,11 @@ const PosPage = () => {
               </div>
 
               <div className="w-[135px] max-h-[70vh]">
-                <SelectSection branches={branches} tables={tables} />
+                <SelectSection
+                  branches={branches}
+                  tables={tables}
+                  pyamnetTypes={pyamnetTypes}
+                />
               </div>
             </div>
           </div>

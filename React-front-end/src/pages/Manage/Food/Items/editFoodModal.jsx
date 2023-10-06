@@ -3,7 +3,7 @@ import FormModal from "../../../../components/FormModal";
 import { TextField } from "@mui/material";
 import SelectOption from "../../../../components/SelectOption";
 import { Checkbox } from "@material-tailwind/react";
-import { toggle_edit_food_modal } from "../../../../stores/manageFood";
+// import { toggle_edit_food_modal } from "../../../../stores/manageFood";
 import { useState } from "react";
 
 export default function EditFoodModal({ foodGroups, refresh }) {
@@ -49,7 +49,7 @@ export default function EditFoodModal({ foodGroups, refresh }) {
     <FormModal
       labels={{ title: `Update ${selected_food.name}` }}
       open={openEditFoodModal}
-      handleClose={() => dispatch(toggle_edit_food_modal(false))}
+      // handleClose={() => dispatch(toggle_edit_food_modal(false))}
       onSubmitForm={updateFoodItem}
       isLoading={isLoading}
     >
