@@ -4,7 +4,7 @@ const userProfile = {
   email: "",
   id: null,
   isLoggedIn: true,
-  role_id: null,
+  role_id: 1,
 };
 export const userSlice = createSlice({
   name: "user",
@@ -14,10 +14,6 @@ export const userSlice = createSlice({
   },
 
   reducers: {
-    fetch_user: async () => {},
-
-    register_user: async () => {},
-
     set_user_profile: (state, action) => {
       Object.keys(action.payload).forEach((key) => {
         if (state.userProfile.hasOwnProperty(key)) {

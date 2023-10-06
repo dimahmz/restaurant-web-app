@@ -222,11 +222,7 @@ const OnlineHistoryPage = () => {
               loading={isLoading}
             />
           </div>
-          <Modal
-            className="overflow-y-auto"
-            open={openModal}
-            onClose={() => setOpenModal(false)}
-          >
+          <Modal open={openModal} onClose={() => setOpenModal(false)}>
             <OrderDetailModal
               selectedOrder={selectedOrder}
               isDetailLoading={isDetailLoading}

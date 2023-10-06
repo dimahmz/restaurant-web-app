@@ -15,7 +15,6 @@ const VariationPrice = ({ variations, onSelectOption }) => {
         $variation.price = price;
         return $variation;
       });
-      console.log(is_varaition_exists);
       if (!is_varaition_exists)
         variations_prices = [...prev, { variation_id: variation.id, price }];
 

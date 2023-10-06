@@ -28,7 +28,25 @@ export class Food {
     }
   }
   static async update() {}
-  static async delete() {}
+
+  static async updateImg({ image, id }) {
+    const form = new FormData();
+    form.append("image", image);
+    try {
+      const resp = await axios.post(`/food/img/${id}`, form);
+      return resp.data;
+    } catch (e) {
+      return e.response.data;
+    }
+  }
+  static async delete(id) {
+    try {
+      const resp = await axios.delete(`/food/${id}`);
+      return resp.data;
+    } catch (e) {
+      return e.response.data;
+    }
+  }
 }
 
 export class Property {
@@ -48,7 +66,7 @@ export class Property {
 export class Group {
   static async get() {
     try {
-      const resp = await axios.get("/food_groups");
+      const resp = await axios.get("/groups");
       return resp.data;
     } catch (e) {
       return e.response.data;
@@ -65,7 +83,7 @@ export class Group {
 
   static async create(name) {
     try {
-      const resp = await axios.post("/food_groups", { name });
+      const resp = await axios.post("/groups", { name });
       return resp.data;
     } catch (e) {
       return e.response.data;
@@ -73,15 +91,15 @@ export class Group {
   }
   static async delete(id) {
     try {
-      const resp = await axios.delete(`/food_group/${id}`);
+      const resp = await axios.delete(`/groups/${id}`);
       return resp.data;
     } catch (e) {
       return e.response.data;
     }
   }
-  static async update(id, name) {
+  static async update({ id, name }) {
     try {
-      const resp = await axios.put(`/food_group/${id}`, { name });
+      const resp = await axios.put(`/groups/${id}`, { name });
       return resp.data;
     } catch (e) {
       return e.response.data;
@@ -92,13 +110,36 @@ export class Group {
 export class Variation {
   static async get() {
     try {
-      const resp = await axios.get("/food_variations");
+      const resp = await axios.get("/variations");
       return resp.data;
     } catch (e) {
       return e.response.data;
     }
   }
-  static async create() {}
-  static async update() {}
-  static async delete() {}
+  static async create(name) {
+    try {
+      const resp = await axios.post("/variations", { name });
+      return resp.data;
+    } catch (e) {
+      return e.response.data;
+    }
+  }
+  static async update({ id, name }) {
+    console.log(name, id);
+    try {
+      const resp = await axios.put(`/variations/${id}`, { name });
+      return resp.data;
+    } catch (e) {
+      console.error(e);
+      return e.response.data;
+    }
+  }
+  static async delete(id) {
+    try {
+      const resp = await axios.delete(`/variations/${id}`);
+      return resp.data;
+    } catch (e) {
+      return e.response.data;
+    }
+  }
 }

@@ -152,10 +152,6 @@ export const {
   reset_selections,
 } = pointOfSaleSlice.actions;
 
-// const unsubscribe = pointOfSaleSlice.subscribe(() => {
-//   console.log("an action was invoked");
-// });
-// unsubscribe();
 export const store_order_food = (state) => state.pointOfSalesOrders.food_order;
 
 export default pointOfSaleSlice.reducer;

@@ -31,7 +31,6 @@ const ManageTables = () => {
       field: "branch_id",
       headerName: "Branch",
       valueGetter: (params) => {
-        // Calculate age in months based on the 'age' field in years
         return params.row.branch.name;
       },
       flex: 1,

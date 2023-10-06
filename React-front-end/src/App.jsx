@@ -10,10 +10,10 @@ import PosOnlineOrders from "./pages/Orders/Pos_Online";
 import Kichen from "./pages/Kitchen";
 // manage
 import ManagePage from "./pages/Manage";
-import Food from "./pages/Manage/Food";
-import Groups from "./pages/Manage/Food/groups";
-import AddFood from "./pages/Manage/Food/addFood";
-import Variations from "./pages/Manage/Food/variations";
+// import Food from "./pages/Manage/Food";
+import Groups from "./pages/Manage/Food/Goups";
+// import AddFood from "./pages/Manage/Food/addFood";
+import Variations from "./pages/Manage/Food/Variations";
 
 import UpdatePassPage from "./pages/Auth/UpdatePassPage";
 
@@ -25,10 +25,10 @@ import {
 import AuthProvider from "./context/AuthContext";
 import Layout from "./pages/Layout";
 // Restaurant
-import Branches from "./pages/Manage/Restaurant/branches";
-import DepTags from "./pages/Manage/Restaurant/depTags";
-import Payments from "./pages/Manage/Restaurant/payments";
-import Tables from "./pages/Manage/Restaurant/tables";
+import Branches from "./pages/Manage/Restaurant/Branches";
+import DeptTags from "./pages/Manage/Restaurant/DeptTags";
+import Payments from "./pages/Manage/Restaurant/PaymentsTypes";
+import Tables from "./pages/Manage/Restaurant/Tables";
 
 import LoadingContext from "./context/LoadingContext";
 
@@ -55,14 +55,14 @@ function App() {
                 <Route path="kitchen" element={<Kichen />} />
                 <Route path="manage" element={<ManagePage />}>
                   <Route path="food">
-                    <Route index element={<Food />} />
-                    <Route path="add-food" element={<AddFood />} />
+                    {/* <Route index element={<Food />} /> */}
+                    {/* <Route path="add-food" element={<AddFood />} /> */}
                     <Route path="groups" element={<Groups />} />
                     <Route path="variations" element={<Variations />} />
                   </Route>
                   <Route path="restaurant">
                     <Route path="branches" element={<Branches />} />
-                    <Route path="dpt-tags" element={<DepTags />} />
+                    <Route path="dpt-tags" element={<DeptTags />} />
                     <Route path="tables" element={<Tables />} />
                     <Route path="payments" element={<Payments />} />
                   </Route>

@@ -3,9 +3,9 @@ export default class Filter {
   static byName(records, name) {
     let filtredRecords = [...records];
     if (name) {
-      const filtredByName = records.filter((food) => {
+      const filtredByName = records.filter((row) => {
         const namePattern = new RegExp(name, "i");
-        return namePattern.test(food.name);
+        return namePattern.test(row.name);
       });
       filtredRecords = [...filtredByName];
     }
