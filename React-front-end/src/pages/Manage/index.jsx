@@ -21,14 +21,6 @@ const SubPages = [
       { name: "Payment Types", path: "restaurant/payments" },
     ],
   },
-  {
-    category: "Manage stock",
-    pages: [
-      { name: "Food Purchase", path: "restaurant/purchases" },
-      { name: "Purchase History", path: "restaurant/food-purchase" },
-      { name: "Manange Supplier", path: "restaurant/suppliers" },
-    ],
-  },
 ];
 
 const ManageSideBar = () => {

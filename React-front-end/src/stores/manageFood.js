@@ -6,7 +6,7 @@ export const manageFoodSlice = createSlice({
     selectedFood: {},
     openEditFoodModal: false,
     openDeleteItemModal: false,
-    openChangeImgModal: false,
+    openChangeFoodImgModal: false,
     openAddFoodVariationModal: false,
     // Group
     selectedGroup: {},
@@ -45,9 +45,7 @@ export const manageFoodSlice = createSlice({
     },
     toggle_edit_modal: (state, action) => {
       state[action.payload.name] = action.payload.value;
-    },
-    toggle_change_img_modal: (state, action) => {
-      state[action.payload.name] = action.payload.value;
+      console.log(state[action.payload.name]);
     },
     toggle_delete_item_modal: (state, action) => {
       state[action.payload.name] = action.payload.value;
@@ -64,7 +62,6 @@ export const manageFoodSlice = createSlice({
 export const {
   set_selected_item,
   toggle_edit_modal,
-  toggle_change_img_modal,
   toggle_delete_item_modal,
   toggle_add_item_modal,
 } = manageFoodSlice.actions;

@@ -1,33 +1,44 @@
 import { useDispatch, useSelector } from "react-redux";
 import FormModal from "../../../../components/FormModal";
-import { toggle_change_img_modal } from "../../../../stores/manageFood";
+import { toggle_edit_modal } from "../../../../stores/manageFood";
 import { useState } from "react";
+import { Food } from "../../../../APIs/Food";
 
-export default function ChangeImgModal({ refresh }) {
+export default function ChangeImgModal({ refresh, serverResponse }) {
   const dispatch = useDispatch();
 
   const [isLoading, setIsLoading] = useState(false);
 
   const selectedFood = useSelector((state) => state.manageFood.selectedFood);
 
-  const openChangeImgModal = useSelector(
-    (state) => state.manageFood.openChangeImgModal
+  const openModal = useSelector(
+    (state) => state.manageFood.openChangeFoodImgModal
   );
+
   const [image, setImage] = useState(null);
 
-  function updateImage(e) {
-    console.log(image);
-    e.preventDefault();
+  function closeModal() {
+    dispatch(
+      toggle_edit_modal({ name: "openChangeFoodImgModal", value: false })
+    );
+  }
+  async function updateImage() {
+    const id = selectedFood.id;
     setIsLoading(true);
+    const response = await Food.updateImg({ image, id });
+    serverResponse(response);
+    if (response.success) {
+      closeModal();
+      refresh();
+    }
     setIsLoading(false);
-    refresh();
   }
 
   return (
     <FormModal
       labels={{ title: `Update ${selectedFood.name}` }}
-      open={openChangeImgModal}
-      handleClose={() => dispatch(toggle_change_img_modal(false))}
+      open={openModal}
+      handleClose={closeModal}
       onSubmitForm={updateImage}
       isLoading={isLoading}
     >

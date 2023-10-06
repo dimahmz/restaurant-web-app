@@ -14,7 +14,6 @@ import EditFoodModal from "./editFoodModal";
 import AddVariationModal from "./addFoodVariationModal";
 import {
   toggle_edit_modal,
-  toggle_add_item_modal,
   toggle_delete_item_modal,
   set_selected_item,
 } from "../../../../stores/manageFood";
@@ -129,8 +128,16 @@ const FoodItems = () => {
                 <p>Edit / View</p>
               </div>
             </MenuItem>
-
-            <MenuItem onClick={() => {}}>
+            <MenuItem
+              onClick={() => {
+                dispatch(
+                  toggle_edit_modal({
+                    name: "openChangeFoodImgModal",
+                    value: true,
+                  })
+                );
+              }}
+            >
               <div className="flex items-center space-x-2">
                 <MdImage />
                 <p>Image</p>
@@ -177,7 +184,7 @@ const FoodItems = () => {
         serverResponse={displayReponse}
       />
       {/* edit an image Modal */}
-      <ChangeImageModal refresh={fetchFood} />
+      <ChangeImageModal refresh={fetchFood} serverResponse={displayReponse} />
       {/* edit a food item modal */}
       <EditFoodModal foodGroups={foodGroups} refresh={fetchFood} />
       {/* add variations  modal */}

@@ -8,9 +8,9 @@ use App\Traits\HttpResponses;
 use App\Models\Foods\FoodGroup;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
+use \Illuminate\Support\Facades\Storage;
 use App\Http\Requests\Foods\StoreFoodRequest;
 use App\Http\Requests\Foods\UpdateFoodRequest;
-use \Illuminate\Support\Facades\Storage;
 
 class FoodController extends Controller
 {
@@ -39,6 +39,15 @@ class FoodController extends Controller
         return $this::success($food);
     }
 
+
+    // add variation
+    function addVariation(Request $request, $id){
+        $request->validate(["name" => "required|string" , "variation_id" => "required|string"]);
+        $food = Food::find($id);
+        if(!$food) return $this::error(null, "Food whih this Id doesn't exist", 404);        
+        $food->variations()->attach($request->variation_id);
+    }
+
     // ------- Read ----------
     function get()
     {
@@ -59,26 +68,19 @@ class FoodController extends Controller
     function getSpecial(){
         $foods = Food::where('is_special' , '>' , 0);
         return $this::success($foods);
-
-
     }
-
-
     function getGroupsFoods()
     {
         $foods = FoodGroup::with('foods.variations')->get();
         return $this::success($foods);
+        
     }
 
     function getFood()
     {
-        
         $foods = Food::with('variations' , 'food_group')->get();
         return $this::success($foods);
     }
-
-
-
 
     // ------- Update ----------
     function put(UpdateFoodRequest $request)
@@ -94,15 +96,24 @@ class FoodController extends Controller
         );
         return $this::success("food has been updated");
     }
-
     function editImg(Request $request , $id){
+        $size = 4*1024;
+        $request->validate(['image' => "required|image|mimes:jpeg,png,jpg,gif|max:$size"]);
         $path  = $request->file('image')->store('images'  , 'public');
+
         $food = Food::find($id);
+        // delete images if doesn't exist
+        if(!$food) {
+            Storage::disk('public')->delete("$path");
+            return $this::error(null, "Food whih this Id doesn't exist", 404);
+        }
         $old_path = $food->image;
-        $food::update([
+        $food->update([
             'image' => $path
         ]);
-        Storage::delete($old_path);
+        // delete old image
+        Storage::disk('public')->delete("$old_path");
+        return $this::success(null, 'Image has been updated');
     }
 
     // ------- Delete ----------
@@ -110,6 +121,7 @@ class FoodController extends Controller
     {
         $food = Food::find($id);
         if (!$food) return $this::error(null, "Food whih this Id doesn't exist", 404);
+        Storage::delete($food->image);
         $food->delete();
         return $this::success(null, 'Deleted');
     }

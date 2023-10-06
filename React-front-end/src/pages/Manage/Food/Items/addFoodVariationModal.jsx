@@ -53,7 +53,7 @@ export default function AddFoodVariationModal({ variations, refresh }) {
         <SelectOption
           options={variations}
           onSelectOption={(id) => setSelectedVariationID(id)}
-          label="Select a group"
+          label="j"
           selectedOption=""
         />
       </div>

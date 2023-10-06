@@ -28,7 +28,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 // --------  Public Routes  ------------
-Route::post('/test', function (Request $request) {
+// Route::post('/test', function (Request $request) {
+//     Log::info($request);
+//     return "working";
+// });
+Route::put('/test', function (Request $request) {
+    Log::info($request);
     return "working";
 });
 
@@ -45,8 +50,9 @@ Route::get('/groups/foods', [FoodController::class, 'getGroupsFoods']);
 
 Route::post('/food', [FoodController::class, 'post']);
 Route::put('/food', [FoodController::class, 'put']);
+Route::post('/food/img/{id}', [FoodController::class, 'editImg']);
+Route::post('/food/variation/{id}', [FoodController::class, 'addVariation']);
 Route::put('/food/{id}', [FoodController::class, 'put']);
-Route::put('/food/img/{id}', [FoodController::class, 'editImg']);
 Route::delete('/food/{id}', [FoodController::class, 'delete']);
 //  food groups
 Route::get('/groups', [FoodGroupController::class, 'get']);
