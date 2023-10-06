@@ -6,6 +6,8 @@ import { Group } from "../../APIs/Food";
 import { Branch } from "../../APIs/Restaurant";
 import { MenuProvider } from "./MenuProvider";
 import { CircularProgress } from "@mui/material";
+import Snackbar from "../../components/snackBar";
+import { useSelector } from "react-redux";
 
 const MenuHome = () => {
   const [foodGroups, setFoodGroups] = useState([]);
@@ -13,6 +15,28 @@ const MenuHome = () => {
 
   const [selectedFoodGroup, setSelectedFoodGroup] = useState([]);
   const [selectedFood, setSelectedFood] = useState({});
+
+  const isUserLoggedIn = useSelector(
+    (state) => state.user.userProfile.isLoggedIn
+  );
+  const [response, setResponse] = useState({
+    open: false,
+    message: "",
+    severity: "success",
+  });
+
+  function AddFoodToBasket(item) {
+    console.log(isUserLoggedIn);
+    if (!isUserLoggedIn) {
+      setResponse({
+        open: true,
+        message: "You must log in before placing an order",
+        severity: "error",
+      });
+    } else {
+      setSelectedFood(item);
+    }
+  }
 
   const [isLoading, setLoading] = useState(false);
 
@@ -39,6 +63,17 @@ const MenuHome = () => {
   return (
     <MenuProvider>
       <SideBarOrder selectedFood={selectedFood} branches={branches} />
+      <Snackbar
+        message={response.message}
+        open={response.open}
+        severity={response.severity}
+        handleClose={() => setResponse((prev) => ({ ...prev, open: false }))}
+        sx={{
+          fontSize: "16px",
+          height: "60px",
+        }}
+      />
+
       <HeroSection />
       <div id="popular" className="w-full bg-white relative">
         <div className="max-w-[1140px] m-auto px-4 bg-white">
@@ -54,8 +89,8 @@ const MenuHome = () => {
             </div>
           ) : foodGroups.length == 0 ? (
             <div className="text-red-800 text-2xl my-24 font-medium text-center bg-white">
-              Error while trying to load Popular Menu. please refresh page page
-              or try again later
+              Error while trying to load Popular Menu. please refresh page or
+              try again later
             </div>
           ) : (
             <div className="flex justify-center">
@@ -83,7 +118,7 @@ const MenuHome = () => {
                   key={index}
                   className="flex py-6  px-4 space-x-8 border-2 rounded hover:shadow-lg hover:scale-105 duration-300 cursor-pointer"
                   onClick={() => {
-                    setSelectedFood(food);
+                    AddFoodToBasket(food);
                   }}
                 >
                   <div className="flex-center">
@@ -121,7 +156,7 @@ const MenuHome = () => {
                           key={index}
                           className="shadow-xl flex-column py-12 px-6 text-center rounded-lg hover:scale-105 duration-300"
                           onClick={() => {
-                            setSelectedFood(food);
+                            AddFoodToBasket(food);
                           }}
                         >
                           <div className="relative">

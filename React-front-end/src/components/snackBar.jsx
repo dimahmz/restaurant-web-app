@@ -11,16 +11,25 @@ export default function SimpleSnackbar({
   if (!severity) {
     severity = "error";
   }
-  // className={ "& .MuiAlert-icon": { color: "#fff" } }
+  const $sx =
+    severity == "success"
+      ? { background: "#07bc0c", color: "#fff" }
+      : { background: "#de222a", color: "#fff" };
+
+  const style = {
+    ...sx,
+    ...$sx,
+  };
+
   return (
     <>
       <Snackbar
         anchorOrigin={{ ...position }}
         open={open}
-        autoHideDuration={6000}
+        autoHideDuration={4000}
         onClose={handleClose}
       >
-        <Alert onClose={handleClose} severity={severity} sx={sx}>
+        <Alert onClose={handleClose} severity={severity} sx={style}>
           {message}
         </Alert>
       </Snackbar>
