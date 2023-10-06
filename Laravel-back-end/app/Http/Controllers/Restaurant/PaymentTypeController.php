@@ -18,7 +18,7 @@ class PaymentTypeController extends Controller
             "name" => $request->name,
             'unique_key' => $request->unique_key
         ]);
-        return $this::success($payment_type);
+        return $this::success(null, "Payment has been added!");
     }
     // --------- read ----------
     function get()
@@ -28,21 +28,19 @@ class PaymentTypeController extends Controller
     }
 
     // --------update -------
-    function put(Request $request)
+    function put(Request $request, $id)
     {
-        $request->validate(['id' => 'required|numeric' ,'name' => 'required|string' , 'unique_key' => 'required|string' ]);
+        $request->validate(['name' => 'required|string' ]);
         $payment_type = PaymentType::where('id', $request->id)->update([
             "name" => $request->name,
-            'unique_key' => $request->unique_key,
         ]);
-        return $this::success($payment_type);
+        if (!$payment_type) return $this::error(null, "Payment type whih this Id doesn't exist", 404);
+
+        return $this::success(null, "Payment has been updated!");
     }
     // ------- delete -----------
-    function delete(Request $request) {
-
-        $request->validate(['id' => 'required|numeric']);
-
-        $payment_type = PaymentType::find($request->id);
+    function delete($id) {
+        $payment_type = PaymentType::find($id);
         if (!$payment_type) return $this::error(null, "Payment type whih this Id doesn't exist", 404);
 
         $payment_type->delete();

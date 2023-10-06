@@ -16,30 +16,28 @@ class VariationController extends Controller
     {
         $request->validate(['name' => 'required|string']);
         $variations = Variation::create(["name" => $request->name]);
-        return $this::success($variations);
+        return $this::success($variations , "Variation has been added!");
     }
 
     // --------- read ----------
     function get()
     {
-        $food_Properties = Variation::all();
+        $food_Properties = Variation::orderBy('created_at' , 'desc')->get();
         return $this::success($food_Properties);
     }
 
     // --------update -------
-    function put(Request $request)
+    function put(Request $request, $id)
     {
-        $request->validate(['name' => 'required|string' ,'id' => 'required|numeric']);
-        $variations = Variation::where('id', $request->id)->update(['name' => $request->name]);
-        if($variations) return $this::success($variations);
-        return $this::error("could not fount resource");
+        $request->validate(['name' => 'required|string']);
+        $variations = Variation::where('id', $id)->update(['name' => $request->name]);
+        if($variations) return $this::success(null,"variation has been updated!");
+        return $this::error(null,"could not fount resource");
     }
     // ------- delete -----------
-    function delete(Request $request) {
+    function delete($id) {
+        $variations = Variation::find($id);
 
-        $request->validate(['id' => 'required|numeric']);
-
-        $variations = Variation::find($request->id);
         if (!$variations) return $this::error(null, "Variation whih this Id doesn't exist", 404);
 
         $variations->delete();

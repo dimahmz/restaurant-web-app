@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\Restaurant;
 
+use App\Http\Requests\Restaurant\StoreTable;
 use Illuminate\Http\Request;
 use App\Traits\HttpResponses;
 use App\Models\Restaurant\Table;
 use App\Http\Controllers\Controller;
+
+
 
 class TableController extends Controller
 {
@@ -13,10 +16,10 @@ class TableController extends Controller
     use HttpResponses;
 
     // --------create -------
-    function post(Request $request)
+    function post(StoreTable $request)
     {
-        $table = Table::create(["name" => $request->name , 'commission' => $request->commission]);
-        return $this::success($table);
+        $table = Table::create(["name" => $request->name , 'capacity' => $request->capacity, "branch_id"=> $request->branch_id]);
+        return $this::success($table, "Table has been added!");
     }
 
     // --------- read ----------
@@ -26,30 +29,28 @@ class TableController extends Controller
         return $this::success($table);
     }
     function get_with_branch(){
-        $table = Table::with('branch')->get();
+        $table = Table::with('branch')->orderBy('created_at' , 'desc')->get();
         return $this::success($table);
 
     }
 
     // --------update -------
-    function put(Request $request)
+    function put(StoreTable $request, $id)
     {
-        $request->validate(['id' => 'required|numeric' ]);
-        $table = Table::where('id', $request->id)->update(['name' => $request->name , 'commission' => $request->commission]);
-        return $this::success($table);
+        $table = Table::where('id', $id)->update(["name" => $request->name , 'capacity' => $request->capacity, "branch_id"=> $request->branch_id]);
+        if(!$table) return $this::error(null,"table doesn't exist!");
+        return $this::success($table , "Table has been updated!");
     }
     
     // ------- delete -----------
-    function delete(Request $request) {
+    function delete($id) {
 
-        $request->validate(['id' => 'required|numeric']);
+        $table = Table::find($id);
 
-        $table = Table::find($request->id);
-        if (!$table) return $this::error(null, "Department whih this Id doesn't exist", 404);
-
+        if (!$table) return $this::error(null, "Table whih this Id doesn't exist", 404);
         $table->delete();
 
-        return $this::success(null, 'Deleted');
+        return $this::success(null, 'Deleted!');
     }
 
 }

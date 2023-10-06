@@ -4,7 +4,7 @@ namespace App\Http\Requests\Restaurant;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreBranch extends FormRequest
+class StoreTable extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

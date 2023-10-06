@@ -20,7 +20,7 @@ class AuthController extends Controller
 
 
         if (!Auth::attempt($request->only($credentials)))
-            return HttpResponses::error("name or email is incorrect", 'error while trying to log in', 401);
+            return HttpResponses::error(null, 'name or email is incorrect', 401);
 
         $user = Auth::user();
 
@@ -32,7 +32,6 @@ class AuthController extends Controller
     // StoreUserRequest $request
     public  function register(StoreUserRequest $request)
     {
-        $request->validated($request->only(['name', 'email', 'password', 'phone']));
         // create a new user 
         $user = User::create([
             'name' => $request->name,
@@ -46,6 +45,6 @@ class AuthController extends Controller
     function logout()
     {
         Auth::logout();        
-        return HttpResponses::success([], 'user has been logged out');
+        return HttpResponses::success(null, 'user has been logged out');
     }
 }

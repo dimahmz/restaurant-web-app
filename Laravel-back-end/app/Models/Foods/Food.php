@@ -23,11 +23,9 @@ class Food extends Model
     {
         return $this->belongsToMany(Variation::class, 'food_variations')->withPivot("price");
     }
-
     function property_items(){
         return $this->belongsToMany(PropertyItem::class, 'order_food_items');
     }
-
     public function purchases()
     {
         return $this->belongsToMany(Purchase::class, 'food_purchases');
@@ -36,15 +34,10 @@ class Food extends Model
     {
         return $this->belongsToMany(Order::class, 'order_food');
     }
-
-
-
-    public function food_group()
+    public function group()
     {
-        return $this->belongsTo(FoodGroup::class);
+        return $this->belongsTo(FoodGroup::class, 'food_group_id');
     }
-
-
     protected $fillable = [
         'food_group_id',
         'name',

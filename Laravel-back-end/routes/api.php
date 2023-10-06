@@ -41,27 +41,28 @@ Route::post('/signup', [AuthController::class, 'register']);
 // food Routes 
 Route::get('/foods', [FoodController::class, 'get']);
 Route::get('/food/variations_properties', [FoodController::class, 'getFood_var_prop']);
-
 Route::get('/groups/foods', [FoodController::class, 'getGroupsFoods']);
 
 Route::post('/food', [FoodController::class, 'post']);
 Route::put('/food', [FoodController::class, 'put']);
-Route::delete('/food', [FoodController::class, 'delete']);
-// food groups
-Route::get('/food_groups', [FoodGroupController::class, 'get']);
-Route::post('/food_groups', [FoodGroupController::class, 'post']);
-Route::put('/food_group/{id}', [FoodGroupController::class, 'put']);
-Route::delete('/food_group/{id}', [FoodGroupController::class, 'delete']);
+Route::put('/food/{id}', [FoodController::class, 'put']);
+Route::put('/food/img/{id}', [FoodController::class, 'editImg']);
+Route::delete('/food/{id}', [FoodController::class, 'delete']);
+//  food groups
+Route::get('/groups', [FoodGroupController::class, 'get']);
+Route::post('/groups', [FoodGroupController::class, 'post']);
+Route::put('/groups/{id}', [FoodGroupController::class, 'put']);
+Route::delete('/groups/{id}', [FoodGroupController::class, 'delete']);
 // food properties
 Route::get('/food_properties', [PropertyController::class, 'get']);
 Route::post('/food_properties', [PropertyController::class, 'post']);
 Route::put('/food_properties', [PropertyController::class, 'put']);
 Route::delete('/food_properties', [PropertyController::class, 'delete']);
 // food variations
-Route::get('/food_variations', [VariationController::class, 'get']);
-Route::post('/food_variations', [VariationController::class, 'post']);
-Route::put('/food_variations', [VariationController::class, 'put']);
-Route::delete('/food_variations', [VariationController::class, 'delete']);
+Route::get('/variations', [VariationController::class, 'get']);
+Route::post('/variations', [VariationController::class, 'post']);
+Route::put('/variations/{id}', [VariationController::class, 'put']);
+Route::delete('/variations/{id}', [VariationController::class, 'delete']);
 
     // ------- Orders ----------
 
@@ -102,27 +103,27 @@ Route::delete('/suppliers', [SupplierController::class, 'delete']);
 // branches
 Route::get('/branches', [BranchController::class, 'get']);
 Route::post('/branches', [BranchController::class, 'post']);
-Route::put('/branches', [BranchController::class, 'put']);
-Route::delete('/branches', [BranchController::class, 'delete']);
+Route::put('/branches/{id}', [BranchController::class, 'put']);
+Route::delete('/branches/{id}', [BranchController::class, 'delete']);
 
 // Dept Tags
 Route::get('/department_tags', [DepartmentTagController::class, 'get']);
 Route::post('/department_tags', [DepartmentTagController::class, 'post']);
-Route::put('/department_tags', [DepartmentTagController::class, 'put']);
-Route::delete('/department_tags', [DepartmentTagController::class, 'delete']);
+Route::put('/department_tags/{id}', [DepartmentTagController::class, 'put']);
+Route::delete('/department_tags/{id}', [DepartmentTagController::class, 'delete']);
 
 // tables
 Route::get('/tables', [TableController::class, 'get']);
 Route::get('/tables/branch', [TableController::class, 'get_with_branch']);
 Route::post('/tables', [TableController::class, 'post']);
-Route::put('/tables', [TableController::class, 'put']);
-Route::delete('/tables', [TableController::class, 'delete']);
+Route::put('/tables/{id}', [TableController::class, 'put']);
+Route::delete('/tables/{id}', [TableController::class, 'delete']);
 
 // Payment types
 Route::get('/payment_types', [PaymentTypeController::class, 'get']);
 Route::post('/payment_types', [PaymentTypeController::class, 'post']);
-Route::put('/payment_types', [PaymentTypeController::class, 'put']);
-Route::delete('/payment_types', [PaymentTypeController::class, 'delete']);
+Route::put('/payment_types/{id}', [PaymentTypeController::class, 'put']);
+Route::delete('/payment_types/{id}', [PaymentTypeController::class, 'delete']);
 
 
 

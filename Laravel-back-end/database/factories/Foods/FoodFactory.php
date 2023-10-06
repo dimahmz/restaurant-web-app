@@ -28,7 +28,7 @@ class FoodFactory extends Factory
             'is_special' => 0,
             // "food_group_id" => FoodGroup::factory(),
             "food_group_id" => $id,
-            'image' => "images/".fake()->image('public/storage/images',640,480, null, false),
+            'image' => "images/".fake()->image('storage/app/public/images',640,480, null, false),
 
             //
         ];

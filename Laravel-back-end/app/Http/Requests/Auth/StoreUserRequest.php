@@ -46,6 +46,6 @@ class StoreUserRequest extends FormRequest
     protected function failedValidation(Validator $validator)
     {
 
-        throw new HttpResponseException($this::error(['errors' => $validator->errors()], 'inputs are valid',  422));
+        throw new HttpResponseException($this::error(['errors' => $validator->errors()], 'invalid inputs',  422));
     }
 }

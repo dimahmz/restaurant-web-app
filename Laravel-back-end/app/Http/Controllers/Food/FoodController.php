@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Foods\StoreFoodRequest;
 use App\Http\Requests\Foods\UpdateFoodRequest;
+use \Illuminate\Support\Facades\Storage;
 
 class FoodController extends Controller
 {
@@ -41,7 +42,7 @@ class FoodController extends Controller
     // ------- Read ----------
     function get()
     {
-        $foods = Food::orderBy('created_at' , 'desc')->get();
+        $foods = Food::with('variations' , 'group')->orderBy('created_at' , 'desc')->get();
         return $this::success($foods);
     }
     function getOnlyFood()
@@ -65,13 +66,14 @@ class FoodController extends Controller
 
     function getGroupsFoods()
     {
-        $foods = FoodGroup::with('foods.variations', 'foods.properties.property_items')->get();
+        $foods = FoodGroup::with('foods.variations')->get();
         return $this::success($foods);
     }
 
     function getFood()
     {
-        $foods = Food::with('properties' , 'variations' , 'food_group')->get();
+        
+        $foods = Food::with('variations' , 'food_group')->get();
         return $this::success($foods);
     }
 
@@ -93,11 +95,20 @@ class FoodController extends Controller
         return $this::success("food has been updated");
     }
 
+    function editImg(Request $request , $id){
+        $path  = $request->file('image')->store('images'  , 'public');
+        $food = Food::find($id);
+        $old_path = $food->image;
+        $food::update([
+            'image' => $path
+        ]);
+        Storage::delete($old_path);
+    }
+
     // ------- Delete ----------
-    function delete(Request $request)
+    function delete(Request $request , $id)
     {
-        $request->validate(['id' => 'required|numeric']);
-        $food = Food::find($request->id);
+        $food = Food::find($id);
         if (!$food) return $this::error(null, "Food whih this Id doesn't exist", 404);
         $food->delete();
         return $this::success(null, 'Deleted');

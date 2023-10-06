@@ -21,7 +21,7 @@ class BranchController extends Controller
             'address' => $request->address,
             'phone' => $request->phone,
         ]);
-        return $this::success($branch);
+        return $this::success($branch , "Branch has been created");
     }
     // --------- read ----------
     function get()
@@ -31,23 +31,23 @@ class BranchController extends Controller
     }
 
     // --------update -------
-    function put(StoreBranch $request)
+    function put(StoreBranch $request, $id)
     {
-        $request->validate(['id' => 'required|numeric']);
-        $branch = Branch::where('id', $request->id)->update([
+
+        $branch = Branch::where('id', $id)->update([
             "name" => $request->name,
             'delivery_charge' => $request->delivery_charge,
             'address' => $request->address,
             'phone' => $request->phone,
         ]);
-        return $this::success($branch);
+        if (!$branch) return $this::error(null, "Branch whih this ID doesn't exist", 404);
+
+        return $this::success(null, "Branch has been updated!");
     }
     // ------- delete -----------
-    function delete(Request $request) {
+    function delete($id) {
 
-        $request->validate(['id' => 'required|numeric']);
-
-        $branch = Branch::find($request->id);
+        $branch = Branch::find($id);
         if (!$branch) return $this::error(null, "Branch whih this Id doesn't exist", 404);
 
         $branch->delete();

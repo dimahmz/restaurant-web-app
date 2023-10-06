@@ -6,9 +6,6 @@ use App\Models\Foods\Food;
 use App\Models\Foods\Property;
 use App\Models\Foods\Variation;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
-use App\Models\Foods\PropertyItem;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class FoodSeeder extends Seeder
 {
