@@ -1,5 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
-import { selectedVariation } from "../../../../stores/manageFood";
+import {
+  selectedVariation,
+  toggle_add_item_modal,
+} from "../../../../stores/manageFood";
 import { useEffect, useState } from "react";
 import FormModal from "../../../../components/FormModal";
 import SelectOption from "../../../../components/SelectOption";
@@ -30,7 +33,12 @@ export default function AddFoodVariationModal({ variations, refresh }) {
   }, []);
 
   function handleClose() {
-    // dispatch(toggle_add_food_variation_modal(false));
+    dispatch(
+      toggle_add_item_modal({
+        name: "openAddFoodVariationModal",
+        value: false,
+      })
+    );
   }
 
   async function addVariation() {

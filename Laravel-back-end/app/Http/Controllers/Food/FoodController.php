@@ -83,10 +83,10 @@ class FoodController extends Controller
     }
 
     // ------- Update ----------
-    function put(UpdateFoodRequest $request)
+    function put(UpdateFoodRequest $request , $id)
     {
 
-        Food::where('id', $request->id)->update(
+        Food::where('id', $id)->update(
             [
                 'food_group_id' => $request->food_group_id,
                 'name' => $request->name,
@@ -94,7 +94,7 @@ class FoodController extends Controller
                 'is_special' => $request->is_special
             ]
         );
-        return $this::success("food has been updated");
+        return $this::success(null, "Food has been updated");
     }
     function editImg(Request $request , $id){
         $size = 4*1024;

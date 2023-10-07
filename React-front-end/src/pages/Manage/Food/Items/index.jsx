@@ -16,6 +16,7 @@ import {
   toggle_edit_modal,
   toggle_delete_item_modal,
   set_selected_item,
+  toggle_add_item_modal,
 } from "../../../../stores/manageFood";
 import SimpleSnackbar from "../../../../components/snackBar";
 import getResponseMessage from "../../../../utils/getResponse";
@@ -91,6 +92,12 @@ const FoodItems = () => {
       ),
     },
     { field: "name", headerName: "Name", flex: 1 },
+    {
+      field: "_group",
+      headerName: "Group",
+      valueGetter: (params) => params.row.group.name || "-",
+      flex: 1,
+    },
     { field: "price", headerName: "Price", flex: 1 },
     {
       field: "no_field",
@@ -109,12 +116,12 @@ const FoodItems = () => {
           >
             <MenuItem
               onClick={() => {
-                // dispatch(
-                //   toggle_add_item_modal({
-                //     name: "openAddFoodItemModal ",
-                //     value: true,
-                //   })
-                // );
+                dispatch(
+                  toggle_add_item_modal({
+                    name: "openAddFoodVariationModal",
+                    value: true,
+                  })
+                );
               }}
             >
               <div className="flex items-center space-x-2">
@@ -122,7 +129,16 @@ const FoodItems = () => {
                 <p>Add variation</p>
               </div>
             </MenuItem>
-            <MenuItem onClick={() => {}}>
+            <MenuItem
+              onClick={() => {
+                dispatch(
+                  toggle_add_item_modal({
+                    name: "openEditFoodItemModal",
+                    value: true,
+                  })
+                );
+              }}
+            >
               <div className="flex items-center space-x-2">
                 <MdModeEdit />
                 <p>Edit / View</p>
@@ -186,9 +202,17 @@ const FoodItems = () => {
       {/* edit an image Modal */}
       <ChangeImageModal refresh={fetchFood} serverResponse={displayReponse} />
       {/* edit a food item modal */}
-      <EditFoodModal foodGroups={foodGroups} refresh={fetchFood} />
+      <EditFoodModal
+        foodGroups={foodGroups}
+        refresh={fetchFood}
+        serverResponse={displayReponse}
+      />
       {/* add variations  modal */}
-      <AddVariationModal variations={variations} refresh={fetchFood} />
+      <AddVariationModal
+        variations={variations}
+        refresh={fetchFood}
+        serverResponse={displayReponse}
+      />
 
       <TableHeader
         title="Items List"

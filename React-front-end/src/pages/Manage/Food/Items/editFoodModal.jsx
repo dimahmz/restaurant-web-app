@@ -5,42 +5,65 @@ import SelectOption from "../../../../components/SelectOption";
 import { Checkbox } from "@material-tailwind/react";
 // import { toggle_edit_food_modal } from "../../../../stores/manageFood";
 import { useState } from "react";
+import { toggle_edit_modal } from "../../../../stores/manageFood";
+import { Food } from "../../../../APIs/Food";
 
-export default function EditFoodModal({ foodGroups, refresh }) {
+export default function EditFoodModal({ foodGroups, refresh, serverResponse }) {
   const dispatch = useDispatch();
 
   const selected_food = useSelector((state) => state.manageFood.selectedFood);
 
-  const openEditFoodModal = useSelector(
-    (state) => state.manageFood.openEditFoodModal
+  const openModal = useSelector(
+    (state) => state.manageFood.openEditFoodItemModal
   );
+
+  function closeModal() {
+    dispatch(
+      toggle_edit_modal({
+        name: "openEditFoodItemModal",
+        value: false,
+      })
+    );
+  }
 
   const [isLoading, setIsLoading] = useState(false);
 
   const [name, setName] = useState(selected_food?.name);
   const [price, setPrice] = useState(selected_food?.price);
   const [is_special, setIsSpecial] = useState(selected_food?.is_special);
-  const [food_group_id, setSelectedGoupID] = useState(
-    selected_food?.group?.name
-  );
+  const [food_group_id, setSelectedGoupID] = useState(selected_food?.group?.id);
 
-  function updateFoodItem() {
-    const id = selected_food?.id;
-    // {
-    //   id,
-    //   price,
-    //   name,
-    //   is_special,
-    //   food_group_id,
-    // }
+  async function updateFoodItem() {
+    const id = selected_food?.id || 0;
+    const item = {
+      id,
+      price,
+      name,
+      is_special,
+      food_group_id,
+    };
+    // ugly code !!!!!
+    if (
+      selected_food.price == price &&
+      selected_food.is_special == is_special &&
+      selected_food?.group?.id == food_group_id &&
+      selected_food.name == name
+    ) {
+      closeModal();
+      return;
+    }
     setIsLoading(true);
+    const response = await Food.update({ id, item });
+    serverResponse(response);
+    if (response.success) {
+      refresh();
+      closeModal();
+    }
     setIsLoading(false);
-    refresh();
   }
 
   // @TODO think of a methid that dosen't iterate throughtout the hole array
-  // intead stops when if finds the desired element
-
+  //but intead stops when it finds the matched element
   const $foodGroups = foodGroups.filter((row) => {
     return row.id != selected_food?.group?.id;
   });
@@ -48,38 +71,41 @@ export default function EditFoodModal({ foodGroups, refresh }) {
   return (
     <FormModal
       labels={{ title: `Update ${selected_food.name}` }}
-      open={openEditFoodModal}
-      // handleClose={() => dispatch(toggle_edit_food_modal(false))}
+      open={openModal}
+      handleClose={closeModal}
       onSubmitForm={updateFoodItem}
       isLoading={isLoading}
     >
-      <div className="py-5 px-4 flex-col space-y-4">
-        <div className="flex  items-center space-x-12">
-          <p>Selected Group</p>
-          <p className="text-sm bg-[#0dd19d] text-[#121063] py-1 px-5 rounded-sm">
-            {selected_food?.group?.name || "-"}
-          </p>
+      <div className="py-5 px-4 flex-col space-y-5">
+        <div className="flex-column space-y-4">
+          <div className="flex  items-center space-x-12">
+            <p>Selected Group</p>
+            <p className="text-sm bg-[#0dd19d] text-[#121063] py-1 px-5 rounded-sm">
+              {selected_food?.group?.name || "-"}
+            </p>
+          </div>
+          <SelectOption
+            options={$foodGroups}
+            onSelectOption={(id) => setSelectedGoupID(id)}
+            label="Select a group"
+            selectedOption=""
+            required
+          />
         </div>
-        <SelectOption
-          options={$foodGroups}
-          onSelectOption={(id) => setSelectedGoupID(id)}
-          label="Select a group"
-          selectedOption=""
-        />
-        <div className="flex-column">
+        <div className="flex-column space-y-4">
           <label htmlFor="name">Name</label>
           <TextField
             required
             name="name"
             fullWidth
             hiddenLabel
-            value={selected_food?.name}
+            defaultValue={selected_food?.name}
             size="small"
             variant="filled"
-            // onChange={}
+            onChange={(e) => setName(e.target.value)}
           />
         </div>
-        <div className="flex-column">
+        <div className="flex-column space-y-4">
           <label className="font-semibold">
             Price
             <span className="text-[#158df7] font-normal">
@@ -92,19 +118,21 @@ export default function EditFoodModal({ foodGroups, refresh }) {
             type="number"
             variant="filled"
             placeholder="e.g Type price of this item"
-            value={selected_food?.price}
+            defaultValue={selected_food?.price}
             min={1}
             required
-            // onChange={}
+            onChange={(e) => setPrice(e.target.value)}
           />
         </div>
         <div className="flex items-center">
           <Checkbox
             color="pink"
-            defaultChecked={selected_food?.is_special ? true : false}
-            // onChange={}
+            defaultChecked={selected_food?.is_special == 0 ? false : true}
+            onChange={(e) => {
+              setIsSpecial(() => (e.target.checked ? 1 : 0));
+            }}
           />
-          <label htmlFor="">is special</label>
+          <label>is special</label>
         </div>
       </div>
     </FormModal>

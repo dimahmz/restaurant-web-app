@@ -7,6 +7,7 @@ export default function SimpleSnackbar({
   label,
   value,
   OptionId = "",
+  props,
 }) {
   const [selectedOptionId, setSelectedOptionId] = useState(OptionId);
 
@@ -22,7 +23,7 @@ export default function SimpleSnackbar({
     <FormControl sx={{ width: "100%" }}>
       <Select
         value={selectedOptionId}
-        required
+        {...props}
         onChange={handleSelectOption}
         displayEmpty
         inputProps={{

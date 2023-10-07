@@ -27,7 +27,14 @@ export class Food {
       return e.response.data;
     }
   }
-  static async update() {}
+  static async update({ id, item }) {
+    try {
+      const resp = await axios.put(`/food/${id}`, { ...item });
+      return resp.data;
+    } catch (e) {
+      return e.response.data;
+    }
+  }
 
   static async updateImg({ image, id }) {
     const form = new FormData();
