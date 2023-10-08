@@ -32,6 +32,7 @@ import Tables from "./pages/Manage/Restaurant/Tables";
 import Items from "./pages/Manage/Food/Items";
 
 import LoadingContext from "./context/LoadingContext";
+import AddFood from "./pages/Manage/Food/Items/addFood";
 
 function App() {
   return (
@@ -57,7 +58,7 @@ function App() {
                 <Route path="manage" element={<ManagePage />}>
                   <Route path="food">
                     <Route index element={<Items />} />
-                    {/* <Route path="add-food" element={<AddFood />} /> */}
+                    <Route path="add-food" element={<AddFood />} />
                     <Route path="groups" element={<Groups />} />
                     <Route path="variations" element={<Variations />} />
                   </Route>

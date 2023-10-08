@@ -73,14 +73,10 @@ export default function AddFoodVariationModal({ refresh, serverResponse }) {
     const foodVariationsIDs = $selectedFood?.variations?.map(
       (variation) => variation.id
     );
-
-    allVariations.map((variation) => {
-      console.log(!foodVariationsIDs?.includes(variation.id));
-    });
     const filtredVariations = allVariations.filter(
       (variation) => !foodVariationsIDs?.includes(variation.id)
     );
-    console.log(filtredVariations);
+
     return filtredVariations;
   }
 

@@ -12,7 +12,7 @@
 
 `npm i`
 
-_run it in the dev mode_
+**start vite server**
 
 `npm run dev`
 
@@ -32,16 +32,19 @@ _run it in the dev mode_
 
 **start Xampp server**
 
-**run the database migrations**
-
-(this command will take a couple of time around 2 minutes, because around 15 images will be generated and stored on your machine in the storage/app/public/images folder)
-
-`php artisan app:run-migrations`
-
 **create a symblic link to the images storage**
+
+before this command create a folder called images in this folder storage/app/public/images
 
 `php artisan storage:link`
 
-**run the project**
+**run the database migrations**
+`php artisan migrate`
+
+`php artisan app:run-migrations`
+
+(hint: the cammand will take some time, due to the images genration and the storing in the local disk)
+
+**start laravel server**
 
 `php artisan serve`

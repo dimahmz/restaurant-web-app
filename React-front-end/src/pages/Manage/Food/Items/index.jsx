@@ -5,7 +5,7 @@ import DataGrid from "../../../../components/DataGrid";
 import TableHeader from "../../tableHeader";
 import { MenuItem } from "@mui/material";
 import { MdDelete, MdModeEdit, MdAdd, MdImage } from "react-icons/md";
-import { Food, Group, Variation } from "../../../../APIs/Food";
+import { Food, Group } from "../../../../APIs/Food";
 import { useDispatch } from "react-redux";
 import ChangeImageModal from "./changeImgModal";
 import Filter from "../../../../utils/filters";

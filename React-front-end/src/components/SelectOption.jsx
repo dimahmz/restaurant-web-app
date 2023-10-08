@@ -20,10 +20,9 @@ export default function SimpleSnackbar({
   }, [value]);
 
   return (
-    <FormControl sx={{ width: "100%" }}>
+    <FormControl {...props} sx={{ width: "100%" }}>
       <Select
         value={selectedOptionId}
-        {...props}
         onChange={handleSelectOption}
         displayEmpty
         inputProps={{
