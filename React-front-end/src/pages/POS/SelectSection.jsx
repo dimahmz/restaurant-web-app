@@ -17,6 +17,7 @@ const SelectSideBar = ({ branches, tables, pyamnetTypes }) => {
     setValue(Math.random());
     dispatch(reset_selections());
   }
+
   return (
     <div className="relative w-full h-full py-3 px-2 bg-white">
       <div className="flex flex-col space-y-5 h-[80%] w-full overflow-y-auto ">
@@ -24,6 +25,7 @@ const SelectSideBar = ({ branches, tables, pyamnetTypes }) => {
           <SelectOption
             value={value}
             label="Branch"
+            className="text-xs"
             options={branches}
             onSelectOption={(id) => {
               dispatch(update_branch(id));
@@ -41,7 +43,7 @@ const SelectSideBar = ({ branches, tables, pyamnetTypes }) => {
           />
         </div>
         <SelectOption
-          label="Payment type"
+          label="Payment"
           value={value}
           options={pyamnetTypes}
           onSelectOption={(id) => {

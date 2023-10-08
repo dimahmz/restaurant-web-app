@@ -47,9 +47,9 @@ const Products = () => {
             handleSelectFood(food, index);
           }}
         >
-          <div className="relative bg-cover bg-no-repeat">
+          <div className="w-full overflow-hidden">
             <img
-              className="transition duration-300 ease-in-out hover:scale-110"
+              className="block transition duration-300 ease-in-out hover:scale-125 w-full h-full "
               src={`/images_host/${food.image}`}
               alt={food.name}
             />

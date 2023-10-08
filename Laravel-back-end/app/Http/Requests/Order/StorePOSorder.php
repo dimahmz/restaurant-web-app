@@ -31,4 +31,12 @@ class StorePOSorder extends FormRequest
             'department_commission' => 'required|numeric',
         ];
     }
+
+    public function messages(): array{
+        return [
+            'branch_id.*' => 'You must select a branch',
+            'payment_id.*' => 'You must select a payment type',
+
+        ];
+    }
 }

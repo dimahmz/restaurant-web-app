@@ -94,7 +94,6 @@ const PosPage = () => {
     setMessage(() =>
       response.success ? response.message : getResponseMessage(response)
     );
-
     setSx(() =>
       response.success
         ? { background: "#07bc0c", color: "#fff" }

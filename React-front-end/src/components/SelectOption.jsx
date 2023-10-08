@@ -36,7 +36,7 @@ export default function SimpleSnackbar({
         name="selectedFoodGroup"
       >
         <MenuItem value={selectedOptionId}>
-          <label>{label}</label>
+          <label className="text-sm">{label}</label>
         </MenuItem>
         {options.map((option) => (
           <MenuItem key={option.id} value={option.id} name={option.name}>
