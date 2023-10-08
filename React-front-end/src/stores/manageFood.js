@@ -4,7 +4,7 @@ export const manageFoodSlice = createSlice({
   initialState: {
     // Food
     selectedFood: {},
-    openEditFoodModal: false,
+    openEditFoodItemModal: false,
     openDeleteItemModal: false,
     openChangeFoodImgModal: false,
     openAddFoodVariationModal: false,

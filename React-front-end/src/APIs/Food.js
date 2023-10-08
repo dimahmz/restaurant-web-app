@@ -54,6 +54,17 @@ export class Food {
       return e.response.data;
     }
   }
+
+  static async addVariations({ id, variations_IDs }) {
+    try {
+      const resp = await axios.post(`/food/variation/${id}`, {
+        variations_IDs,
+      });
+      return resp.data;
+    } catch (e) {
+      return e.response.data;
+    }
+  }
 }
 
 export class Property {

@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useTheme } from "@mui/material/styles";
+import _ from "lodash";
+
 import {
   Box,
   OutlinedInput,
@@ -29,7 +31,7 @@ function getStyles(name, items, theme) {
   };
 }
 
-export default function MultipleSelectChip({ options, onSelectOption }) {
+export default function MultipleSelectChip({ options, onSelectOption, props }) {
   const theme = useTheme();
   const [items, setItems] = useState([]);
 
@@ -42,16 +44,26 @@ export default function MultipleSelectChip({ options, onSelectOption }) {
       typeof value === "string" ? value.split(",") : value
     );
     // get the IDs base on the names
-    const propertiesIDs = value.map((option) => {
-      return options.find((o) => o.name === option);
-    });
+    const selectedOptions = _.map(value, (option) =>
+      _.find(options, { name: option })
+    );
+    // console.log("selected", selectedOptions);
+    onSelectOption(selectedOptions);
+  };
 
-    onSelectOption(propertiesIDs);
+  const handleDelete = (name) => {
+    const $items = _.without(items, name);
+    setItems($items);
+    const selectedOptions = _.map($items, (item) => {
+      return _.find(options, { name: item });
+    });
+    onSelectOption(selectedOptions);
   };
 
   return (
     <FormControl sx={{ width: "100%" }}>
       <Select
+        {...props}
         multiple
         value={items}
         onChange={handleChange}
@@ -69,7 +81,12 @@ export default function MultipleSelectChip({ options, onSelectOption }) {
             }}
           >
             {selected.map((value) => (
-              <Chip key={value} label={value} />
+              <Chip
+                key={value}
+                label={value}
+                onDelete={() => handleDelete(value)}
+                onMouseDown={(e) => e.stopPropagation()}
+              />
             ))}
           </Box>
         )}

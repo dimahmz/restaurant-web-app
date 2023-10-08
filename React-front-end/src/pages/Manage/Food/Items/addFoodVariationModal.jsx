@@ -1,38 +1,30 @@
 import { useDispatch, useSelector } from "react-redux";
 import {
-  selectedVariation,
+  selectedFood,
   toggle_add_item_modal,
 } from "../../../../stores/manageFood";
 import { useEffect, useState } from "react";
 import FormModal from "../../../../components/FormModal";
-import SelectOption from "../../../../components/SelectOption";
+import AddVariation from "./components/addVariations";
+import _ from "lodash";
+import { Food, Variation } from "../../../../APIs/Food";
+import { CircularProgress } from "@mui/material";
 
-export default function AddFoodVariationModal({ variations, refresh }) {
+export default function AddFoodVariationModal({ refresh, serverResponse }) {
   const dispatch = useDispatch();
 
   const [isLoading, setIsLoading] = useState(false);
-  const [$variations, setVariations] = useState(variations);
-  const [selectedVariationID, setSelectedVariationID] = useState(null);
+  const [variations, setVariations] = useState([]);
+  const [isFetchLoading, setFetchLoading] = useState(false);
+  const [selectedVariationID, setSelectedVariationID] = useState([]);
 
-  const selectedFood = useSelector(selectedVariation);
+  const $selectedFood = useSelector(selectedFood);
 
   const open = useSelector(
     (state) => state.manageFood.openAddFoodVariationModal
   );
 
-  useEffect(() => {
-    setVariations(() => {
-      const variationsIDs = selectedFood?.variations?.map(
-        (variation) => variation.id
-      );
-      const filtredVariations = $variations.filter(
-        (variation) => !variationsIDs?.includes(variation.id)
-      );
-      return filtredVariations;
-    });
-  }, []);
-
-  function handleClose() {
+  function closeModal() {
     dispatch(
       toggle_add_item_modal({
         name: "openAddFoodVariationModal",
@@ -40,31 +32,84 @@ export default function AddFoodVariationModal({ variations, refresh }) {
       })
     );
   }
+  // add the price to the selected variation
+  function getVariationsPrices(variatiosPrices) {
+    const $variationsPrices = _.map(variatiosPrices, (obj) =>
+      _.pick(obj, ["variation_id", "price"])
+    );
+    setSelectedVariationID($variationsPrices);
+  }
 
   async function addVariation() {
+    const id = $selectedFood.id;
+    if (selectedVariationID.length == 0) {
+      closeModal();
+      return;
+    }
     setIsLoading(true);
+    const response = await Food.addVariations({
+      id,
+      variations_IDs: selectedVariationID,
+    });
+    serverResponse(response);
+    if (response.success) {
+      closeModal();
+      refresh();
+    }
     setIsLoading(false);
-    console.log(selectedVariationID);
-    refresh();
-    handleClose();
   }
+
+  async function fetchVariations() {
+    setFetchLoading(true);
+    const response = await Variation.get();
+    if (response.success) {
+      const $filtred = filterVariations(response.payload);
+      setVariations($filtred);
+    }
+    setFetchLoading(false);
+  }
+
+  function filterVariations(allVariations) {
+    const foodVariationsIDs = $selectedFood?.variations?.map(
+      (variation) => variation.id
+    );
+
+    allVariations.map((variation) => {
+      console.log(!foodVariationsIDs?.includes(variation.id));
+    });
+    const filtredVariations = allVariations.filter(
+      (variation) => !foodVariationsIDs?.includes(variation.id)
+    );
+    console.log(filtredVariations);
+    return filtredVariations;
+  }
+
+  // rendre the variation that are not in the food
+  useEffect(() => {
+    fetchVariations();
+  }, [open]);
+
   return (
     <FormModal
-      labels={{ title: `Add variations for ${selectedFood.name}` }}
+      labels={{ title: `Add variations for ${$selectedFood.name}` }}
       open={open}
-      handleClose={handleClose}
+      handleClose={closeModal}
       onSubmitForm={addVariation}
       isLoading={isLoading}
     >
-      <div className="flex-column space-y-3 py-8 px-4">
-        <label htmlFor="">Add Variations</label>
-        <SelectOption
-          options={variations}
-          onSelectOption={(id) => setSelectedVariationID(id)}
-          label="j"
-          selectedOption=""
-        />
-      </div>
+      {isFetchLoading ? (
+        <div className="flex-center w-full min-h-[50vh]">
+          <CircularProgress color="inherit" />
+        </div>
+      ) : (
+        <div className="flex-column space-y-3 py-8 px-4">
+          <label className="pl-3 text-lg">Add Variations</label>
+          <AddVariation
+            foodVariations={variations}
+            addVariationPrice={getVariationsPrices}
+          />
+        </div>
+      )}
     </FormModal>
   );
 }

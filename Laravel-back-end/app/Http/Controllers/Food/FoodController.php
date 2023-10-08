@@ -11,6 +11,7 @@ use App\Http\Controllers\Controller;
 use \Illuminate\Support\Facades\Storage;
 use App\Http\Requests\Foods\StoreFoodRequest;
 use App\Http\Requests\Foods\UpdateFoodRequest;
+use App\Http\Requests\Foods\AddFoodVariationRequest;
 
 class FoodController extends Controller
 {
@@ -41,11 +42,11 @@ class FoodController extends Controller
 
 
     // add variation
-    function addVariation(Request $request, $id){
-        $request->validate(["name" => "required|string" , "variation_id" => "required|string"]);
+    function addVariation(AddFoodVariationRequest $request, $id){
         $food = Food::find($id);
         if(!$food) return $this::error(null, "Food whih this Id doesn't exist", 404);        
-        $food->variations()->attach($request->variation_id);
+        $food->variations()->attach($request->variations_IDs);
+        return $this::success(null, "Variations has been added");
     }
 
     // ------- Read ----------

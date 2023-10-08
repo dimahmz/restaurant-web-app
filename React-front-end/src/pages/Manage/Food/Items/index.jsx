@@ -25,7 +25,6 @@ const FoodItems = () => {
   const [isFetchLoading, setIsFetchLoading] = useState(false);
   const [foods, setFoods] = useState([]);
   const [foodGroups, setFoodGroups] = useState([]);
-  const [variations, setVariations] = useState([]);
   const [filtredFoods, setFiltredFoods] = useState([]);
   const [response, setResponse] = useState({
     open: false,
@@ -63,17 +62,9 @@ const FoodItems = () => {
     }
   }
 
-  async function fetchVariations() {
-    const response = await Variation.get();
-    if (response.success) {
-      setVariations(response.payload);
-    }
-  }
-
   useEffect(() => {
     fetchFood();
     fetchFoodGroups();
-    fetchVariations();
   }, []);
 
   const columns = [
@@ -208,11 +199,7 @@ const FoodItems = () => {
         serverResponse={displayReponse}
       />
       {/* add variations  modal */}
-      <AddVariationModal
-        variations={variations}
-        refresh={fetchFood}
-        serverResponse={displayReponse}
-      />
+      <AddVariationModal refresh={fetchFood} serverResponse={displayReponse} />
 
       <TableHeader
         title="Items List"
