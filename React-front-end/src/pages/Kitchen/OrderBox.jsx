@@ -2,7 +2,7 @@ import { Button } from "@mui/material";
 import Order from "../../APIs/Orders";
 import { useEffect, useState } from "react";
 import AppModal from "../../components/ConfirmModal";
-import "./index.css";
+import "./styles/index.css";
 import getDate from "../../utils/getTime";
 import { LoadingButton } from "@mui/lab";
 

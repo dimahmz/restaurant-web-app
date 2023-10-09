@@ -9,12 +9,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { FaTrash } from "react-icons/fa";
 import BasketHeader from "./BasketHeader";
 import BasketFooter from "./BasketFooter";
+import { useEffect } from "react";
 
 const BasketComponent = () => {
   const dispatch = useDispatch();
 
   const order_food = useSelector(store_order_food);
+  const selected_variation = useSelector(
+    (state) => state.pointOfSalesOrders.selected_variation
+  );
 
+  useEffect(() => {}, [selected_variation]);
   const selectedFoodIndex = useSelector(
     (state) => state.pointOfSalesOrders.select_food_index
   );
@@ -88,17 +93,6 @@ const BasketComponent = () => {
                                 </span>
                               </p>
                             )}
-                            {$food?.property_items &&
-                              (<p>Properties</p>)(
-                                $food.property_items.map((item, i) => (
-                                  <span
-                                    key={i}
-                                    className="text-black text-[8px] bg-[#f4bd0e] rounded-full p-2"
-                                  >
-                                    {item.name}
-                                  </span>
-                                ))
-                              )}
                           </div>
                         </section>
                         <span

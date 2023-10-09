@@ -4,7 +4,7 @@ import { MenuItem, FormControl, Select } from "@mui/material";
 import { Branch } from "../../APIs/Restaurant";
 import { useLocation } from "react-router-dom";
 import SearchInput from "../../components/SearchInput";
-import "./Header.css";
+import "./styles/Header.css";
 
 const TableHeader = ({ onSearchChange, branchChange }) => {
   const [branch, setBranch] = useState("");

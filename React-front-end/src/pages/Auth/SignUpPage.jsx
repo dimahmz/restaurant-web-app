@@ -75,6 +75,9 @@ const SignUpPage = () => {
                   name="signup"
                   className="flex flex-col"
                   onSubmit={registerNewUser}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") registerNewUser(e);
+                  }}
                 >
                   <div className=" mb-4">
                     <input

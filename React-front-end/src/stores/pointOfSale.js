@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   food_order: [],
+  selected_variation: {},
   selected_food: { id: null },
   depTag: {},
   select_food_index: -1,
@@ -37,17 +38,6 @@ export const pointOfSaleSlice = createSlice({
     // ----- food that are in the order -------
     add_food_order: (state, action) => {
       let $food = action.payload;
-      let isFoodExist = false;
-      state.food_order.map((food, i) => {
-        if (food.id === $food.id) {
-          isFoodExist = true;
-          state.select_food_index = i;
-          state.selected_food = food;
-          return;
-        }
-      });
-
-      if (isFoodExist) return;
       state.food_order.push($food);
       const index = state.food_order.length - 1;
       state.select_food_index = index;
@@ -81,6 +71,10 @@ export const pointOfSaleSlice = createSlice({
       state.select_food_index = -1;
       state.selected_food_variations = [];
       state.selected_food_properties = [];
+    },
+    //
+    update_selected_variation: (state, action) => {
+      state.selected_variation = action.payload;
     },
     // ------ selected table ---------
     update_branch: (state, action) => {
@@ -143,6 +137,7 @@ export const {
   update_index,
   update_selected_group_food,
   add_food_order,
+  update_selected_variation,
   delete_food_order,
   modify_food_order,
   update_branch,

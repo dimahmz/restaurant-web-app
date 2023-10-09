@@ -1,5 +1,9 @@
 import { useSelector, useDispatch } from "react-redux";
-import { modify_food_order, store_order_food } from "../../stores/pointOfSale";
+import {
+  modify_food_order,
+  store_order_food,
+  update_selected_variation,
+} from "../../stores/pointOfSale";
 
 const VariationsTable = ({ variations }) => {
   const dispatch = useDispatch();
@@ -17,6 +21,7 @@ const VariationsTable = ({ variations }) => {
     const update = { ...order_food[selectedFoodIndex] };
     update.selected_variation = variation;
     dispatch(modify_food_order(update));
+    dispatch(update_selected_variation(variation));
   }
 
   return (

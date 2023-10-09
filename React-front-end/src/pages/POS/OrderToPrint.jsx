@@ -31,30 +31,30 @@ export const ComponentToPrint = forwardRef((props, ref) => {
         <h1 className="text-center">TOKEN NO : {order?.id || "-"}</h1>
 
         <h1 className="py-2">Date : {getDate(order?.created_at)} </h1>
-        <h1 className="py-2">
+        <h1 className="py-6">
           Payment type: {order?.payment_type?.name || "-"}
         </h1>
 
-        <table className="w-full">
+        <table className="w-full border-separate border-spacing-y-3">
           <thead>
             <tr>
-              <td className="w-[10%]">Qty</td>
               <td className="w-[70%]">Item</td>
+              <td className="w-[10%]">Qty</td>
               <td className="w-[20%]">T.Price</td>
             </tr>
           </thead>
           <tbody>
             {order?.order_food?.map(($order_food, i) => (
               <tr key={i}>
-                <td className=""> - {$order_food?.quantity}</td>
                 <td className="">
-                  {$order_food?.food?.name || " - "}
+                  -&nbsp;&nbsp;{$order_food?.food?.name || " - "}
                   {$order_food.variation && (
                     <span className="mx-[1px] px-[1px]">
                       ({$order_food.variation?.name || " - "})
                     </span>
                   )}
                 </td>
+                <td className=""> {$order_food?.quantity}</td>
                 <td className="">
                   {`${$order_food?.food?.price}  DH` || " - "}
                 </td>

@@ -4,7 +4,7 @@ import { TextField } from "@mui/material";
 import SelectOption from "../../../../components/SelectOption";
 import { Checkbox } from "@material-tailwind/react";
 // import { toggle_edit_food_modal } from "../../../../stores/manageFood";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toggle_edit_modal } from "../../../../stores/manageFood";
 import { Food } from "../../../../APIs/Food";
 
@@ -28,20 +28,21 @@ export default function EditFoodModal({ foodGroups, refresh, serverResponse }) {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const [name, setName] = useState(selected_food?.name);
-  const [price, setPrice] = useState(selected_food?.price);
-  const [is_special, setIsSpecial] = useState(selected_food?.is_special);
-  const [food_group_id, setSelectedGoupID] = useState(selected_food?.group?.id);
+  const [name, setName] = useState(selected_food.name);
+  const [price, setPrice] = useState(selected_food.price);
+  const [is_special, setIsSpecial] = useState(selected_food.is_special);
+  const [food_group_id, setSelectedGoupID] = useState(selected_food.group?.id);
+
+  useEffect(() => {
+    setName(selected_food.name);
+    setPrice(selected_food.price);
+    setIsSpecial(selected_food.is_special);
+    setSelectedGoupID(selected_food.group?.id);
+  }, [selected_food]);
 
   async function updateFoodItem() {
     const id = selected_food?.id || 0;
-    const item = {
-      id,
-      price,
-      name,
-      is_special,
-      food_group_id,
-    };
+
     // ugly code !!!!!
     if (
       selected_food.price == price &&
@@ -53,6 +54,14 @@ export default function EditFoodModal({ foodGroups, refresh, serverResponse }) {
       return;
     }
     setIsLoading(true);
+    const item = {
+      id,
+      price,
+      name,
+      is_special,
+      food_group_id,
+    };
+
     const response = await Food.update({ id, item });
     serverResponse(response);
     if (response.success) {

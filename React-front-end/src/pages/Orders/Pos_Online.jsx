@@ -7,7 +7,7 @@ import Order, { OnlineOrder, PosOrder } from "../../APIs/Orders";
 import { Modal } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import ConfirmModal from "../../components/ConfirmModal";
-import "./Pos_Online.css";
+import "./styles/Pos_Online.css";
 import { getTime, getYearMonthDay } from "../../utils/getTime";
 import Filter from "../../utils/filters";
 

@@ -70,7 +70,13 @@ const LoginPage = () => {
       <section className="flex space-y-5 maw-w-[1000px] px-4">
         <div className="w-full max-w-[450px] flex-column space-y-12 pl-8 mt-16">
           <h3 className="font-bold text-3xl text-[#2a435d] ml-8">Sign In</h3>
-          <form onSubmit={loginUser} className="flex-column space-y-5">
+          <form
+            onSubmit={loginUser}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") loginUser(e);
+            }}
+            className="flex-column space-y-5"
+          >
             <input
               className="rounded focus:outline-none text-gray-800 px-4 py-2 w-full"
               type="email"
