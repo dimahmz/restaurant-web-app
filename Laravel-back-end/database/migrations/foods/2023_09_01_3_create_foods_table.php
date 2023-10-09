@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('food_group_id')->constrained(table: 'food_groups')->cascadeOnDelete();
             $table->string("name");
-            $table->decimal("price", 8, 2);
+            $table->decimal("price", 8, 2)->nullable()->default(null);
             $table->boolean("is_special")->default(1);
             $table->integer("in_stock")->default(100);
             $table->string("image")->nullable();

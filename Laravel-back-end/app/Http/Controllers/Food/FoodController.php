@@ -37,7 +37,7 @@ class FoodController extends Controller
             $food->variations()->attach($IDs);
         }
 
-        return $this::success($food);
+        return $this::success($food, "Food has been added");
     }
 
 

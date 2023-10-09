@@ -18,9 +18,6 @@ class StorePOSorder extends FormRequest
             'order_food.*.food_id' => 'required|numeric',
             'order_food.*.variation_id' => 'present|nullable|numeric',
             'order_food.*.quantity' => 'required|numeric',
-            'order_food.*.food_property_items' => 'array',
-            'order_food.*.food_property_items.*.property_item_id' => 'required|numeric',
-            'order_food.*.food_property_items.*.quantity' => 'required|numeric',
             'branch_id' => 'required|numeric',
             'payment_id' => 'required|numeric',
             'user_id' => 'required|numeric',
@@ -36,7 +33,7 @@ class StorePOSorder extends FormRequest
         return [
             'branch_id.*' => 'You must select a branch',
             'payment_id.*' => 'You must select a payment type',
-
+            'order_food.*' => 'No food item was selected',
         ];
     }
 }

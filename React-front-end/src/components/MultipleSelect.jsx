@@ -31,7 +31,7 @@ function getStyles(name, items, theme) {
   };
 }
 
-export default function MultipleSelectChip({ options, onSelectOption, props }) {
+export default function MultipleSelectChip({ options, onSelectOption }) {
   const theme = useTheme();
   const [items, setItems] = useState([]);
 
@@ -61,9 +61,8 @@ export default function MultipleSelectChip({ options, onSelectOption, props }) {
   };
 
   return (
-    <FormControl sx={{ width: "100%" }}>
+    <FormControl sx={{ width: "100%" }} required>
       <Select
-        {...props}
         multiple
         value={items}
         onChange={handleChange}

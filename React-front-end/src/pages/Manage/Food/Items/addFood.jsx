@@ -18,7 +18,7 @@ const AddNewItemPage = () => {
 
   const [food_group_id, setFoodGroupID] = useState("");
 
-  const [price, setPrice] = useState(null);
+  const [price, setPrice] = useState("");
 
   const [hasVariations, setHasVariations] = useState(false);
 
@@ -75,7 +75,7 @@ const AddNewItemPage = () => {
     const newFood = {
       name,
       image,
-      price,
+      price: hasVariations ? 0 : price,
       food_group_id,
       is_special,
       variations_IDs: selectedVariationIDs,
@@ -145,7 +145,7 @@ const AddNewItemPage = () => {
             <Checkbox
               className="h-4 w-4"
               color="pink"
-              defaultChecked={hasVariations}
+              checked={hasVariations}
               onChange={() => setHasVariations(!hasVariations)}
             />
             <label className="inline-block cursor-pointer">
@@ -158,28 +158,30 @@ const AddNewItemPage = () => {
               addVariationPrice={getVariationsPrices}
             />
           )}
-          <div className="flex-column space-y-3 mb-3">
-            <label className="font-semibold">
-              Price
-              <span className="text-red-600">
-                *
-                <span className="text-[#158df7] font-normal">
-                  (Enter price in MAD)
+          {!hasVariations && (
+            <div className="flex-column space-y-3 mb-3">
+              <label className="font-semibold">
+                Price
+                <span className="text-red-600">
+                  *
+                  <span className="text-[#158df7] font-normal">
+                    (Enter price in MAD)
+                  </span>
                 </span>
-              </span>
-            </label>
-            <TextField
-              hiddenLabel
-              value={price}
-              size="small"
-              type="number"
-              variant="filled"
-              placeholder="e.g Type price of this item"
-              min={1}
-              onChange={(e) => setPrice(e.target.value)}
-              required
-            />
-          </div>
+              </label>
+              <TextField
+                hiddenLabel
+                value={price}
+                size="small"
+                type="number"
+                variant="filled"
+                placeholder="e.g Type price of this item"
+                min={1}
+                onChange={(e) => setPrice(e.target.value)}
+                required
+              />
+            </div>
+          )}
           <div className="flex items-center space-x-3 mb-3">
             <Checkbox
               className="h-4 w-4"

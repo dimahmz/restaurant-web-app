@@ -23,9 +23,4 @@ class UpdateFoodRequest extends FormRequest
 
         ];
     }
-    // protected function failedValidation(Validator $validator): void
-    // {
-
-    //     throw new HttpResponseException($this::error(['errors' => $validator->errors()], 'invalid inputs',  422));
-    // }
 }

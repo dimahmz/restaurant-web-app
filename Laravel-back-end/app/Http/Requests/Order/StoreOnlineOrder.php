@@ -22,5 +22,13 @@ class StoreOnlineOrder extends FormRequest
             'subtotal' => 'required|numeric',
             'total_bill' => 'required|numeric',
         ];
+        
     }
+    public function messages(): array{
+        return [
+            'branch_id.*' => 'You must select a branch',
+            "delivery_address.*"  => 'Add an address to the delivery man'
+        ];
+    }
+
 }

@@ -1,6 +1,7 @@
 /* eslint-disable no-prototype-builtins */
 // write functional tests to this function
 export default function getResponseMessage(response) {
+  if (response.success) return response.message;
   if (typeof response.payload === "object") {
     let errors = response.payload;
     let errorMsg = response.message;

@@ -28,7 +28,6 @@ export default function AddVariation({ foodVariations, addVariationPrice }) {
         <MultipleSelectChip
           options={foodVariations}
           onSelectOption={handleSelectOption}
-          required
         />
       </div>
       {variations.length != 0 && (

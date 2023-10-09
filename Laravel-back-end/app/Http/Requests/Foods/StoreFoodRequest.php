@@ -30,5 +30,14 @@ class StoreFoodRequest extends FormRequest
             'varaitions_IDs.*.price' => 'required|numeric',
             'image' => "required|image|mimes:jpeg,png,jpg,gif|max:$size"
         ];
+
+        
     }
+    public function messages(): array{
+        return [
+            'image' => 'Image is required',
+            "food_group_id.*"  => 'select a group for this food'
+        ];
+    }
+
 }

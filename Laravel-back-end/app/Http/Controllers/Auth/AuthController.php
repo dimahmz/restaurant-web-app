@@ -20,7 +20,7 @@ class AuthController extends Controller
 
 
         if (!Auth::attempt($request->only($credentials)))
-            return HttpResponses::error(null, 'name or email is incorrect', 401);
+            return HttpResponses::error(null, 'incorrect email or password', 401);
 
         $user = Auth::user();
 
