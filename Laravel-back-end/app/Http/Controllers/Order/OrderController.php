@@ -15,7 +15,7 @@ class OrderController extends Controller
     //
     function getById($id)
     {
-        $order = Order::with('branch','user',"payment_type", 'order_food.food' , 'order_food.variation')->find($id);
+        $order = Order::with('branch','user',"payment_type", 'order_food.food' , 'order_food.variation' )->find($id);
         return $this::success($order);
     }
     function get(Request $request)

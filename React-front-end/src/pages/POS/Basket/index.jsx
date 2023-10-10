@@ -15,11 +15,10 @@ const BasketComponent = () => {
   const dispatch = useDispatch();
 
   const order_food = useSelector(store_order_food);
-  const selected_variation = useSelector(
-    (state) => state.pointOfSalesOrders.selected_variation
-  );
+  const state = useSelector((state) => state.pointOfSalesOrders);
 
-  useEffect(() => {}, [selected_variation]);
+  useEffect(() => {}, [state]);
+
   const selectedFoodIndex = useSelector(
     (state) => state.pointOfSalesOrders.select_food_index
   );
@@ -38,16 +37,20 @@ const BasketComponent = () => {
     // update quantity
     $selected_food.quantity = quantity;
     // get variation if selected
-    const variation_price =
-      +$selected_food.selected_variation?.pivot?.price || 0;
+
+    const price =
+      +$selected_food.selected_variation?.pivot?.price || +$selected_food.price;
 
     // update price
-    $selected_food.quantity_price = (
-      (+$selected_food.price + variation_price) *
-      $selected_food.quantity
-    ).toFixed(2);
+    $selected_food.quantity_price = (price * $selected_food.quantity).toFixed(
+      2
+    );
 
     dispatch(modify_food_order($selected_food));
+  }
+
+  function handleDelete(index) {
+    dispatch(delete_food_order(index));
   }
 
   // className="border-collapse border border-slate-400"
@@ -98,7 +101,7 @@ const BasketComponent = () => {
                         <span
                           className="bg-[#158df7] rounded-md flex-center w-7 h-7 cursor-pointer"
                           onClick={() => {
-                            dispatch(delete_food_order(index));
+                            handleDelete(index);
                           }}
                         >
                           <FaTrash size={14} />

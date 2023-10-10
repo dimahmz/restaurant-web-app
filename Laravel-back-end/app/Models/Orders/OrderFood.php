@@ -17,6 +17,10 @@ class OrderFood extends Pivot
         return $this->belongsTo(Variation::class);
     }
 
+    function food_variation(){
+        return $this->belongsToMaby(Variation::class, 'food_variations');
+    }
+
     function propertyItems(){
         return $this->belongsToMany(PropertyItem::class , 'order_food_items');
 

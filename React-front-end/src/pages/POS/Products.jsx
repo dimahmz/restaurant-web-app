@@ -14,10 +14,13 @@ const Products = () => {
 
   function handleSelectFood(newFood) {
     const $newFood = { ...newFood };
+    const variation = $newFood.variations[0] || null;
     $newFood.selected_property_items = [];
-    $newFood.selected_variation = {};
+    $newFood.selected_variation = variation || {};
     $newFood.quantity = 1;
-    $newFood.quantity_price = $newFood.price;
+    $newFood.quantity_price = variation
+      ? variation.pivot.price
+      : $newFood.price;
     $newFood.branch_id = null;
     $newFood.user_id = null;
     dispatch(add_food_order($newFood));
@@ -58,9 +61,6 @@ const Products = () => {
             <p className="break-all text-sm text-center uppercase font-bold">
               {food.name}
             </p>
-            {/* <div className="text-sm uppercase flex justify-center items-center text-center font-bold">
-              Stock: {food.in_stock}
-            </div> */}
           </div>
         </div>
       ))}

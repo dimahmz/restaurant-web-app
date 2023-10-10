@@ -61,9 +61,7 @@ const Footer = () => {
   useEffect(() => {
     // array of prices of each food in the order plus its variation and in multiply of its quantity
     const $food_subtotals = order_food.map((food) => {
-      const variation_price = +food.selected_variation?.pivot?.price || 0;
-
-      return (+food.price + +variation_price) * +food.quantity;
+      return +food.quantity_price;
     });
     // the sum of all food in the order
     const subtotal = $food_subtotals

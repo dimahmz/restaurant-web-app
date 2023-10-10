@@ -20,10 +20,6 @@ import getResponseMessage from "../../utils/getResponse";
 const PosPage = () => {
   const dispatch = useDispatch();
 
-  const selectedFoodVariation = useSelector(
-    (state) => state.pointOfSalesOrders.selected_food_variations
-  );
-
   const [branches, setBranches] = useState([]);
   const [tables, setTables] = useState([]);
   const [foodGroups, setFoodGroups] = useState([]);
@@ -108,7 +104,7 @@ const PosPage = () => {
           <CircularProgress color="secondary" />
         </div>
       )}
-      <div className="bg-gray-200 overflow-hidden ">
+      <div className="bg-gray-200 overflow-hidden max-w-[1500px] mx-auto">
         {show_response && (
           <div className="relative z-[1000]">
             <Snackbar
@@ -151,7 +147,7 @@ const PosPage = () => {
                 <Products />
               </div>
               <div className="h-[70vh] relative w-[185px] bg-white overflow-y-auto overflow-x-hidden py-2 px-1">
-                <VariationsTable variations={selectedFoodVariation} />
+                <VariationsTable />
               </div>
 
               <div className="w-[135px] max-h-[70vh]">

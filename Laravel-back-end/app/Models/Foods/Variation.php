@@ -11,9 +11,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class Variation extends Model
 {
     use HasFactory;
-    public function foods(): BelongsToMany
+    public function food_variation(): BelongsToMany
     {
-        return $this->belongsToMany(Food::class, 'food_variations');
+        return $this->belongsToMany(Food::class, 'food_variations')->withPivot("*");
     }
     public function order_food()
     {

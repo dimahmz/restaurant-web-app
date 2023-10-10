@@ -1,6 +1,8 @@
 export default function getDate(date) {
   const $Date = new Date(date);
-  const dateString = `${$Date.getDay()}-${$Date.getMonth()}-${$Date.getFullYear()}`;
+  const dateString = `${$Date.getDate()}-${
+    $Date.getMonth() + 1
+  }-${$Date.getFullYear()}`;
   const timeString = $Date.toLocaleTimeString([], {
     hour: "2-digit",
     minute: "2-digit",
@@ -11,7 +13,7 @@ export default function getDate(date) {
 //  YY--MM--DD
 export function getYearMonthDay(date) {
   const $Date = new Date(date);
-  return `${$Date.getMonth()}-${$Date.getFullYear()}-${$Date.getDate()}`;
+  return `${$Date.getDate()}-${$Date.getMonth() + 1}-${$Date.getFullYear()}`;
 }
 
 // HH-MM

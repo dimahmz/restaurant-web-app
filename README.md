@@ -13,7 +13,7 @@
 `npm i`
 
 **start vite server**
-
+s
 `npm run dev`
 
 #### Back-end
@@ -26,20 +26,15 @@
 
 `composer install`
 
-**generate_an_app_key**
-
-`php artisan key:generate`
-
 **start Xampp server**
 
-**create a symblic link to the images storage**
-
 before this command create a folder called images in this folder storage/app/public/images
+
+**create a symblic link to the images storage**
 
 `php artisan storage:link`
 
 **run the database migrations**
-`php artisan migrate`
 
 `php artisan app:run-migrations`
 

@@ -41,14 +41,16 @@ export const pointOfSaleSlice = createSlice({
       state.food_order.push($food);
       const index = state.food_order.length - 1;
       state.select_food_index = index;
-      state.selected_food_variations = $food.variations;
-      state.selected_food_properties = $food.properties;
       state.selected_food = $food;
+      state.selected_food_variations = $food.variations;
     },
 
     delete_food_order: (state, action) => {
-      if (!state.food_order[action.payload]) return;
-      state.food_order.splice(action.payload, 1);
+      state.food_order.splice(action.paylload, 1);
+      if (state.food_order.length == 0) {
+        state.selected_food_variations = [];
+        state.selected_food = { id: null };
+      }
     },
     modify_food_order: (state, action) => {
       state.food_order[state.select_food_index] = action.payload;
