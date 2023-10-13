@@ -14,6 +14,7 @@ const lineStyle = {
 export const ComponentToPrint = forwardRef((props, ref) => {
   const response = useSelector((state) => state.pointOfSalesOrders.response);
   const order = response.payload;
+  console.log(order);
   return (
     <div ref={ref} className="mx-16 my-10 text-sm">
       <div>
@@ -55,9 +56,20 @@ export const ComponentToPrint = forwardRef((props, ref) => {
                   )}
                 </td>
                 <td className=""> {$order_food?.quantity}</td>
-                <td className="">
-                  {`${$order_food?.food?.price}  DH` || " - "}
-                </td>
+                {$order_food?.food_variation ? (
+                  <td className="">
+                    {`${
+                      +$order_food?.food_variation?.price *
+                      +$order_food?.quantity
+                    }  DH` || " - "}
+                  </td>
+                ) : (
+                  <td className="">
+                    {`${
+                      $order_food?.food?.price * +$order_food?.quantity
+                    }  DH` || " - "}
+                  </td>
+                )}
               </tr>
             ))}
           </tbody>

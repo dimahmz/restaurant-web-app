@@ -18,7 +18,7 @@ class OrderFood extends Pivot
     }
 
     function food_variation(){
-        return $this->belongsToMaby(Variation::class, 'food_variations');
+        return $this->hasOneThrough(Variation::class, 'food_variations');
     }
 
     function propertyItems(){

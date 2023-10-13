@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Order;
 
+use App\Models\Foods\FoodVariation;
 use App\Models\Orders\Order;
 use App\Traits\HttpResponses;
 use App\Models\Orders\OrderFood;
 use App\Http\Controllers\Controller;
 use App\Models\Orders\OrderFoodItem;
 use App\Http\Requests\Order\StorePOSorder;
+use App\Http\Controllers\Order\OrderController;
 
 class PosOrderController extends Controller
 {
@@ -38,19 +40,17 @@ class PosOrderController extends Controller
                 'variation_id' => $order_food['variation_id'],
                 'quantity'=>$order_food['quantity'],        
             ]);
-                // each order food can have multiple property items attched to it  
-                // if(isset($order_food['food_property_items'])){
-                //     Log::info(isset($order_food['food_property_items']));
-                //     foreach ($order_food['food_property_items'] as $food_property_item ){
-                //         OrderFoodItem::create([
-                //             'order_food_id'=> $new_order_food->id,
-                //             'property_item_id'=> $food_property_item['property_item_id'],
-                //             'quantity'=>$food_property_item['quantity'],
-                //         ]);
-                //     }
-                // }
+             
         }
-        $order = Order::with('branch','user','order_food.food', 'payment_type' , 'order_food.variation')->find($order->id);
+        $order = Order::with('branch', 'user', 'payment_type', 'order_food.food', 'order_food.variation')->find($order->id);
+        if ($order) {   
+            foreach ($order->order_food as $orderFood) {
+                $foodId = $orderFood->food_id;
+                $variationId = $orderFood->variation_id;
+                $foodVariation = FoodVariation::where('food_id', $foodId)->where('variation_id', $variationId)->first();
+                $orderFood->food_variation = $foodVariation;
+            }
+        }
         return $this::success($order, "Order has been taken");
     }
     // --------- read ----------

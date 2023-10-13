@@ -2,22 +2,21 @@
 
 namespace App\Http\Controllers\Order;
 
+use App\Models\Foods\FoodVariation;
 use App\Models\Orders\Order;
-use App\Traits\HttpResponses;
-use App\Models\Orders\OrderFood;
-use Illuminate\Support\Facades\Log;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Traits\HttpResponses;
+use App\Http\Controllers\Controller;
 
 class OrderController extends Controller
 {
     use HttpResponses;
     //
-    function getById($id)
-    {
-        $order = Order::with('branch','user',"payment_type", 'order_food.food' , 'order_food.variation' )->find($id);
-        return $this::success($order);
-    }
+    // function getById($id)
+    // {
+    //     $order = Order::with('branch','user',"payment_type", 'order_food.food' , 'order_food.variation' )->find($id);
+    //     return $this::success($order);
+    // }
     function get(Request $request)
 
     {
@@ -31,6 +30,23 @@ class OrderController extends Controller
 
         return $this::success($orders);
     }
+
+    function getById($id)
+
+    {
+        $order = Order::with('branch', 'user', 'payment_type', 'order_food.food', 'order_food.variation')->find($id);
+        if ($order) {   
+            foreach ($order->order_food as $orderFood) {
+                $foodId = $orderFood->food_id;
+                $variationId = $orderFood->variation_id;
+                $foodVariation = FoodVariation::where('food_id', $foodId)->where('variation_id', $variationId)->first();
+                $orderFood->food_variation = $foodVariation;
+            }
+        }
+
+        return $this::success($order);
+    }
+
     function getKitchenOrders()
     {
 
@@ -68,3 +84,4 @@ class OrderController extends Controller
 
 
 }
+

@@ -7,7 +7,6 @@ const Products = () => {
   const $selected_food = useSelector(
     (state) => state.pointOfSalesOrders.selected_food
   );
-  console.log($selected_food);
 
   const selectedGroupFood = useSelector(
     (state) => state.pointOfSalesOrders.selected_group_food
