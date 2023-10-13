@@ -7,28 +7,28 @@ import { Link } from "react-router-dom";
 const dashboardElements = [
   {
     to: "/dashboard/pos",
-    imgSrc: "https://khadyo.softtechdemo.com/assets/img/product-img-2.jpg",
+    imgSrc: "images/pos.jpg",
     icon: <HiShoppingCart size={20} />,
     title: "POS",
     description: "Point Of Sales",
   },
   {
     to: "/dashboard/online-orders",
-    imgSrc: "https://khadyo.softtechdemo.com/assets/img/product-img-3.jpg",
+    imgSrc: "images/orders.jpg",
     icon: <HiShoppingCart size={20} />,
     title: "ORDERS",
     description: "Orders Histories",
   },
   {
     to: "/dashboard/kitchen",
-    imgSrc: "https://khadyo.softtechdemo.com/assets/img/product-img-9.jpg",
+    imgSrc: "images/kitchen.jpg",
     icon: <HiShoppingCart size={20} />,
     title: "KITCHEN",
     description: "Kitchen",
   },
   {
     to: "/dashboard/manage/food/",
-    imgSrc: "https://khadyo.softtechdemo.com/assets/img/product-img-8.png",
+    imgSrc: "images/manage.png",
     icon: <MdManageHistory size={20} />,
     title: "MANAGE",
     description: "Manage",
