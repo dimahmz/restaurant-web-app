@@ -13,7 +13,8 @@ const VariationsTable = () => {
   const selectedFoodVariation = useSelector(
     (state) => state.pointOfSalesOrders.selected_food_variations
   );
-  // console.log(selectedFoodVariation);
+
+  console.log(selected_food);
 
   const order_food = useSelector(store_order_food);
 
@@ -35,7 +36,7 @@ const VariationsTable = () => {
         </div>
         {!selected_food.id ? (
           <p className="px-2 mt-7 text-center text-base">no food is selected</p>
-        ) : selectedFoodVariation?.length == 0 ? (
+        ) : selected_food?.variations?.length == 0 ? (
           <p className="px-2 mt-7 text-center text-base">
             Food doesn&apos;t have any variation
           </p>
@@ -48,7 +49,7 @@ const VariationsTable = () => {
               </tr>
             </thead>
             <tbody className="bg-[#f4f9fc] border">
-              {selectedFoodVariation?.map((variation, index) => (
+              {selected_food?.variations?.map((variation, index) => (
                 <tr key={index} className="border-b-2">
                   <td className="p-2 ">
                     <label className="flex items-center space-x-2">

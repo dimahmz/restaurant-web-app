@@ -46,11 +46,9 @@ export const pointOfSaleSlice = createSlice({
     },
 
     delete_food_order: (state, action) => {
-      state.food_order.splice(action.paylload, 1);
-      if (state.food_order.length == 0) {
-        state.selected_food_variations = [];
-        state.selected_food = { id: null };
-      }
+      state.select_food_index = -1;
+      state.selected_food = { id: null };
+      state.food_order.splice(action.payload, 1);
     },
     modify_food_order: (state, action) => {
       state.food_order[state.select_food_index] = action.payload;
