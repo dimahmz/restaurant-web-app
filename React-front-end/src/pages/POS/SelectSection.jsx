@@ -8,6 +8,7 @@ import {
 } from "../../stores/pointOfSale";
 import SelectOption from "../../components/SelectOption";
 import { useState } from "react";
+import { Button } from "@mui/material";
 
 const SelectSideBar = ({ branches, tables, pyamnetTypes }) => {
   const dispatch = useDispatch();
@@ -52,12 +53,18 @@ const SelectSideBar = ({ branches, tables, pyamnetTypes }) => {
         />
       </div>
       <div className="absolute bottom-[15px] w-full flex-center">
-        <button
+        <Button
+          variant="contained"
+          sx={{
+            backgroundColor: "#f64e60",
+            "&:hover": {
+              backgroundColor: "#f64e60",
+            },
+          }}
           onClick={cancleSelections}
-          className="uppercase py-2 px-2 text-white bg-[#f64e60]"
         >
-          cancel
-        </button>
+          Cancel
+        </Button>
       </div>
     </div>
   );

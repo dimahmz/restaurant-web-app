@@ -13,6 +13,7 @@ import {
   reset_store,
 } from "../../../stores/pointOfSale";
 import { PosOrder } from "../../../APIs/Orders";
+import { Button } from "@mui/material";
 
 const Footer = () => {
   const dispatch = useDispatch();
@@ -150,12 +151,21 @@ const Footer = () => {
         <div className="hidden">
           <ComponentToPrint ref={componenetRef} />
         </div>
-        <button
-          className="text-white px-4 py-2 tracking-[5px]  bg-[#0dd19d] rounded-[2px]"
+        <Button
+          variant="contained"
+          sx={{
+            fontSize: "18px",
+            letterSpacing: "5px",
+            paddingX: "50px",
+            backgroundColor: "#0dd19d",
+            "&:hover": {
+              backgroundColor: "#0dd19d",
+            },
+          }}
           onClick={submitOrder}
         >
           SUBMIT
-        </button>
+        </Button>
       </div>
     </div>
   );

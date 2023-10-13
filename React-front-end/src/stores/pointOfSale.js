@@ -21,6 +21,7 @@ const initialState = {
     value: 0.0,
   },
   order_commission: 0,
+  changeNumber: 0,
 };
 
 export const pointOfSaleSlice = createSlice({
@@ -47,7 +48,9 @@ export const pointOfSaleSlice = createSlice({
 
     delete_food_order: (state, action) => {
       state.select_food_index = -1;
+      state.selected_food_variations = [];
       state.selected_food = { id: null };
+      state.selected_variation = {};
       state.food_order.splice(action.payload, 1);
     },
     modify_food_order: (state, action) => {
@@ -130,6 +133,9 @@ export const pointOfSaleSlice = createSlice({
         if (initialState[key]) state[key] = initialState[key];
       });
     },
+    notify_change: (state) => {
+      state.changeNumber = state.payload;
+    },
   },
 });
 
@@ -154,6 +160,7 @@ export const {
   update_total_bill,
   reset_store,
   reset_selections,
+  notify_change,
 } = pointOfSaleSlice.actions;
 
 export const store_order_food = (state) => state.pointOfSalesOrders.food_order;

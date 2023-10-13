@@ -9,10 +9,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { FaTrash } from "react-icons/fa";
 import BasketHeader from "./BasketHeader";
 import BasketFooter from "./BasketFooter";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 const BasketComponent = () => {
   const dispatch = useDispatch();
+
+  const DeleteBtnRef = useRef();
 
   const order_food = useSelector(store_order_food);
   const state = useSelector((state) => state.pointOfSalesOrders);
@@ -23,7 +25,7 @@ const BasketComponent = () => {
     (state) => state.pointOfSalesOrders.select_food_index
   );
 
-  function handleSelcetedFoodInOrder(food, index) {
+  function handleSelcetedFoodInOrder(e, food, index) {
     dispatch(update_index({ index, food }));
   }
 
@@ -49,8 +51,9 @@ const BasketComponent = () => {
     dispatch(modify_food_order($selected_food));
   }
 
-  function handleDelete(index) {
+  function handleDelete(e, index) {
     dispatch(delete_food_order(index));
+    e.stopPropagation();
   }
 
   // className="border-collapse border border-slate-400"
@@ -77,7 +80,7 @@ const BasketComponent = () => {
                                     ? "bg-[#f64e60] text-white basket-order"
                                     : "text-black basket-order"
                                 }`}
-                  onClick={() => handleSelcetedFoodInOrder($food, index)}
+                  onClick={(e) => handleSelcetedFoodInOrder(e, $food, index)}
                 >
                   <span className="w-12">{index + 1}</span>
                   <div className="w-full">
@@ -100,8 +103,9 @@ const BasketComponent = () => {
                         </section>
                         <span
                           className="bg-[#158df7] rounded-md flex-center w-7 h-7 cursor-pointer"
-                          onClick={() => {
-                            handleDelete(index);
+                          ref={DeleteBtnRef}
+                          onClick={(e) => {
+                            handleDelete(e, index);
                           }}
                         >
                           <FaTrash size={14} />

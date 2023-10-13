@@ -10,14 +10,10 @@ const VariationsTable = () => {
   const selectedFoodIndex = useSelector(
     (state) => state.pointOfSalesOrders.select_food_index
   );
-  // const selectedFoodVariation = useSelector(
-  //   (state) => state.pointOfSalesOrders.selected_food_variations
-  // );
 
   const order_food = useSelector(store_order_food);
 
   function addVariation(variation) {
-    console.log(variation);
     const update = { ...order_food[selectedFoodIndex] };
     update.selected_variation = variation;
     const quantity = +update.quantity;

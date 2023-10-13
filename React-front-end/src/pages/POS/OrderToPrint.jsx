@@ -14,7 +14,6 @@ const lineStyle = {
 export const ComponentToPrint = forwardRef((props, ref) => {
   const response = useSelector((state) => state.pointOfSalesOrders.response);
   const order = response.payload;
-  console.log(order);
   return (
     <div ref={ref} className="mx-16 my-10 text-sm">
       <div>

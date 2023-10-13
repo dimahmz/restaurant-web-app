@@ -124,7 +124,7 @@ const PosPage = () => {
               <OrdersNavBar />
             </div>
             <div className="max-h-[70vh] px-2 flex space-x-2">
-              <div className="overflow-y-auto px-1 w-full max-w-[150px]">
+              <div className="overflow-y-auto px-3 w-full max-w-[180px]">
                 {commissionsLoading ? (
                   <div className="flex-center w-full h-1/2 z-[1000] backdrop-blur-sm bg-white/0">
                     <CircularProgress color="primary" />
