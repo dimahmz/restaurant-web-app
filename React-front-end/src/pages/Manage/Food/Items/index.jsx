@@ -184,7 +184,7 @@ const FoodItems = () => {
   }
 
   return (
-    <div className="bg-white h-full relative">
+    <div className="bg-white h-full w-full">
       {/* Delete a food modal */}
       <DeleteFoodItemModal
         refresh={fetchFood}

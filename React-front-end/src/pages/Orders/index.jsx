@@ -165,7 +165,7 @@ const OnlineHistoryPage = () => {
   ];
 
   return (
-    <>
+    <div className="w-full h-full">
       <SnackBar
         message={errorMsg}
         open={openNotification}
@@ -185,52 +185,43 @@ const OnlineHistoryPage = () => {
         isLoading={isDeleteLoading}
       />
 
-      <div className="bg-gray-200 h-screen ">
-        {/* Table seach header component */}
-        <div className="px-3">
-          <SeachHeader
-            onSearchChange={searchChange}
-            branchChange={branchChange}
-          />
-          <div
-            style={{
-              width: "100%",
-              backgroundColor: "#ffffff",
-              padding: "14px",
-              overflowY: "auto",
+      {/* Table seach header component */}
+      <div className="px-3">
+        <SeachHeader
+          onSearchChange={searchChange}
+          branchChange={branchChange}
+        />
+        <div className="bg-white my-2 l overflow-auto">
+          <DataGrid
+            sx={{
+              height: "100%",
+              "& .MuiDataGrid-cell:focus": {
+                outline: "none",
+                border: "none",
+              },
             }}
-          >
-            <DataGrid
-              sx={{
-                height: 340,
-                "& .MuiDataGrid-cell:focus": {
-                  outline: "none",
-                  border: "none",
-                },
-              }}
-              rows={filteredRows.map((row, i) => ({
-                _index: i + 1,
-                ...row,
-              }))}
-              columns={columns}
-              initialState={{
-                pagination: {
-                  paginationModel: { page: 0, pageSize: 5 },
-                },
-              }}
-              pageSizeOptions={[5, 10]}
-              loading={isLoading}
-            />
-          </div>
-          <Modal open={openModal} onClose={() => setOpenModal(false)}>
-            <OrderDetailModal
-              selectedOrder={selectedOrder}
-              isDetailLoading={isDetailLoading}
-            />
-          </Modal>
+            rows={filteredRows.map((row, i) => ({
+              _index: i + 1,
+              ...row,
+            }))}
+            columns={columns}
+            initialState={{
+              pagination: {
+                paginationModel: { page: 0, pageSize: 5 },
+              },
+            }}
+            pageSizeOptions={[5, 10]}
+            loading={isLoading}
+          />
         </div>
+        <Modal open={openModal} onClose={() => setOpenModal(false)}>
+          <OrderDetailModal
+            selectedOrder={selectedOrder}
+            isDetailLoading={isDetailLoading}
+          />
+        </Modal>
       </div>
-    </>
+    </div>
   );
 };
 

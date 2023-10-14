@@ -26,8 +26,8 @@ const SubPages = [
 const ManageSideBar = () => {
   const [selecteSubPagesIndex, setSelecteSubPagesIndex] = useState(0);
   return (
-    <div className="py-1 flex justify-center w-full space-x-4">
-      <aside className="w-[236px] max-h-[100vh] overflow-y-auto space-y-2">
+    <div className="py-1 flex justify-center w-full space-x-4 px-4">
+      <aside className="w-[250px] overflow-y-auto space-y-2">
         {SubPages.map((subpage, i) => (
           <div key={i} className="bg-white ">
             <h1
@@ -58,7 +58,7 @@ const ManageSideBar = () => {
           </div>
         ))}
       </aside>
-      <section className="w-full max-w-[900px] h-[75vh] overflow-y-auto">
+      <section className="h-full w-full">
         <Outlet />
       </section>
     </div>

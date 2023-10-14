@@ -117,7 +117,7 @@ const Branches = () => {
   ];
 
   return (
-    <div className="bg-white h-full">
+    <div className="bg-white w-full h-full">
       <TableHeader
         title="Payment Type List"
         handleSearchChange={filterPaymentTypes}

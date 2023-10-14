@@ -7,7 +7,7 @@ const PosModal = ({ selectedOrder, isDetailLoading }) => {
   // location.pathname === "/dashboard/pos-orders" ?
 
   return (
-    <section className="w-full max-w-[800px] bg-white absolute top-10 left-1/2 transform -translate-x-1/2 py-3 px-5">
+    <section className="w-full h-full max-w-[800px] bg-white fixed top-10 left-1/2 transform -translate-x-1/2 py-3 px-5">
       {isDetailLoading ? (
         <div className="flex-center w-full min-h-[50vh]">
           <CircularProgress color="inherit" />

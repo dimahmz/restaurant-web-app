@@ -116,7 +116,7 @@ export default function VariationItems() {
   }
 
   return (
-    <div className="bg-white h-full">
+    <div className="bg-white h-full w-full">
       <TableHeader
         title="Variations Item List"
         handleSearchChange={filterGroup}
@@ -149,6 +149,7 @@ export default function VariationItems() {
 
       <div className="w-full h-[400px] px-4 py-8 mt-3">
         <DataGrid
+          width="100%"
           rows={filtredVariations.map((row, i) => ({
             _index: i + 1,
             ...row,

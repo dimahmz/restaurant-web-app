@@ -6,7 +6,7 @@ import ResetPasswordPage from "./pages/Auth/ResetPasswordPage";
 // Dashboard
 import DashboardPage from "./pages/Dashboard";
 import PosDashboard from "./pages/POS";
-import PosOnlineOrders from "./pages/Orders/Pos_Online";
+import PosOnlineOrders from "./pages/Orders";
 import Kichen from "./pages/Kitchen";
 // manage
 import ManagePage from "./pages/Manage";

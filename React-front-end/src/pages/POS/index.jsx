@@ -98,73 +98,71 @@ const PosPage = () => {
   }, [response]);
 
   return (
-    <>
+    <div className="w-full">
       {isLoading && (
         <div className="fixed w-screen h-screen flex-center z-[1000000] backdrop-blur-sm bg-white/0">
           <CircularProgress color="secondary" />
         </div>
       )}
-      <div className="bg-gray-200 overflow-hidden max-w-[1500px] mx-auto">
-        {show_response && (
-          <div className="relative z-[1000]">
-            <Snackbar
-              message={message}
-              open={show_response}
-              severity={response.success ? "success" : "error"}
-              handleClose={() => {
-                dispatch(set_show_response(false));
-              }}
-              sx={sx}
-            />
+      {show_response && (
+        <div className="relative z-[1000]">
+          <Snackbar
+            message={message}
+            open={show_response}
+            severity={response.success ? "success" : "error"}
+            handleClose={() => {
+              dispatch(set_show_response(false));
+            }}
+            sx={sx}
+          />
+        </div>
+      )}
+      <div className="flex w-full">
+        <div className="flex-col">
+          <div className="px-3 py-2">
+            <OrdersNavBar />
           </div>
-        )}
-        <div className="flex w-full  overflow-y-hidden overflow-x-auto">
-          <div className="flex-col">
-            <div className="px-3 py-2">
-              <OrdersNavBar />
-            </div>
-            <div className="max-h-[70vh] px-2 flex space-x-2">
-              <div className="overflow-y-auto px-3 w-full max-w-[180px]">
-                {commissionsLoading ? (
-                  <div className="flex-center w-full h-1/2 z-[1000] backdrop-blur-sm bg-white/0">
-                    <CircularProgress color="primary" />
-                  </div>
-                ) : (
-                  <CommissionBar data={commissions} />
-                )}
-                {foodGroupsLoading ? (
-                  <div className="flex-center w-full h-1/2 z-[1000] backdrop-blur-sm bg-white/0">
-                    <CircularProgress color="primary" />
-                  </div>
-                ) : (
-                  <GroupsBar
-                    foodGroups={foodGroups}
-                    onSelectGroup={handleSelectedGroup}
-                  />
-                )}
-              </div>
-              <div className="w-[322px] overflow-y-auto">
-                <Products />
-              </div>
-              <div className="h-[70vh] relative w-[185px] bg-white overflow-y-auto overflow-x-hidden py-2 px-1">
-                <VariationsTable />
-              </div>
-
-              <div className="w-[135px] max-h-[70vh]">
-                <SelectSection
-                  branches={branches}
-                  tables={tables}
-                  pyamnetTypes={pyamnetTypes}
+          <div className="px-2 flex space-x-2">
+            <div className="overflow-y-auto px-3 w-full max-w-[180px]">
+              {commissionsLoading ? (
+                <div className="flex-center w-full h-1/2 z-[1000] backdrop-blur-sm bg-white/0">
+                  <CircularProgress color="primary" />
+                </div>
+              ) : (
+                <CommissionBar data={commissions} />
+              )}
+              {foodGroupsLoading ? (
+                <div className="flex-center w-full h-1/2 z-[1000] backdrop-blur-sm bg-white/0">
+                  <CircularProgress color="primary" />
+                </div>
+              ) : (
+                <GroupsBar
+                  foodGroups={foodGroups}
+                  onSelectGroup={handleSelectedGroup}
                 />
-              </div>
+              )}
             </div>
-          </div>
-          <div className="flex h-[79vh] w-full pr-3 pt-2">
-            <BasketComponent />
+            <div className="w-[222px] overflow-y-auto">
+              <Products />
+            </div>
+            <div className="relative w-[185px] bg-white overflow-y-auto overflow-x-hidden py-2 px-1">
+              <VariationsTable />
+            </div>
+
+            <div className="w-[135px]">
+              <SelectSection
+                branches={branches}
+                tables={tables}
+                pyamnetTypes={pyamnetTypes}
+              />
+            </div>
           </div>
         </div>
+        <div className="flex w-full pt-2">
+          <BasketComponent />
+        </div>
       </div>
-    </>
+    </div>
   );
 };
 

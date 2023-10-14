@@ -94,7 +94,7 @@ const AddNewItemPage = () => {
   }
 
   return (
-    <>
+    <div className="w-full h-full p-6 text-[#121053] text-sm bg-white">
       <SnackBar
         message={response.message}
         open={response.open}
@@ -104,133 +104,129 @@ const AddNewItemPage = () => {
         }}
       />
 
-      <div className="w-full p-6 text-[#121053] text-sm bg-white">
-        <p className="mb-3 text-[#121053] text-lg font-bold">Add New Item</p>
-        <form
-          encType="multipart/form-data"
-          onSubmit={AddNewFoodItem}
-          className="rounded-lg border-[1px] border-solid p-4"
-        >
-          <div className="flex-column space-y-2 mb-3">
-            <label className=" font-semibold ">
-              Food Group
-              <span className="text-red-600">*</span>
-            </label>
-            <SelectOption
-              required
-              options={foodGroups}
-              onSelectOption={(id) => {
-                setFoodGroupID(id);
-              }}
-              label="Select a group"
-              selectedOption=""
-            />
-          </div>
-          <div className="flex-column space-y-2 mb-3">
-            <label className=" font-semibold">
-              Name
-              <span className="text-red-600">*</span>
+      <p className="mb-3 text-[#121053] text-lg font-bold">Add New Item</p>
+      <form
+        encType="multipart/form-data"
+        onSubmit={AddNewFoodItem}
+        className="w-full rounded-lg border-[1px] border-solid p-4"
+      >
+        <div className="flex-column space-y-2 mb-3">
+          <label className=" font-semibold ">
+            Food Group
+            <span className="text-red-600">*</span>
+          </label>
+          <SelectOption
+            required
+            options={foodGroups}
+            onSelectOption={(id) => {
+              setFoodGroupID(id);
+            }}
+            label="Select a group"
+            selectedOption=""
+          />
+        </div>
+        <div className="flex-column space-y-2 mb-3">
+          <label className=" font-semibold">
+            Name
+            <span className="text-red-600">*</span>
+          </label>
+          <TextField
+            hiddenLabel
+            value={name}
+            placeholder="e.g Spicy Pizza"
+            size="small"
+            variant="filled"
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
+        </div>
+        <div className="flex items-center space-x-2 mb-3">
+          <Checkbox
+            className="h-4 w-4"
+            color="pink"
+            checked={hasVariations}
+            onChange={() => setHasVariations(!hasVariations)}
+          />
+          <label className="inline-block cursor-pointer">Has variations?</label>
+        </div>
+        {hasVariations && (
+          <AddVariation
+            foodVariations={foodVariations}
+            addVariationPrice={getVariationsPrices}
+          />
+        )}
+        {!hasVariations && (
+          <div className="flex-column space-y-3 mb-3">
+            <label className="font-semibold">
+              Price
+              <span className="text-red-600">
+                *
+                <span className="text-[#158df7] font-normal">
+                  (Enter price in MAD)
+                </span>
+              </span>
             </label>
             <TextField
               hiddenLabel
-              value={name}
-              placeholder="e.g Spicy Pizza"
+              value={price}
               size="small"
+              type="number"
               variant="filled"
-              onChange={(e) => setName(e.target.value)}
+              placeholder="e.g Type price of this item"
+              min={1}
+              onChange={(e) => setPrice(e.target.value)}
               required
             />
           </div>
-          <div className="flex items-center space-x-2 mb-3">
-            <Checkbox
-              className="h-4 w-4"
-              color="pink"
-              checked={hasVariations}
-              onChange={() => setHasVariations(!hasVariations)}
+        )}
+        <div className="flex items-center space-x-3 mb-3">
+          <Checkbox
+            className="h-4 w-4"
+            color="pink"
+            name="is_special"
+            defaultChecked={() => (is_special == 1 ? true : false)}
+            onChange={() => setIsSpecial(() => (is_special ? 1 : 0))}
+          />
+          <label className="cursor-pointer"> Is Special?</label>
+        </div>
+        <div className="flex-column space-y-6">
+          <label className="font-semibold ">
+            Image
+            <span className="text-[#158df7] font-normal">(300x300)</span>
+          </label>
+          <div>
+            <input
+              type="file"
+              name="image"
+              accept="image/*"
+              defaultValue={image}
+              onChange={(e) => setImage(e.target.files[0])}
+              required
             />
-            <label className="inline-block cursor-pointer">
-              Has variations?
-            </label>
           </div>
-          {hasVariations && (
-            <AddVariation
-              foodVariations={foodVariations}
-              addVariationPrice={getVariationsPrices}
-            />
-          )}
-          {!hasVariations && (
-            <div className="flex-column space-y-3 mb-3">
-              <label className="font-semibold">
-                Price
-                <span className="text-red-600">
-                  *
-                  <span className="text-[#158df7] font-normal">
-                    (Enter price in MAD)
-                  </span>
-                </span>
-              </label>
-              <TextField
-                hiddenLabel
-                value={price}
-                size="small"
-                type="number"
-                variant="filled"
-                placeholder="e.g Type price of this item"
-                min={1}
-                onChange={(e) => setPrice(e.target.value)}
-                required
-              />
-            </div>
-          )}
-          <div className="flex items-center space-x-3 mb-3">
-            <Checkbox
-              className="h-4 w-4"
-              color="pink"
-              name="is_special"
-              defaultChecked={() => (is_special == 1 ? true : false)}
-              onChange={() => setIsSpecial(() => (is_special ? 1 : 0))}
-            />
-            <label className="cursor-pointer"> Is Special?</label>
-          </div>
-          <div className="flex-column space-y-6">
-            <label className="font-semibold ">
-              Image
-              <span className="text-[#158df7] font-normal">(300x300)</span>
-            </label>
-            <div>
-              <input
-                type="file"
-                name="image"
-                accept="image/*"
-                defaultValue={image}
-                onChange={(e) => setImage(e.target.files[0])}
-                required
-              />
-            </div>
-            <button className="inline-block text-lg uppercase tracking-widest">
-              <LoadingButton
-                sx={{
-                  paddingX: "70px",
-                  paddingY: "7px",
-                  backgroundColor: "#F5364A",
-                  fontSize: "15px",
-                  letterSpacing: "5px",
-                  "&:hover": {
-                    backgroundColor: "#F5365A",
-                  },
-                }}
-                loading={isLoading}
-                size="small"
-                loadingPosition="center"
-                variant="contained"
-              >
-                <span>save</span>
-              </LoadingButton>
-            </button>
-          </div>
-        </form>
-      </div>
-    </>
+          <button className="inline-block text-lg uppercase tracking-widest">
+            <LoadingButton
+              sx={{
+                paddingX: "70px",
+                paddingY: "7px",
+                backgroundColor: "#F5364A",
+                fontSize: "15px",
+                letterSpacing: "5px",
+                "&:hover": {
+                  backgroundColor: "#F5365A",
+                },
+              }}
+              loading={isLoading}
+              size="small"
+              loadingPosition="center"
+              variant="contained"
+            >
+              <span>save</span>
+            </LoadingButton>
+          </button>
+        </div>
+      </form>
+    </div>
   );
 };
 

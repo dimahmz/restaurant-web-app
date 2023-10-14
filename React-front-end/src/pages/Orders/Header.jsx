@@ -54,7 +54,7 @@ const TableHeader = ({ onSearchChange, branchChange }) => {
   }
 
   return (
-    <header className="relative header-shadow max-w-[1520px] mx-auto px-4 mt-[10px] bg-white py-2">
+    <header className="relative header-shadow px-4  bg-white py-2">
       <h1 className="text-lg font-bold uppercase text-[#121053] my-1">
         {link.title}
       </h1>

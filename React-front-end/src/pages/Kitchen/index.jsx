@@ -43,8 +43,8 @@ const KitchenPage = () => {
   }, []);
 
   return (
-    <div className="px-4 mb-16 fixed h-[78vh] w-full overflow-y-auto">
-      <div className="mb-3 sticky top-0 z-[100] header-shadow">
+    <div className="px-4">
+      <div className="mb-3 sticky top-0 w-full z-[100] header-shadow">
         <KitchenHeader
           onRefrechOrder={() => getOrders()}
           handleFilter={onFilter}

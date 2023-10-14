@@ -31,26 +31,28 @@ export default function AddVariation({ refresh, serverResponse }) {
     setIsLoading(false);
   }
   return (
-    <FormModal
-      labels={{ title: "Add new Variation" }}
-      open={openModal}
-      handleClose={closeModal}
-      onSubmitForm={addVariation}
-      isLoading={isLoading}
-    >
-      <div className="py-3 px-4 flex-col space-y-4">
-        <label htmlFor="group_name">Name</label>
-        <TextField
-          required
-          name="group_name"
-          fullWidth
-          hiddenLabel
-          placeholder="e.g Burger, Chiken"
-          size="small"
-          variant="filled"
-          onChange={(e) => setName(e.target.value)}
-        />
-      </div>
-    </FormModal>
+    <div className="w-full">
+      <FormModal
+        labels={{ title: "Add new Variation" }}
+        open={openModal}
+        handleClose={closeModal}
+        onSubmitForm={addVariation}
+        isLoading={isLoading}
+      >
+        <div className="py-3 px-4 flex-col space-y-4">
+          <label htmlFor="group_name">Name</label>
+          <TextField
+            required
+            name="group_name"
+            fullWidth
+            hiddenLabel
+            placeholder="e.g Burger, Chiken"
+            size="small"
+            variant="filled"
+            onChange={(e) => setName(e.target.value)}
+          />
+        </div>
+      </FormModal>
+    </div>
   );
 }

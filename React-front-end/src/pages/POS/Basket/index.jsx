@@ -58,7 +58,7 @@ const BasketComponent = () => {
 
   // className="border-collapse border border-slate-400"
   return (
-    <div className="relative w-full bg-white px-2 py-2">
+    <div className="relative bg-white px-2 py-2">
       <BasketHeader />
       <div className="h-[59%] overflow-y-auto py-1">
         {order_food.length === 0 ? (
