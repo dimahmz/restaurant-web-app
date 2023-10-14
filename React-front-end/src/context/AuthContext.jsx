@@ -9,6 +9,7 @@ import {
   set_user_profile,
   update_loading,
 } from "../stores/user";
+import axiosInstance from "../utils/axios";
 
 export const AuthContext = createContext();
 
@@ -50,6 +51,9 @@ export default function AuthProvider({ children }) {
         response.payload.token,
         rememberUser ? 100 : 0
       );
+      axiosInstance.defaults.headers[
+        "Authorization"
+      ] = `Bearer ${response.payload.token}`;
     }
 
     return response;
