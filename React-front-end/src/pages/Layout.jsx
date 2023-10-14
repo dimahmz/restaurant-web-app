@@ -26,7 +26,7 @@ const Layout = () => {
           }}
           className={`relative py-3 overflow-auto w-full max-w-[1320px] mx-auto`}
         >
-          <div className="relative w-full h-full  overflow-auto">
+          <div className="relative w-full h-full overflow-auto">
             <Outlet />
           </div>
         </div>

@@ -154,9 +154,9 @@ const Footer = () => {
         <Button
           variant="contained"
           sx={{
-            fontSize: "18px",
+            fontSize: "15px",
             letterSpacing: "5px",
-            paddingX: "50px",
+            paddingX: "30px",
             backgroundColor: "#0dd19d",
             "&:hover": {
               backgroundColor: "#0dd19d",
