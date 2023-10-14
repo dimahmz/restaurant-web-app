@@ -8,20 +8,20 @@ export default defineConfig({
     include: ["@emotion/styled"],
   },
   server: {
-    proxy: {
-      "/serverip": {
-        // locahost
-        target: "http://192.168.1.106:8000/api/",
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/serverip/, ""),
-      },
-      "/images_host": {
-        // locahost
-        target: "http://192.168.1.106:8000/storage/",
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/images_host/, ""),
-      },
-    },
+    // proxy: {
+    //   "/serverip": {
+    //     // locahost
+    //     target: "http://192.168.1.106:8000/api/",
+    //     changeOrigin: true,
+    //     rewrite: (path) => path.replace(/^\/serverip/, ""),
+    //   },
+    // "/images_host": {
+    //   // locahost
+    //   target: "http://192.168.1.106:8000/storage/",
+    //   changeOrigin: true,
+    //   rewrite: (path) => path.replace(/^\/images_host/, ""),
+    // },
+    // },
     host: true,
   },
 });

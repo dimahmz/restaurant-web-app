@@ -22,6 +22,8 @@ import SimpleSnackbar from "../../../../components/snackBar";
 import getResponseMessage from "../../../../utils/getResponse";
 
 const FoodItems = () => {
+  const imgUrl = new URL(import.meta.env.VITE_APP_IMAGES_HOST).href;
+
   const [isFetchLoading, setIsFetchLoading] = useState(false);
   const [foods, setFoods] = useState([]);
   const [foodGroups, setFoodGroups] = useState([]);
@@ -76,7 +78,7 @@ const FoodItems = () => {
         <div className="p-2 flex-center">
           <img
             className="block rounded-full w-12 h-12"
-            src={`/images_host/${params.row.image}`}
+            src={`${imgUrl}/${params.row.image}`}
             alt={params.row.name.slice(0, 9)}
           />
         </div>

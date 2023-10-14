@@ -10,6 +10,9 @@ import Snackbar from "../../components/snackBar";
 import { useSelector } from "react-redux";
 
 const MenuHome = () => {
+  // images host
+  const imgUrl = new URL(import.meta.env.VITE_APP_IMAGES_HOST).href;
+
   const [foodGroups, setFoodGroups] = useState([]);
   const [branches, setBranches] = useState([]);
 
@@ -124,7 +127,7 @@ const MenuHome = () => {
                   <div className="flex-center">
                     <img
                       className="rounded-full w-[100px] h-[100px]"
-                      src={`/images_host/${food.image}`}
+                      src={`${imgUrl}/${food.image}`}
                       alt={food.name}
                     />
                   </div>
@@ -161,7 +164,7 @@ const MenuHome = () => {
                         >
                           <div className="relative">
                             <img
-                              src={`/images_host/${food.image}`}
+                              src={`${imgUrl}/${food.image}`}
                               alt={food.name}
                               className="block w-full h-full object-cover rounded-lg "
                             />

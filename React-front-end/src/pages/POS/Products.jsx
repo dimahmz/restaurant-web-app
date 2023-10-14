@@ -2,6 +2,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { add_food_order } from "../../stores/pointOfSale";
 
 const Products = () => {
+  const imgUrl = new URL(import.meta.env.VITE_APP_IMAGES_HOST).href;
+
   const dispatch = useDispatch();
 
   const $selected_food = useSelector(
@@ -52,7 +54,7 @@ const Products = () => {
           <div className="w-full overflow-hidden">
             <img
               className="block transition duration-300 ease-in-out hover:scale-125 w-full h-full "
-              src={`/images_host/${food.image}`}
+              src={`${imgUrl}/${food.image}`}
               alt={food.name}
             />
           </div>
