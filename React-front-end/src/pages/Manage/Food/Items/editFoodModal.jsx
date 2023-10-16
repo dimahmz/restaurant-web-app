@@ -73,9 +73,9 @@ export default function EditFoodModal({ foodGroups, refresh, serverResponse }) {
 
   // @TODO think of a methid that dosen't iterate throughtout the hole array
   //but intead stops when it finds the matched element
-  const $foodGroups = foodGroups.filter((row) => {
-    return row.id != selected_food?.group?.id;
-  });
+  // const $foodGroups = foodGroups.filter((row) => {
+  //   return row.id != selected_food?.group?.id;
+  // });
 
   return (
     <FormModal
@@ -94,11 +94,10 @@ export default function EditFoodModal({ foodGroups, refresh, serverResponse }) {
             </p>
           </div>
           <SelectOption
-            options={$foodGroups}
+            options={foodGroups}
             onSelectOption={(id) => setSelectedGoupID(id)}
             label="Select a group"
-            selectedOption=""
-            required
+            required={false}
           />
         </div>
         <div className="flex-column space-y-4">
@@ -114,7 +113,7 @@ export default function EditFoodModal({ foodGroups, refresh, serverResponse }) {
             onChange={(e) => setName(e.target.value)}
           />
         </div>
-        {selected_food?.food?.variations == 0 && (
+        {selected_food?.variations?.length == 0 && (
           <div className="flex-column space-y-4">
             <label className="font-semibold">
               Price
@@ -124,13 +123,12 @@ export default function EditFoodModal({ foodGroups, refresh, serverResponse }) {
             </label>
             <TextField
               hiddenLabel
+              InputProps={{ inputProps: { min: 0 } }}
               size="small"
               type="number"
               variant="filled"
               placeholder="e.g Type price of this item"
               defaultValue={selected_food?.price}
-              min={1}
-              required
               onChange={(e) => setPrice(e.target.value)}
             />
           </div>

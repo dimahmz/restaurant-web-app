@@ -7,6 +7,8 @@ import { Food } from "../../../../APIs/Food";
 export default function ChangeImgModal({ refresh, serverResponse }) {
   const dispatch = useDispatch();
 
+  const imgUrl = new URL(import.meta.env.VITE_APP_IMAGES_HOST).href;
+
   const [isLoading, setIsLoading] = useState(false);
 
   const selectedFood = useSelector((state) => state.manageFood.selectedFood);
@@ -46,8 +48,8 @@ export default function ChangeImgModal({ refresh, serverResponse }) {
         <div className="flex items-center space-x-3">
           <label htmlFor="image">Image</label>
           <img
-            className="w-9 h-9 rounded-full block"
-            src={`/images_host/${selectedFood?.image}`}
+            className="w-9 h-9 rounded-full block object-cover"
+            src={`${imgUrl}/${selectedFood?.image}`}
             alt={selectedFood?.name}
           />
         </div>

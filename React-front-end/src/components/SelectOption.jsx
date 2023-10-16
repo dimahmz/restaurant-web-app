@@ -1,12 +1,13 @@
 import { FormControl, Select, MenuItem } from "@mui/material";
 import { useEffect, useState } from "react";
 
-export default function SimpleSnackbar({
+export default function SelectOption({
   options,
   onSelectOption,
   label,
   value,
   OptionId = "",
+  required = true,
 }) {
   const [selectedOptionId, setSelectedOptionId] = useState(OptionId);
 
@@ -19,7 +20,7 @@ export default function SimpleSnackbar({
   }, [value]);
 
   return (
-    <FormControl required sx={{ width: "100%" }}>
+    <FormControl required={required} sx={{ width: "100%" }}>
       <Select
         value={selectedOptionId}
         onChange={handleSelectOption}

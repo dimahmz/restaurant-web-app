@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import TableHeader from "../../tableHeader";
-import { DataGrid } from "@mui/x-data-grid";
 import { MdDelete, MdModeEdit } from "react-icons/md";
 import { MenuItem } from "@mui/material";
 import SnackBar from "../../../../components/snackBar";
@@ -18,6 +17,7 @@ import AddGroupModal from "./addGroup";
 import DeleteGroupModal from "./deleteGroup";
 import EditGroupModal from "./editGroup";
 import getResponseMessage from "../../../../utils/getResponse";
+import DataGrid from "../../../../components/DataGrid";
 
 export default function GroupItems() {
   const dispatch = useDispatch();
@@ -138,21 +138,12 @@ export default function GroupItems() {
       {/* Add varition */}
       <DeleteGroupModal refresh={fetchGroups} serverResponse={displayReponse} />
 
-      <div className="w-full h-[400px] px-4 py-8 mt-3">
-        <DataGrid
-          rows={filtredGroups.map((row, i) => ({
-            _index: i + 1,
-            ...row,
-          }))}
-          columns={columns}
-          initialState={{
-            pagination: {
-              paginationModel: { page: 0, pageSize: 20 },
-            },
-          }}
-          loading={isLoading}
-        />
-      </div>
+      <DataGrid
+        rowHeight={140}
+        isLoading={isLoading}
+        columns={columns}
+        filteredRows={filtredGroups}
+      />
       {/* notification message */}
       <SnackBar
         message={response.message}

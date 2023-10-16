@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { MdDelete, MdModeEdit } from "react-icons/md";
-import { DataGrid } from "@mui/x-data-grid";
 import { Branch, Table } from "../../../../APIs/Restaurant";
 import TableHeader from "../../tableHeader";
 import Filter from "../../../../utils/filters";
@@ -18,6 +17,7 @@ import EditTableModal from "./editTable";
 import DeleteTableModal from "./deleteTable";
 import SnackBar from "../../../../components/snackBar";
 import getResponseMessage from "../../../../utils/getResponse";
+import CustomDataGrid from "../../../../components/DataGrid";
 
 const Branches = () => {
   const dispatch = useDispatch();
@@ -167,19 +167,11 @@ const Branches = () => {
       {/* Add varition */}
       <DeleteTableModal refresh={fetchTables} serverResponse={displayReponse} />
 
-      <div className="w-full h-[370px] px-4 py-4 ">
-        <DataGrid
-          rows={filtredTables}
-          columns={columns}
-          initialState={{
-            pagination: {
-              paginationModel: { page: 0, pageSize: 5 },
-            },
-          }}
-          pageSizeOptions={[5, 10]}
-          loading={isLoading}
-        />
-      </div>
+      <CustomDataGrid
+        filteredRows={filtredTables}
+        columns={columns}
+        loading={isLoading}
+      />
 
       <SnackBar
         message={response.message}

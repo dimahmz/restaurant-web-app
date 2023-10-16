@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { MdDelete, MdModeEdit } from "react-icons/md";
-import { DataGrid } from "@mui/x-data-grid";
 import { DeptTag } from "../../../../APIs/Restaurant";
 import DeptTagHeader from "../../tableHeader";
 import Filter from "../../../../utils/filters";
@@ -18,6 +17,7 @@ import EditDeptTagModal from "./editDepTag";
 import DeleteDeptTagModal from "./deleteDepTag";
 import SnackBar from "../../../../components/snackBar";
 import getResponseMessage from "../../../../utils/getResponse";
+import CustomDataGrid from "../../../../components/DataGrid";
 
 const Branches = () => {
   const dispatch = useDispatch();
@@ -119,7 +119,7 @@ const Branches = () => {
   return (
     <div className="bg-white h-full">
       <DeptTagHeader
-        title="DepTag Type List"
+        title="Department Tag List"
         handleSearchChange={filterDeptTags}
         onAddNew={() => {
           dispatch(
@@ -147,20 +147,11 @@ const Branches = () => {
         refresh={fetchDeptTags}
         serverResponse={displayReponse}
       />
-
-      <div className="w-full h-[370px] px-4 py-4 ">
-        <DataGrid
-          rows={filtredDepTags}
-          columns={columns}
-          initialState={{
-            pagination: {
-              paginationModel: { page: 0, pageSize: 5 },
-            },
-          }}
-          pageSizeOptions={[5, 10]}
-          loading={isLoading}
-        />
-      </div>
+      <CustomDataGrid
+        isLoading={isLoading}
+        columns={columns}
+        filteredRows={filtredDepTags}
+      />
 
       <SnackBar
         message={response.message}

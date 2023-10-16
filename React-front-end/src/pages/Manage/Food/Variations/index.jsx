@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import TableHeader from "../../tableHeader";
-import { DataGrid } from "@mui/x-data-grid";
 import { MdDelete, MdModeEdit } from "react-icons/md";
 import { MenuItem } from "@mui/material";
 import SnackBar from "../../../../components/snackBar";
@@ -18,6 +17,7 @@ import AddVariationModal from "./addVariation";
 import DeleteVariationModal from "./deleteVariation";
 import EditVariationModal from "./editVariation";
 import getResponseMessage from "../../../../utils/getResponse";
+import CustomDataGrid from "../../../../components/DataGrid";
 
 export default function VariationItems() {
   const dispatch = useDispatch();
@@ -147,22 +147,11 @@ export default function VariationItems() {
         serverResponse={displayReponse}
       />
 
-      <div className="w-full h-[400px] px-4 py-8 mt-3">
-        <DataGrid
-          width="100%"
-          rows={filtredVariations.map((row, i) => ({
-            _index: i + 1,
-            ...row,
-          }))}
-          columns={columns}
-          initialState={{
-            pagination: {
-              paginationModel: { page: 0, pageSize: 20 },
-            },
-          }}
-          loading={isLoading}
-        />
-      </div>
+      <CustomDataGrid
+        isLoading={isLoading}
+        columns={columns}
+        filteredRows={filtredVariations}
+      />
       {/* notification message */}
       <SnackBar
         message={response.message}

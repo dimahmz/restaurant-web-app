@@ -22,13 +22,17 @@ body {
 .open {
   max-height: 10px; /* Adjust this value to the maximum height of your submenu */
 }
+
 .hovered-plus:hover {
   background-color: #cc3333;
   color: white;
   transition: background-color 0.3s, color 0.3s;
 }
 
+/* ------SCROLL BAR--------- */
+
 ::-webkit-scrollbar {
+  width: 5px;
   background: #555;
 }
 

@@ -116,13 +116,12 @@ const AddNewItemPage = () => {
             <span className="text-red-600">*</span>
           </label>
           <SelectOption
-            required
             options={foodGroups}
             onSelectOption={(id) => {
               setFoodGroupID(id);
             }}
             label="Select a group"
-            selectedOption=""
+            required
           />
         </div>
         <div className="flex-column space-y-2 mb-3">
@@ -169,6 +168,7 @@ const AddNewItemPage = () => {
             <TextField
               hiddenLabel
               value={price}
+              type="number"
               size="small"
               InputProps={{ inputProps: { min: 0 } }}
               variant="filled"

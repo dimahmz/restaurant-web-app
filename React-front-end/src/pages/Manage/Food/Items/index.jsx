@@ -78,7 +78,7 @@ const FoodItems = () => {
       renderCell: (params) => (
         <div className="p-2 flex-center">
           <img
-            className="block rounded-full w-12 h-12"
+            className="block rounded-full w-12 h-12 object-cover"
             src={`${imgUrl}/${params.row.image}`}
             alt={params.row.name.slice(0, 9)}
           />
@@ -246,15 +246,11 @@ const FoodItems = () => {
         placeholder="search by name"
       />
       {/* table of foods */}
-      <div className="w-full h-[400px] bg-white px-4 py-8 mt-3">
-        <DataGrid
-          rowHeight={140}
-          isLoading={isFetchLoading}
-          columns={columns}
-          filteredRows={filtredFoods}
-        />
-      </div>
-
+      <DataGrid
+        isLoading={isFetchLoading}
+        columns={columns}
+        filteredRows={filtredFoods}
+      />
       <SimpleSnackbar
         message={response.message}
         open={response.open}

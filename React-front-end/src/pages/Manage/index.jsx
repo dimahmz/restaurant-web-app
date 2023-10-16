@@ -58,7 +58,7 @@ const ManageSideBar = () => {
           </div>
         ))}
       </aside>
-      <section className="h-full w-full">
+      <section className="h-full w-full bg-white">
         <Outlet />
       </section>
     </div>
