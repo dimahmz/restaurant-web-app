@@ -100,26 +100,26 @@ const OrderBoxItem = ({ order, onRefrechOrder }) => {
           <tr className="text-white bg-[#f64e60]">
             <td colSpan={5}>
               <div className="font-bold flex space-x-2 px-3">
-                <p>Otder Token : #{$order.id}</p>
-                <p>Ordred At : {getDate($order.created_at)}</p>
+                <p>Otder Token : #{$order?.id}</p>
+                <p>Ordred At : {getDate($order?.created_at)}</p>
               </div>
             </td>
           </tr>
-          {$order.order_food.map((order_food, index) => (
+          {$order?.order_food?.map((order_food, index) => (
             <tr key={index} className="bg-[#f4f9fc] text-center py-4">
               <td>{index + 1}</td>
-              <td className="w-[30%]">{order_food.food.name}</td>
+              <td className="w-[30%]">{order_food?.food?.name || "-"}</td>
               <td>
                 {order_food?.variation?.name ? (
                   <div>
                     <span>Variation:&nbsp;</span>
-                    {order_food?.variation?.name}
+                    {order_food?.variation?.name || "-"}
                   </div>
                 ) : (
                   "-"
                 )}
               </td>
-              <td>{order_food.quantity}</td>
+              <td>{order_food?.quantity}</td>
             </tr>
           ))}
         </tbody>
