@@ -7,7 +7,7 @@ import { Food } from "../../../../APIs/Food";
 export default function ChangeImgModal({ refresh, serverResponse }) {
   const dispatch = useDispatch();
 
-  const imgUrl = new URL(import.meta.env.VITE_APP_IMAGES_HOST).href;
+  const imgUrl = import.meta.env.VITE_APP_IMAGES_HOST;
 
   const [isLoading, setIsLoading] = useState(false);
 

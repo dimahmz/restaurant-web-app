@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { add_food_order } from "../../stores/pointOfSale";
 
 const Products = () => {
-  const imgUrl = new URL(import.meta.env.VITE_APP_IMAGES_HOST).href;
+  const imgUrl = import.meta.env.VITE_APP_IMAGES_HOST;
 
   const dispatch = useDispatch();
 

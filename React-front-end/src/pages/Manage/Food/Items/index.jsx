@@ -23,7 +23,7 @@ import SimpleSnackbar from "../../../../components/snackBar";
 import getResponseMessage from "../../../../utils/getResponse";
 
 const FoodItems = () => {
-  const imgUrl = new URL(import.meta.env.VITE_APP_IMAGES_HOST).href;
+  const imgUrl = import.meta.env.VITE_APP_IMAGES_HOST;
 
   const [isFetchLoading, setIsFetchLoading] = useState(false);
   const [foods, setFoods] = useState([]);
