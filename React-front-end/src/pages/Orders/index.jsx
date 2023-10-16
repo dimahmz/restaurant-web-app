@@ -126,7 +126,7 @@ const OnlineHistoryPage = () => {
     {
       field: "_branch",
       headerName: "Branch",
-      valueGetter: (params) => params.row.branch.name,
+      valueGetter: (params) => params.row.branch?.name,
       flex: 1,
     },
     {
@@ -165,7 +165,7 @@ const OnlineHistoryPage = () => {
   ];
 
   return (
-    <div className="w-full h-full">
+    <div className="w-full h-full pt-4">
       <SnackBar
         message={errorMsg}
         open={openNotification}
@@ -191,10 +191,9 @@ const OnlineHistoryPage = () => {
           onSearchChange={searchChange}
           branchChange={branchChange}
         />
-        <div className="bg-white my-2 l overflow-auto">
+        <div className="bg-white my-2 l h-full overflow-auto">
           <DataGrid
             sx={{
-              height: "100%",
               "& .MuiDataGrid-cell:focus": {
                 outline: "none",
                 border: "none",
