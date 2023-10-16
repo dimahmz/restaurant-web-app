@@ -126,7 +126,7 @@ const OnlineHistoryPage = () => {
     {
       field: "_branch",
       headerName: "Branch",
-      valueGetter: (params) => params.row.branch?.name,
+      valueGetter: (params) => params.row?.branch?.name || "-",
       flex: 1,
     },
     {

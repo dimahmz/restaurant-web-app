@@ -2,7 +2,7 @@ import { useLocation } from "react-router-dom";
 import { Box, CircularProgress, Divider } from "@mui/material";
 
 // {location.pathname === "/dashboard/pos-orders" ? (
-const PosModal = ({ selectedOrder, isDetailLoading }) => {
+const OrderDetailsModal = ({ selectedOrder, isDetailLoading }) => {
   let location = useLocation();
   // location.pathname === "/dashboard/pos-orders" ?
 
@@ -31,10 +31,10 @@ const PosModal = ({ selectedOrder, isDetailLoading }) => {
                 <td>QTY</td>
                 <td>Status</td>
               </tr>
-              {selectedOrder.order_food.map((order_food, index) => (
+              {selectedOrder?.order_food?.map((order_food, index) => (
                 <tr key={index} className="bg-[#f4f9fc] text-center py-1">
                   <td>{index + 1}</td>
-                  <td className="w-[30%]">{order_food.food.name}</td>
+                  <td className="w-[30%]">{order_food?.food?.name || "-"}</td>
                   <td>
                     {order_food?.variation?.name && (
                       <div>
@@ -43,7 +43,7 @@ const PosModal = ({ selectedOrder, isDetailLoading }) => {
                       </div>
                     )}
                   </td>
-                  <td>{order_food.quantity}</td>
+                  <td>{order_food?.quantity || "-"}</td>
                   <td></td>
                 </tr>
               ))}
@@ -124,4 +124,4 @@ const PosModal = ({ selectedOrder, isDetailLoading }) => {
     </section>
   );
 };
-export default PosModal;
+export default OrderDetailsModal;
