@@ -120,7 +120,7 @@ const OnlineHistoryPage = () => {
     {
       field: "total_bill",
       headerName: "Totall Bill",
-      valueGetter: (params) => params.row.total_bill + " DH",
+      valueGetter: (params) => params.row?.total_bill + " DH" || "-",
       flex: 1,
     },
     {
@@ -193,6 +193,7 @@ const OnlineHistoryPage = () => {
         />
         <div className="bg-white my-2 l h-full overflow-auto">
           <DataGrid
+            autoHeight
             sx={{
               "& .MuiDataGrid-cell:focus": {
                 outline: "none",
