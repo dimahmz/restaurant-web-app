@@ -8,8 +8,8 @@ use App\Http\Controllers\Auth\PasswordResetLinkController;
 
 // Food
 include 'api/Food/groups.php';
-include 'api/Food/variations.php';
 include 'api/Food/index.php';
+include 'api/Food/variations.php';
 // Order
 include 'api/Orders/index.php';
 // Restaurant

@@ -60,10 +60,10 @@ class FoodController extends Controller
         $foods = FoodGroup::all();
         return $this::success($foods);
     }
-
-    function getFood_var_prop(){
-        $foods = Food::with('variations', 'properties.property_items')->get();
-        return $this::success($foods);
+    function getFoodVariationById($id){
+        $food = Food::with('variations')->find($id);
+        if($food) return  $this::success($food);
+        return $this::error(null,"Food doesn't exist");
     }
 
     function getSpecial(){
@@ -82,6 +82,8 @@ class FoodController extends Controller
         $foods = Food::with('variations' , 'food_group')->get();
         return $this::success($foods);
     }
+
+
 
     // ------- Update ----------
     function put(UpdateFoodRequest $request , $id)
