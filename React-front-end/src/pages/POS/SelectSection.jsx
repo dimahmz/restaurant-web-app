@@ -20,8 +20,8 @@ const SelectSideBar = ({ branches, tables, pyamnetTypes }) => {
   }
 
   return (
-    <div className="relative w-full h-full py-4 px-2 flex justify-between bg-white">
-      <div className="flex flex-col space-y-5  w-full overflow-y-auto h-[70%] ">
+    <div className="flex-col space-y-7 w-full overflow-y-auto  py-7 px-2 flex justify-between bg-white">
+      <div className="flex-column space-y-7">
         <div>
           <SelectOption
             value={value}
@@ -52,7 +52,7 @@ const SelectSideBar = ({ branches, tables, pyamnetTypes }) => {
           }}
         />
       </div>
-      <div className="absolute bottom-[15px] w-full flex-center">
+      <div className="w-full flex-center">
         <Button
           variant="contained"
           sx={{

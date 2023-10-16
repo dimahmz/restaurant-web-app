@@ -24,7 +24,7 @@ const Layout = () => {
             marginTop: `${headerHeight}px`,
             marginBottom: `${footerHeight}px`,
           }}
-          className={`relative py-3 overflow-auto w-full max-w-[1320px] mx-auto`}
+          className={`relative py-3 overflow-auto w-full max-w-[1520px] mx-auto`}
         >
           <div className="relative w-full h-full overflow-auto">
             <Outlet />

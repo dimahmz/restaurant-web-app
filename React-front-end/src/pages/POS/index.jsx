@@ -98,7 +98,7 @@ const PosPage = () => {
   }, [response]);
 
   return (
-    <div className="w-full h-full overflow-x-hidden px-4">
+    <div className="w-full px-4">
       {isLoading && (
         <div className="fixed w-screen h-screen flex-center z-[1000000] backdrop-blur-sm bg-white/0">
           <CircularProgress color="secondary" />
@@ -117,13 +117,13 @@ const PosPage = () => {
           />
         </div>
       )}
-      <div className="flex w-full">
+      <div className="flex">
         <div className="flex-col">
           <div className="py-2">
             <OrdersNavBar />
           </div>
-          <div className="flex h-screen space-x-2 px-2">
-            <div className="overflow-y-auto h-full  w-full max-w-[180px]">
+          <div className="flex space-x-2 px-2">
+            <div className="overflow-y-auto h-full w-full max-w-[180px]">
               {commissionsLoading ? (
                 <div className="flex-center w-full h-1/2 z-[1000] backdrop-blur-sm bg-white/0">
                   <CircularProgress color="primary" />
@@ -142,14 +142,13 @@ const PosPage = () => {
                 />
               )}
             </div>
-            <div className="w-[292px] h-[screen]  overflow-y-auto">
+            <div className="w-[292px]  overflow-y-auto">
               <Products />
             </div>
-            <div className="relative w-[165px] h-[screen]  bg-white overflow-y-auto overflow-x-hidden py-2 px-1">
+            <div className="w-[290px] ">
               <VariationsTable />
             </div>
-
-            <div className="w-[135px] h-[screen] ">
+            <div className="w-[135px] ">
               <SelectSection
                 branches={branches}
                 tables={tables}
@@ -158,7 +157,7 @@ const PosPage = () => {
             </div>
           </div>
         </div>
-        <div className="flex w-full pt-2">
+        <div className="flex max-w-[800px] max-h-[900px] pt-2">
           <BasketComponent />
         </div>
       </div>
