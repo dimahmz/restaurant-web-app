@@ -8,6 +8,7 @@ export const manageFoodSlice = createSlice({
     openDeleteItemModal: false,
     openChangeFoodImgModal: false,
     openAddFoodVariationModal: false,
+    openChangeFoodVariationModal: false,
     // Group
     selectedGroup: {},
     openAddGroupModal: false,
@@ -45,7 +46,6 @@ export const manageFoodSlice = createSlice({
     },
     toggle_edit_modal: (state, action) => {
       state[action.payload.name] = action.payload.value;
-      console.log(state[action.payload.name]);
     },
     toggle_delete_item_modal: (state, action) => {
       state[action.payload.name] = action.payload.value;

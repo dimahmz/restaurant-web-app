@@ -114,25 +114,27 @@ export default function EditFoodModal({ foodGroups, refresh, serverResponse }) {
             onChange={(e) => setName(e.target.value)}
           />
         </div>
-        <div className="flex-column space-y-4">
-          <label className="font-semibold">
-            Price
-            <span className="text-[#158df7] font-normal">
-              (Enter price in MAD)
-            </span>
-          </label>
-          <TextField
-            hiddenLabel
-            size="small"
-            type="number"
-            variant="filled"
-            placeholder="e.g Type price of this item"
-            defaultValue={selected_food?.price}
-            min={1}
-            required
-            onChange={(e) => setPrice(e.target.value)}
-          />
-        </div>
+        {selected_food?.food?.variations == 0 && (
+          <div className="flex-column space-y-4">
+            <label className="font-semibold">
+              Price
+              <span className="text-[#158df7] font-normal">
+                (Enter price in MAD)
+              </span>
+            </label>
+            <TextField
+              hiddenLabel
+              size="small"
+              type="number"
+              variant="filled"
+              placeholder="e.g Type price of this item"
+              defaultValue={selected_food?.price}
+              min={1}
+              required
+              onChange={(e) => setPrice(e.target.value)}
+            />
+          </div>
+        )}
         <div className="flex items-center">
           <Checkbox
             color="pink"

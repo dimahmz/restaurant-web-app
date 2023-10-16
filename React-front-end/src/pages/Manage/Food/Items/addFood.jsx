@@ -170,7 +170,7 @@ const AddNewItemPage = () => {
               hiddenLabel
               value={price}
               size="small"
-              type="number"
+              InputProps={{ inputProps: { min: 0 } }}
               variant="filled"
               placeholder="e.g Type price of this item"
               min={1}

@@ -65,20 +65,16 @@ export class Food {
       return e.response.data;
     }
   }
-}
-
-export class Property {
-  static async get() {
+  static async editVariations({ food_variations }) {
     try {
-      const resp = await axios.get("/food_properties");
+      const resp = await axios.put(`/food/variations`, {
+        food_variations,
+      });
       return resp.data;
     } catch (e) {
       return e.response.data;
     }
   }
-  static async create() {}
-  static async update() {}
-  static async delete() {}
 }
 
 export class Group {

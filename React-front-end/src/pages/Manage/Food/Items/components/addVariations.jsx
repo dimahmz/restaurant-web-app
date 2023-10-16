@@ -51,7 +51,7 @@ export default function AddVariation({ foodVariations, addVariationPrice }) {
                   hiddenLabel
                   sx={{ width: "100%" }}
                   type="number"
-                  min={1}
+                  InputProps={{ inputProps: { min: 0 } }}
                   name="price"
                   required
                   onChange={(e) => {

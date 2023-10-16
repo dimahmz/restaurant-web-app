@@ -12,6 +12,7 @@ import Filter from "../../../../utils/filters";
 import DeleteFoodItemModal from "./deleteFoodModal";
 import EditFoodModal from "./editFoodModal";
 import AddVariationModal from "./addFoodVariationModal";
+import ChangeVariationModal from "./changeVariationModal";
 import {
   toggle_edit_modal,
   toggle_delete_item_modal,
@@ -91,7 +92,37 @@ const FoodItems = () => {
       valueGetter: (params) => params.row.group.name || "-",
       flex: 1,
     },
-    { field: "price", headerName: "Price", flex: 1 },
+    {
+      field: "price",
+      headerName: "Price",
+      renderCell: (params) => {
+        if (params.row.variations.length == 0) {
+          return params.row.price;
+        }
+        return (
+          <button
+            className="bg-[#F5364A] text-white px-1 py-0.5 rounded"
+            onClick={() => {
+              dispatch(
+                toggle_edit_modal({
+                  name: "openChangeFoodVariationModal",
+                  value: true,
+                })
+              );
+              dispatch(
+                set_selected_item({
+                  name: "selectedFood",
+                  value: params.row,
+                })
+              );
+            }}
+          >
+            check variations
+          </button>
+        );
+      },
+      flex: 1,
+    },
     {
       field: "no_field",
       headerName: "Action",
@@ -202,6 +233,11 @@ const FoodItems = () => {
       />
       {/* add variations  modal */}
       <AddVariationModal refresh={fetchFood} serverResponse={displayReponse} />
+      {/* Change variations  modal */}
+      <ChangeVariationModal
+        refresh={fetchFood}
+        serverResponse={displayReponse}
+      />
 
       <TableHeader
         title="Items List"
