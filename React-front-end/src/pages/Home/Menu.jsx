@@ -183,11 +183,6 @@ const MenuHome = () => {
                   )
                 )}
               </div>
-              <img
-                className="hidden xl:flex absolute right-0 top-[62%]"
-                src="https://khadyo.softtechdemo.com/website/images/img/37.png"
-                alt=""
-              />
             </div>
           </div>
         </div>

@@ -45,7 +45,7 @@ const DashboardPage = () => {
           <Link key={index} to={element.to}>
             <div className="mb-4 px-2 bg-white shadow-lg cursor-pointer">
               <div>
-                <img src={element.imgSrc} alt="" />
+                <img src={element.imgSrc} alt={element.description} />
                 <div className=" p-8 relative">
                   <div className="flex text-purple-700 font-bold text-sm">
                     {element.icon}
@@ -66,10 +66,7 @@ const DashboardPage = () => {
           className="mb-4 px-2 bg-white shadow-lg cursor-pointer"
           onClick={LogoutUser}
         >
-          <img
-            src="https://khadyo.softtechdemo.com/assets/img/product-img-6.jpg"
-            alt=""
-          />
+          <img src="images/logout.jpg" alt="logout image" />
           <div className=" p-8 relative">
             <div className="flex text-purple-700 font-bold text-sm">
               <MdManageHistory size={20} />
@@ -77,7 +74,7 @@ const DashboardPage = () => {
             </div>
             <div className="text-3xl font-bold py-2">Logout</div>
             <div className="absolute bg-white  w-[70px] h-[70px] rounded-full right-[10%] top-[-35%] shadow-lg flex justify-center items-center hover:bg-[#cc3333] hover:text-white duration-300">
-              <AiOutlinePlus size={40} className="" />
+              <AiOutlinePlus size={40} />
             </div>
           </div>
         </div>

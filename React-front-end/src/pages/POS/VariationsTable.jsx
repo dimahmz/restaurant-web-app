@@ -24,7 +24,7 @@ const VariationsTable = () => {
   }
 
   return (
-    <div className="text-xs bg-white py-7 px-3">
+    <div className="text-xs p-2">
       <div className="text-white bg-[#f64e60] px-4 py-2 flex justify-center font-medium border-2">
         Variations
       </div>

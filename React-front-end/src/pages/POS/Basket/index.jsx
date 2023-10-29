@@ -58,9 +58,9 @@ const BasketComponent = () => {
 
   // className="border-collapse border border-slate-400"
   return (
-    <div className="relative w-full bg-white px-2 py-2">
-      <BasketHeader />
-      <div className="h-[50%] overflow-y-auto py-1">
+    <div className="w-full h-full bg-white px-2 py-2 flex-column">
+      <div className="overflow-y-auto py-1 flex-1">
+        <BasketHeader />
         {order_food.length === 0 ? (
           <p className="text-red-800 text-center pt-14">
             Basket Food items is empty

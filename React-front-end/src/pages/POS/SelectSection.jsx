@@ -20,8 +20,8 @@ const SelectSideBar = ({ branches, tables, pyamnetTypes }) => {
   }
 
   return (
-    <div className="flex-col space-y-7 w-full overflow-y-auto  py-7 px-2 flex justify-between bg-white">
-      <div className="flex-column space-y-7">
+    <div className="flex-column justify-between space-y-7 w-full h-full overflow-y-auto py-4 px-2 ">
+      <div className="flex-column space-y-3 flex-1">
         <div>
           <SelectOption
             value={value}

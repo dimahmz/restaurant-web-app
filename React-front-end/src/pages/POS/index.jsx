@@ -117,13 +117,14 @@ const PosPage = () => {
           />
         </div>
       )}
-      <div className="flex">
+      <div className="flex justify-start">
         <div className="flex-col">
           <div className="py-2">
             <OrdersNavBar />
           </div>
+          {/* commission bar */}
           <div className="flex space-x-2 px-2">
-            <div className="overflow-y-auto h-full w-full max-w-[180px]">
+            <div className="overflow-y-auto h-[415px] 1xl:h-[480px] 3xl:h-[565px] w-full max-w-[180px]">
               {commissionsLoading ? (
                 <div className="flex-center w-full h-1/2 z-[1000] backdrop-blur-sm bg-white/0">
                   <CircularProgress color="primary" />
@@ -142,13 +143,13 @@ const PosPage = () => {
                 />
               )}
             </div>
-            <div className="w-[292px]  overflow-y-auto">
+            <div className="w-[292px] h-[371px]  1xl:h-[436px] 2xl:h-[560px] overflow-y-auto">
               <Products />
             </div>
-            <div className="w-[290px] ">
+            <div className="w-[210px] h-[371px] 1xl:h-[436px] 2xl:h-[560px] bg-white">
               <VariationsTable />
             </div>
-            <div className="w-[135px] ">
+            <div className="w-[135px] h-[371px] 1xl:h-[436px] 2xl:h-[560px] bg-white">
               <SelectSection
                 branches={branches}
                 tables={tables}
@@ -157,7 +158,7 @@ const PosPage = () => {
             </div>
           </div>
         </div>
-        <div className="flex max-w-[800px] max-h-[900px] pt-2">
+        <div className="flex h-[470px] 1xl:h-[535px]  w-full pt-2">
           <BasketComponent />
         </div>
       </div>
