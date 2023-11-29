@@ -28,13 +28,9 @@
 
 **start Xampp server**
 
-<<<<<<< HEAD
 before this command create a folder called images in this folder storage/app/public/images
 
 **create a symbolic link to the images storage**
-=======
-**create a symblic link to the images storage**
->>>>>>> 2a4224a (update password)
 
 before running this command, make sure to create a folder named "images" inside the "storage/app/public" folder
 
