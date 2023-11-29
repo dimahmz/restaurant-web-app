@@ -34,7 +34,7 @@ export default function AuthProvider({ children }) {
 
   // fetch the user data when the component (page) is mounted
   useEffect(() => {
-    fetchUser();
+    // fetchUser();
   }, []);
 
   //to authenticate a user

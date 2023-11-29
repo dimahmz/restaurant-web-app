@@ -46,23 +46,13 @@ const HeaderHome = () => {
                     LANGUAGE
                   </li>
                 </a>
-                <li className="py-4 font-bold hover:text-[#cc3333]">
-                  DELIVERYMAN
-                </li>
               </ul>
             </div>
             <div className=" flex  px-4 justify-between md:gap-40 lg:gap-10">
-              <span className="hidden md:flex ">
-                <img
-                  className=" md:w-[55px]"
-                  src="https://khadyo.softtechdemo.com/website/images/icons/1.png"
-                  alt="/"
-                />
-              </span>
               <div className=" flex flex-col text-[#2a435d] ">
                 <span className="mb-2 md:text-sm text-[10px]">Need Help ?</span>
                 <span className=" font-bold md:text-xl text-md text-[#cc3333]">
-                  09612046593
+                  12345667
                 </span>
               </div>
               <div className="flex">
@@ -153,7 +143,7 @@ const HeaderHome = () => {
                   <div className="flex flex-col text-white  font-bold mt-6">
                     <span>Delivery Order Num.</span>
                     <span className="text-yellow-600  text-3xl ">
-                      123123005480
+                      166123005480
                     </span>
                   </div>
                 </div>
