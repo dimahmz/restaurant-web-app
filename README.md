@@ -13,7 +13,7 @@
 `npm i`
 
 **start vite server**
-s
+
 `npm run dev`
 
 #### Back-end
@@ -30,7 +30,7 @@ s
 
 before this command create a folder called images in this folder storage/app/public/images
 
-**create a symblic link to the images storage**
+**create a symbolic link to the images storage**
 
 `php artisan storage:link`
 
