@@ -14,12 +14,13 @@ trait HttpResponses
     ],  $code);
   }
 
-  public static  function error($data, $message = null, $code = 404)
+  public static  function error($data, $message = null, $code = 404 , $errorLevel=2)
   {
     return response()->json([
       'success' => false,
       'message' => $message,
-      'payload' => $data
+      'payload' => $data,
+      'errorLevel'=> $errorLevel
     ],  $code);
   }
 }

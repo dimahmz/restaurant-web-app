@@ -46,5 +46,5 @@ Route::namespace(PasswordResetLinkController::class)->prefix('reset-password')->
 
 // Catch-out any route that is not defined
 Route::fallback(function () {
-    return HttpResponses::error(null, "The requested resource could not be found.", 404);
+    return HttpResponses::error(null, "The requested resource could not be found.", 404, 3);
 });

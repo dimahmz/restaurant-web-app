@@ -1,14 +1,11 @@
-import axios from "../utils/axios";
+import makeRequest from ".";
 
 export class Food {
   static async get() {
-    try {
-      const resp = await axios.get("/foods");
-      return resp.data;
-    } catch (e) {
-      return e.response.data;
-    }
+    const response = await makeRequest("/foodssss", "get", null);
+    return response;
   }
+
   static async create(food) {
     const { name, image, price, variations_IDs, food_group_id, is_special } =
       food;
@@ -20,140 +17,84 @@ export class Food {
     form.append("variations_IDs", JSON.stringify(variations_IDs));
     form.append("food_group_id", food_group_id);
     form.append("is_special", is_special);
-    try {
-      const resp = await axios.post("/food", form);
-      return resp.data;
-    } catch (e) {
-      return e.response.data;
-    }
+
+    const response = await makeRequest("/food", "post", form);
+    return response;
   }
   static async update({ id, item }) {
-    try {
-      const resp = await axios.put(`/food/${id}`, { ...item });
-      return resp.data;
-    } catch (e) {
-      return e.response.data;
-    }
+    const response = await makeRequest(`/food/${id}`, "put", { ...item });
+    return response;
   }
 
   static async updateImg({ image, id }) {
     const form = new FormData();
     form.append("image", image);
-    try {
-      const resp = await axios.post(`/food/img/${id}`, form);
-      return resp.data;
-    } catch (e) {
-      return e.response.data;
-    }
+    const resp = await makeRequest(`/food/img/${id}`, "post", form);
+    return resp;
   }
   static async delete(id) {
-    try {
-      const resp = await axios.delete(`/food/${id}`);
-      return resp.data;
-    } catch (e) {
-      return e.response.data;
-    }
+    const resp = await makeRequest(`/food/${id}`, "delete", null);
+    return resp;
   }
 
   static async addVariations({ id, variations_IDs }) {
-    try {
-      const resp = await axios.post(`/food/variation/${id}`, {
-        variations_IDs,
-      });
-      return resp.data;
-    } catch (e) {
-      return e.response.data;
-    }
+    const resp = await makeRequest(`/food/variation/${id}`, "post", {
+      variations_IDs,
+    });
+    return resp;
   }
   static async editVariations({ food_variations }) {
-    try {
-      const resp = await axios.put(`/food/variations`, {
-        food_variations,
-      });
-      return resp.data;
-    } catch (e) {
-      return e.response.data;
-    }
+    const resp = await makeRequest(`/food/variations`, "put", {
+      food_variations,
+    });
+    return resp;
   }
 }
 
 export class Group {
   static async get() {
-    try {
-      const resp = await axios.get("/groups");
-      return resp.data;
-    } catch (e) {
-      return e.response.data;
-    }
+    const response = await makeRequest(`/groups`, "get", null);
+    return response;
   }
   static async getGroupFood() {
-    try {
-      const resp = await axios.get("/groups/foods");
-      return resp.data;
-    } catch (e) {
-      return e?.response?.data;
-    }
+    const response = await makeRequest(`/groups/foods`, "get", null);
+    return response;
   }
 
   static async create(name) {
-    try {
-      const resp = await axios.post("/groups", { name });
-      return resp.data;
-    } catch (e) {
-      return e.response.data;
-    }
+    const response = await makeRequest(`/groups`, "post", { name });
+    return response;
   }
+
   static async delete(id) {
-    try {
-      const resp = await axios.delete(`/groups/${id}`);
-      return resp.data;
-    } catch (e) {
-      return e.response.data;
-    }
+    const response = await makeRequest(`/groups/${id}`, "delete", null);
+    return response;
   }
+
   static async update({ id, name }) {
-    try {
-      const resp = await axios.put(`/groups/${id}`, { name });
-      return resp.data;
-    } catch (e) {
-      return e.response.data;
-    }
+    const response = await makeRequest(`/groups/${id}`, "put", { name });
+    return response;
   }
 }
 
 export class Variation {
   static async get() {
-    try {
-      const resp = await axios.get("/variations");
-      return resp.data;
-    } catch (e) {
-      return e.response.data;
-    }
+    const response = await makeRequest(`/variations`, "get", null);
+    return response;
   }
+
   static async create(name) {
-    try {
-      const resp = await axios.post("/variations", { name });
-      return resp.data;
-    } catch (e) {
-      return e.response.data;
-    }
+    const response = await makeRequest(`/variations`, "post", { name });
+    return response;
   }
+
   static async update({ id, name }) {
-    console.log(name, id);
-    try {
-      const resp = await axios.put(`/variations/${id}`, { name });
-      return resp.data;
-    } catch (e) {
-      console.error(e);
-      return e.response.data;
-    }
+    const response = await makeRequest(`/variations/${id}`, "put", { name });
+    return response;
   }
+
   static async delete(id) {
-    try {
-      const resp = await axios.delete(`/variations/${id}`);
-      return resp.data;
-    } catch (e) {
-      return e.response.data;
-    }
+    const response = await makeRequest(`/variations/${id}`, "delete", null);
+    return response;
   }
 }

@@ -1,0 +1,16 @@
+{
+  "ambigiousError": {
+    "success": false,
+    "message": "server error",
+    "details": "a server error occurred, please try again later",
+    "payload": null,
+    "errorLevel": 3
+  },
+  "internetError": {
+    "success": false,
+    "message": "internet error",
+    "details": "please check your internet connection",
+    "payload": null,
+    "errorLevel": 3
+  }
+}

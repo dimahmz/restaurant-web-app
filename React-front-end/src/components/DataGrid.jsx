@@ -6,13 +6,11 @@ export default function CustomDataGrid({
   filteredRows,
   props,
 }) {
-  const $rows = filteredRows?.map((row, i) => {
-    return {
-      id: i + 1,
-      ...row,
-      key: i,
-    };
-  });
+  // const $rows = filteredRows?.map((row) => {
+  //   return {
+  //     ...row,
+  //   };
+  // });
 
   return (
     <div className="w-full h-[411px] px-4 py-5">
@@ -33,7 +31,7 @@ export default function CustomDataGrid({
           },
           height: "100%",
         }}
-        rows={$rows}
+        rows={filteredRows}
         columns={columns}
         initialState={{
           pagination: {

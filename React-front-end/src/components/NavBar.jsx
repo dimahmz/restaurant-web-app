@@ -10,11 +10,7 @@ const NavBar = () => {
     <div className="bg-white py-0.5 relative">
       <div className="flex-center-between max-w-[1320px] mx-auto pr-32">
         <div className="px-4">
-          <img
-            className="max-h-[38px]"
-            src="https://khadyo.softtechdemo.com/public/images/logo/1685847152-jcris-system-logopng.png"
-            alt=""
-          />
+          <img className="w-20 " src="/system_logo_.png" alt="" />
         </div>
         <div className="flex items-center space-x-8 px-4 py-1">
           <Link to="/">

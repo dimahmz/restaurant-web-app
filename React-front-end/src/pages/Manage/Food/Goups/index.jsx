@@ -52,9 +52,8 @@ export default function GroupItems() {
       severity: $response.success ? "success" : "error",
     }));
   }
-
   const columns = [
-    { field: "_index", headerName: "S/L", flex: 1 },
+    { field: "id", headerName: "S/L", flex: 1 },
     { field: "name", headerName: "Name", flex: 1 },
     {
       field: "no_field",

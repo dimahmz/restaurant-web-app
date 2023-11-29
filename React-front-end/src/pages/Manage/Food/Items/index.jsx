@@ -87,7 +87,7 @@ const FoodItems = () => {
     },
     { field: "name", headerName: "Name", flex: 1 },
     {
-      field: "_group",
+      field: "group",
       headerName: "Group",
       valueGetter: (params) => params.row.group.name || "-",
       flex: 1,

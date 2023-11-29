@@ -1,49 +1,28 @@
-import axios from "../utils/axios";
+import makeRequest from ".";
 
 export default class Order {
   static async getOneOrder(id) {
-    try {
-      const resp = await axios.get(`/order/${id}`);
-      return resp.data;
-    } catch (e) {
-      return e.response.data;
-    }
+    const response = await makeRequest(`/order/${id}`, "get", null);
+    return response;
   }
+
   static async get({ status }) {
-    try {
-      const resp = await axios.get(`/orders?status=${status}`);
-      return resp.data;
-    } catch (e) {
-      return e.response.data;
-    }
+    const response = await makeRequest(`/orders?status=${status}`, "get", null);
+    return response;
   }
 
   static async getKitchenOrders() {
-    try {
-      const resp = await axios.get(`/orders/kitchen`);
-      return resp.data;
-    } catch (e) {
-      return e.response.data;
-    }
+    const response = await makeRequest(`/orders/kitchen`, "get", null);
+    return response;
   }
 
   static async changeStatus(id, status) {
-    try {
-      const resp = await axios.put(`/order/${id}`, {
-        status,
-      });
-      return resp.data;
-    } catch (e) {
-      return e.response.data;
-    }
+    const response = await makeRequest(`/order/${id}`, "put", { status });
+    return response;
   }
   static async delete(id) {
-    try {
-      const resp = await axios.delete(`/order/${id}`);
-      return resp.data;
-    } catch (e) {
-      return e.response.data;
-    }
+    const response = await makeRequest(`/order/${id}`, "delete", null);
+    return response;
   }
 }
 
@@ -53,20 +32,12 @@ export class PosOrder extends Order {
     const new_food_order = {
       ...order,
     };
-    try {
-      const resp = await axios.post("/pos_order", new_food_order);
-      return resp.data;
-    } catch (e) {
-      return e.response.data;
-    }
+    const response = await makeRequest(`/pos_order`, "post", new_food_order);
+    return response;
   }
   static async get() {
-    try {
-      const resp = await axios.get("/pos_orders");
-      return resp.data;
-    } catch (e) {
-      return e.response.data;
-    }
+    const response = await makeRequest(`/pos_orders`, "get", null);
+    return response;
   }
 }
 
@@ -82,45 +53,32 @@ export class OnlineOrder extends Order {
       subtotal = $order.order_subtotal,
       total_bill = $order.order_total_bill,
       note = $order.order_note_to_rider;
-    try {
-      const resp = await axios.post("/online_order", {
-        branch_id,
-        variation_id,
-        food_id,
-        costumer_id,
-        quantity,
-        delivery_address,
-        subtotal,
-        total_bill,
-        note,
-      });
 
-      return resp.data;
-    } catch (e) {
-      console.log(e.response.data);
-      return e.response.data;
-    }
+    const response = await makeRequest("/online_order", `post`, "", {
+      branch_id,
+      variation_id,
+      food_id,
+      costumer_id,
+      quantity,
+      delivery_address,
+      subtotal,
+      total_bill,
+      note,
+    });
+    return response;
   }
 
   // get order
   static async get() {
-    try {
-      const resp = await axios.get("/online_orders");
-      return resp.data;
-    } catch (e) {
-      return e.response.data;
-    }
+    const response = await makeRequest(`/online_orders`, "get", null);
+    return response;
   }
   // update
   static async update({ id, status }) {
-    try {
-      const resp = await axios.put("/online_order", {
-        id,
-        status,
-      });
-      return resp.data;
-    } catch (e) {
-      return e.response.data;
-    }
+    const response = await makeRequest(`/online_order`, "put", {
+      id,
+      status,
+    });
+    return response;
   }
 }
