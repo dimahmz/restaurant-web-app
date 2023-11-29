@@ -28,9 +28,15 @@
 
 **start Xampp server**
 
+<<<<<<< HEAD
 before this command create a folder called images in this folder storage/app/public/images
 
 **create a symbolic link to the images storage**
+=======
+**create a symblic link to the images storage**
+>>>>>>> 2a4224a (update password)
+
+before running this command, make sure to create a folder named "images" inside the "storage/app/public" folder
 
 `php artisan storage:link`
 
@@ -38,7 +44,7 @@ before this command create a folder called images in this folder storage/app/pub
 
 `php artisan app:run-migrations`
 
-(hint: the cammand will take some time, due to the images genration and the storing in the local disk)
+Please note that the command will take some time because it needs to generate images and store them on the local disk.
 
 **start laravel server**
 

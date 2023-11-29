@@ -8,8 +8,9 @@ export default function CustomDataGrid({
 }) {
   const $rows = filteredRows?.map((row, i) => {
     return {
-      _index: i + 1,
+      id: i + 1,
       ...row,
+      key: i,
     };
   });
 

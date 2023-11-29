@@ -49,6 +49,7 @@ function App() {
           {/* protected routes */}
           <Route element={<ProtectedRoutes />}>
             <Route element={<Layout />}>
+              <Route path="/change-password" element={<UpdatePassPage />} />
               <Route path="/dashboard">
                 <Route index element={<DashboardPage />} />
                 <Route path="pos" element={<PosDashboard />} />

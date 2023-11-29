@@ -1,2 +1,7 @@
 *.local*
 local.*
+push.sh
+*.zip
+*.tar
+.env
+local/*

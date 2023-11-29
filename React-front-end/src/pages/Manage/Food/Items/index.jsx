@@ -71,7 +71,7 @@ const FoodItems = () => {
   }, []);
 
   const columns = [
-    { field: "_index", headerName: "S/L", flex: 1 },
+    { field: "id", headerName: "S/L", flex: 1 },
     {
       headerName: "Image",
       flex: 1,
