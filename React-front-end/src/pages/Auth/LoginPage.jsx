@@ -17,7 +17,7 @@ const LoginPage = () => {
   const [open, setOpen] = useState(false);
 
   // form inputs
-  const [email, setEmail] = useState("iamanadmin@example.com");
+  const [email, setEmail] = useState("admin@email.com");
   const [password, setPassword] = useState("admin1234");
   const [rememberUser, setRemeberUser] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
@@ -139,9 +139,6 @@ const LoginPage = () => {
                   Remember Me
                 </label>
               </div>
-              <Link to="/reset-password">
-                <p className="hover:text-[#f64e60]">Forget password?</p>
-              </Link>
             </div>
           </form>
         </div>
