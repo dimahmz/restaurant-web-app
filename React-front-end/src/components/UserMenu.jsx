@@ -9,7 +9,7 @@ import {
   Tooltip,
 } from "@mui/material";
 
-import { Logout, LockClockOutlined } from "@mui/icons-material";
+import { Logout } from "@mui/icons-material";
 import { UseAuth } from "../context/AuthContext";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -90,12 +90,12 @@ export default function AccountMenu() {
           Logout
         </MenuItem>
         <MenuItem>
-          <Link to="/change-password">
+          {/* <Link to="/change-password">
             <ListItemIcon>
               <LockClockOutlined fontSize="small" />
             </ListItemIcon>
             Change password
-          </Link>
+          </Link> */}
         </MenuItem>
       </Menu>
     </>
