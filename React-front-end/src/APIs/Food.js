@@ -2,7 +2,7 @@ import makeRequest from ".";
 
 export class Food {
   static async get() {
-    const response = await makeRequest("/foodssss", "get", null);
+    const response = await makeRequest("/foods", "get", null);
     return response;
   }
 
