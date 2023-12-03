@@ -37,12 +37,13 @@ const LoginPage = () => {
     setIsLoading(false);
     // authentiaction failed
     if (response.success == false) {
-      const message = getResponseMessage(response);
-      setErrorMsg(message);
-      setOpen(true);
+      if (response.errorLevel != 3) {
+        const message = getResponseMessage(response);
+        setErrorMsg(message);
+        setOpen(true);
+      }
       return;
     }
-
     // send the user to a page depends on its role
     if (response.payload.user.role_id == "5") navigate("/");
     else navigate("/dashboard");

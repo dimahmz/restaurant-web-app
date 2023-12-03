@@ -18,6 +18,8 @@ export class Food {
     form.append("food_group_id", food_group_id);
     form.append("is_special", is_special);
 
+    console.log(form);
+
     const response = await makeRequest("/food", "post", form);
     return response;
   }
@@ -29,7 +31,7 @@ export class Food {
   static async updateImg({ image, id }) {
     const form = new FormData();
     form.append("image", image);
-    const resp = await makeRequest(`/food/img/${id}`, "post", form);
+    const resp = await makeRequest(`/food/img/${id}`, "post", form, true);
     return resp;
   }
   static async delete(id) {

@@ -34,10 +34,11 @@ const SignUpPage = () => {
       navigate("/login");
       return;
     }
-
-    const errorMessage = getResponseMessage(response);
-    setErrorMsg(errorMessage);
-    setOpen(true);
+    if (response.errorLevel != 3) {
+      const errorMessage = getResponseMessage(response);
+      setErrorMsg(errorMessage);
+      setOpen(true);
+    }
   }
   return (
     <>

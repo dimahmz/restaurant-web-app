@@ -80,13 +80,17 @@ const AddNewItemPage = () => {
       is_special,
       variations_IDs: selectedVariationIDs,
     };
+    console.log(newFood);
     const response = await Food.create(newFood);
     const message = getResponseMessage(response);
-    setResponse(() => ({
-      open: true,
-      message,
-      severity: response.success ? "success" : "error",
-    }));
+
+    if (response.errorLevel != 3) {
+      setResponse(() => ({
+        open: true,
+        message,
+        severity: response.success ? "success" : "error",
+      }));
+    }
 
     if (response.success) resetForm();
 
