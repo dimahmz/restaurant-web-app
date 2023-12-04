@@ -3,8 +3,8 @@ const userProfile = {
   name: "",
   email: "",
   id: null,
-  isLoggedIn: true,
-  role_id: 1,
+  isLoggedIn: false,
+  role_id: 0,
 };
 export const userSlice = createSlice({
   name: "user",
@@ -29,7 +29,6 @@ export const userSlice = createSlice({
     update_loading: (state, action) => {
       state.isLoading = action.payload;
     },
-
     log_out_user: (state) => {
       Object.keys(state.userProfile).forEach((key) => {
         if (userProfile[key]) state[key] = userProfile[key];

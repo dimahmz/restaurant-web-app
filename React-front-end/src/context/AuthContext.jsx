@@ -10,6 +10,8 @@ import {
   update_loading,
 } from "../stores/user";
 import axiosInstance from "../utils/axios";
+import store from "../stores/index";
+import { userSlice } from "../stores/user";
 
 export const AuthContext = createContext();
 
@@ -63,6 +65,7 @@ export default function AuthProvider({ children }) {
   const resetAuthState = () => {
     dispatch(update_login_state(false));
     ManageCookies.removeCookie("authorization_token");
+    store.dispatch(userSlice.actions.log_out_user());
   };
 
   const setAuthState = (userData) => {
