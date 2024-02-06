@@ -10,7 +10,7 @@ export const userSlice = createSlice({
   name: "user",
   initialState: {
     userProfile,
-    isLoading: false,
+    isLoading: true,
   },
 
   reducers: {

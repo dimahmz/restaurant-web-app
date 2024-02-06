@@ -22,7 +22,8 @@ export default function AuthProvider({ children }) {
   // fetch the user if he is authenticated
   const fetchUser = async () => {
     if (!ManageCookies.getCookie("authorization_token")) {
-      resetAuthState();
+      // resetAuthState();
+      dispatch(update_loading(false));
       return;
     }
 
@@ -36,7 +37,7 @@ export default function AuthProvider({ children }) {
 
   // fetch the user data when the component (page) is mounted
   useEffect(() => {
-    // fetchUser();
+    fetchUser();
   }, []);
 
   //to authenticate a user

@@ -5,7 +5,6 @@ import { Outlet } from "react-router-dom";
 
 export default function SimpleBackdrop() {
   const isLoading = useSelector((state) => state.user.isLoading);
-
   return isLoading ? (
     <div>
       <Backdrop

@@ -6,12 +6,6 @@ export default function CustomDataGrid({
   filteredRows,
   props,
 }) {
-  // const $rows = filteredRows?.map((row) => {
-  //   return {
-  //     ...row,
-  //   };
-  // });
-
   return (
     <div className="w-full h-[411px] px-4 py-5">
       <DataGrid
