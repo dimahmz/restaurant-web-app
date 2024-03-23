@@ -46,7 +46,7 @@ const LoginPage = () => {
     }
     // send the user to a page depends on its role
     if (response.payload.user.role_id == "5") navigate("/");
-    else navigate("/dashboard");
+    else navigate("/dashboard/pos");
   }
   return (
     <main className="w-full h-full">

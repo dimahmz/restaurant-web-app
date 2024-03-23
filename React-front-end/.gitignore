@@ -24,3 +24,5 @@ push.sh
 *.njsproj
 *.sln
 *.sw?
+#environment
+.env

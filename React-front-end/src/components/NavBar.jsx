@@ -1,4 +1,4 @@
-import { AiTwotoneHome } from "react-icons/ai";
+import { RxDashboard } from "react-icons/rx";
 import { Link } from "react-router-dom";
 import UserMenu from "./UserMenu";
 import { useSelector } from "react-redux";
@@ -17,9 +17,9 @@ const NavBar = () => {
           />
         </div>
         <div className="flex items-center space-x-8 px-4 py-1">
-          <Link to="/">
+          <Link to="/dashboard">
             <div className="p-1">
-              <AiTwotoneHome size={25} className="text-[#cc3333]" />
+              <RxDashboard size={25} className="text-[#cc3333]" />
             </div>
           </Link>
 

@@ -9,7 +9,7 @@ import {
   Tooltip,
 } from "@mui/material";
 
-import { Logout } from "@mui/icons-material";
+import { Logout, Home } from "@mui/icons-material";
 import { UseAuth } from "../context/AuthContext";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -80,7 +80,10 @@ export default function AccountMenu() {
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
         <MenuItem onClick={handleClose}>
-          <Link to="/dashboard">Dashboard</Link>
+          <ListItemIcon>
+            <Home fontSize="small" />
+          </ListItemIcon>
+          <Link to="/">Home</Link>
         </MenuItem>
         <Divider />
         <MenuItem onClick={handleLogOut}>
